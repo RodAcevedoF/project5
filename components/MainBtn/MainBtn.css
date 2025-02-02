@@ -1,0 +1,13 @@
+
+.main-btn {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+}
+
+.main-btn:hover {
+    background-color: #555;
+}

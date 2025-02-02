@@ -1,6 +1,8 @@
 import { loginUser } from "../../api/userApi";
 import { changePage } from "../../utils/changePage";
 import { Home } from "../../pages/Home/Home";
+import MainBtn from "../MainBtn/MainBtn";
+import { LogOutBtn } from "../LogOutBtn/LogOutBtn";
 
 export const LoginForm = () => {
   const div = document.createElement("div");
@@ -9,7 +11,7 @@ export const LoginForm = () => {
           <h2>Iniciar Sesión</h2>
           <input type="email" id="login-email" placeholder="Email" required>
           <input type="password" id="login-password" placeholder="Contraseña" required>
-          <button type="submit">Ingresar</button>
+          ${MainBtn("submit", "login-form", "Go in!")}
           <p id="login-error" style="color: red;"></p>
       </form>
   `;
@@ -21,8 +23,10 @@ export const LoginForm = () => {
     const errorMessage = div.querySelector("#login-error");
 
     const response = await loginUser(email, password);
-    if (response && response.token) {
+    if (response && response.data.token) {
+      localStorage.setItem("token", response.data.token);
       changePage(Home);
+      LogOutBtn.updateButtonText()
     } else {
       errorMessage.textContent = "Error al iniciar sesión";
     }

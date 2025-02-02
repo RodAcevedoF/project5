@@ -1,11 +1,15 @@
 import { NavBar } from "../components/NavBar/NavBar.js";
 import { changePage } from "../utils/changePage.js";
 import { Landing } from "../pages/Landing/Landing.js";
-/* import { Home } from "./pages/Home.js"; // Lo implementaremos después */
+import { isAuthenticated } from "../utils/isAuthenticated.js";
+import { Home } from "../pages/Home/Home.js";
 
-NavBar(); // Renderiza el Navbar
+NavBar(); 
 
-// Enlace de páginas con efectos de transición
+if (isAuthenticated()) {
+    changePage(Home);
+  } else {
 changePage(Landing);
+}
 
-// Enlazar botones a Home cuando el usuario inicie sesión (se agregará después)
+//Footer();

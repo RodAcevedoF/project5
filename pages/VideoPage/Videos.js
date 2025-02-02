@@ -1,6 +1,16 @@
-export default function Videos() {
-    return `
-        <h1>Mis Videos</h1>
-        <p>Aquí verás los videos guardados desde YouTube.</p>
+// pages/VideoList/VideoList.js
+export const Videos = () => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <div class="page-container">
+        <h2>Lista de Videos</h2>
+        <div id="video-list"></div>
+        <button id="add-video" class="main-btn">Añadir Video</button>
+      </div>
     `;
-}
+  
+    // Aquí puedes agregar el código para cargar y manejar la lista de videos
+  
+    return div;
+  };
+  

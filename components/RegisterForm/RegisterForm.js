@@ -22,7 +22,9 @@ export const RegisterForm = () => {
     const errorMessage = div.querySelector("#register-error");
 
     const response = await registerUser(name, email, password);
-    if (response && response.token) {
+  
+    if (response && response.data && response.data.token) {
+      localStorage.setItem("token", response.data.token);
       changePage(Home);
     } else {
       errorMessage.textContent = "Error al registrarse";

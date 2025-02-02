@@ -1,17 +1,20 @@
 import "./Landing.css";
 import { LoginForm } from "../../components/LoginForm/LoginForm.js";
 import { RegisterForm } from "../../components/RegisterForm/RegisterForm.js";
-
+import MainBtn from "../../components/MainBtn/MainBtn.js";
+import { isAuthenticated } from "../../utils/isAuthenticated.js";
+import { changePage } from "../../utils/changePage.js";
+import { Home } from "../Home/Home.js";
 export const Landing = () => {
   const main = document.querySelector("main");
   main.innerHTML = `
-    <section class="Landing">
-        <div class="Landing-container">
+    <section class="landing">
+        <div class="landing-container">
             <h1>Bienvenido a To-Do App</h1>
             <p>Organiza tus tareas y libros fácilmente.</p>
-            <div class="Landing-buttons">
-                <button id="login-btn">Iniciar sesión</button>
-                <button id="register-btn">Registrarse</button>
+            <div class="landing-buttons">
+                ${MainBtn("button", "login-btn", "LOGIN")}
+                ${MainBtn("button", "register-btn", "REGISTER")}
             </div>
             <div id="auth-form-container"></div>
         </div>

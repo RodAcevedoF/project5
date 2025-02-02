@@ -9,6 +9,7 @@ export const registerUser = async (name, email, password) => {
       email,
       password
     });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(
@@ -25,10 +26,9 @@ export const loginUser = async (email, password) => {
       email,
       password
     });
-    if (response.data.token) {
-      localStorage.setItem("token", response.data.token); // Guarda el token en localStorage
+    if (response.data) {
+      return response.data; 
     }
-    return response.data;
   } catch (error) {
     console.error("Error en el login:", error.response?.data || error.message);
     return null;
@@ -36,9 +36,6 @@ export const loginUser = async (email, password) => {
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem("token"); // Elimina el token del almacenamiento local
+  localStorage.removeItem("token");
 };
 
-export const isAuthenticated = () => {
-  return !!localStorage.getItem("token"); // Devuelve true si hay token, false si no.
-};

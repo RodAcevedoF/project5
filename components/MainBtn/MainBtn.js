@@ -1,6 +1,5 @@
 import "./MainBtn.css";
 
-export const MainBtn = () => {
-    const nav = document.querySelector(".nav-bar");
-    const btn = document.createElement("button");
-}
+const MainBtn = (type, idName, txt) => `<button type=${type} class="main-btn" id=${idName}>${txt}</button>`;
+
+export default MainBtn;

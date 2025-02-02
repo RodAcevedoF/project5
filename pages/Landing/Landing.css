@@ -1,33 +1,36 @@
-.Landing {
+.landing {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 100%;
     height: 100vh;
     background: #f4f4f4;
 }
 
-.Landing-container {
+.landing-container {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 2em;
+    border-radius: 2em;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.Landing-buttons {
+.landing-buttons {
     margin-top: 15px;
+    display: none;
 }
 
-.Landing-buttons button {
-    margin: 5px;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    background-color: #333;
-    color: white;
+.landing-buttons.get {
+    display: block;
 }
 
-.Landing-buttons button:hover {
-    background-color: #555;
+
+.highlight {
+    animation: highlight-animation 1s ease-in-out;
+}
+  
+@keyframes highlight-animation {
+  0% { background-color: yellow; }
+  100% { background-color: inherit; }
 }
