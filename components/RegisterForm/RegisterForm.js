@@ -1,6 +1,8 @@
+import "./RegisterForm.css";
 import { registerUser } from "../../api/userApi";
 import { Home } from "../../pages/Home/Home";
 import { changePage } from "../../utils/changePage";
+import MainBtn from "../MainBtn/MainBtn";
 export const RegisterForm = () => {
   const div = document.createElement("div");
   div.innerHTML = `
@@ -9,7 +11,7 @@ export const RegisterForm = () => {
           <input type="text" id="register-name" placeholder="Nombre" required>
           <input type="email" id="register-email" placeholder="Email" required>
           <input type="password" id="register-password" placeholder="Contraseña" required>
-          <button type="submit">Registrarse</button>
+          ${MainBtn("submit", "register-button", "Register")}
           <p id="register-error" style="color: red;"></p>
       </form>
   `;

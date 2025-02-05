@@ -1,0 +1,23 @@
+.footer-ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .75em;
+    gap: 1em;
+    flex-flow: row wrap;
+}
+
+.footer-ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25em;
+    font-size: .85em;
+    border-right: .5px solid var(--box-general);
+    border-left: .5px solid var(--box-general);
+    padding: 0 .5em 0 .5em;
+}
+
+.quali-icons {
+    width: 1.15em;
+}

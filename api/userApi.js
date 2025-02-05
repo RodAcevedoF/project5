@@ -9,7 +9,7 @@ export const registerUser = async (name, email, password) => {
       email,
       password
     });
-    console.log(response.data);
+    //console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(

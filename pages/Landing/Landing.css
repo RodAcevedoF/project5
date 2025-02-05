@@ -1,36 +1,116 @@
 .landing {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     width: 100%;
-    height: 100vh;
-    background: #f4f4f4;
+    height: auto;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center; 
+    gap: 2em;
 }
 
 .landing-container {
-    background: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    padding-left: 0;
+    gap: .5em
+}
+
+.landing-box {
+    height: 80%;
     padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 20em; 
+    max-width: 30em; 
     border-radius: 2em;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--general-shadow);
+    z-index: 10;
+    gap: 1em;
+    background: var(--light-letter);
 }
 
-.landing-buttons {
-    margin-top: 15px;
-    display: none;
+.landing-box > p:nth-child(1) {
+    font-size: .8em;
+    background-color: var(--highlight-letter);
+    width: 8em;
+    padding: .2em;
+    border-radius: 1em;
+    text-align: center;
 }
 
-.landing-buttons.get {
-    display: block;
+.landing-box h1 {
+    font-size: clamp(2em, 4vw, 3.5em);
+    color: var(--letter-general);
 }
 
-
-.highlight {
-    animation: highlight-animation 1s ease-in-out;
+.landing-box em {
+    font-weight: bolder;
 }
-  
-@keyframes highlight-animation {
-  0% { background-color: yellow; }
-  100% { background-color: inherit; }
+
+.back-landing {
+    z-index: 0;
+    width: 50vw; 
+    height: 30vh; 
+    position: absolute;
+    object-fit: cover;
+}
+
+.back-landing:first-of-type {
+    left: 0;
+}
+
+.back-landing:last-of-type {
+    right: 0;
+}
+
+.alt-login {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    border-radius: 1em;
+    width:fit-content;
+    box-shadow: var(--general-shadow);
+    padding: .5em;
+    width: 17em;
+}
+
+.alt-login p {
+    font-size: clamp(.5em, .8em, 1em);
+}
+
+.reviews {
+    display: flex;
+    font-size: .8em;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .2em;
+    flex-flow: row wrap;
+}
+
+.stars {
+    width: 1.5em;
+    height: auto;
+}
+
+.rev-apps {
+    width: 9em;
+    height: auto;
+}
+
+#sign-in-alt {
+    width: 10em;
+}
+
+.article-exp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,25 +1,26 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1.5em;
+  background: var(--nav-light);
+  width: 100%;
+  color: var(--back-general);
+  position: fixed;
+  top: 0;
+  gap: 1em;
+  z-index: 20;
 }
 
-.logo {
-    font-size: 1.5rem;
-}
-
-.nav-links button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 5px 10px;
-}
-
-.nav-links button:hover {
-    text-decoration: underline;
+.nav-links {
+  border: 1px solid var(--box-general);
+  border-radius: 1em;
+  padding: 0.2em;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 11em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  gap: 0.25em;
 }

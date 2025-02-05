@@ -1,0 +1,88 @@
+.brand-div {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 5em 0 5em 0;
+    justify-self: center;
+    gap: 1em;
+}
+
+.brand-article {
+    background: var(--box-alt-background);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0;
+    gap: 1em
+}
+
+.brand-article h4 {
+    color: var(--light-letter);
+}
+
+.brand-div h4:nth-child(2) {
+    font-size: 2em;
+    padding-top: 1em;
+}
+
+.brand-ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 1em;
+    flex-flow: row wrap;
+}
+
+.brand-ul li {
+    display: flex;
+    height: 2.3em;
+    width: auto;
+}
+
+.brand-ul li img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.comparative {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+    padding: 2em;
+    flex-flow: row wrap;
+}
+
+.with, .without{
+    display: flex; 
+    flex-direction: column;
+    gap: .5em;
+    border: 2px solid var(--highlight-letter);
+    border-radius: 1em;
+    padding: 2em;
+    box-shadow: var(--general-shadow);
+}
+
+.with li, .without li {
+    display: flex;
+    gap: .25em
+}
+
+.with li h5, .without li h5 {
+    font-weight: bolder;
+    font-size: 1em;
+}
+
+.comparative img {
+    width: 1em;
+    height: auto;
+    object-fit: contain;
+}
+
+#last-sign-in {
+    margin-top: 2em;
+    width: 15em;
+}

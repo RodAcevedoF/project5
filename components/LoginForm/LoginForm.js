@@ -1,3 +1,4 @@
+import "./LoginForm.css";
 import { loginUser } from "../../api/userApi";
 import { changePage } from "../../utils/changePage";
 import { Home } from "../../pages/Home/Home";
@@ -11,7 +12,7 @@ export const LoginForm = () => {
           <h2>Iniciar Sesión</h2>
           <input type="email" id="login-email" placeholder="Email" required>
           <input type="password" id="login-password" placeholder="Contraseña" required>
-          ${MainBtn("submit", "login-form", "Go in!")}
+          ${MainBtn("submit", "login-button", "Go in!")}
           <p id="login-error" style="color: red;"></p>
       </form>
   `;

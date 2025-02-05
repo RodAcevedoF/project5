@@ -1,0 +1,13 @@
+.sign-page {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin-top: 10em;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sign-container {
+    display: flex;
+    flex-direction: column;
+}

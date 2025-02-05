@@ -1,0 +1,11 @@
+.foot-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: var(--highlight-letter);
+}
+
+.foot-contact {
+    background: var(--box-alt-background);
+    height: 5em;
+}

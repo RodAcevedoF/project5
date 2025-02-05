@@ -2,19 +2,69 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  
+  font-family: "Axiforma";
 }
 
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
+:root {
+  --back-general: rgba(245, 245, 245, 0.751);
+  --back-alt: #211f23;
+  --light-letter: rgb(242, 242, 242);
+  --nav-light: rgba(245, 245, 245, 0.879);
+  --box-general: rgba(75, 26, 181, 0.596);
+  --box-background: linear-gradient(to right, #6a11cb, #2575fc);
+  --box-alt-background: linear-gradient(to right, #aa29c1, #25b4fc);
+  --letter-background: linear-gradient(to right, #000000, #141379);
+  --letter-general: rgb(38, 12, 105);
+  --highlight-letter: rgba(165, 130, 255, 0.114);
+  --general-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  --alt-shadow: 0px 0px 15px rgba(231, 229, 229, 0.449);
 }
 
 ul {
   list-style: none;
-  padding: 0;
 }
 
 button {
   cursor: pointer;
+}
+
+main {
+  margin-top: 8rem;
+}
+
+body {
+  background-color: var(--back-general);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dark {
+  background-color: var(--back-alt);
+  color: var(--back-general);
+
+  .navbar {
+    background: var(--back-alt);
+  }
+
+  .landing-box {
+    box-shadow: var(--alt-shadow);
+    background-color: var(--back-alt);
+  }
+  .landing-container h1 {
+    color: var(--back-general);
+  }
+  .snap {
+    filter: invert(1);
+  }
+  .alt-login {
+    box-shadow: var(--alt-shadow);
+  }
+}
+
+@font-face {
+  font-family: "Axiforma";
+  src: url("/public/fonts/axiforma_regular/axiforma_regular.woff2")
+      format("woff2"),
+    url("../public/fonts/axiforma_regular/axiforma_regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }

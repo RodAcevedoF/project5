@@ -1,0 +1,34 @@
+.sign-in-button {
+    padding: 1em;
+    background: var(--box-background);
+    color: var(--light-letter);
+    border: none;
+    border-radius: 1em;
+    cursor: pointer;
+    width: 6em;
+    font-weight: bolder;
+    background-size: 200% 100%;
+    background-image: linear-gradient(to right, #6a11cb, #2575fc);
+    transition: background-position .25s ease-in-out;
+  }
+  
+  .sign-in-button:hover {
+    background-position: 100% 0;
+    background-image: linear-gradient(to right, #aa46a7, #ea3c74);
+  }
+  
+  #sign-in-btn {
+    padding: 1em;
+    background: inherit;
+    color: var(--letter-general);
+    border: none;
+    border-radius: 1em;
+    cursor: pointer;
+    width: 6em;
+    font-weight: bolder;
+    transition: background .25s ease-in-out;
+  }
+
+  #sign-in-btn:hover {
+    background: var(--highlight-letter);
+  }
