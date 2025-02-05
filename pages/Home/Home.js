@@ -23,6 +23,6 @@ export const Home = () => {
   main.querySelector("#video-btn").addEventListener("click", () => changePage(Videos));
   main.querySelector("#book-btn").addEventListener("click", () => changePage(Books));
   const section = main.querySelector(".home-container");
-  section.appendChild(MainAside());
+  //section.appendChild(MainAside());
   return main;
 };

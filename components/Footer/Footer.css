@@ -5,7 +5,27 @@
     background: var(--highlight-letter);
 }
 
-.foot-contact {
+.foot-article {
     background: var(--box-alt-background);
-    height: 5em;
+    display: flex;
+    padding: 0 2em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.legal {
+    display: flex;
+    align-self: flex-end;
+    padding: .5em;
+    gap: .5em;
+}
+
+.legal li {
+    font-size: .8em;
+    font-weight: bolder;
+    color: var(--letter-general);
+}
+
+.legal li a {
+    color: var(--letter-general);
 }

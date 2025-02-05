@@ -1,4 +1,51 @@
 #register-form {
     display: flex;
     flex-direction: column;
+    padding: 1.5em;
+    gap: .5em;
+    box-shadow: var(--general-shadow);
+    background: var(--nav-light);
+    border-radius: 1.5em;
+}
+
+#register-form h2 {
+    font-size: 2em;
+    text-align: center;
+    color: inherit;
+    margin-bottom: .5em;
+}
+
+#register-form label {
+    font-size: .8em;
+}
+
+#register-form input {
+    padding: .5em;
+    border-radius: .5em;
+    border: none;
+
+}
+
+#register-button {
+    margin: 1em 0 1em 0;
+    width: 100%;
+} 
+
+.checks {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .25em;
+}
+
+.registered {
+    font-size: .85em;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+
+.registered:hover {
+    transform: scale(1.05);
 }

@@ -9,7 +9,7 @@
     border: none;
     flex-direction: column;
     overflow: visible;
-    background: inherit;
+    background: transparent;
   }
   
   #up-btn img {

@@ -12,7 +12,7 @@
   --nav-light: rgba(245, 245, 245, 0.879);
   --box-general: rgba(75, 26, 181, 0.596);
   --box-background: linear-gradient(to right, #6a11cb, #2575fc);
-  --box-alt-background: linear-gradient(to right, #aa29c1, #25b4fc);
+  --box-alt-background: linear-gradient(to right, #bf3bd6b8, #41c0ffc4);
   --letter-background: linear-gradient(to right, #000000, #141379);
   --letter-general: rgb(38, 12, 105);
   --highlight-letter: rgba(165, 130, 255, 0.114);
@@ -22,10 +22,10 @@
 
 ul {
   list-style: none;
-}
+} 
 
-button {
-  cursor: pointer;
+a {
+  text-decoration: none;
 }
 
 main {
@@ -44,7 +44,12 @@ body {
   .navbar {
     background: var(--back-alt);
   }
-
+  .nav-links {
+    box-shadow: var(--alt-shadow);
+  }
+  #sign-up-btn {
+    color: var(--light-letter);
+  }
   .landing-box {
     box-shadow: var(--alt-shadow);
     background-color: var(--back-alt);
@@ -56,6 +61,24 @@ body {
     filter: invert(1);
   }
   .alt-login {
+    box-shadow: var(--alt-shadow);
+  }
+  .quali-icons {
+    filter: invert(50%);
+  }
+  .services-ul {
+    background: var(--back-alt);
+    box-shadow: var(--alt-shadow);
+  }
+  .service-li {
+    color: var(--light-letter)
+  }
+  #register-form {
+    background: var(--back-alt);
+    box-shadow: var(--alt-shadow);
+  }
+  #login-form {
+    background: var(--back-alt);
     box-shadow: var(--alt-shadow);
   }
 }

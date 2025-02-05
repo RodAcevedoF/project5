@@ -17,7 +17,7 @@
     background-image: linear-gradient(to right, #aa46a7, #ea3c74);
   }
   
-  #sign-in-btn {
+  #sign-up-btn {
     padding: 1em;
     background: inherit;
     color: var(--letter-general);
@@ -29,6 +29,6 @@
     transition: background .25s ease-in-out;
   }
 
-  #sign-in-btn:hover {
+  #sign-up-btn:hover {
     background: var(--highlight-letter);
   }

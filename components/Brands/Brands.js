@@ -62,7 +62,7 @@ const Brands = () => {
         newLi.innerHTML = `<img src=${brand.url} class="${brand.className} logo">`;
         ul.appendChild(newLi);
     }
-    div.appendChild(SignBtn("last-sign-in", "Get Started for free! ►"));
+    div.appendChild(SignBtn("last-sign-in", "Get Started for free! ►", "register"));
     return div;
 }
 

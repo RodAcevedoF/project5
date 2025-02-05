@@ -1,7 +1,6 @@
 import "./Landing.css";
 import { LoginForm } from "../../components/LoginForm/LoginForm.js";
 import { RegisterForm } from "../../components/RegisterForm/RegisterForm.js";
-import MainBtn from "../../components/MainBtn/MainBtn.js";
 import { SignBtn } from "../../components/SignBtn/SignBtn.js";
 import { isAuthenticated } from "../../utils/isAuthenticated.js";
 import { changePage } from "../../utils/changePage.js";
@@ -39,7 +38,7 @@ export const Landing = () => {
   const divAltLogin = main.querySelector(".alt-login");
   divAltLogin.insertAdjacentElement(
     "afterbegin",
-    SignBtn("sign-in-alt", "Get Started ►")
+    SignBtn("sign-in-alt", "Get Started ►", "register")
   );
   const articleExp = main.querySelector(".article-exp");
   articleExp.appendChild(Brands());

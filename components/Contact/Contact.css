@@ -1,0 +1,23 @@
+.foot-contact {
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+    gap: .25em;
+}
+
+.foot-contact h5 {
+    color: var(--light-letter);
+    font-size:1em;
+}
+
+.foot-contact ul {
+    display: flex;
+    align-items: center;
+    gap: .25em;
+
+}
+
+.foot-contact ul li:last-of-type img{
+    width: 6em;
+    filter: invert(0);
+}
