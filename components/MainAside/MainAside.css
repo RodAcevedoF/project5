@@ -1,7 +1,42 @@
 .main-aside {
+    background-color: var(--nav-light);
+    padding: 3em 0 0 1em;
     width: 100%;
-    height: 100vh;
-    top: 10vh;
-    background-color: rgb(149, 149, 149);
-    grid-area: 1/1/2/2;
-}
+    border: 1px solid cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .main-aside .latest,
+  .main-aside .deadline,
+  .main-aside .calendar {
+    margin-bottom: 20px;
+  }
+  
+  .main-aside h3 {
+  cursor: pointer;
+  }
+  
+  #latest-tasks .todo-item {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .todo-btn {
+    padding: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .collapsible {
+    display: none;
+  }
+  
+  .collapsible.hidden {
+    display: block;
+  }
+  
+  #calendar-container {
+    width: 50em;
+  }

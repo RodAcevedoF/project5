@@ -17,19 +17,19 @@ const Brands = () => {
                             <h5>Without GetDone</h5>
                           </li>
                           <li>
-                            <img src="/public/icon/fail.png">
+                            <img src="/icon/fail.png">
                             <p>Constantly switching apps</p>
                           </li>
                           <li>
-                            <img src="/public/icon/fail.png">
+                            <img src="/icon/fail.png">
                             <p>Manual tracking of tasks</p>
                           </li>
                           <li>
-                            <img src="/public/icon/fail.png">
+                            <img src="/icon/fail.png">
                             <p>Unorganized and chaotic workflows</p>
                           </li>
                           <li>
-                            <img src="/public/icon/fail.png">
+                            <img src="/icon/fail.png">
                             <p>Endless noise and distractions</p>
                           </li>
                         </ul>  
@@ -38,19 +38,19 @@ const Brands = () => {
                             <h5>With GetDone</h5>
                           </li>
                           <li>
-                            <img src="/public/icon/check.png">
+                            <img src="/icon/check.png">
                             <p>Focused and organized workflows</p>
                           </li>
                           <li>
-                            <img src="/public/icon/check.png">
+                            <img src="/icon/check.png">
                             <p>Efficient task management</p>
                           </li>
                           <li>
-                            <img src="/public/icon/check.png">
+                            <img src="/icon/check.png">
                             <p>Seamless integration</p>
                           </li>
                           <li>
-                            <img src="/public/icon/check.png">
+                            <img src="/icon/check.png">
                             <p>All-in-one</p>
                           </li>
                         </ul>

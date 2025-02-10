@@ -1,0 +1,72 @@
+.simple-calendar {
+  font-family: sans-serif;
+  margin: 1em 0;
+  border: 1px solid #ccc;
+  padding: 0.5em;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0 0.5em;
+}
+
+.month-label {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid #ddd;
+  padding: 4px;
+  min-width: 30px;
+  height: 30px;
+  vertical-align: top;
+}
+
+.day-number {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dot.high {
+  background-color: red;
+}
+
+.dot.medium {
+  background-color: yellow;
+}
+
+.dot.low {
+  background-color: green;
+}

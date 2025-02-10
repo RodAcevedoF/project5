@@ -9,7 +9,7 @@ const Contact = () => {
                        <li>${ImgBtn("linkedin", "/icon/linkedin.png", "linkedin.com")}</li>
                        <li>${ImgBtn("x", "/icon/twitter.png", "x.com")}</li>
                        <li>${ImgBtn("instagram", "/icon/instagram.png", "instagram.com")}</li>
-                       <li>${ImgBtn("microsoft", "../../public/images/getMicrosoft.png", "microsoft.com")}</li>
+                       <li>${ImgBtn("microsoft", "/images/getMicrosoft.png", "microsoft.com")}</li>
                      </ul>`;
     return div;
 };

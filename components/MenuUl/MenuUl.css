@@ -1,27 +1,109 @@
 .services-ul {
-    display: flex;
-    gap: .5em;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1em;
-    border: 1px solid var(--box-general);
-    box-shadow: var(--general-shadow);
-    width: 28em;
-    background: var(--nav-light);
-    margin-left: 5.5em;
+  display: flex;
+  width: fit-content;
+  gap: .25em;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em;
+  border: 1px solid var(--box-general);
+  box-shadow: var(--general-shadow);
+  background: var(--nav-light);
+  list-style: none;
+  margin-left: 5em;
 }
 
 .service-li {
-    color: var(--letter-general);
-    font-size: .8em;
-    cursor: pointer;
-    transition: background .25s ease-in-out;
-    padding: 1em .5em;
-    border-radius: 1em;
-    width: 9em;
-    text-align: center;
+  color: var(--letter-general);
+  font-size: .75em;
+  cursor: pointer;
+  transition: background 0.25s ease-in-out;
+  padding: 1em;
+  border-radius: 1em;
+  width: fit-content;
+  text-align: center;
 }
 
 .service-li:hover {
-    background: var(--highlight-letter);
+  background: var(--highlight-letter);
+}
+
+.services-ul.floating {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 5em;
+  width: fit-content;
+  gap: .5em;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em;
+  border: 1px solid var(--box-general);
+  box-shadow: var(--general-shadow);
+  background: var(--nav-light);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .25s ease-in-out; 
+}
+
+.services-ul.floating.get {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-burger-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 2.5em;
+  height: 2.5em;
+  background: var(--box-background);
+  border: none;
+  cursor: pointer;
+  padding: .4em;
+  gap: .3em;
+  border-radius: .75em;
+}
+
+.menu-burger-btn span {
+  background: var(--light-letter);
+  border-radius: 10px;
+  height: .25em;
+  transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* Definimos los tamaños de cada barra */
+.menu-burger-btn span:nth-of-type(1) {
+  width: 100%;
+}
+.menu-burger-btn span:nth-of-type(2) {
+  width: 100%;
+}
+.menu-burger-btn span:nth-of-type(3) {
+  width: 100%;
+}
+
+.menu-burger-btn.active span:nth-of-type(1) {
+  transform-origin: bottom;
+  width: 55%;
+  transform: rotate(45deg) translate(1px, 1px);
+}
+
+.menu-burger-btn.active span:nth-of-type(2) {
+  transform-origin: top;
+  width: 120%;
+  transform: rotate(-45deg) translate(-2px, -2.5px);
+}
+
+.menu-burger-btn.active span:nth-of-type(3) {
+  transform-origin: bottom;
+  width: 65%;
+  transform: translate(9px, -4px) rotate(45deg);
+}
+
+
+@media screen and (width <= 768px) {
+
 }

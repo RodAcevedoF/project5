@@ -1,0 +1,11 @@
+.hero-article {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.hero-article img {
+    width: 100%;
+    height: 20em;
+    object-fit: cover;
+}

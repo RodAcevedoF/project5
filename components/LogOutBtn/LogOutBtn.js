@@ -16,7 +16,7 @@ export const LogOutBtn = () => {
     logoutUser();
     setState('isLoggedIn', false);
     NavBar();
-    changePage(Landing);
+    changePage(Landing, "landing");
   });
 
   return button;

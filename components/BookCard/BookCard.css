@@ -1,0 +1,52 @@
+.book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+}
+
+.book-card {
+  width: 200px;
+  height: 300px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.book-card img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+}
+
+.book-card h3,
+.book-card p {
+  margin: 5px;
+  text-align: center;
+}
+
+/* Estado expandido: la tarjeta se superpone y muestra los detalles */
+.book-card.expanded {
+  position: absolute;
+  width: 400px;
+  height: 500px;
+  transform: scale(1.1);
+  z-index: 10;
+  background: white;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+}
+
+/* Ocultar detalles por defecto (aunque se utiliza inline style en el HTML) */
+.book-card .card-details {
+  display: none;
+}
+
+/* Cuando la tarjeta tiene la clase 'expanded', se muestran los detalles */
+.book-card.expanded .card-details {
+  display: block;
+}

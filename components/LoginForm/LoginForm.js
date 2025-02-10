@@ -29,21 +29,16 @@ export const LoginForm = () => {
     const errorMessage = div.querySelector("#login-error");
 
     const response = await loginUser(email, password);
-    if (response && response.data.token) {
-      localStorage.setItem("token", response.data.token);
-
-      setState("isLoggedIn", true);;
-
-      changePage(Home); 
+    if (response && response.data && response.data.token) {
+      changePage(Home, "home"); 
       NavBar(); 
     } else {
       errorMessage.textContent = "Error al iniciar sesión";
     }
   });
-
+  
   div.querySelector(".no-registered").addEventListener("click", () => {
-    div.innerHTML = "";
-    div.appendChild(RegisterForm());
+    window.dispatchEvent(new CustomEvent("changeForm", { detail: "register" }));
   });
 
   return div;

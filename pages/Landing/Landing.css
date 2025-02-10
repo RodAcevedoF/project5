@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-content: center; 
     gap: 2em;
+    padding-top: 2em;
 }
 
 .landing-container {

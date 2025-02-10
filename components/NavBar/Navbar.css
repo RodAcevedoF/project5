@@ -17,7 +17,7 @@
   border-radius: 1em;
   padding: 0.2em;
   box-shadow: var(--general-shadow);
-  width: 11em;
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;

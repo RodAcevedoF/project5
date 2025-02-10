@@ -1,16 +1,20 @@
-import { NavBar } from "../components/NavBar/NavBar.js";
+import { setState } from "../utils/state.js";
+import { isAuthenticated } from "../utils/isAuthenticated.js";
 import { changePage } from "../utils/changePage.js";
 import { Landing } from "../pages/Landing/Landing.js";
-import { isAuthenticated } from "../utils/isAuthenticated.js";
 import { Home } from "../pages/Home/Home.js";
 import Footer from "../components/Footer/Footer.js";
+import { NavBar } from "../components/NavBar/NavBar.js";
 
-NavBar(); 
+const authenticated = isAuthenticated();
+setState("isLoggedIn", authenticated);
 
-if (isAuthenticated()) {
-    changePage(Home);
-  } else {
-changePage(Landing);
+NavBar();
+
+if (authenticated) {
+  changePage(Home, "home");
+} else {
+  changePage(Landing, "landing");
 }
 
 Footer();

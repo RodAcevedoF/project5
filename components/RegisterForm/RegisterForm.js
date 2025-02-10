@@ -4,8 +4,8 @@ import { Home } from "../../pages/Home/Home";
 import { changePage } from "../../utils/changePage";
 import MainBtn from "../MainBtn/MainBtn";
 import { LoginForm } from "../LoginForm/LoginForm";
-import { setState } from "../../utils/state.js"; // Importamos setState
-import { NavBar } from "../NavBar/NavBar"; // Importamos NavBar para actualizarla
+import { setState } from "../../utils/state.js";
+import { NavBar } from "../NavBar/NavBar"; 
 
 export const RegisterForm = () => {
   const div = document.createElement("div");
@@ -40,26 +40,17 @@ export const RegisterForm = () => {
     const errorMessage = div.querySelector("#register-error");
 
     const response = await registerUser(name, email, password);
-  
+    
     if (response && response.data && response.data.token) {
-      // Guardamos el token en localStorage
-      localStorage.setItem("token", response.data.token);
-
-      // Actualizamos el estado global
-      setState('isLoggedIn', true);
-      // Si tienes información del usuario, puedes guardarla
-      // setState('currentUser', response.data.user);
-
-      changePage(Home); // Cambiamos a la página Home
-      NavBar(); // Actualizamos la barra de navegación
+      changePage(Home, "home"); 
+      NavBar(); 
     } else {
       errorMessage.textContent = "Error al registrarse";
     }
   });
 
   div.querySelector(".registered").addEventListener("click", () => {
-    div.innerHTML = "";
-    div.appendChild(LoginForm());
+    window.dispatchEvent(new CustomEvent("changeForm", { detail: "login" }));
   });
 
   return div;

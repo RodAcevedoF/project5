@@ -6,9 +6,9 @@
 }
 
 :root {
-  --back-general: rgba(245, 245, 245, 0.751);
+  --back-general: whitesmoke;
   --back-alt: #211f23;
-  --light-letter: rgb(242, 242, 242);
+  --light-letter: whitesmoke;
   --nav-light: rgba(245, 245, 245, 0.879);
   --box-general: rgba(75, 26, 181, 0.596);
   --box-background: linear-gradient(to right, #6a11cb, #2575fc);
@@ -29,7 +29,7 @@ a {
 }
 
 main {
-  margin-top: 8rem;
+  margin-top: 6rem;
 }
 
 body {
@@ -39,7 +39,7 @@ body {
 
 .dark {
   background-color: var(--back-alt);
-  color: var(--back-general);
+  color: var(--light-letter);
 
   .navbar {
     background: var(--back-alt);
@@ -81,13 +81,16 @@ body {
     background: var(--back-alt);
     box-shadow: var(--alt-shadow);
   }
+  .go-back-btn span {
+    color: var(--nav-light);
+  }
 }
 
 @font-face {
   font-family: "Axiforma";
-  src: url("/public/fonts/axiforma_regular/axiforma_regular.woff2")
+  src: url("/fonts/axiforma_regular/axiforma_regular.woff2")
       format("woff2"),
-    url("../public/fonts/axiforma_regular/axiforma_regular.woff") format("woff");
+    url("/fonts/axiforma_regular/axiforma_regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

@@ -1,0 +1,31 @@
+.go-back-btn {
+    display: flex;
+    position: relative;
+    bottom: -32em;
+    width: fit-content;
+    border: none;
+    background: inherit;
+    margin-top: 2em;
+    cursor: pointer;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.go-back-btn img {
+    width: 3.5em;
+}
+
+.go-back-btn span {
+    position: absolute;
+    font-weight: bold;
+    opacity: 0;
+    transition: all .25s ease-in-out;
+    width: 5em;
+}
+
+.go-back-btn:hover  span {
+    transform: translateY(200%);
+    opacity: 1;
+}

@@ -1,6 +1,7 @@
 import "./SignBtn.css";
-import { SignLogin } from "../../pages/SignLogin/SignLogin";
-import { changePage } from "../../utils/changePage";
+import { SignLogin } from "../../pages/SignLogin/SignLogin.js";
+import { setState, getState } from "../../utils/state.js";
+import { changePage } from "../../utils/changePage.js";
 
 export const SignBtn = (idName, txt, formType) => {
   const button = document.createElement("button");
@@ -10,13 +11,13 @@ export const SignBtn = (idName, txt, formType) => {
   button.textContent = txt;
 
   button.addEventListener("click", () => {
-    if (window.location.pathname === "/signlogin") {
-      // Si ya estamos en SignLogin, cambiar solo el formulario sin recargar
+    const currentPage = getState("currentPage");
+
+    if (currentPage === "signlogin") {
       window.dispatchEvent(new CustomEvent("changeForm", { detail: formType }));
     } else {
-      // Guardar la elección del usuario antes de cambiar la página
-      sessionStorage.setItem("currentForm", formType);
-      changePage(SignLogin);
+      setState("currentForm", formType);
+      changePage(SignLogin, "signlogin");
     }
   });
 

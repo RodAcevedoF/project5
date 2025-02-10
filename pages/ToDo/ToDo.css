@@ -1,0 +1,62 @@
+  .todo-main {
+    display: grid;
+    grid-template-columns: 20vw 80vw;
+    grid-template-rows: 1fr;
+    background-color: var(--nav-light);
+    width: 100%;
+    height: auto;
+    border: 1px solid red; 
+    overflow: hidden;
+  }
+  
+  .task-editor {
+    width: 100%;
+    grid-area: 1/2/2/3;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
+  }
+
+  .task-editor h2 {
+    text-align: start;
+    width: 100%;
+  }
+
+  #todo-form {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+  }
+  
+  .task-editor form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .task-editor input,
+  .task-editor textarea,
+  .task-editor select {
+    padding: .5em;
+    font-size: 1em;
+    width: 100%;
+  }
+  
+  .todo-btn {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  #todo-list {
+    margin-top: 20px;
+  }
+  
+  .todo-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  

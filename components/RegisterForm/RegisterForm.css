@@ -1,11 +1,23 @@
 #register-form {
-    display: flex;
+    display: flex;/* 
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -48%); */
     flex-direction: column;
     padding: 1.5em;
     gap: .5em;
     box-shadow: var(--general-shadow);
     background: var(--nav-light);
     border-radius: 1.5em;
+    opacity: 1;
+    transition: all .25s ease;
+    /* z-index: 0; */
+}
+
+#register-form.get {
+    opacity: 1;
+    z-index: 10;
 }
 
 #register-form h2 {

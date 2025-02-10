@@ -1,7 +1,7 @@
 .log-btn {
   padding: .5em;
   background: var(--box-background);
-  color: var(--back-general);
+  color: var(--light-letter);
   border: none;
   border-radius: 1em;
   cursor: pointer;

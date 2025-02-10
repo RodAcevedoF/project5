@@ -1,47 +1,104 @@
-const API_URL = 'https://api-to-do.duckdns.org';
+import axios from "axios";
 
-// Obtener token almacenado
-const getToken = () => localStorage.getItem('token');
+const API_URL = "https://api-to-do.duckdns.org/api/todos";
 
-// Obtener todas las tareas
-export const getTodos = async () => {
-    try {
-        const response = await fetch(`${API_URL}/todos`, {
-            headers: { 'Authorization': `Bearer ${getToken()}` }
-        });
-        if (!response.ok) throw new Error('Error al obtener tareas');
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return [];
+export const createTodo = async (todoData) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    for (let key in todoData) {
+      if (todoData.hasOwnProperty(key)) {
+        formData.append(key, todoData[key]);
+      }
     }
+
+    const response = await axios.post(API_URL, formData, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error creating todo:", error.response?.data || error.message);
+    return { error: error.response?.data?.error || "Error creating todo" };
+  }
 };
 
-// Crear una nueva tarea
-export const createTodo = async (title, description) => {
-    try {
-        const response = await fetch(`${API_URL}/todos`, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${getToken()}`
-            },
-            body: JSON.stringify({ title, description })
-        });
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-    }
+export const getTodos = async (limit = 10, offset = 0) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await axios.get(API_URL, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+      params: { limit, offset },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error getting todos:", error.response?.data || error.message);
+    return { error: error.response?.data?.error || "Error getting todos" };
+  }
 };
 
-// Eliminar una tarea
+export const updateTodo = async (id, updateData) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    for (let key in updateData) {
+      if (updateData.hasOwnProperty(key)) {
+        formData.append(key, updateData[key]);
+      }
+    }
+
+    const response = await axios.put(`${API_URL}/${id}`, formData, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating todo:", error.response?.data || error.message);
+    return { error: error.response?.data?.error || "Error updating todo" };
+  }
+};
+
 export const deleteTodo = async (id) => {
     try {
-        await fetch(`${API_URL}/todos/${id}`, { 
-            method: 'DELETE',
-            headers: { 'Authorization': `Bearer ${getToken()}` }
-        });
+      const token = localStorage.getItem("token");
+  
+      const response = await axios.delete(`${API_URL}/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+  
+      if (response.status === 204) {
+        return { success: true };
+      }
+      
+      return response.data;
     } catch (error) {
-        console.error(error);
+      console.error("Error deleting todo:", error.response?.data || error.message);
+      return { error: error.response?.data?.error || "Error deleting todo" };
     }
+  };
+
+export const getTodoFile = async (filename) => {
+  try {
+    const response = await axios.get(`${API_URL}/file/${filename}`, {
+      responseType: "blob",
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error getting todo file:", error.response?.data || error.message);
+    return { error: error.response?.data?.error || "Error getting file" };
+  }
 };
