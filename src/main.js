@@ -5,10 +5,10 @@ import { Landing } from "../pages/Landing/Landing.js";
 import { Home } from "../pages/Home/Home.js";
 import Footer from "../components/Footer/Footer.js";
 import { NavBar } from "../components/NavBar/NavBar.js";
-
+import checkSessionTheme from "../utils/sessionTheme.js"
 const authenticated = isAuthenticated();
 setState("isLoggedIn", authenticated);
-
+checkSessionTheme();
 NavBar();
 
 if (authenticated) {

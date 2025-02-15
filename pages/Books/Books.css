@@ -1,0 +1,8 @@
+.book-main {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--nav-light);
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}

@@ -1,16 +1,17 @@
-// pages/VideoList/VideoList.js
+//import "./Videos.css";
+import { VideoGrid } from "../../components/VideoGrid/VideoGrid.js";
+import HeroBanner from "../../components/HeroBanner/HeroBanner.js";
+
 export const Videos = () => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <div class="page-container">
-        <h2>Lista de Videos</h2>
-        <div id="video-list"></div>
-        <button id="add-video" class="main-btn">Añadir Video</button>
-      </div>
-    `;
-  
-    // Aquí puedes agregar el código para cargar y manejar la lista de videos
-  
-    return div;
-  };
-  
+  const main = document.querySelector("main");
+  main.innerHTML = `<section class="video-main"></section>`;
+  const div = document.createElement("div")
+  const section = main.querySelector(".video-main");
+  section.appendChild(HeroBanner());
+
+  const videoGrid = VideoGrid();
+
+  section.appendChild(videoGrid.container);
+
+  return main;
+};

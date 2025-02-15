@@ -1,0 +1,12 @@
+.profile-btn {
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.profile-btn img {
+    width: 100%;
+}

@@ -1,21 +1,21 @@
-// BookGrid.js
-import { BookCard } from "../BookCard/BookCard.js";
-import "./BookGrid.css";
-import { SearchBar } from "../SearchBar/SearchBar.js";
-import { getBooks } from "../../api/bookAPI.js";
-import BackBtn from "../BackBtn/BackBtn.js"
-import { Home } from "../../pages/Home/Home.js"
+// VideoGrid.js
+import { VideoCard } from "../VideoCard/VideoCard.js";
+//import "./VideoGrid.css";
+import { SearchBarVids } from "../SearchBarVids/SearchBarVids.js";
+import { getVideos } from "../../api/videoApi";
+import BackBtn from "../BackBtn/BackBtn.js";
+import { Home } from "../../pages/Home/Home.js";
 
-export const BookGrid = () => {
+export const VideoGrid = () => {
   const container = document.createElement("article");
-  container.classList.add("book-article");
+  container.classList.add("video-article");
 
   const grid = document.createElement("div");
-  grid.classList.add("book-grid");
+  grid.classList.add("video-grid");
   const toggleButton = document.createElement("button");
-  toggleButton.innerText = "Ver libros guardados";
+  toggleButton.innerText = "Ver videos guardados";
   toggleButton.classList.add("toggle-button");
-  let showingSavedBooks = false;
+  let showingSavedVideos = false;
 
   const updateResults = (results) => {
     grid.innerHTML = "";
@@ -31,44 +31,44 @@ export const BookGrid = () => {
       return;
     }
 
-    results.forEach((book) => {
-      const card = BookCard(book);
+    results.forEach((video) => {
+      const card = VideoCard(video);
       grid.appendChild(card);
     });
   };
 
-  const searchBarElement = SearchBar(updateResults);
+  const searchBarElement = SearchBarVids(updateResults);
   searchBarElement.style.display = "block";
 
-  const loadSavedBooks = async () => {
-    grid.innerHTML = "<p>Cargando libros guardados...</p>";
+  const loadSavedVideos = async () => {
+    grid.innerHTML = "<p>Cargando videos guardados...</p>";
     try {
-      const result = await getBooks();
-      let books = [];
+      const result = await getVideos();
+      let videos = [];
       if (Array.isArray(result)) {
-        books = result;
-      } else if (result.books && Array.isArray(result.books)) {
-        books = result.books;
+        videos = result;
+      } else if (result.videos && Array.isArray(result.videos)) {
+        videos = result.videos;
       } else if (result.data && Array.isArray(result.data)) {
-        books = result.data;
+        videos = result.data;
       }
 
-      updateResults(books);
+      updateResults(videos);
     } catch (error) {
-      console.error("Error cargando libros guardados:", error);
+      console.error("Error cargando videos guardados:", error);
       updateResults([]);
     }
   };
 
   toggleButton.addEventListener("click", () => {
-    showingSavedBooks = !showingSavedBooks;
+    showingSavedVideos = !showingSavedVideos;
 
-    if (showingSavedBooks) {
-      toggleButton.innerText = "Ver búsqueda de libros";
+    if (showingSavedVideos) {
+      toggleButton.innerText = "Ver búsqueda de videos";
       searchBarElement.style.display = "none";
-      loadSavedBooks();
+      loadSavedVideos();
     } else {
-      toggleButton.innerText = "Ver libros guardados";
+      toggleButton.innerText = "Ver videos guardados";
       searchBarElement.style.display = "block";
       grid.innerHTML = "";
     }

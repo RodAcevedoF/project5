@@ -15,7 +15,7 @@ export const MenuUl = () => {
   return ul;
 };
 
-export const menuBtn = () => {
+export const menuBtn = (menuContainer) => {
   const btn = document.createElement("button");
   btn.classList.add("menu-burger-btn");
 
@@ -27,17 +27,14 @@ export const menuBtn = () => {
 
   btn.addEventListener("click", (ev) => {
     ev.stopPropagation();  
-  const ul = document.querySelector(".services-ul");
     btn.classList.toggle("active");
-    ul.classList.toggle("get");
+    menuContainer.classList.toggle("get");
   });
 
   document.addEventListener("click", (ev) => {
-    const target = ev.target;
-    const ul = document.querySelector(".services-ul");
-    if (!btn.contains(target) && !ul.contains(target)) {
+    if (!btn.contains(ev.target) && !menuContainer.contains(ev.target)) {
       btn.classList.remove("active");
-      ul.classList.remove("get");
+      menuContainer.classList.remove("get");
     }
   });
 

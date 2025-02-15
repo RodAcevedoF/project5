@@ -16,7 +16,7 @@ export const LoginForm = () => {
           <input type="email" id="login-email" placeholder="example@site.com" required>
           <label for="login-password">Password:</label>
           <input type="password" id="login-password" placeholder="At least 8 characters" required>
-          ${MainBtn("submit", "login-button", "Go in!")}
+          ${MainBtn("submit", "login-button", "main-btn", "Go in!")}
           <p class="no-registered">Still no account? Register!</p>
           <p id="login-error" style="color: red;"></p>
       </form>

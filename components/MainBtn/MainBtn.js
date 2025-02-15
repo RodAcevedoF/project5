@@ -1,5 +1,5 @@
 import "./MainBtn.css";
 
-const MainBtn = (type = "button", idName = null, txt = "Click me") => `<button type=${type} class="main-btn" id=${idName}>${txt}</button>`;
+const MainBtn = (type = "button", idName = null, classNam, txt = "Click me") => `<button type=${type} class=${classNam} id=${idName}>${txt}</button>`;
 
 export default MainBtn;

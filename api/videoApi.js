@@ -1,35 +1,40 @@
 import axios from "axios";
 
-const API_URL = "https://api-to-do.duckdns.org/api/books";
+const API_URL = "https://api-to-do.duckdns.org/api/videos";
 
-export const createBook = async (bookData) => {
+export const createVideo = async (videoData) => {
   try {
     const token = localStorage.getItem("token");
 
-    const formData = new FormData();
-    for (let key in bookData) {
-      if (bookData.hasOwnProperty(key)) {
-        formData.append(key, bookData[key]);
-      }
-    }
+    const { channelTitle, ...rest } = videoData;
+    const formattedData = { ...rest, channel: channelTitle };
 
-    const response = await axios.post(API_URL, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`
+    console.log("📤 Enviando formattedData:", formattedData);
+
+    const response = await axios.post(
+      "https://api-to-do.duckdns.org/api/videos",
+      formattedData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
 
     return response.data;
   } catch (error) {
     console.error(
-      "Error creando el libro:",
+      "Error creando el video:",
       error.response?.data || error.message
     );
-    return { error: error.response?.data?.error || "Error creando el libro" };
+    return {
+      error: error.response?.data?.error || "Error creando el video"
+    };
   }
 };
 
-export const getBooks = async (limit = 10, offset = 0) => {
+export const getVideos = async (limit = 10, offset = 0) => {
   try {
     const token = localStorage.getItem("token");
 
@@ -43,20 +48,20 @@ export const getBooks = async (limit = 10, offset = 0) => {
     return response.data;
   } catch (error) {
     console.error(
-      "Error obteniendo los libros:",
+      "Error obteniendo los videos:",
       error.response?.data || error.message
     );
     return {
-      error: error.response?.data?.error || "Error obteniendo los libros"
+      error: error.response?.data?.error || "Error obteniendo los videos"
     };
   }
 };
 
-export const updateBook = async (id, updateData) => {
+export const updateVideo = async (id, updateData) => {
   try {
     const token = localStorage.getItem("token");
 
-    const hasFile = updateData.cover_image instanceof File;
+    const hasFile = updateData.thumbnail instanceof File;
 
     let response;
     if (hasFile) {
@@ -84,16 +89,16 @@ export const updateBook = async (id, updateData) => {
     return response.data;
   } catch (error) {
     console.error(
-      "Error actualizando el libro:",
+      "Error actualizando el video:",
       error.response?.data || error.message
     );
     return {
-      error: error.response?.data?.error || "Error actualizando el libro"
+      error: error.response?.data?.error || "Error actualizando el video"
     };
   }
 };
 
-export const deleteBook = async (id) => {
+export const deleteVideo = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
@@ -109,11 +114,11 @@ export const deleteBook = async (id) => {
     return response.data;
   } catch (error) {
     console.error(
-      "Error eliminando el libro:",
+      "Error eliminando el video:",
       error.response?.data || error.message
     );
     return {
-      error: error.response?.data?.error || "Error eliminando el libro"
+      error: error.response?.data?.error || "Error eliminando el video"
     };
   }
 };

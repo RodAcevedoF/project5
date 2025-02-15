@@ -1,7 +1,7 @@
 .go-back-btn {
     display: flex;
     position: relative;
-    bottom: -32em;
+    bottom: 0em;
     width: fit-content;
     border: none;
     background: inherit;

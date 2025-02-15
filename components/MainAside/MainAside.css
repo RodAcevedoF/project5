@@ -1,11 +1,12 @@
 .main-aside {
-    background-color: var(--nav-light);
+    background: var(--box-alt-background);
     padding: 3em 0 0 1em;
     width: 100%;
-    border: 1px solid cornflowerblue;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    grid-area: 1/1/2/2;
   }
   
   .main-aside .latest,

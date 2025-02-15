@@ -18,7 +18,7 @@ export const RegisterForm = () => {
           <input type="email" id="register-email" placeholder="example@site.com" required>
           <label for="register-password">Password:</label>
           <input type="password" id="register-password" placeholder="At least 8 characters" required>
-          ${MainBtn("submit", "register-button", "Register")}
+          ${MainBtn("submit", "register-button", "main-btn","Register")}
           <div class="checks">
             <input type="checkbox" id="promotions" required>
             <label for="promotions">I agree to receive promotions and marketing emails</label>

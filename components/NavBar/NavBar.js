@@ -4,6 +4,7 @@ import { UpBtn } from "../UpBtn/UpBtn.js";
 import { LogOutBtn } from "../LogOutBtn/LogOutBtn.js";
 import { SignBtn } from "../SignBtn/SignBtn.js";
 import { getState } from "../../utils/state.js";
+import ProfileBtn from "../ProfileBtn/ProfileBtn.js";
 
 export const NavBar = () => {
   const header = document.querySelector("header");
@@ -14,21 +15,33 @@ export const NavBar = () => {
 
   nav.appendChild(UpBtn("/icon/list.png", "Design for U"));
 
-  const currentPage = getState("currentPage");
-  console.log(currentPage);
-  const menuContainer = MenuUl();
-  if (currentPage == "landing" || currentPage == "signlogin") {
-    nav.appendChild(menuContainer);
-  } else {
-    nav.appendChild(menuContainer).classList.add("floating");
-  }
-
   const navLinks = document.createElement("div");
   navLinks.classList.add("nav-links");
 
+  const menuContainer = MenuUl();
+  const menuButton = menuBtn(menuContainer);
+  
+  menuButton.style.display = "none";
+  navLinks.appendChild(menuButton);
+
+  const currentPage = getState("currentPage");
+  console.log(currentPage);
+
+  if (
+    (currentPage === "landing" && window.innerWidth > 810) ||
+    (currentPage === "signlogin" && window.innerWidth > 810)
+  ) {
+    nav.appendChild(menuContainer);
+  } else {
+    menuContainer.classList.add("floating")
+    nav.appendChild(menuContainer);
+    menuButton.style.display = "flex";
+  }
+
   if (getState("isLoggedIn")) {
-    navLinks.appendChild(LogOutBtn());
-    navLinks.appendChild(menuBtn());
+    navLinks.insertAdjacentElement("afterbegin", LogOutBtn());
+    navLinks.appendChild(ProfileBtn());
+    menuButton.style.display = "flex";
   } else {
     navLinks.appendChild(SignBtn("sign-up-btn", "Sign Up", "register"));
     navLinks.appendChild(SignBtn("login-btn", "Login", "login"));
@@ -37,3 +50,5 @@ export const NavBar = () => {
   nav.appendChild(navLinks);
   header.appendChild(nav);
 };
+
+window.addEventListener("resize", NavBar);
