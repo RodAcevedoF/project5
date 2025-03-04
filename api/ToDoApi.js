@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://api-to-do.duckdns.org/api/todos";
+const API_URL = "https://service.todo-api.site/api/todos";
 
 export const createTodo = async (todoData) => {
   try {

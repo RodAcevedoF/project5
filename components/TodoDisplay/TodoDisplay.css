@@ -1,0 +1,43 @@
+.todo-display-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--box-background);
+  border-radius: 2em;
+  padding: 2em;
+  box-shadow: var(--general-shadow);
+  width: 50%;
+  color: var(--light-letter);
+}
+
+.todo-display-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.todo-display-card p {
+  margin: .25em 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: .5em;
+  margin-top: .5em;
+}
+
+.actions button {
+  padding: .5em 1em;
+  border: none;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.actions .edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.actions .delete-btn {
+  background-color: #dc3545;
+  color: white;
+}

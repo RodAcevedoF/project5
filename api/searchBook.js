@@ -1,43 +1,29 @@
 import axios from "axios";
 
-export const searchBook = async (query) => {
+export const searchBook = async (query, startIndex = 0, maxResults = 10) => {
   try {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-      query
-    )}`;
-    const response = await axios.get(url);
-
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&startIndex=${startIndex}&maxResults=${maxResults}&random=${Math.random()}`;
+    
+    const response = await axios.get(url, { headers: { "Cache-Control": "no-cache" } });
+    
     if (response.data.items) {
-      const books = response.data.items.map((item) => {
-        const volumeInfo = item.volumeInfo;
+      const books = response.data.items.map(item => {
+        const { title, authors, description, publisher, publishedDate, imageLinks } = item.volumeInfo;
         return {
-          apiId: item.id, // Id proveniente de la API pública.
-          title: volumeInfo.title || "Sin título",
-          author: volumeInfo.authors
-            ? volumeInfo.authors.join(", ")
-            : "Autor desconocido",
-          // Usamos description para mostrar una descripción breve.
-          description: volumeInfo.description || "Sin descripción",
-          // Datos adicionales:
-          publisher: volumeInfo.publisher || "",
-          publishedDate: volumeInfo.publishedDate || "",
-          // Se obtiene la imagen de portada si existe.
-          cover_image: volumeInfo.imageLinks
-            ? volumeInfo.imageLinks.thumbnail
-            : null
+          apiId: item.id,
+          title: title || "Sin título",
+          author: authors ? authors.join(", ") : "Autor desconocido",
+          description: description || "Sin descripción",
+          publisher: publisher || "",
+          publishedDate: publishedDate || "",
+          cover_image: imageLinks ? imageLinks.thumbnail : null
         };
       });
-      return books;
-    } else {
-      return [];
+      return { books, totalItems: response.data.totalItems };
     }
+    return { books: [], totalItems: 0 };
   } catch (error) {
-    console.error(
-      "Error searching public books:",
-      error.response?.data || error.message
-    );
-    return {
-      error: error.response?.data?.error || "Error searching public books"
-    };
+    console.error("Error buscando libros:", error.response?.data || error.message);
+    return { error: error.response?.data?.error || "Error buscando libros" };
   }
 };

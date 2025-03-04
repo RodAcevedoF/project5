@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://api-to-do.duckdns.org/api/videos";
+const API_URL = "https://service.todo-api.site/api/videos";
 
 export const createVideo = async (videoData) => {
   try {
@@ -8,8 +8,6 @@ export const createVideo = async (videoData) => {
 
     const { channelTitle, ...rest } = videoData;
     const formattedData = { ...rest, channel: channelTitle };
-
-    console.log("📤 Enviando formattedData:", formattedData);
 
     const response = await axios.post(
       "https://api-to-do.duckdns.org/api/videos",

@@ -1,0 +1,114 @@
+.aside-btn {
+  position: relative;
+  display: flex;
+  padding: 1em;
+  color: var(--light-letter);
+  text-decoration: none;
+  transition: 0.5s;
+  overflow: hidden;
+  background-color: var(--box-background-trans);
+  border: none;
+  border-radius: .5em;
+  width: 4em;
+  height: 4em ;
+}
+.aside-btn:hover {
+  background: var(--button-alt-background);
+  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+    0 0 200px #03e9f4;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+.aside-btn:nth-child(1) {
+  filter: hue-rotate(270deg);
+}
+.aside-btn:nth-child(2) {
+  filter: hue-rotate(110deg);
+}
+.aside-btn span {
+  position: absolute;
+  display: block;
+}
+.aside-btn span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: animate1 1s linear infinite;
+}
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+.aside-btn span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+.aside-btn span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.aside-btn span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+.open-close {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.open-close span {
+    background: var(--light-letter);
+    height: .25em;
+    width: 100%;
+}

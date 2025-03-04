@@ -1,6 +1,6 @@
 import axios from "axios";
-import { setState } from "../utils/state";
-const API_URL = "https://api-to-do.duckdns.org/api/auth";
+import { getState, setState } from "../utils/state";
+const API_URL = "https://service.todo-api.site/api/auth";
 
 export const registerUser = async (name, email, password) => {
   try {
@@ -14,6 +14,7 @@ export const registerUser = async (name, email, password) => {
       localStorage.setItem("token", token);
       setState("isLoggedIn", true);
       setState("currentUser", user);
+      localStorage.setItem("name", user.name)
       return response.data;
     }
   } catch (error) {
@@ -33,6 +34,7 @@ export const loginUser = async (email, password) => {
       localStorage.setItem("token", token);
       setState("isLoggedIn", true);
       setState("currentUser", user);
+      localStorage.setItem("name", user.name)
       return response.data;
     } else {
       throw new Error("No token received");

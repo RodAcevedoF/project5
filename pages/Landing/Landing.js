@@ -1,10 +1,5 @@
 import "./Landing.css";
-import { LoginForm } from "../../components/LoginForm/LoginForm.js";
-import { RegisterForm } from "../../components/RegisterForm/RegisterForm.js";
 import { SignBtn } from "../../components/SignBtn/SignBtn.js";
-import { isAuthenticated } from "../../utils/isAuthenticated.js";
-import { changePage } from "../../utils/changePage.js";
-import { Home } from "../Home/Home.js";
 import Brands from "../../components/Brands/Brands.js";
 export const Landing = () => {
   const main = document.querySelector("main");

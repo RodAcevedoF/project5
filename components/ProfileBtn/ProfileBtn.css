@@ -5,8 +5,21 @@
     border: none;
     cursor: pointer;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: 200% 100%;
+    background-image: var(--box-background);
+    transition: background-position .3s ease-in-out;
 }
+
+.profile-btn:hover {
+    background-position: 100% 0;
+    background-image: var(--button-alt-background)
+  }
 
 .profile-btn img {
     width: 100%;
+    padding: .5em;
+    filter: invert(1);
 }

@@ -12,12 +12,16 @@
   --nav-light: rgba(245, 245, 245, 0.879);
   --box-general: rgba(75, 26, 181, 0.596);
   --box-background: linear-gradient(to right, #6a11cb, #2575fc);
+  --box-background-trans: linear-gradient(to right, #7316d59a, #4185fa95);
+  --box-alt-hover: linear-gradient(to right, #ff93fb9f, #ae74ffa3);
   --box-alt-background: linear-gradient(to right, #bf3bd6b8, #41c0ffc4);
+  --aside-background: linear-gradient(to right, #6b11cb74, #2574fc67);
+  --button-alt-background: linear-gradient(to right, #4343f0, #36c5cd);
   --letter-background: linear-gradient(to right, #000000, #141379);
   --letter-general: rgb(38, 12, 105);
   --highlight-letter: rgba(165, 130, 255, 0.114);
-  --general-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
-  --alt-shadow: 0px 0px 15px rgba(231, 229, 229, 0.449);
+  --general-shadow: 1px 1px 15px rgba(0, 0, 0, 0.25);
+  --alt-shadow: 0px 0px 10px rgba(231, 229, 229, 0.273);
 }
 
 ul {
@@ -88,6 +92,38 @@ body {
     background: var(--back-alt);
     box-shadow: var(--alt-shadow);
   }
+  .todo-main {
+    background: var(--back-alt);
+  }
+  .page-btn {
+    box-shadow: var(--alt-shadow);
+  }
+  .weather-widget {
+    box-shadow: var(--alt-shadow);
+  }
+  .quote-div {
+    box-shadow: var(--alt-shadow);
+  }
+  .task-editor {
+    box-shadow: var(--alt-shadow);
+  }
+  .main-aside {
+    box-shadow: var(--alt-shadow);
+  }
+  .simple-calendar {
+    background: var(--back-alt);
+    color: var(--light-letter);
+    box-shadow: var(--alt-shadow);
+  }
+  .nav-btn {
+    color: var(--light-letter);
+  }
+  .todo-display-card {
+  /*   color: var(--light-letter);
+    background: var(--back-alt);
+   */
+  box-shadow: var(--alt-shadow);
+  } 
 }
 
 @font-face {

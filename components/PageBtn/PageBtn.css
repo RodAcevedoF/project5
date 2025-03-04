@@ -1,0 +1,25 @@
+.page-btn {
+    display: flex;
+    width: 10em;
+    padding: .5em;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+    background-size: 200% 100%;
+    background-image: var(--box-background);
+    transition: background-position .3s ease-in-out;
+    color: var(--light-letter);
+    border-radius: 1em;
+    border: none;
+    box-shadow: var(--general-shadow);
+}
+
+.page-btn:hover {
+    background-position: 100% 0;
+    background-image: var(--button-alt-background);
+}
+.page-btn img {
+    width: 2em;
+    object-fit: contain;
+}

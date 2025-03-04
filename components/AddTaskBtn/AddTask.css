@@ -1,0 +1,29 @@
+.add-task-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-letter);
+    border-radius: 1em;
+    padding: .5em;
+    border: none;
+    cursor: pointer;
+    gap: .3em;
+    background-size: 200% 100%;
+    background-image: var(--box-background);
+    transition: all .3s ease-in-out;
+    width: 10em;
+}
+
+.add-task-btn:hover {
+    background-position: 100% 0;
+    background-image: var(--button-alt-background)
+}
+
+.add-task-btn span {
+    font-weight: bolder;
+}
+
+.add-task-btn img {
+    width: 3em;
+    filter: invert(1);
+}

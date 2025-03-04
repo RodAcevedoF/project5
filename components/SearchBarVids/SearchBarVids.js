@@ -1,7 +1,4 @@
-// SearchBar.js
-import { searchVideo } from "../../api/searchVideos";
-
-export const SearchBarVids = (onSearchResults) => {
+export const SearchBarVids = (onSearchQuery) => {
   const container = document.createElement("div");
   container.classList.add("search-bar");
 
@@ -13,14 +10,13 @@ export const SearchBarVids = (onSearchResults) => {
   `;
 
   const form = container.querySelector("#search-form");
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const query = container.querySelector("#search-input").value.trim();
+    const input = container.querySelector("#search-input");
+    const query = input.value.trim();
     if (!query) return;
-    console.log("Consulta enviada:", query); // Log de la consulta
-    const results = await searchVideo(query);
-    console.log("Resultados de la búsqueda:", results); // Log de los resultados
-    onSearchResults(results);
+    console.log("Consulta enviada:", query);
+    onSearchQuery(query);
   });
 
   return container;

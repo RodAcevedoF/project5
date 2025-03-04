@@ -8,12 +8,12 @@ const ProfileBtn = () => {
   const img = document.createElement("img");
   img.alt = "profile icon";
   const updateImg = () => {
-  const storedImg = localStorage.getItem("profileImg") || "../../public/icon/user.png";
+  const storedImg = localStorage.getItem("profileImg") || "/icon/user.png";
   img.src = storedImg;
   }
   updateImg();
   btn.addEventListener("click", () => {
-    changePage(Profile);
+    changePage(Profile, "profile");
   });
   btn.appendChild(img)
   return btn;

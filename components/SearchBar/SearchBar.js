@@ -1,6 +1,4 @@
-import { searchBook } from "../../api/searchBook.js";
-
-export const SearchBar = (onSearchResults) => {
+export const SearchBar = (onSearchQuery) => {
   const container = document.createElement("div");
   container.classList.add("search-bar");
 
@@ -12,12 +10,13 @@ export const SearchBar = (onSearchResults) => {
   `;
 
   const form = container.querySelector("#search-form");
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const query = container.querySelector("#search-input").value.trim();
-    if (!query) return;
-    const results = await searchBook(query);
-    onSearchResults(results);
+    const input = container.querySelector("#search-input");
+    let query = input.value.trim();
+    if (!query || typeof query !== "string") return;
+    
+    onSearchQuery(query);
   });
 
   return container;

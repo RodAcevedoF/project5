@@ -1,0 +1,38 @@
+.weather-widget {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  height: 100%;
+  width: 30%;
+  min-width: 15em;
+  box-shadow: var(--general-shadow);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 10px;
+}
+
+.weather-widget h3 {
+  font-size: 1em;
+  align-self: start;
+  padding-left: 0.5em;
+}
+
+.weather-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-div img {
+  width: 5em;
+  height: auto;
+}
+.txt-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5em;
+}

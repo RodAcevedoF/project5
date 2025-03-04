@@ -1,0 +1,67 @@
+.task-editor {
+    width: 60%;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3em;
+    box-shadow: var(--general-shadow);
+    height: auto;
+    transition: all .3s ease-in-out;
+  }
+
+  .task-editor h2 {
+    text-align: center;
+    width: 100%;
+    font-size: 1em;
+    padding: 0 0 1em 0;
+  }
+
+  #todo-form {
+    display: flex;
+    flex-direction: column;
+    gap: .75em;
+    width: 100%;
+    height: auto;
+  }
+  
+  .task-editor form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .task-editor input,
+  .task-editor textarea {
+    padding: .5em;
+    font-size: .8em;
+    width: 100%;
+    border-radius: 1em;
+  }
+
+  #todo-deadline {
+    min-width: 50%;
+  }
+
+  .task-editor select {
+    padding: .5em;
+    border-radius: 1em;
+    font-size: .8em;
+  }
+
+  .task-editor textarea {
+    resize: none;
+  }
+  
+
+  .form-div {
+    display: flex;
+    gap: 1em;
+  }
+
+  .form-btns {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+  }

@@ -10,6 +10,7 @@
   top: 0;
   gap: 1em;
   z-index: 20;
+  opacity: .9;
 }
 
 .nav-links {

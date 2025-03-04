@@ -8,11 +8,11 @@
   width: 8em;
   font-weight: bolder;
   background-size: 200% 100%;
-  background-image: linear-gradient(to right, #6a11cb, #2575fc);
-  transition: background-position .25s ease-in-out;
+  background-image: var(--box-background);
+  transition: background-position .3s ease-in-out;
 }
 
 .log-btn:hover {
   background-position: 100% 0;
-  background-image: linear-gradient(to right, #aa46a7, #ea3c74);
+  background-image: var(--button-alt-background)
 }
