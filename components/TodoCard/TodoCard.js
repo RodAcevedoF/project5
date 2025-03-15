@@ -44,6 +44,7 @@ export const TodoCard = () => {
     form.querySelector("#save-todo").textContent = "Update";
     const cont = document.querySelector(".editor-container"); 
     cont.classList.add("visible")
+    form.querySelector("#delete-todo").style.display = "block";
   };
 
   window.addEventListener("loadTodoIntoEditor", (e) => {
@@ -98,6 +99,8 @@ export const TodoCard = () => {
       }
       const cont = document.querySelector(".editor-container");
       cont.classList.remove("visible");
+      const p = document.querySelector(".add-task-btn > p");
+      p.textContent = "Add task";
     } else {
       alert(result.error || "Error al guardar la tarea");
     }

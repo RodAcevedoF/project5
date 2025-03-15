@@ -2,15 +2,16 @@
   background: var(--aside-background);
   padding: 4em 1em 0 1em;
   width: 100%;
+  min-width: 11.5em;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   grid-area: 1/1/2/2;
-  border-radius: 2em;
   box-shadow: var(--general-shadow);
   color: var(--light-letter);
   gap: 2em;
+  z-index: 1;
 }
 
 .main-aside .latest,
@@ -21,6 +22,21 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.mobile-close {
+  filter: invert(1);
+  width: 1.6em;
+  position: absolute;
+  top: .25em;
+  visibility: hidden;
+  cursor: pointer;
+  opacity: .5;
+  transition: all .3s ease;
+}
+
+.mobile-close:hover {
+  opacity: .8;
 }
 
 .main-aside h3 {
@@ -39,7 +55,7 @@
 }
 
 .main-aside h3:hover {
-  filter: brightness(1.5);
+  filter: brightness(1.2);
 }
 
 .todo-item {
@@ -90,6 +106,29 @@
 
 @media screen and (max-width: 792px) {
   .main-aside {
-    display: none;
+    width: 15em;
+    position: fixed;
+    opacity: 0;
+    left: 0;
+    top:10em;
+    padding: 2em 1em;
+    height: auto;
+    border-radius: 1em;
+  }
+
+  .main-aside h3 {
+    font-size: .8em;
+  }
+
+  .main-aside.visible {
+    display: flex;
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 520px){
+  .mobile-close {
+    visibility: visible;
   }
 }

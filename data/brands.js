@@ -1,7 +1,7 @@
 const brandInfo = [
     {
-      "className": "spotify",
-      "url": "/images/spotify.png"
+      "className": "leetcode",
+      "url": "/images/leetcode.png"
     },
     {
       "className": "codeacademy",
@@ -12,8 +12,8 @@ const brandInfo = [
       "url": "/images/fortinet.png"
     },
     {
-      "className": "leetcode",
-      "url": "/images/leetcode.png"
+      "className": "spotify",
+      "url": "/images/spotify.png"
     }
 ];
 

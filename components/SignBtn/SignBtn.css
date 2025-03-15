@@ -13,7 +13,7 @@
   
   .sign-in-button:hover {
     background-position: 100% 0;
-    background-image: var(--box-alt-background);
+    background-image: var(--button-alt-background);
   }
   
   #sign-up-btn {

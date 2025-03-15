@@ -3,22 +3,17 @@ import "./BookGrid.css";
 import { SearchBar } from "../SearchBar/SearchBar.js";
 import { searchBook } from "../../api/searchBook.js";
 import { getBooks } from "../../api/bookApi.js";
-import BackBtn from "../BackBtn/BackBtn.js";
-import { Home } from "../../pages/Home/Home.js";
+import ToggleBtn from "../ToggleBtn/ToggleBtn.js";
 
 export const BookGrid = () => {
   const container = document.createElement("article");
   container.classList.add("book-article");
-
-  const grid = document.createElement("div");
+  const grid = document.createElement("section");
   grid.classList.add("book-grid");
-
-  const toggleButton = document.createElement("button");
-  toggleButton.innerText = "Ver libros guardados";
-  toggleButton.classList.add("toggle-button");
+  const toggleButton = ToggleBtn("Saved books", "Search books");
 
   const loadMoreButton = document.createElement("button");
-  loadMoreButton.innerText = "Cargar más";
+  loadMoreButton.innerText = "Load more";
   loadMoreButton.classList.add("load-more-button");
   loadMoreButton.style.display = "none";
 
@@ -28,18 +23,17 @@ export const BookGrid = () => {
   const maxResults = 10;
   let totalItems = 0;
 
-  // Actualiza la cuadrícula con los libros obtenidos
   const updateResults = (result, isNewSearch = false) => {
     if (isNewSearch) {
       grid.innerHTML = "";
       startIndex = 0;
     }
     if (!result || !Array.isArray(result.books)) {
-      grid.innerHTML = "<p>Error: Datos inválidos</p>";
+      grid.innerHTML = "<p>Oopss...not valid!</p>";
       return;
     }
     if (result.books.length === 0 && isNewSearch) {
-      grid.innerHTML = "<p>No se encontraron resultados.</p>";
+      grid.innerHTML = "<p>No results</p>";
       return;
     }
     result.books.forEach((book) => {
@@ -54,7 +48,7 @@ export const BookGrid = () => {
   // Realiza la búsqueda de libros usando la consulta actual
   const searchBooks = async (isNewSearch = false) => {
     if (!query || typeof query !== "string") {
-      console.error("❌ Error: searchQuery inválida en SearchBar callback:", searchQuery);
+      console.error("Error: invalid search:", searchQuery);
       return;
     }
     if (isNewSearch) showLoading();
@@ -63,7 +57,7 @@ export const BookGrid = () => {
   };
 
   const loadSavedBooks = async () => {
-    grid.innerHTML = "<p>Cargando libros guardados...</p>";
+    grid.innerHTML = "<p>Loading saved books...</p>";
     try {
       const result = await getBooks();
       let books = Array.isArray(result)
@@ -75,23 +69,37 @@ export const BookGrid = () => {
         : [];
       updateResults({ books, totalItems: books.length }, true);
     } catch (error) {
-      console.error("Error cargando libros guardados:", error);
+      console.error("Error loading books:", error);
       updateResults({ books: [], totalItems: 0 }, true);
     }
+  };
+
+  const randomQueries = [
+    "science",
+    "history",
+    "fiction",
+    "fantasy",
+    "mystery",
+    "art",
+    "music"
+  ];
+  const getRandomQuery = () => {
+    const randomIndex = Math.floor(Math.random() * randomQueries.length);
+    return randomQueries[randomIndex];
   };
 
   toggleButton.addEventListener("click", () => {
     showingSavedBooks = !showingSavedBooks;
     if (showingSavedBooks) {
-      toggleButton.innerText = "Ver búsqueda de libros";
       searchBarElement.style.display = "none";
       loadMoreButton.style.display = "none";
       loadSavedBooks();
     } else {
-      toggleButton.innerText = "Ver libros guardados";
       searchBarElement.style.display = "block";
       grid.innerHTML = "";
       loadMoreButton.style.display = "none";
+      query = getRandomQuery();
+      searchBooks(true);
     }
   });
 
@@ -103,7 +111,7 @@ export const BookGrid = () => {
   // Barra de búsqueda: recibe la consulta y la asigna para realizar la búsqueda
   const searchBarElement = SearchBar((searchQuery) => {
     if (!searchQuery || typeof searchQuery !== "string") {
-      console.error("❌ Error: searchQuery inválida en SearchBar callback:", searchQuery);
+      console.error("Error: invalid search:", searchQuery);
       return;
     }
     query = searchQuery;
@@ -112,15 +120,20 @@ export const BookGrid = () => {
   searchBarElement.style.display = "block";
 
   // Agregar elementos al contenedor
-  container.appendChild(toggleButton);
+  const toggleDiv = document.createElement("section");
+  toggleDiv.classList.add("toggle-div");
+  toggleDiv.appendChild(toggleButton);
+  container.appendChild(toggleDiv);
   container.appendChild(searchBarElement);
   container.appendChild(grid);
   container.appendChild(loadMoreButton);
-  container.appendChild(BackBtn(Home, "home"));
 
   const showLoading = () => {
-    grid.innerHTML = "<p>Buscando...</p>";
+    grid.innerHTML = "<p>Loading...</p>";
   };
+
+  query = getRandomQuery();
+  searchBooks(true);
 
   return { container, updateResults, showLoading };
 };

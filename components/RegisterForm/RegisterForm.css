@@ -12,6 +12,7 @@
     border-radius: 1.5em;
     opacity: 1;
     transition: all .25s ease;
+    margin-bottom: 1em;
     /* z-index: 0; */
 }
 

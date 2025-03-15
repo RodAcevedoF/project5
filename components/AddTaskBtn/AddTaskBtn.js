@@ -3,13 +3,18 @@ import "./AddTask.css";
 const AddTaskBtn = (todoEditor) => {
   const btn = document.createElement("button");
   btn.classList.add("add-task-btn");
-  const span = document.createElement("span");
-  span.textContent = "Add task";
+  const p = document.createElement("p");
+  p.textContent = "Add task";
   const img = document.createElement("img");
-  img.src = "../../public/icon/add.png"
+  img.src = "../../public/icon/add.png";
   img.alt = "add button icon";
-  btn.appendChild(span);
+  btn.appendChild(p);
   btn.appendChild(img);
+  for (let i = 0; i < 4; i++) {
+    let span = document.createElement("span");
+    span.classList.add(`animation-span${i+1}`);
+    btn.appendChild(span);
+  }
   btn.addEventListener("click", () => {
     const cont = document.querySelector(".editor-container");
     if (!cont.classList.contains("visible")) {
@@ -19,10 +24,10 @@ const AddTaskBtn = (todoEditor) => {
       document.getElementById("save-todo").textContent = "Save";
       document.getElementById("delete-todo").style.display = "none";
       cont.classList.add("visible");
-      span.textContent = "Hide"
+      p.textContent = "Hide";
     } else {
       cont.classList.remove("visible");
-      span.textContent = "Add task";
+      p.textContent = "Add task";
     }
   });
 

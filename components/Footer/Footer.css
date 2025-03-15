@@ -6,11 +6,12 @@
 }
 
 .foot-article {
-    background: var(--box-alt-background);
+    background: var(--button-alt-background);
     display: flex;
-    padding: 0 2em;
+    padding: 1em 2em;
     justify-content: space-between;
     align-items: center;
+    flex-flow: wrap;
 }
 
 .legal {
@@ -18,14 +19,15 @@
     align-self: flex-end;
     padding: .5em;
     gap: .5em;
+    flex-flow: wrap;
 }
 
 .legal li {
     font-size: .8em;
     font-weight: bolder;
-    color: var(--letter-general);
+    color: var(--light-letter);
 }
 
 .legal li a {
-    color: var(--letter-general);
+    color: var(--light-letter);
 }

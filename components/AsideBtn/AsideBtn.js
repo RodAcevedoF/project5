@@ -7,13 +7,20 @@ const AsideBtn = () =>{
                        <span></span>
                        <span></span>
                        <span></span>
+                       <p>Tasks</p>
                        <div class="open-close">
                         <span></span>
                         <span></span>
                         <span></span>
                        </div>`;
-                       
+                     
 
-return btn;
+    btn.addEventListener("click", () => {
+        const openCloseSpan = document.querySelectorAll(".open-close span");
+        openCloseSpan.forEach(span => span.classList.toggle("closing"));
+        const aside = document.querySelector(".main-aside");
+        aside.classList.toggle("visible");
+    });
+    return btn;
 }
 export default AsideBtn;

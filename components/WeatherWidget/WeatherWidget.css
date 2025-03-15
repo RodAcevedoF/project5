@@ -36,3 +36,33 @@
   width: 100%;
   padding: 0.5em;
 }
+
+@media screen and (max-width: 792px) {
+  .weather-widget {
+    min-width: 12em;
+  }
+  .weather-widget h3 {
+    font-size: 0.7em;
+  }
+  .txt-div {
+    font-size: 0.7em;
+  }
+  .weather-div img {
+    width: 3.5em;
+  }
+}
+
+@media screen and (max-width: 392px) {
+  .weather-widget {
+    width: 100%;
+  }
+  .weather-widget h3 {
+    font-size: 0.85em;
+  }
+  .txt-div {
+    font-size: 0.85em;
+  }
+  .weather-div img {
+    width: 7em;
+  }
+}

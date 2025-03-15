@@ -6,17 +6,25 @@ import { TodoDisplay } from "../TodoDisplay/TodoDisplay";
 export const Calendar = () => {
   const container = document.createElement("div");
   container.classList.add("simple-calendar");
+  const hideAllSections = () => {
+    document.querySelectorAll('.collapsible').forEach(section => section.classList.remove('visible'));
+    document.querySelector("#load-more-tasks").classList.remove('visible');
+    if(window.innerWidth < 792) {
+    document.querySelector(".main-aside").classList.remove('visible');
+    }
+  };
 
   let currentDate = new Date();
 
-  const render = async () => {    const result = await getTodos(100, 0);
+  const render = async () => {
+    const result = await getTodos(100, 0);
     let tasks = [];
     if (result.success) {
       tasks = result.data.filter((task) => task.deadline && task.priority);
     }
 
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth(); 
+    const month = currentDate.getMonth();
 
     const eventsMap = {};
     tasks.forEach((task) => {
@@ -59,8 +67,18 @@ export const Calendar = () => {
 
     const monthLabel = document.createElement("span");
     const monthNames = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ];
     monthLabel.textContent = `${monthNames[month]} ${year}`;
     monthLabel.classList.add("month-label");
@@ -73,11 +91,12 @@ export const Calendar = () => {
     const table = document.createElement("table");
     table.classList.add("calendar-table");
 
-    const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const daysOfWeek = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
     const thead = document.createElement("thead");
     const headerRow = document.createElement("tr");
     daysOfWeek.forEach((day) => {
       const th = document.createElement("th");
+      th.classList.add("weekday");
       th.textContent = day;
       headerRow.appendChild(th);
     });
@@ -94,7 +113,6 @@ export const Calendar = () => {
     const tbody = document.createElement("tbody");
     let row = document.createElement("tr");
 
-    // Celdas vacías hasta el inicio del mes
     for (let i = 0; i < startIndex; i++) {
       const cell = document.createElement("td");
       row.appendChild(cell);
@@ -114,7 +132,6 @@ export const Calendar = () => {
       if (eventsMap[day]) {
         const dotsDiv = document.createElement("div");
         dotsDiv.classList.add("dots");
-
         if (eventsMap[day].high.length > 0) {
           const dotHigh = document.createElement("span");
           dotHigh.classList.add("dot", "high");
@@ -123,6 +140,7 @@ export const Calendar = () => {
             const container = document.querySelector(".latest-container");
             container.innerHTML = "";
             container.appendChild(TodoDisplay(eventsMap[day].high[0]));
+            hideAllSections();
           });
           dotsDiv.appendChild(dotHigh);
         }
@@ -134,6 +152,7 @@ export const Calendar = () => {
             const container = document.querySelector(".latest-container");
             container.innerHTML = "";
             container.appendChild(TodoDisplay(eventsMap[day].medium[0]));
+            hideAllSections();
           });
           dotsDiv.appendChild(dotMed);
         }
@@ -145,6 +164,7 @@ export const Calendar = () => {
             const container = document.querySelector(".latest-container");
             container.innerHTML = "";
             container.appendChild(TodoDisplay(eventsMap[day].low[0]));
+            hideAllSections();
           });
           dotsDiv.appendChild(dotLow);
         }

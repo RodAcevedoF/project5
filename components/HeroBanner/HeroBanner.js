@@ -1,11 +1,13 @@
 import "./HeroBanner.css";
 
-const HeroBanner = () => {
+const HeroBanner = (src, txt) => {
     const article = document.createElement("article")
     article.classList.add("hero-article");
-    article.innerHTML= `<img src="/images/booksback.png" alt="" class="hero-book">
-                        <h3>What are you reading today</h3>
-                        <p>Search some book now!</p>`;
+    article.innerHTML= `<div class="title-div">
+                        <h3>What are you reading today?</h3>
+                        <p>Search some books now!</p>
+                        </div>
+                        <img src=${src} alt="${txt} banner" class="hero-img">`;
 
     return article;
 }

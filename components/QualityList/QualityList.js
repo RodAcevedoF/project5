@@ -4,7 +4,7 @@ const QualityList = () => {
   const ul = document.createElement("ul");
   ul.classList.add("footer-ul");
   ul.innerHTML = `<li>
-                    <img src="/icon/list.png" alt="getdone logo" class="quali-icons">
+                    <img src="/icon/focus.png" alt="getdone logo" class="quali-icons">
                     <p>Designed to focus</p>
                   </li>
                   <li>

@@ -3,7 +3,7 @@
   grid-template-columns: 20vw 80vw;
   background-color: var(--nav-light);
   width: 100%;
-  min-height: 100vh;
+  height: auto;
   overflow: hidden;
   margin-top: 6em;
 }
@@ -16,6 +16,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
 }
 
 .todo-header {
@@ -26,7 +27,8 @@
   justify-content: space-evenly;
   align-items: center;
   flex-flow: wrap;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
+  z-index: 0;
 }
 
 .mid-container {
@@ -36,15 +38,16 @@
   align-items: center;
   justify-content: flex-end;
   margin-bottom: 2em;
+  gap: 2em;
 }
 .latest-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1em 3em;
+  padding: 2em 3em;
 }
- .editor-container {
+.editor-container {
   visibility: hidden;
   height: 0;
   opacity: 0;
@@ -54,24 +57,45 @@
   padding: 3em;
   justify-content: center;
   align-items: center;
-  transition: all .25s ease-in-out;
+  transition: all 0.25s ease-in-out;
   transform: translateY(150%);
- }
+}
 
- .editor-container.visible {
+.editor-container.visible {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
   height: auto;
- }
+}
 
- @media screen and (max-width: 792px) {
+@media screen and (max-width: 792px) {
   .todo-main {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
-  .todo-tasks {
-    grid-area: 1/1/2/2;
+}
+
+@media screen and (max-width: 520px) {
+  .mid-container {
+    padding: 2em 2em 0 2em;
   }
 
- }
+  .todo-header {
+    padding: 0.5em;
+  }
+}
 
+@media screen and (max-width: 392px) {
+  .mid-container {
+    padding: 2em 1em 0 1em;
+  }
+  .todo-header {
+    padding: 0.5em 2em;
+  }
+  .editor-container {
+    padding: 3em 1em;
+  }
+  .latest-container {
+    padding: 2em 1em;
+  }
+}

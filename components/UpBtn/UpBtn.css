@@ -10,11 +10,13 @@
     flex-direction: column;
     overflow: visible;
     background: transparent;
+    opacity: .9;
   }
   
   #up-btn img {
-    width: 6.5em;
+    width: 5.5em;
     padding: 0;
+    border-radius: 50%;
   }
 
   #up-btn span {
@@ -33,26 +35,9 @@
   #up-btn img.dark {
     filter: invert(1);
   }
-  
-  /* #up-btn span.dark-letter {
-    color: var(--back-general);
-  }
-   */
-  @media (max-width: 430px) {
+   
+  @media (max-width: 420px) {
     #up-btn img {
-      width: 3em;
-    }
-  
-  /*   #up-btn span {
-      font-size: 1.1em;
-    }
-  
-    #up-btn:hover span {
-      transform: translateX(-20%);
-    }
-   */
-  /*   #up-btn {
-      width: 12em;
-    }
-   */}
-  
+      width: 4em;
+    }  
+  }

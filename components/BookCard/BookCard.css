@@ -1,54 +1,229 @@
-.book-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  position: relative;
-}
-
 .book-card {
-  width: 200px;
-  height: 300px;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em;
+  overflow: visible;
   transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
   cursor: pointer;
   position: relative;
+  padding: .5em;
+  gap: 1em;
+  flex-direction: column;
+  z-index: 5;
+  background: none; 
+  position: relative;
 }
 
-.book-card img {
-  width: 100%;
-  height: 60%;
-  object-fit: cover;
-}
-
-.book-card h3,
-.book-card p {
-  margin: 5px;
-  text-align: center;
-}
-
-/* Estado expandido: la tarjeta se superpone y muestra los detalles */
-.book-card.expanded {
+.book-card::before {
+  content: "";
   position: absolute;
-  width: 400px;
-  height: 500px;
+  margin: auto;
+  width: 98%;
+  height: 98%;
+  border-radius: 1em;
+  background: linear-gradient(-45deg, #757575 0%, #42ef76a8 100%);
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.book-card::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #424242 0%, #32ff6f95 98%);
+  transform: translate3d(0, 0, 0) scale(.9);
+  filter: blur(20px);
+}
+
+.book-card:hover::after {
+  filter: blur(50px);
+}
+
+.book-card:hover::before {
+  transform: rotate(-5deg);
+}
+
+.book-card.expanded {
+  position: fixed;
+  width: 50%;
+  height: auto;
   transform: scale(1.1);
   z-index: 10;
-  background: white;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--general-shadow);
   padding: 15px;
+  display: flex;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  background: var(--light-letter);
 }
 
-/* Ocultar detalles por defecto (aunque se utiliza inline style en el HTML) */
-.book-card .card-details {
+.book-card.expanded::before {
+  visibility: hidden;
+  transition: none;
+}
+
+.book-card.expanded::after {
+  visibility: hidden;
+  transition: none;
+}
+
+.card-summary {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  background: var(--card-light-bg);
+  border-radius: 1em;
+  padding: .5em;
+}
+
+.card-summary.expanded {
+  width: 100%;
+  flex-direction: row;
+  height: auto;
+}
+
+.card-summary img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-summary.expanded img {
+  width: 40%;
+}
+
+.bookcard-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  backdrop-filter: blur(15px) contrast(0.4);
+  -webkit-backdrop-filter: blur(15px);
   display: none;
+  border-radius: 1em;
 }
 
-/* Cuando la tarjeta tiene la clase 'expanded', se muestran los detalles */
-.book-card.expanded .card-details {
+.bookcard-title {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25em;
+  position: relative;
+  top: 3em;
+  padding: 1em;
+  justify-self: center;
+  color: whitesmoke;
+}
+
+.bookcard-title h3 {
+  color: inherit;
+  font-size: .9em;
+  text-align: start;
+  width: 100%;
+  font-weight: bold;
+  margin-bottom: 1em;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-card:hover .bookcard-info {
   display: block;
+}
+
+.book-card.expanded .bookcard-info {
+  position: static;
+  display: flex;
+  backdrop-filter: unset;
+  -webkit-backdrop-filter: none;
+}
+
+.book-card.expanded .bookcard-title {
+  top: 0;
+  width: 100%;
+  padding: 0;
+  color: var(--general-letter);
+}
+
+.book-card.expanded .bookcard-title h3 {
+  line-clamp: unset;
+  -webkit-line-clamp:unset;
+  overflow: visible;
+  display: flex;
+}
+
+.just-expanded {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+.just-expanded p:nth-child(2), p:nth-child(4){
+  font-size: .8em;
+}
+
+.book-card.expanded .just-expanded {
+  display: flex;
+}
+
+.label {
+  letter-spacing: .25em;
+  height:auto;
+  font-size: .7em;
+  font-weight: bold;
+  width: 100%;
+  padding-bottom: .25em;
+}
+
+.card-details {
+  border: 1px solid red;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-details p:first-of-type {
+  font-size: 0.8em;
+  color: red;
+  display: flex;
+}
+
+.card-details p:nth-child(2) {
+  color: red;
+  font-size: 0.8em;
+}
+
+.card-details p:nth-child(3) {
+  color: black;
+  border: 1px solid red;
+  font-size: 0.8em;
+  width: 100%;
+  max-height: 12em;
+  overflow: scroll;
+}
+
+.card-details.expanded {
+  display: flex;
+  width: 100%;
 }
 
 .workspace-overlay {
@@ -57,9 +232,21 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+}
+
+@media screen and (max-width: 792px) {
+  .book-card.book-card.expanded {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .book-card.book-card.expanded {
+    width: 95%;
+  }
 }

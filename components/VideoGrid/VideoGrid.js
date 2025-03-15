@@ -2,8 +2,6 @@ import { VideoCard } from "../VideoCard/VideoCard.js";
 import { SearchBarVids } from "../SearchBarVids/SearchBarVids.js";
 import { searchVideo } from "../../api/searchVideos.js";
 import { getVideos } from "../../api/videoApi";
-import BackBtn from "../BackBtn/BackBtn.js";
-import { Home } from "../../pages/Home/Home.js";
 
 export const VideoGrid = () => {
   const container = document.createElement("article");
@@ -13,11 +11,11 @@ export const VideoGrid = () => {
   grid.classList.add("video-grid");
 
   const toggleButton = document.createElement("button");
-  toggleButton.innerText = "Ver videos guardados";
+  toggleButton.innerText = "Saved videos";
   toggleButton.classList.add("toggle-button");
 
   const loadMoreButton = document.createElement("button");
-  loadMoreButton.innerText = "Cargar más";
+  loadMoreButton.innerText = "Load more";
   loadMoreButton.classList.add("load-more-button");
   loadMoreButton.style.display = "none";
 
@@ -111,7 +109,6 @@ export const VideoGrid = () => {
   container.appendChild(searchBarElement);
   container.appendChild(grid);
   container.appendChild(loadMoreButton);
-  container.appendChild(BackBtn(Home, "home"));
 
   const showLoading = () => {
     grid.innerHTML = "<p>Buscando...</p>";

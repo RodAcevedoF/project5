@@ -1,19 +1,16 @@
 .main-btn {
     padding: .5em;
-    background: var(--box-background);
     color: var(--light-letter);
     border: none;
     border-radius: 1em;
     cursor: pointer;
     width: 8em;
     font-weight: bolder;
-    background-size: 200% 100%;
-    background-image: linear-gradient(to right, #6a11cb, #2575fc);
+    background-image: var(--box-background);
     transition: background-position .25s ease-in-out
   }
   
-  .main-btn-alt:hover {
-    background-position: 100% 0;
-    background-image: linear-gradient(to right, #aa46a7, #ea3c74);
+  .main-btn:hover {
+    background-image: var(--button-alt-background);
   }
   

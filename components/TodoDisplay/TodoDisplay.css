@@ -3,41 +3,95 @@
   flex-direction: column;
   background: var(--box-background);
   border-radius: 2em;
-  padding: 2em;
+  padding: 1.5em;
+  gap: .5em;
   box-shadow: var(--general-shadow);
-  width: 50%;
+  width: 60%;
   color: var(--light-letter);
 }
 
-.todo-display-card h3 {
-  margin: 0;
-  font-size: 1.5rem;
+.card-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: .5em;
+  padding: .5em;
+  border-radius: .5em;
+  background: rgba(85, 85, 85, 0.452);
+  box-shadow: 0 8px 32px 0 rgba(80, 80, 80, 0.37);
+  backdrop-filter: blur(17px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 1em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.todo-display-card p {
-  margin: .25em 0;
+.card-title img {
+  width: 2em;
+}
+
+.todo-display-card h3 {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: transparent;
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: var(--light-letter);
+}
+
+.card-content{
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  padding: .5em;
+  border-radius: .5em;
+  background: rgba(85, 85, 85, 0.452);
+  box-shadow: 0 8px 32px 0 rgba(80, 80, 80, 0.37);
+  backdrop-filter: blur(17px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 1em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.card-content p {
+  font-size: .8em;
+}
+
+.card-content p:first-of-type {
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: .5em;
 }
 
 .actions {
   display: flex;
   justify-content: center;
-  gap: .5em;
+  gap: 1em;
   margin-top: .5em;
 }
 
 .actions button {
-  padding: .5em 1em;
+  padding: .5em;
   border: none;
   border-radius: 1em;
   cursor: pointer;
+  background-image: linear-gradient(to right, #6d6d6d, #363f36);
+  transition: transform .25s ease;
+  width: 5em;
 }
 
-.actions .edit-btn {
-  background-color: #007bff;
-  color: white;
+.actions button:hover {
+  transform: scale(1.1);
+  background-image: linear-gradient(to right, #6d6d6d, #363f36);
 }
 
-.actions .delete-btn {
-  background-color: #dc3545;
-  color: white;
+@media screen and (max-width: 792px) {
+  .todo-display-card {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 392px) {
+  .todo-display-card {
+    width: 100%;
+  }
 }

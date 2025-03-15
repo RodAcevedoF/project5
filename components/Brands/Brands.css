@@ -9,7 +9,7 @@
 }
 
 .brand-article {
-    background: var(--box-alt-background);
+    background: var(--button-alt-background);
     width: 100%;
     display: flex;
     flex-direction: column;

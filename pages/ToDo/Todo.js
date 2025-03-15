@@ -5,6 +5,7 @@ import QuoteWidget from "../../components/QuoteWidget/QuoteWidget";
 import WeatherWidget from "../../components/WeatherWidget/WeatherWidget";
 import AddTaskBtn from "../../components/AddTaskBtn/AddTaskBtn";
 import InnerFooter from "../../components/InnerFooter/InnerFooter";
+import AsideBtn from "../../components/AsideBtn/AsideBtn";
 
 export const Todo = () => {
   const container = document.querySelector("main");
@@ -40,7 +41,9 @@ export const Todo = () => {
   editorContainer.appendChild(todoEditor);
 
   const taskBtn = AddTaskBtn(todoEditor);
+  const asideButton = AsideBtn();
   middleContainer.appendChild(taskBtn);
+  middleContainer.appendChild(asideButton);
   mainArticle.appendChild(middleContainer);
 
   mainArea.appendChild(aside);

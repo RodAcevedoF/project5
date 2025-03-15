@@ -2,11 +2,14 @@
   position: relative;
   box-shadow: var(--general-shadow);
   padding: 0.5em;
-  background: var(--back-general);
+  background: var(--calendar-bg);
   color: var(--letter-general);
   border-radius: 1em;
   top: 1em;
   width: fit-content;
+  margin-bottom: 2em;
+  justify-self: center;
+  align-self: center;
 }
 
 .calendar-header {
@@ -19,15 +22,15 @@
 .nav-btn {
   background: none;
   border: none;
-  font-size: 1.2em;
+  font-size: .8em;
   cursor: pointer;
-  padding: 0 0.5em;
+  padding: 0 .5em;
   color: var(--letter-general);
 }
 
 .month-label {
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: .8em;
 }
 
 .calendar-table {
@@ -38,16 +41,19 @@
 
 .calendar-table th,
 .calendar-table td {
-  border: 1px solid #ddd;
-  padding: 4px;
-  min-width: 30px;
-  height: 30px;
+  border: 1px solid var(--letter-general);
+  padding: .25em;
+  width: 2em;
+  height:1.5em;
   vertical-align: top;
 }
-
+.weekday {
+  font-size: .7em;
+}
 .day-number {
   font-weight: bold;
-  margin-bottom: 2px;
+  font-size: .7em;
+  margin-bottom: .15em;
 }
 
 .dots {
@@ -65,13 +71,13 @@
 }
 
 .dot.high {
-  background-color: red;
+  background-color: rgb(255, 0, 111);
 }
 
 .dot.medium {
-  background-color: yellow;
+  background-color: rgb(255, 255, 0);
 }
 
 .dot.low {
-  background-color: green;
+  background-color: rgb(19, 255, 149);
 }

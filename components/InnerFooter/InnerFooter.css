@@ -6,4 +6,10 @@
     gap: 1em;
     padding: 1em 0;
     flex-flow: wrap;
+    background: var(--back-general);
+    z-index: 0;
+}
+
+.todo-footer img {
+    filter: invert(1);
 }

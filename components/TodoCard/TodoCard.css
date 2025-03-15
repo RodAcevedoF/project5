@@ -65,3 +65,16 @@
     gap: 1em;
     justify-content: center;
   }
+
+  @media screen and (max-width: 792px) {
+    .task-editor {
+      width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    .task-editor {
+      width: 100%;
+      padding: 2em;
+    }
+  }

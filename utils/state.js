@@ -3,8 +3,8 @@
     currentUser: null,
     currentPage: "landing",
     currentForm: "",
-    bookCards: {},       // Mapa de tarjetas guardadas
-    currentSavedCard: null  // Tarjeta guardada actualmente mostrada
+    bookCards: {},   
+    currentSavedCard: null  
   };
 
   export const setState = (key, value) => {

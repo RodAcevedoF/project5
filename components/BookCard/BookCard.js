@@ -1,5 +1,6 @@
 import { createBook, updateBook, deleteBook } from "../../api/bookApi.js";
 import { getState, setState } from "../../utils/state.js";
+import "./BookCard.css";
 
 export const BookCard = (book) => {
   const card = document.createElement("div");
@@ -16,11 +17,20 @@ export const BookCard = (book) => {
   card.innerHTML = `
     <div class="card-summary">
       <img src="${book.cover_image || "default-cover.png"}" alt="${book.title}">
-      <h3>${book.title}</h3>
-      <p><strong>Autor:</strong> ${book.author}</p>
-      <button class="expand-button">Ver detalles</button>
+      <div class="bookcard-info">
+        <div class="bookcard-title">
+          <p class="label">Title</p>
+          <h3>${book.title}</h3>
+        </div>
+        <div class="just-expanded">
+          <p class="label">Author</p> 
+          <p class="author">${book.author}</p>
+          <p class="label">ISBN</p>
+          <p class="isbn">${book.isbn}</p>
+        </div>
+      </div>
     </div>
-    <div class="card-details" style="display: none;">
+    <div class="card-details">
       ${["Editorial", "Fecha de publicación", "Descripción"]
         .map((label, i) => {
           const key = ["publisher", "publishedDate", "description"][i];
@@ -40,6 +50,7 @@ export const BookCard = (book) => {
     </div>
   `;
 
+  const summaryDiv = card.querySelector(".card-summary");
   const detailsDiv = card.querySelector(".card-details");
   const notesInput = card.querySelector(".notes-input");
   const collapseButton = card.querySelector(".collapse-button");
@@ -48,8 +59,9 @@ export const BookCard = (book) => {
   let deleteButton = card.querySelector(".delete-button");
 
   const toggleCard = () => {
-    const expanded = card.classList.toggle("expanded");
-    detailsDiv.style.display = expanded ? "block" : "none";
+    card.classList.toggle("expanded");
+    detailsDiv.classList.toggle("expanded");
+    summaryDiv.classList.toggle("expanded");
   };
 
   card.addEventListener("click", (e) => {

@@ -2,31 +2,31 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Axiforma";
+  font-family: "Monda";
 }
 
 :root {
   --back-general: whitesmoke;
-  --back-alt: #211f23;
+  --back-alt: #1d1c1e;
   --light-letter: whitesmoke;
   --nav-light: rgba(245, 245, 245, 0.879);
-  --box-general: rgba(75, 26, 181, 0.596);
-  --box-background: linear-gradient(to right, #6a11cb, #2575fc);
-  --box-background-trans: linear-gradient(to right, #7316d59a, #4185fa95);
-  --box-alt-hover: linear-gradient(to right, #ff93fb9f, #ae74ffa3);
-  --box-alt-background: linear-gradient(to right, #bf3bd6b8, #41c0ffc4);
-  --aside-background: linear-gradient(to right, #6b11cb74, #2574fc67);
-  --button-alt-background: linear-gradient(to right, #4343f0, #36c5cd);
-  --letter-background: linear-gradient(to right, #000000, #141379);
-  --letter-general: rgb(38, 12, 105);
-  --highlight-letter: rgba(165, 130, 255, 0.114);
+  --box-background: linear-gradient(to right, #24e26a, #2e2e2e);
+  --hero-background: linear-gradient(to right top, #1e1e1e, #3b3b3b, #19632a, #05441d);
+  --aside-background: linear-gradient(to right, #11452ab2, #2626269e);
+  --button-alt-background: linear-gradient(to right, #585757, #22914d);
+  --calendar-bg: linear-gradient(to right, #c8ffd0, #aaaaaa);
+  --letter-general: rgb(20, 20, 22);
+  --highlight-letter: #24e26a2e;
   --general-shadow: 1px 1px 15px rgba(0, 0, 0, 0.25);
   --alt-shadow: 0px 0px 10px rgba(231, 229, 229, 0.273);
+  --calendar-bg-alt: linear-gradient(to right, #2c2c2c, #3c3c3c);
+  --card-light-bg: linear-gradient(to right, #e7e7e7cf, #cacacac7);
+  --card-dark-bg: radial-gradient(circle, rgba(0, 0, 0, 0.942) 0%, rgba(29, 29, 29, 0.959) 100%);
 }
 
 ul {
   list-style: none;
-} 
+}
 
 a {
   text-decoration: none;
@@ -45,9 +45,6 @@ body {
   background-color: var(--back-alt);
   color: var(--light-letter);
 
-  .navbar {
-    background: var(--back-alt);
-  }
   .nav-links {
     box-shadow: var(--alt-shadow);
   }
@@ -75,7 +72,7 @@ body {
     box-shadow: var(--alt-shadow);
   }
   .service-li {
-    color: var(--light-letter)
+    color: var(--light-letter);
   }
   #register-form {
     background: var(--back-alt);
@@ -119,18 +116,40 @@ body {
     color: var(--light-letter);
   }
   .todo-display-card {
-  /*   color: var(--light-letter);
+    box-shadow: var(--alt-shadow);
+  }
+  .calendar-table th,
+  .calendar-table td {
+    border: 1px solid var(--light-letter);
+  }
+  .simple-calendar {
+    background: var(--calendar-bg-alt);
+  }
+  .book-article {
     background: var(--back-alt);
-   */
-  box-shadow: var(--alt-shadow);
-  } 
+  }
+  .todo-footer {
+    background: var(--back-alt);
+  }
+  .card-summary {
+    background: var(--card-dark-bg);
+  }
+  .book-card.expanded {
+    background: var(--back-alt);
+  }
 }
 
 @font-face {
   font-family: "Axiforma";
-  src: url("/fonts/axiforma_regular/axiforma_regular.woff2")
-      format("woff2"),
+  src: url("/fonts/axiforma_regular/axiforma_regular.woff2") format("woff2"),
     url("/fonts/axiforma_regular/axiforma_regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Monda";
+  src: url("../public/fonts/monda_regular/monda_regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }

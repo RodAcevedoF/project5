@@ -21,3 +21,7 @@
 .quali-icons {
     width: 1.15em;
 }
+
+.footer-ul li p {
+    font-size: clamp(.7em, .8em, 1em);
+}
