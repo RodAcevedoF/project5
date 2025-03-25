@@ -5,11 +5,13 @@
   gap: 0.5em;
   box-shadow: var(--general-shadow);
   background: var(--nav-light);
-  border-radius: 1.5em;
+  border-radius: .2em;
   margin-top: 2em;
   opacity: 1;
   transition: all 0.25s ease;
   margin-bottom: 1em;
+  border: 0.5vmin solid var(--back-alt);
+  box-shadow: 0.4rem 0.4rem var(--back-alt);
 }
 
 #login-form.get {
@@ -30,7 +32,7 @@
 
 #login-form input {
   padding: 0.5em;
-  border-radius: 0.5em;
+  border-radius: 0.2em;
   border: none;
 }
 

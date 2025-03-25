@@ -1,10 +1,10 @@
 .services-ul {
   display: flex;
   width: fit-content;
-  gap: .25em;
+  gap: .5em;
   justify-content: center;
   align-items: center;
-  border-radius: 1em;
+  border-radius: .2em;
   border: 1px solid var(--box-general);
   box-shadow: var(--general-shadow);
   background: var(--nav-light);
@@ -16,15 +16,17 @@
   color: var(--letter-general);
   font-size: .75em;
   cursor: pointer;
-  transition: background 0.25s ease-in-out;
-  padding: 1em;
-  border-radius: 1em;
-  width: fit-content;
+  transition: all 0.25s ease-in-out;
+  padding: .5em;
+  border-radius: .2em;
+  width: 7.5em;
   text-align: center;
+  height: 100%;
 }
 
 .service-li:hover {
-  background: var(--highlight-letter);
+  border: 0.2vmin solid #05060f;
+  box-shadow: 0.1rem 0.1rem #05060f;
 }
 
 .services-ul.floating {
@@ -33,11 +35,12 @@
   position: absolute;
   right: 0;
   top: 5em;
-  width: fit-content;
+  width: 8em;
+  height: 14em;
   gap: .5em;
   justify-content: center;
   align-items: center;
-  border-radius: 1em;
+  border-radius: .2em;
   border: 1px solid var(--box-general);
   box-shadow: var(--general-shadow);
   background: var(--nav-light);
@@ -64,12 +67,12 @@
   cursor: pointer;
   padding: .4em;
   gap: .3em;
-  border-radius: .75em;
+  border-radius: .2em;
 }
 
 .menu-burger-btn span {
-  background: var(--light-letter);
-  border-radius: 10px;
+  background: var(--back-general);
+  border-radius: .1em;
   height: .25em;
   transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }

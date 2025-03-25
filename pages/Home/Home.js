@@ -3,6 +3,8 @@ import { changePage } from "../../utils/changePage";
 import { Todo } from "../../pages/ToDo/Todo";
 import { Videos } from "../../pages/VideoPage/Videos";
 import { Books } from "../../pages/Books/Books";
+import { loadCategories } from "../../utils/getCategories";
+await loadCategories();
 
 export const Home = () => {
   const main = document.querySelector("main");
@@ -22,5 +24,6 @@ export const Home = () => {
   main.querySelector("#video-btn").addEventListener("click", () => changePage(Videos, "videos"));
   main.querySelector("#book-btn").addEventListener("click", () => changePage(Books, "books"));
   const section = main.querySelector(".home-container");
+  
   return main;
 };

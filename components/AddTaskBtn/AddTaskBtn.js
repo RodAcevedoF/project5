@@ -21,8 +21,8 @@ const AddTaskBtn = (todoEditor) => {
       const form = todoEditor.querySelector("#todo-form");
       form.reset();
       document.getElementById("todo-id").value = "";
-      document.getElementById("save-todo").textContent = "Save";
-      document.getElementById("delete-todo").style.display = "none";
+      document.querySelector(".tooltip").textContent = "Save";
+      document.querySelector(".delete-todo-button").style.display = "none";
       cont.classList.add("visible");
       p.textContent = "Hide";
     } else {

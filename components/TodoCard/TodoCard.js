@@ -2,6 +2,7 @@ import "./TodoCard.css";
 import { createTodo, updateTodo, deleteTodo } from "../../api/ToDoApi";
 import { loadTodos, loadUpcomingDeadlines } from "../MainAside/MainAside";
 import MainBtn from "../MainBtn/MainBtn";
+import CardBtn from "../CardBtn/CardBtn";
 
 export const TodoCard = () => {
   const cardContainer = document.createElement("div");
@@ -20,17 +21,24 @@ export const TodoCard = () => {
       </select>
       <input type="datetime-local" id="todo-deadline" />
       </div>
-      <div class="form-btns">
-      ${MainBtn("submit", "save-todo", "main-btn", "Save")}
-      ${MainBtn("button", "delete-todo", "main-btn", "Delete")}
-      </div>
+      <div class="form-btns"></div>
     </form>
   `;
 
-  {
-    /* <input type="file" id="todo-file" /> */
-  }
+  
+    /* <input type="file" id="todo-file" /> 
+    
+      ${MainBtn("submit", "save-todo", "main-btn", "Save")}
+      ${MainBtn("button", "delete-todo", "main-btn", "Delete")}
+    */
+  
+
+
   const todoForm = cardContainer.querySelector("#todo-form");
+  const formBtns = cardContainer.querySelector(".form-btns");
+  formBtns.appendChild(CardBtn("Save", "save-todo", "/icon/add.png"));
+  formBtns.appendChild(CardBtn("Delete", "delete-todo", "/icon/focus.png"));
+
 
   const loadTodoIntoEditor = (todo) => {
     const form = cardContainer.querySelector("#todo-form");
@@ -41,10 +49,10 @@ export const TodoCard = () => {
     form.querySelector("#todo-deadline").value = todo.deadline
       ? todo.deadline.slice(0, 16)
       : "";
-    form.querySelector("#save-todo").textContent = "Update";
+    form.querySelector(".tooltip").textContent = "Update";
     const cont = document.querySelector(".editor-container"); 
     cont.classList.add("visible")
-    form.querySelector("#delete-todo").style.display = "block";
+    document.querySelector(".delete-todo-button").style.display = "block";
   };
 
   window.addEventListener("loadTodoIntoEditor", (e) => {
@@ -58,8 +66,8 @@ export const TodoCard = () => {
     const form = cardContainer.querySelector("#todo-form");
     form.reset();
     form.querySelector("#todo-id").value = "";
-    form.querySelector("#save-todo").textContent = "Save";
-    form.querySelector("#delete-todo").style.display = "none";
+    form.querySelector(".tooltip").textContent = "Save";
+    form.querySelector(".delete-todo-button").style.display = "none";
   };
 
   todoForm.addEventListener("submit", async (e) => {
@@ -105,9 +113,7 @@ export const TodoCard = () => {
       alert(result.error || "Error al guardar la tarea");
     }
   });
-
-  const deleteButton = cardContainer.querySelector("#delete-todo");
-  deleteButton.addEventListener("click", async () => {
+    formBtns.querySelector(".delete-todo-button").addEventListener("click", async () => {
     const form = cardContainer.querySelector("#todo-form");
     const id = form.querySelector("#todo-id").value;
     if (id && confirm("¿Estás seguro de eliminar esta tarea?")) {

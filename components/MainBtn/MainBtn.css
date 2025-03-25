@@ -1,13 +1,13 @@
 .main-btn {
     padding: .5em;
-    color: var(--light-letter);
+    color: var(--back-general);
     border: none;
-    border-radius: 1em;
+    border-radius: .2em;
     cursor: pointer;
     width: 8em;
     font-weight: bolder;
     background-image: var(--box-background);
-    transition: background-position .25s ease-in-out
+    transition: background-image .25s ease-in-out
   }
   
   .main-btn:hover {

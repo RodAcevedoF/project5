@@ -6,20 +6,17 @@
 }
 
 :root {
-  --back-general: whitesmoke;
-  --back-alt: #1d1c1e;
-  --light-letter: whitesmoke;
+  --back-general: rgb(250, 250, 250);
+  --back-alt: #05060f;
   --nav-light: rgba(245, 245, 245, 0.879);
   --box-background: linear-gradient(to right, #24e26a, #2e2e2e);
-  --hero-background: linear-gradient(to right top, #1e1e1e, #3b3b3b, #19632a, #05441d);
+  --hero-background: linear-gradient(to right top, #404040e6, #605e5ee4, #299742e6, #139244e4);
   --aside-background: linear-gradient(to right, #11452ab2, #2626269e);
-  --button-alt-background: linear-gradient(to right, #585757, #22914d);
-  --calendar-bg: linear-gradient(to right, #c8ffd0, #aaaaaa);
+  --button-alt-background: linear-gradient(to right, #1f1e1e, #2cc858);
   --letter-general: rgb(20, 20, 22);
-  --highlight-letter: #24e26a2e;
-  --general-shadow: 1px 1px 15px rgba(0, 0, 0, 0.25);
-  --alt-shadow: 0px 0px 10px rgba(231, 229, 229, 0.273);
-  --calendar-bg-alt: linear-gradient(to right, #2c2c2c, #3c3c3c);
+  --highlight-letter: #a3a3a3ab;
+  --general-shadow: 0 8px 32px 0 rgba(53, 53, 53, 0.37);
+  --alt-shadow: 0px 10px 40px rgba(231, 229, 229, 0.471);
   --card-light-bg: linear-gradient(to right, #e7e7e7cf, #cacacac7);
   --card-dark-bg: radial-gradient(circle, rgba(0, 0, 0, 0.942) 0%, rgba(29, 29, 29, 0.959) 100%);
 }
@@ -43,21 +40,19 @@ body {
 
 .dark {
   background-color: var(--back-alt);
-  color: var(--light-letter);
+  color: var(--back-general);
 
   .nav-links {
     box-shadow: var(--alt-shadow);
   }
-  #sign-up-btn {
-    color: var(--light-letter);
+  #sign-up-btn, .landing-container h1, .service-li {
+    color: var(--back-general);
   }
-  .landing-box {
+  .landing-box  {
     box-shadow: var(--alt-shadow);
     background-color: var(--back-alt);
   }
-  .landing-container h1 {
-    color: var(--back-general);
-  }
+
   .snap {
     filter: invert(1);
   }
@@ -67,38 +62,21 @@ body {
   .quali-icons {
     filter: invert(50%);
   }
-  .services-ul {
-    background: var(--back-alt);
-    box-shadow: var(--alt-shadow);
-  }
-  .service-li {
-    color: var(--light-letter);
-  }
-  #register-form {
-    background: var(--back-alt);
-    box-shadow: var(--alt-shadow);
-  }
-  #login-form {
+
+  #login-form,.services-ul, #register-form, .services-ul.floating {
     background: var(--back-alt);
     box-shadow: var(--alt-shadow);
   }
   .go-back-btn span {
-    color: var(--nav-light);
+    color: var(--back-general);
   }
-  .services-ul.floating {
-    background: var(--back-alt);
-    box-shadow: var(--alt-shadow);
-  }
-  .todo-main {
+  .todo-main, .main-aside {
     background: var(--back-alt);
   }
   .page-btn {
     box-shadow: var(--alt-shadow);
   }
   .weather-widget {
-    box-shadow: var(--alt-shadow);
-  }
-  .quote-div {
     box-shadow: var(--alt-shadow);
   }
   .task-editor {
@@ -109,18 +87,18 @@ body {
   }
   .simple-calendar {
     background: var(--back-alt);
-    color: var(--light-letter);
+    color: var(--back-general);
     box-shadow: var(--alt-shadow);
   }
   .nav-btn {
-    color: var(--light-letter);
+    color: var(--back-general);
   }
   .todo-display-card {
     box-shadow: var(--alt-shadow);
   }
   .calendar-table th,
   .calendar-table td {
-    border: 1px solid var(--light-letter);
+    border: 1px solid var(--back-general);
   }
   .simple-calendar {
     background: var(--calendar-bg-alt);
@@ -128,28 +106,54 @@ body {
   .book-article {
     background: var(--back-alt);
   }
-  .todo-footer {
+  .todo-footer, .nav-links {
     background: var(--back-alt);
   }
-  .card-summary {
-    background: var(--card-dark-bg);
+  .book-card, .todo-display-card, .with, .without, #login-form, #register-form {
+    border: 0.5vmin solid var(--back-general);
+    box-shadow: 0.4rem 0.4rem var(--back-general);
   }
+
   .book-card.expanded {
     background: var(--back-alt);
+    box-shadow: var(--alt-shadow);
+  
+  }
+  .card-summary.expanded {
+    box-shadow: var(--alt-shadow);
+  }
+
+  .card-details p:nth-child(3) {
+    box-shadow: var(--alt-shadow);
+  }
+  .main-aside h3, .task-editor, .card-summary.expanded, .nav-links, .details textarea {
+    border: 0.4vmin solid var(--back-general);
+    box-shadow: 0.3rem 0.3rem var(--back-general);
+  }
+  .service-li:hover {
+    border: 0.2vmin solid var(--back-general);
+    box-shadow: 0.1rem 0.1rem var(--back-general);
+  }
+
+  .landing-box {
+    border: 0.6vmin solid var(--back-general);
+    box-shadow: 0.5rem 0.5rem var(--back-general);
+  }
+  .loader span {
+    color: var(--back-general);
   }
 }
 
 @font-face {
-  font-family: "Axiforma";
-  src: url("/fonts/axiforma_regular/axiforma_regular.woff2") format("woff2"),
-    url("/fonts/axiforma_regular/axiforma_regular.woff") format("woff");
+  font-family: "Monda";
+  src: url("/fonts/monda_regular/monda_regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Monda";
-  src: url("../public/fonts/monda_regular/monda_regular.woff2") format("woff2");
+  font-family: "IndieFlower";
+  src: url("/fonts/indieflower-regular/IndieFlower-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

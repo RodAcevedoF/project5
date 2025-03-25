@@ -27,11 +27,13 @@
     justify-content: center;
     min-width: 20em; 
     max-width: 30em; 
-    border-radius: 2em;
+    border-radius: .1em;
     box-shadow: var(--general-shadow);
     z-index: 10;
     gap: 1em;
-    background: var(--light-letter);
+    background: var(--back-general);
+    border: 0.5vmin solid var(--back-alt);
+    box-shadow: 0.4rem 0.4rem var(--back-alt);
 }
 
 .landing-box > p:nth-child(1) {
@@ -39,7 +41,7 @@
     background-color: var(--highlight-letter);
     width: 8em;
     padding: .2em;
-    border-radius: 1em;
+    border-radius: .2em;
     text-align: center;
 }
 
@@ -73,7 +75,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 1em;
-    border-radius: 1em;
+    border-radius: .2em;
     width:fit-content;
     box-shadow: var(--general-shadow);
     padding: .5em;

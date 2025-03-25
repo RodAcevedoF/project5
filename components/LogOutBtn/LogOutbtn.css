@@ -1,9 +1,9 @@
 .log-btn {
   padding: .5em;
   background: var(--box-background);
-  color: var(--light-letter);
+  color: var(--back-general);
   border: none;
-  border-radius: 1em;
+  border-radius: .2em;
   cursor: pointer;
   width: 8em;
   font-weight: bolder;

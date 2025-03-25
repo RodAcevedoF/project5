@@ -1,5 +1,5 @@
 .main-aside {
-  background: var(--aside-background);
+  background: var(--back-general);
   padding: 4em 1em 0 1em;
   width: 100%;
   min-width: 11.5em;
@@ -9,7 +9,7 @@
   align-items: center;
   grid-area: 1/1/2/2;
   box-shadow: var(--general-shadow);
-  color: var(--light-letter);
+  color: inherit;
   gap: 2em;
   z-index: 1;
 }
@@ -43,19 +43,22 @@
   cursor: pointer;
   font-size: 1em;
   width: 100%;
-  padding: 1em;
+  padding: .5em;/* 
   background: rgba(54, 50, 138, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   backdrop-filter: blur(17px);
   -webkit-backdrop-filter: blur(17px);
   border-radius: 1em;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+  border: 0.4vmin solid #05060f;
+  box-shadow: 0.3rem 0.3rem #05060f;
   transition: all 0.2s ease-in-out;
   text-align: center;
+  border-radius: .1em;
 }
 
 .main-aside h3:hover {
-  filter: brightness(1.2);
+ transform: scale(1.05);
 }
 
 .todo-item {
@@ -66,16 +69,16 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-radius: 1em;
   transition: all 0.2s ease;
+  color: inherit;
+  border-radius: .2em;
 }
 
 .todo-item:hover {
   background: var(--button-alt-background);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.544);
   backdrop-filter: blur(17px);
   -webkit-backdrop-filter: blur(17px);
-  border-radius: 1em;
+  color: whitesmoke
 }
 
 #load-more-tasks {
@@ -84,6 +87,7 @@
   cursor: pointer;
   margin-top: 0.25em;
   width: 100%;
+  border-radius: .2em;
 }
 
 #load-more-tasks.visible {
@@ -113,7 +117,9 @@
     top:10em;
     padding: 2em 1em;
     height: auto;
-    border-radius: 1em;
+    border-radius: .2em;
+    border: 1px solid var(--letter-general);
+    background: inherit;
   }
 
   .main-aside h3 {

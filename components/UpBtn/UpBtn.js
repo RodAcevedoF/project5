@@ -7,7 +7,7 @@ export const UpBtn = (icon, txt) => {
                    <span>🌓</span>`;
 
   const span = btn.querySelector("span");
-  span.addEventListener("click", () => {
+  btn.addEventListener("click", () => {
    document.body.classList.toggle("dark");
    if (document.body.classList.contains("dark")) {
     sessionStorage.setItem("theme", "dark");

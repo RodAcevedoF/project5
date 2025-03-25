@@ -29,6 +29,7 @@
   flex-flow: wrap;
   padding: 0.5em 1em;
   z-index: 0;
+  background: var(--button-alt-background);
 }
 
 .mid-container {

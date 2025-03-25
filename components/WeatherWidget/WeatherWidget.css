@@ -3,20 +3,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1em;
-  height: 100%;
-  width: 30%;
+  padding: .5em;
+  height: auto;
+  width: 25%;
   min-width: 15em;
   box-shadow: var(--general-shadow);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-radius: 10px;
+  border-radius: .2em;
+  color: whitesmoke;
 }
 
 .weather-widget h3 {
-  font-size: 1em;
+  font-size: .9em;
   align-self: start;
   padding-left: 0.5em;
+}
+
+.weather-widget p {
+  font-size: .8em;
 }
 
 .weather-div {

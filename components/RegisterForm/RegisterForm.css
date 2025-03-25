@@ -1,19 +1,16 @@
 #register-form {
-    display: flex;/* 
-    position: absolute;
-    top: 52%;
-    left: 50%;
-    transform: translate(-50%, -48%); */
+    display: flex;
     flex-direction: column;
     padding: 1.5em;
     gap: .5em;
     box-shadow: var(--general-shadow);
     background: var(--nav-light);
-    border-radius: 1.5em;
+    border-radius: .2em;
     opacity: 1;
     transition: all .25s ease;
     margin-bottom: 1em;
-    /* z-index: 0; */
+    border: 0.5vmin solid var(--back-alt);
+    box-shadow: 0.4rem 0.4rem var(--back-alt);
 }
 
 #register-form.get {
@@ -34,7 +31,7 @@
 
 #register-form input {
     padding: .5em;
-    border-radius: .5em;
+    border-radius: .2em;
     border: none;
 
 }

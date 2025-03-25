@@ -25,9 +25,9 @@
 .legal li {
     font-size: .8em;
     font-weight: bolder;
-    color: var(--light-letter);
+    color: var(--back-general);
 }
 
 .legal li a {
-    color: var(--light-letter);
+    color: var(--back-general);
 }

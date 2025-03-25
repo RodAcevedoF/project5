@@ -10,7 +10,11 @@
     flex-direction: column;
     overflow: visible;
     background: transparent;
-    opacity: .9;
+    opacity: 1;
+    mask-image: radial-gradient(
+      var(--back-general) 55%,
+      transparent
+    );
   }
   
   #up-btn img {
@@ -29,7 +33,8 @@
   
   #up-btn:hover span {
     opacity: 1;
-    transform: translateX(120%);
+    transform: translateX(150%);
+    z-index: 10;
   }
    
   #up-btn img.dark {

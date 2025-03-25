@@ -1,13 +1,13 @@
 .todo-display-card {
   display: flex;
   flex-direction: column;
-  background: var(--box-background);
-  border-radius: 2em;
+  border-radius: .1em;
   padding: 1.5em;
   gap: .5em;
   box-shadow: var(--general-shadow);
   width: 60%;
-  color: var(--light-letter);
+  border: 0.6vmin solid var(--back-alt);
+  box-shadow: 0.5rem 0.5rem var(--back-alt);
 }
 
 .card-title {
@@ -16,13 +16,9 @@
   align-items: center;
   gap: .5em;
   padding: .5em;
-  border-radius: .5em;
+  border-radius: .2em;
   background: rgba(85, 85, 85, 0.452);
   box-shadow: 0 8px 32px 0 rgba(80, 80, 80, 0.37);
-  backdrop-filter: blur(17px);
-  -webkit-backdrop-filter: blur(25px);
-  border-radius: 1em;
-  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .card-title img {
@@ -35,7 +31,7 @@
   font-weight: bold;
   color: transparent;
   -webkit-text-stroke-width: 0.3px;
-  -webkit-text-stroke-color: var(--light-letter);
+  -webkit-text-stroke-color: var(--back-general);
 }
 
 .card-content{
@@ -43,13 +39,9 @@
   flex-direction: column;
   gap: .5em;
   padding: .5em;
-  border-radius: .5em;
   background: rgba(85, 85, 85, 0.452);
   box-shadow: 0 8px 32px 0 rgba(80, 80, 80, 0.37);
-  backdrop-filter: blur(17px);
-  -webkit-backdrop-filter: blur(25px);
-  border-radius: 1em;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: .2em;
 }
 
 .card-content p {
@@ -72,7 +64,7 @@
 .actions button {
   padding: .5em;
   border: none;
-  border-radius: 1em;
+  border-radius: .2em;
   cursor: pointer;
   background-image: linear-gradient(to right, #6d6d6d, #363f36);
   transition: transform .25s ease;

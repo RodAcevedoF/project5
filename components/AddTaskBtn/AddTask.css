@@ -3,8 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--light-letter);
-  border-radius: 1em;
+  color: var(--back-general);
   border: none;
   cursor: pointer;
   gap: 0.3em;
@@ -13,6 +12,7 @@
   width: 10em;
   height: 4em;
   overflow: hidden;
+  border-radius: .2em;
 }
 
 .add-task-btn:hover {

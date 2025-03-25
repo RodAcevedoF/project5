@@ -1,0 +1,73 @@
+.card-button {
+    width: 3em ;
+    height: 3em;
+    border-radius: 50%;
+    border: none;
+    background-image: var(--box-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+    position: relative;
+  }
+  
+  .card-button:hover {
+    animation: jello-vertical .75s both;
+  }
+  .card-button img {
+    height: 2.3em;
+    fill: white;
+    filter: invert(1);
+  }
+  
+  @keyframes jello-vertical {
+    0% {
+      transform: scale3d(1, 1, 1);
+    }
+    30% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+    40% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+    50% {
+      transform: scale3d(0.85, 1.15, 1);
+    }
+    65% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+    75% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: -20px;
+    opacity: 0;
+    background-image: var(--box-background);
+    color: var(--back-general);
+    padding: .5em;
+    border-radius: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.2s;
+    pointer-events: none;
+    letter-spacing: .1em;
+  }
+  
+  .card-button:hover .tooltip {
+    top: -40px;
+    opacity: 1;
+    transition-duration: 0.2s;
+  }
+
+  .delete-todo-button {
+    display: none;
+  }
+  

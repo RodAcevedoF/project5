@@ -9,10 +9,10 @@
     background-size: 200% 100%;
     background-image: var(--box-background);
     transition: background-position .3s ease-in-out;
-    color: var(--light-letter);
-    border-radius: 1em;
+    color: var(--back-general);
     border: none;
     box-shadow: var(--general-shadow);
+    border-radius: .2em;
 }
 
 .page-btn:hover {

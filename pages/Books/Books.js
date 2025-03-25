@@ -9,7 +9,7 @@ export const Books = () => {
   main.innerHTML = `<section class="book-main"></section>`;
 
   const section = main.querySelector(".book-main");
-  section.appendChild(HeroBanner("../../public/images/booksban.png", "books"));
+  section.appendChild(HeroBanner("Searching books?"));
 
   const bookGrid = BookGrid();
   section.appendChild(bookGrid.container);

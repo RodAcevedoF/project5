@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--light-letter);
-  border-radius: 1em;
+  color: var(--back-general);
+  border-radius: .2em;
   border: none;
   cursor: pointer;
   gap: 0.3em;

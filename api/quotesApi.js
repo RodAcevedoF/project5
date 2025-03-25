@@ -8,7 +8,6 @@ export async function getBookQuote() {
       quote: response.data.quote,
       author: response.data.author
     }
-    console.log(customData)
     return customData;
   } catch (error) {
     console.error('Error en la API de frases:', error);

@@ -2,9 +2,8 @@
   position: relative;
   box-shadow: var(--general-shadow);
   padding: 0.5em;
-  background: var(--calendar-bg);
   color: var(--letter-general);
-  border-radius: 1em;
+  border-radius: .2em;
   top: 1em;
   width: fit-content;
   margin-bottom: 2em;

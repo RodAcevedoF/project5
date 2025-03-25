@@ -1,9 +1,9 @@
 .sign-in-button {
-    padding: 1em;
+    padding: .5em;
     background: var(--box-background);
-    color: var(--light-letter);
+    color: var(--back-general);
     border: none;
-    border-radius: 1em;
+    border-radius: .2em;
     cursor: pointer;
     width: 6em;
     font-weight: bolder;
@@ -17,11 +17,11 @@
   }
   
   #sign-up-btn {
-    padding: 1em;
+    padding: .5em;
     background: inherit;
     color: var(--letter-general);
     border: none;
-    border-radius: 1em;
+    border-radius: .2em;
     cursor: pointer;
     width: 6em;
     font-weight: bolder;

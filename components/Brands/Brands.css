@@ -20,7 +20,7 @@
 }
 
 .brand-article h4 {
-    color: var(--light-letter);
+    color: var(--back-general);
 }
 
 .brand-div h4:nth-child(2) {
@@ -60,10 +60,11 @@
     display: flex; 
     flex-direction: column;
     gap: .5em;
-    border: 2px solid var(--highlight-letter);
-    border-radius: 1em;
+    border-radius: .1em;
     padding: 2em;
     box-shadow: var(--general-shadow);
+    border: 0.5vmin solid var(--back-alt);
+    box-shadow: 0.4rem 0.4rem var(--back-alt);
 }
 
 .with li, .without li {
