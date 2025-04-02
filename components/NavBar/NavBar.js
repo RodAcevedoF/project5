@@ -25,7 +25,6 @@ export const NavBar = () => {
   navLinks.appendChild(menuButton);
 
   const currentPage = getState("currentPage");
-  console.log(currentPage);
 
   if (
     (currentPage === "landing" && window.innerWidth > 810) ||

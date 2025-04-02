@@ -3,22 +3,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--back-general);
-  border-radius: .2em;
+  color: var(--letter-general);
+  border-radius: 0.2em;
   border: none;
   cursor: pointer;
-  gap: 0.3em;
-  background: var(--box-background);
+  gap: 0.5em;
+  background: var(--main-green);
   transition: all 0.3s;
   overflow: hidden;
   padding: 1em 3em;
+  width: 16em;
 }
 
 .toggle-btn:hover {
-  background: var(--button-alt-background);
+  background: var(--letter-general);
   box-shadow: 0 0 5px #0fff3f, 0 0 25px #0fff3f, 0 0 50px #0fff3f,
-    0 0 100px #03e9f4;
+    0 0 100px #0fff3f;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+  color: var(--back-general);
 }
 
 .toggle-btn span {
@@ -100,11 +102,26 @@
 
 .toggle-btn p {
   font-weight: bolder;
-  font-size: 1.2em;
+  font-size: 1em;
+}
+.toggle-btn img {
+  width: 1em;
+  animation: anim 1s linear infinite;
+  margin-top: 0.25em;
+  background: transparent;
 }
 
-.toggle img {
-  width: 3em;
+.toggle-btn:hover img {
   filter: invert(1);
 }
 
+@keyframes anim {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}

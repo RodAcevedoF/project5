@@ -1,0 +1,9 @@
+.search-vids-form {
+  display: flex;
+  width: 100%;
+  height: auto;
+  border: 1px solid red;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}

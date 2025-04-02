@@ -7,7 +7,7 @@ export const Videos = () => {
   const main = document.querySelector("main");
   main.innerHTML = `<section class="video-main"></section>`;
   const section = main.querySelector(".video-main");
-  section.appendChild(HeroBanner("../../public/images//videosBan.png", "videos"));
+  section.appendChild(HeroBanner("/images/videosBan.png"));
 
   const videoGrid = VideoGrid();
 

@@ -3,6 +3,8 @@ import "./Books.css";
 import { BookGrid } from "../../components/BookGrid/BookGrid.js";
 import HeroBanner from "../../components/HeroBanner/HeroBanner.js";
 import InnerFooter from "../../components/InnerFooter/InnerFooter.js";
+import { loadCategories } from "../../utils/getPopularCategories.js"
+await loadCategories();
 
 export const Books = () => {
   const main = document.querySelector("main");

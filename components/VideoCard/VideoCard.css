@@ -1,0 +1,19 @@
+.video-card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.vidcard-summary {
+  display: flex;
+  flex-direction: row;
+}
+
+.vidcard-summary img {
+  width: 15em;
+}
+
+.vidcard-summary h3 {
+  font-size: 0.8em;
+}

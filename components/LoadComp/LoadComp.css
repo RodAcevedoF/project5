@@ -1,18 +1,23 @@
+.loader {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
 .loader span {
   font-size: 2em;
   font-weight: 600;
   animation: blur 1s linear infinite;
   line-height: 20px;
   transition: all 0.2s;
-  letter-spacing: 0.2em;
-  justify-self: center;
-  align-self: center;
-  width: 100%;
   position: relative;
-  left: 42%;
-  top: 30%
- }
- 
+}
+
  @keyframes blur {
   0%, 90% {
    filter: blur(0);

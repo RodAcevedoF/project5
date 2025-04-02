@@ -5,24 +5,23 @@ const API_URL = "https://service.todo-api.site/api/books";
 export const createBook = async (bookData) => {
   try {
     const token = localStorage.getItem("token");
-    console.log(bookData)
     const formData = new FormData();
+
     for (let key in bookData) {
       if (bookData.hasOwnProperty(key)) {
         if (Array.isArray(bookData[key])) {
-          // Si el campo es un arreglo (ej: categorías), debemos enviarlo como JSON
+          // Procesar arreglos (ej.: categorías)
           formData.append(key, JSON.stringify(bookData[key]));
         } else {
           formData.append(key, bookData[key]);
         }
       }
     }
-    console.log(FormData);
+
     const response = await axios.post(API_URL, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      headers: { Authorization: `Bearer ${token}` },
     });
+
     return response.data;
   } catch (error) {
     console.error(
@@ -33,7 +32,6 @@ export const createBook = async (bookData) => {
   }
 };
 
-
 export const getBooks = async (limit = 10, offset = 0) => {
   try {
     const token = localStorage.getItem("token");
@@ -43,14 +41,13 @@ export const getBooks = async (limit = 10, offset = 0) => {
         Authorization: `Bearer ${token}`
       },
       params: { limit, offset }
-    });
-
-    // Accede a response.data.data
-    const books = response.data.data.map(book => ({
-      ...book,
-      categories: book.categories ? book.categories.map(category => category.name) : [] // Procesa nombres de categorías
-    }));
-
+    }); // Verifica que la respuesta sea un arreglo de libros
+   const books = Array.isArray(response.data.data) 
+      ? response.data.data.filter(book => book.id && book.title) // Solo incluir libros válidos
+      : [];
+      const books2 = Array.isArray(response.data.data) 
+      ? response.data.data.filter(book => book.id && book.title) // Solo incluir libros válidos
+      : [];
     return books;
   } catch (error) {
     console.error(
@@ -62,6 +59,7 @@ export const getBooks = async (limit = 10, offset = 0) => {
     };
   }
 };
+
 
 export const updateBook = async (id, updateData) => {
   try {

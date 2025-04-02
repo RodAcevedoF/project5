@@ -29,7 +29,9 @@
   flex-flow: wrap;
   padding: 0.5em 1em;
   z-index: 0;
-  background: var(--button-alt-background);
+  background: var(--main-green);
+  border: 0.5vmin solid var(--letter-general);
+  box-shadow: 0.4rem 0.4rem var(--letter-general);
 }
 
 .mid-container {

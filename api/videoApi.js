@@ -10,7 +10,7 @@ export const createVideo = async (videoData) => {
     const formattedData = { ...rest, channel: channelTitle };
 
     const response = await axios.post(
-      "https://api-to-do.duckdns.org/api/videos",
+      "https://service.todo-api.site/api/videos",
       formattedData,
       {
         headers: {

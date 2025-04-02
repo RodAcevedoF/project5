@@ -1,16 +1,20 @@
 .main-btn {
-    padding: .5em;
-    color: var(--back-general);
-    border: none;
-    border-radius: .2em;
-    cursor: pointer;
-    width: 8em;
-    font-weight: bolder;
-    background-image: var(--box-background);
-    transition: background-image .25s ease-in-out
-  }
-  
-  .main-btn:hover {
-    background-image: var(--button-alt-background);
-  }
-  
+  display: flex;
+  width: 10em;
+  padding: .5em;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  background-size: 200% 100%;
+  background-image: var(--box-background);
+  transition: background-position .3s ease-in-out;
+  color: var(--back-general);
+  border: none;
+  box-shadow: var(--general-shadow);
+  border-radius: .2em;
+}
+
+.main-btn:hover {
+  background-position: 100% 0;
+  background-image: var(--button-alt-background);
+}

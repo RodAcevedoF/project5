@@ -105,6 +105,8 @@ export const MainAside = () => {
   if (window.innerWidth < 792) {
     document.addEventListener("click", (ev) => {
       const asideBtn = document.querySelector(".aside-btn");
+      const currentPage = getState("currentPage");
+      if (currentPage !== "todo") return;
       if (!aside.contains(ev.target) && !asideBtn.contains(ev.target)) {
         document
           .querySelectorAll(".collapsible")

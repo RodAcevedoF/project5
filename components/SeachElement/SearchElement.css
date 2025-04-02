@@ -1,0 +1,46 @@
+.input-container {
+  width: 12em;
+  position: relative;
+  height: 2.5em;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  transition: 0.2s linear;
+  border: 0.25em solid var(--letter-general);
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--letter-general);
+  border-radius: 0.1em;
+  background: var(--back-general);
+}
+
+.input:focus {
+  outline: none;
+  border: 0.5px solid var(--letter-general);
+  box-shadow: 5px 5px 0px var(--letter-general);
+}
+
+.input-container:hover > .icon {
+  animation: anim 1s linear infinite;
+}
+
+@keyframes anim {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}

@@ -2,13 +2,13 @@
   position: relative;
   visibility: hidden;
   display: flex;
-  color: var(--back-general);
+  color: var(--letter-general);
   text-decoration: none;
   transition: 0.5s;
   overflow: hidden;
-  background: var(--box-background);
+  background: var(--main-green);
   border: none;
-  border-radius: .2em;
+  border-radius: 0.2em;
   width: 0;
   height: 4em;
   justify-content: center;
@@ -16,7 +16,7 @@
   gap: 0.75em;
 }
 .aside-btn:hover {
-  background: var(--button-alt-background);
+  background: var(--letter-general);
   box-shadow: 0 0 5px #0fff3f, 0 0 25px #0fff3f, 0 0 50px #0fff3f,
     0 0 100px #0fff3f;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
@@ -24,6 +24,10 @@
 
 .aside-btn p {
   font-weight: bolder;
+}
+
+.aside-btn:hover p {
+  color: var(--back-general);
 }
 
 .aside-btn span {
@@ -120,11 +124,15 @@
 
 .open-close span {
   position: relative;
-  background: var(--back-general);
+  background: var(--letter-general);
   height: 0.25em;
   width: 100%;
   margin-bottom: 0.2em;
   transition: all 0.25s ease-in-out;
+}
+
+.aside-btn:hover .open-close span {
+  background: var(--back-general);
 }
 
 .open-close span:nth-child(1) {

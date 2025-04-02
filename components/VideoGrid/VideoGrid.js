@@ -1,7 +1,11 @@
+import "./VideoGrid.css";
 import { VideoCard } from "../VideoCard/VideoCard.js";
 import { SearchBarVids } from "../SearchBarVids/SearchBarVids.js";
 import { searchVideo } from "../../api/searchVideos.js";
 import { getVideos } from "../../api/videoApi";
+import ToggleBtn from "../ToggleBtn/ToggleBtn.js";
+import LoadComp from "../LoadComp/LoadComp.js";
+import { randomVidQueries } from "../../data/options.js";
 
 export const VideoGrid = () => {
   const container = document.createElement("article");
@@ -10,13 +14,11 @@ export const VideoGrid = () => {
   const grid = document.createElement("div");
   grid.classList.add("video-grid");
 
-  const toggleButton = document.createElement("button");
-  toggleButton.innerText = "Saved videos";
-  toggleButton.classList.add("toggle-button");
+  const toggleButton = ToggleBtn("Saved books", "Search books");
 
   const loadMoreButton = document.createElement("button");
   loadMoreButton.innerText = "Load more";
-  loadMoreButton.classList.add("load-more-button");
+  loadMoreButton.classList.add("load-more-vids-button");
   loadMoreButton.style.display = "none";
 
   let showingSavedVideos = false;
@@ -25,17 +27,20 @@ export const VideoGrid = () => {
   const maxResults = 10;
   let totalResults = 0;
 
+  const getRandomQuery = () =>
+    randomVidQueries[Math.floor(Math.random() * randomVidQueries.length)];
+
   const updateResults = (result, isNewSearch = false) => {
     if (isNewSearch) {
       grid.innerHTML = "";
       nextPageToken = result.nextPageToken || "";
     }
     if (!result || !Array.isArray(result.videos)) {
-      grid.innerHTML = "<p>Error: Datos inválidos</p>";
+      grid.innerHTML = "<p>Error: Invalid Data</p>";
       return;
     }
     if (result.videos.length === 0 && isNewSearch) {
-      grid.innerHTML = "<p>No se encontraron resultados.</p>";
+      grid.innerHTML = "<p>No Results</p>";
       return;
     }
     result.videos.forEach((video) => {
@@ -49,7 +54,7 @@ export const VideoGrid = () => {
 
   const searchVideos = async (isNewSearch = false) => {
     if (!query || typeof query !== "string") {
-      console.error("❌ Error: query inválida en searchVideos()", query);
+      console.error("Error: invalid query", query);
       return;
     }
     if (isNewSearch) showLoading();
@@ -58,7 +63,7 @@ export const VideoGrid = () => {
   };
 
   const loadSavedVideos = async () => {
-    grid.innerHTML = "<p>Cargando videos guardados...</p>";
+    grid.innerHTML = showLoading();
     try {
       const result = await getVideos();
       let videos = Array.isArray(result)
@@ -68,9 +73,12 @@ export const VideoGrid = () => {
         : result.data && Array.isArray(result.data)
         ? result.data
         : [];
-      updateResults({ videos, nextPageToken: "", totalResults: videos.length }, true);
+      updateResults(
+        { videos, nextPageToken: "", totalResults: videos.length },
+        true
+      );
     } catch (error) {
-      console.error("Error cargando videos guardados:", error);
+      console.error("Error loading books:", error);
       updateResults({ videos: [], nextPageToken: "", totalResults: 0 }, true);
     }
   };
@@ -78,13 +86,11 @@ export const VideoGrid = () => {
   toggleButton.addEventListener("click", () => {
     showingSavedVideos = !showingSavedVideos;
     if (showingSavedVideos) {
-      toggleButton.innerText = "Ver búsqueda de videos";
       searchBarElement.style.display = "none";
       loadMoreButton.style.display = "none";
       loadSavedVideos();
     } else {
-      toggleButton.innerText = "Ver videos guardados";
-      searchBarElement.style.display = "block";
+      searchBarElement.style.display = "flex";
       grid.innerHTML = "";
       loadMoreButton.style.display = "none";
     }
@@ -96,23 +102,38 @@ export const VideoGrid = () => {
 
   const searchBarElement = SearchBarVids((searchQuery) => {
     if (!searchQuery || typeof searchQuery !== "string") {
-      console.error("❌ Error: searchQuery inválida en SearchBarVids callback:", searchQuery);
+      console.error(
+        "Error: searchQuery inválida en SearchBarVids callback:",
+        searchQuery
+      );
       return;
     }
     query = searchQuery;
-    nextPageToken = ""; // Reiniciar paginación en una nueva búsqueda
+    nextPageToken = "";
     searchVideos(true);
   });
-  searchBarElement.style.display = "block";
+  searchBarElement.style.display = "flex";
 
-  container.appendChild(toggleButton);
-  container.appendChild(searchBarElement);
+  const toggleSect = document.createElement("section");
+  toggleSect.classList.add("toggle-sect");
+  toggleSect.appendChild(toggleButton);
+  container.appendChild(toggleSect);
+
+  const menuSect = document.createElement("section");
+  menuSect.classList.add("menu-sect");
+  menuSect.appendChild(searchBarElement);
+  container.appendChild(menuSect);
+
   container.appendChild(grid);
   container.appendChild(loadMoreButton);
 
   const showLoading = () => {
-    grid.innerHTML = "<p>Buscando...</p>";
+    grid.innerHTML = LoadComp();
   };
+
+  // ✅ Iniciar con una búsqueda aleatoria
+  /* query = getRandomQuery();
+  searchVideos(true); */
 
   return { container, updateResults, showLoading };
 };

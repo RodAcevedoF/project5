@@ -4,7 +4,7 @@ const AddTaskBtn = (todoEditor) => {
   const btn = document.createElement("button");
   btn.classList.add("add-task-btn");
   const p = document.createElement("p");
-  p.textContent = "Add task";
+  p.textContent = "ADD TASK";
   const img = document.createElement("img");
   img.src = "../../public/icon/add.png";
   img.alt = "add button icon";
@@ -12,7 +12,7 @@ const AddTaskBtn = (todoEditor) => {
   btn.appendChild(img);
   for (let i = 0; i < 4; i++) {
     let span = document.createElement("span");
-    span.classList.add(`animation-span${i+1}`);
+    span.classList.add(`animation-span${i + 1}`);
     btn.appendChild(span);
   }
   btn.addEventListener("click", () => {
@@ -24,10 +24,10 @@ const AddTaskBtn = (todoEditor) => {
       document.querySelector(".tooltip").textContent = "Save";
       document.querySelector(".delete-todo-button").style.display = "none";
       cont.classList.add("visible");
-      p.textContent = "Hide";
+      p.textContent = "HIDE";
     } else {
       cont.classList.remove("visible");
-      p.textContent = "Add task";
+      p.textContent = "ADD TASK";
     }
   });
 

@@ -3,23 +3,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--back-general);
+  color: var(--letter-general);
   border: none;
   cursor: pointer;
   gap: 0.3em;
-  background: var(--box-background);
+  background: var(--main-green);
   transition: all 0.3s;
   width: 10em;
   height: 4em;
   overflow: hidden;
-  border-radius: .2em;
+  border-radius: 0.2em;
 }
 
 .add-task-btn:hover {
-  background: var(--button-alt-background);
-  box-shadow: 0 0 5px #0fff3f, 0 0 25px #0fff3f, 0 0 50px #0fff3f,
-    0 0 100px #03e9f4;
+  background: var(--letter-general);
+  box-shadow: 0 0 5px var(--main-green), 0 0 25px var(--main-green),
+    0 0 50px var(--main-green), 0 0 100px var(--main-green);
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+  color: var(--back-general);
 }
 
 .add-task-btn span {
@@ -31,7 +32,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #0fff3f);
+  background: linear-gradient(90deg, transparent, var(--main-green));
   animation: animate1 1s linear infinite;
 }
 @keyframes animate1 {
@@ -48,7 +49,7 @@
   right: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(180deg, transparent, #0fff3f);
+  background: linear-gradient(180deg, transparent, var(--main-green));
   animation: animate2 1s linear infinite;
   animation-delay: 0.25s;
 }
@@ -66,7 +67,7 @@
   right: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(270deg, transparent, #0fff3f);
+  background: linear-gradient(270deg, transparent, var(--main-green));
   animation: animate3 1s linear infinite;
   animation-delay: 0.5s;
 }
@@ -85,7 +86,7 @@
   left: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(360deg, transparent, #0fff3f);
+  background: linear-gradient(360deg, transparent, var(--main-green));
   animation: animate4 1s linear infinite;
   animation-delay: 0.75s;
 }
@@ -105,5 +106,9 @@
 
 .add-task-btn img {
   width: 3em;
+  background: transparent;
+}
+
+.add-task-btn:hover img {
   filter: invert(1);
 }

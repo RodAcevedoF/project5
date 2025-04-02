@@ -3,8 +3,6 @@ import { changePage } from "../../utils/changePage";
 import { Todo } from "../../pages/ToDo/Todo";
 import { Videos } from "../../pages/VideoPage/Videos";
 import { Books } from "../../pages/Books/Books";
-import { loadCategories } from "../../utils/getCategories";
-await loadCategories();
 
 export const Home = () => {
   const main = document.querySelector("main");
