@@ -3,36 +3,68 @@ import { setState } from "./state";
 
 export const getPopularCategories = async () => {
   try {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=books&maxResults=40&fields=items(volumeInfo/categories)`;
-    const response = await axios.get(url);
+    // Definimos un array de palabras clave para obtener un abanico más amplio de categorías
+    const keywords = [
+      "fiction",
+      "science",
+      "history",
+      "art",
+      "technology",
+      "romance",
+      "travel"
+    ];
 
-    if (!response.data.items || !Array.isArray(response.data.items)) {
-      console.warn("No categories found in the API response");
+    // Creamos un array de promesas, cada una con una consulta usando una palabra clave diferente
+    const requests = keywords.map((keyword) => {
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=40&fields=items(volumeInfo/categories)`;
+      return axios.get(url);
+    });
+
+    // Ejecutamos todas las solicitudes de forma concurrente
+    const responses = await Promise.all(requests);
+
+    // Combinamos todos los items obtenidos de cada respuesta
+    const allItems = responses.reduce((acc, response) => {
+      if (response.data?.items && Array.isArray(response.data.items)) {
+        return acc.concat(response.data.items);
+      }
+      return acc;
+    }, []);
+
+    if (allItems.length === 0) {
+      console.warn(
+        "No se han encontrado categorías en las respuestas de la API."
+      );
       return [];
     }
 
-    const categories = response.data.items
+    // Extraemos y contamos las categorías
+    const categoryCount = allItems
       .flatMap((item) => item.volumeInfo.categories || [])
       .reduce((acc, category) => {
-        acc[category] = (acc[category] || 0) + 1; // Contador de categorías
+        acc[category] = (acc[category] || 0) + 1;
         return acc;
       }, {});
 
-    // Ordena las categorías por popularidad
-    return Object.keys(categories).sort((a, b) => categories[b] - categories[a]);
+    // Ordenamos las categorías por la cantidad de veces que aparecen (popularidad)
+    const sortedCategories = Object.keys(categoryCount).sort(
+      (a, b) => categoryCount[b] - categoryCount[a]
+    );
+
+    return sortedCategories;
   } catch (error) {
-    console.error("Error fetching categories:", error);
+    console.error("Error al obtener las categorías:", error);
     return [];
   }
 };
 
-// Función para cargar categorías y almacenarlas en el estado
+// Función para cargar las categorías y almacenarlas en el estado centralizado
 export const loadCategories = async () => {
   try {
     const categories = await getPopularCategories();
-    setState("categories", categories); // Guarda las categorías en el estado centralizado
+    setState("categories", categories);
   } catch (error) {
-    console.error("Error loading categories:", error);
-    setState("categories", []); // En caso de error, asegura un arreglo vacío
+    console.error("Error al cargar las categorías:", error);
+    setState("categories", []);
   }
 };

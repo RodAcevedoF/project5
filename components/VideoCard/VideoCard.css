@@ -2,18 +2,127 @@
   display: flex;
   width: 100%;
   height: 100%;
+  flex-direction: column;
+  background: var(--box-background);
+  border: 0.5vmin solid var(--letter-general);
+  box-shadow: 0.4rem 0.4rem var(--letter-general);
+}
+
+.vidcard-header {
+  background: var(--back-general);
+  border: 0.5vmin solid var(--letter-general);
+  box-shadow: 0.4rem 0.4rem var(--letter-general);
+  width: 100%;
+  font-size: 0.9em;
+  font-weight: bolder;
+  padding: 0.2em 0.5em;
+  color: var(--letter-general);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
+
+.yt-channel {
+  width: 5em;
+}
+
+.video-card.expanded {
+  position: fixed;
+  width: 50%;
+  height: auto;
+  max-height: 80vh;
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: var(--general-shadow);
+  padding: 15px;
+  display: flex;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   overflow: hidden;
+  background: var(--back-general);
+  box-shadow: var(--general-shadow);
+  flex-direction: column;
 }
 
 .vidcard-summary {
   display: flex;
   flex-direction: row;
+  justify-content: start;
+  height: auto;
+  width: 100%;
+  margin-top: 1em;
 }
-
 .vidcard-summary img {
-  width: 15em;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-card.expanded .vidcard-summary img {
+  width: 40%;
+}
+.vid-description {
+  display: none;
+}
+.vid-description.expanded {
+  display: block;
+}
+.vidcard-details {
+  display: none;
 }
 
-.vidcard-summary h3 {
-  font-size: 0.8em;
+.vidcard-details.expanded {
+  display: flex;
+}
+
+.vidcard-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  height: auto;
+  width: 100%;
+  padding: 1em;
+}
+
+.vidcard-title h3 {
+  border: 0.5vmin solid var(--letter-general);
+  box-shadow: 0.4rem 0.4rem var(--letter-general);
+  width: 100%;
+  padding: 0.5em;
+  background: var(--back-general);
+}
+
+.video-card.expanded .vidcard-title h3 a {
+  line-clamp: unset;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.vidcard-title h3 a {
+  font-size: 0.9em;
+  color: var(--letter-general);
+  text-align: center;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.vid-input-div {
+  display: none;
+}
+
+.vid-input-div.expanded {
+  display: flex;
+}
+
+.vid-details-buttons {
+  display: none;
+}
+
+.vid-details-buttons.expanded {
+  display: flex;
 }

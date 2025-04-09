@@ -4,9 +4,11 @@ import "./VideoCard.css";
 import CardBtn from "../CardBtn/CardBtn.js";
 
 export const VideoCard = (video) => {
+  // Se crea la tarjeta contenedora
   const card = document.createElement("div");
   card.classList.add("video-card");
 
+  // Determinar si el video ya está guardado (tiene un id interno)
   const isSaved = Boolean(video.id);
   if (isSaved) {
     card.dataset.videoId = video.id;
@@ -15,38 +17,45 @@ export const VideoCard = (video) => {
     setState("videoCards", videoCards);
   }
 
-  const videoUrl = `https://www.youtube.com/watch?v=${video.videoId}`;
-  const channelUrl = `https://www.youtube.com/channel/${video.channelId}`;
+  // Normalizar el identificador del video y del canal (ya que en búsquedas viene con otro nombre)
+  const normVideoId = video.videoId || video.video_id;
+  const normChannelId = video.channelId || video.channelid;
+  const videoUrl = `https://www.youtube.com/watch?v=${normVideoId}`;
+  const channelUrl = `https://www.youtube.com/channel/${normChannelId}`;
 
+  // Formatear la fecha de creación
+  const date = new Date(video.created_at);
+  const formattedDate = date.toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+
+  // Estructura HTML de la tarjeta
   card.innerHTML = `
-    <div class="vidcard-summary">
-      <img src="${video.thumbnail || "default-thumbnail.png"}" alt="${
-    video.title
-  }">
-      <div class="">
-        <h3>
-          <a href="${videoUrl}" target="_blank" rel="noopener noreferrer">
-            ${video.title}
-          </a>
-        </h3>
-        <p>
-          <strong>Canal:</strong>
-          <a href="${channelUrl}" target="_blank" rel="noopener noreferrer">
-            ${video.channelTitle}
-          </a>
-        </p>
-        <button class="expand-button">Ver detalles</button>
-      </div>
+    <div class="vidcard-header">
+      <img src="../../public/icon/youtube.png" alt="youtube icon" class="yt-channel">    
+      <p>
+        <a href="${channelUrl}" target="_blank" rel="noopener noreferrer">
+          ${video.channel}
+        </a>
+      </p>
+      <p>${formattedDate}</p>
     </div>
-    <div class="vidcard-details" style="display: none;">
-      ${["Descripción", "Fecha de publicación"]
-        .map((label, i) => {
-          const key = ["description", "publishedAt"][i];
-          return video[key]
-            ? `<p><strong>${label}:</strong> ${video[key]}</p>`
-            : "";
-        })
-        .join("")}
+    <div class="vidcard-summary">
+      <img src="${
+        video.thumbnail || "../../public/images/defaultCover.png"
+      }" alt="${video.title}">
+      <p class="vid-description">${video.description}</p>
+    </div>
+    <div class="vidcard-title">
+      <h3>
+        <a href="${videoUrl}" target="_blank" rel="noopener noreferrer">
+          ${video.title}
+        </a>
+      </h3>
+    </div>
+    <div class="vid-input-div">
       <textarea class="notes-input" placeholder="Agrega tus notas...">${
         video.notes || ""
       }</textarea>
@@ -54,11 +63,16 @@ export const VideoCard = (video) => {
     </div>
   `;
 
-  const detailsDiv = card.querySelector(".vidcard-details");
+  // Referencias a elementos internos
+  const summaryDiv = card.querySelector(".vidcard-summary");
+  const detailsBtnDiv = card.querySelector(".vid-details-buttons");
   const notesInput = card.querySelector(".notes-input");
   const buttonsContainer = card.querySelector(".vid-details-buttons");
+  const vidDescription = card.querySelector(".vid-description");
+  const vidInput = card.querySelector(".vid-input-div");
 
-  const saveButtonB = CardBtn("Guardar", "save", "../../public/icon/save.png");
+  // Botones de acción
+  const saveButtonB = CardBtn("Guardar", "save", "/icon/add.png");
   const updateButtonB = CardBtn(
     "Actualizar",
     "update",
@@ -79,12 +93,19 @@ export const VideoCard = (video) => {
   }
   buttonsContainer.appendChild(collapseButtonB);
 
+  // Función para expandir / contraer la tarjeta
   const toggleCard = () => {
-    const expanded = card.classList.toggle("expanded");
-    detailsDiv.style.display = expanded ? "block" : "none";
+    card.classList.toggle("expanded");
+    summaryDiv.classList.toggle("expanded");
+    detailsBtnDiv.classList.toggle("expanded");
+    vidDescription.classList.toggle("expanded");
+    vidInput.classList.toggle("expanded");
   };
 
+  // Listener en la tarjeta: si se hace clic en cualquier parte que NO sea un enlace, se alterna el estado
   card.addEventListener("click", (e) => {
+    // Si el click sucede sobre un enlace (<a>) o dentro de uno, no se hace toggle.
+    if (e.target.closest("a")) return;
     if (
       ![
         collapseButtonB,
@@ -97,16 +118,20 @@ export const VideoCard = (video) => {
       toggleCard();
     }
   });
+
   collapseButtonB.addEventListener("click", (e) => {
     e.stopPropagation();
     toggleCard();
   });
+
+  // Cierra la tarjeta si se hace click fuera de ella
   document.addEventListener("click", (e) => {
     if (card.classList.contains("expanded") && !card.contains(e.target)) {
       toggleCard();
     }
   });
 
+  // Manejo de acciones de guardado, actualización y borrado
   const handleVideoAction = async (action, data = {}) => {
     if (action === "delete" && !confirm("¿Eliminar este video?")) return;
     const apiCall = {
@@ -129,23 +154,32 @@ export const VideoCard = (video) => {
           : "eliminado"
       } correctamente!`
     );
+
+    // Si el video fue eliminado, remover la tarjeta del DOM y actualizar el estado
+    if (action === "delete") {
+      card.remove();
+      const videoCards = getState("videoCards") || {};
+      delete videoCards[video.id];
+      setState("videoCards", videoCards);
+    }
+
     document.dispatchEvent(new CustomEvent("videoSaved"));
-    toggleCard();
   };
 
+  // Acciones según si el video está guardado o es resultado de búsqueda
   if (!isSaved) {
-    saveButtonB.addEventListener("click", () =>
+    saveButtonB.addEventListener("click", () => {
       handleVideoAction("save", {
         title: video.title,
-        channelTitle: video.channelTitle,
+        channel: video.channel,
         thumbnail: video.thumbnail,
         notes: notesInput.value,
-        videoId: video.videoId,
+        videoId: normVideoId, // Usamos el identificador normalizado
         description: video.description,
-        publishedAt: video.publishedAt,
-        channelId: video.channelId
-      })
-    );
+        created_at: video.created_at,
+        channelId: normChannelId
+      });
+    });
   }
   if (isSaved) {
     updateButtonB.addEventListener("click", () =>

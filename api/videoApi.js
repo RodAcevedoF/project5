@@ -4,21 +4,14 @@ const API_URL = "https://service.todo-api.site/api/videos";
 
 export const createVideo = async (videoData) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
-    const { channelTitle, ...rest } = videoData;
-    const formattedData = { ...rest, channel: channelTitle };
-
-    const response = await axios.post(
-      "https://service.todo-api.site/api/videos",
-      formattedData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
+    const response = await axios.post(API_URL, videoData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
-    );
+    });
 
     return response.data;
   } catch (error) {
@@ -34,7 +27,7 @@ export const createVideo = async (videoData) => {
 
 export const getVideos = async (limit = 10, offset = 0) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     const response = await axios.get(API_URL, {
       headers: {
@@ -42,7 +35,7 @@ export const getVideos = async (limit = 10, offset = 0) => {
       },
       params: { limit, offset }
     });
-
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(
@@ -57,7 +50,7 @@ export const getVideos = async (limit = 10, offset = 0) => {
 
 export const updateVideo = async (id, updateData) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     const hasFile = updateData.thumbnail instanceof File;
 
@@ -98,7 +91,7 @@ export const updateVideo = async (id, updateData) => {
 
 export const deleteVideo = async (id) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     const response = await axios.delete(`${API_URL}/${id}`, {
       headers: {

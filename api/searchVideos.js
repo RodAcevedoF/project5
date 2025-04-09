@@ -1,78 +1,25 @@
-/* import axios from "axios";
-
-const API_KEY = "AIzaSyALGkaEf_WYxE-VRKt3HC-K1sOet6n7anE";
-
-export const searchVideo = async (query, pageToken = "") => {
-  try {
-    const url = "https://www.googleapis.com/youtube/v3/search";
-    const params = {
-      part: "snippet",
-      q: query,
-      type: "video",
-      maxResults: 10,
-      key: API_KEY,
-      pageToken // Cadena vacía si es la primera búsqueda
-    };
-
-    const response = await axios.get(url, {
-      params,
-      headers: { "Cache-Control": "no-cache" }
-    });
-    if (response.data.items) {
-      const videos = response.data.items.map((item) => {
-        const { title, channelTitle, description, publishedAt, thumbnails } =
-          item.snippet;
-        return {
-          videoId: item.id.videoId,
-          title: title || "No title",
-          channelTitle: channelTitle || "Unknown channel",
-          description: description || "No description",
-          thumbnail: thumbnails && thumbnails.high ? thumbnails.high.url : null,
-          publishedAt: publishedAt || "",
-          channelId: item.snippet.channelId || ""
-        };
-      });
-      return {
-        videos,
-        nextPageToken: response.data.nextPageToken || "",
-        totalResults: response.data.pageInfo.totalResults || 0
-      };
-    }
-    return { videos: [], nextPageToken: "", totalResults: 0 };
-  } catch (error) {
-    console.error(
-      "Error al buscar videos:",
-      error.response?.data || error.message
-    );
-    return { error: error.response?.data?.error || "Error al buscar videos" };
-  }
-};
- */
-
 import axios from "axios";
 
 const API_KEY = "AIzaSyALGkaEf_WYxE-VRKt3HC-K1sOet6n7anE";
 
-export const searchVideo = async (query, pageToken = "") => {
+export const searchVideo = async (
+  query,
+  pageToken = "",
+  videoDuration = "medium",
+  order = "relevance"
+) => {
   try {
     const url = "https://www.googleapis.com/youtube/v3/search";
 
-    // Parámetros adicionales:
-    // - videoDuration: "short", "medium" o "long"
-    // - order: "date", "rating", "relevance", "title", "videoCount" o "viewCount"
-    // - regionCode: Código ISO del país (por ejemplo, "ES" para España)
-    // - relevanceLanguage: Código de idioma para priorizar resultados (ej: "es")
     const params = {
       part: "snippet",
       q: query,
       type: "video",
       maxResults: 10,
       key: API_KEY,
-      pageToken, // Cadena vacía si es la primera búsqueda
-      videoDuration: "medium", // Filtra videos de duración media (4-20 minutos)
-      order: "viewCount", // Ordena según el número de vistas
-      regionCode: "ES", // Prioriza videos de España
-      relevanceLanguage: "es" // Prioriza videos en español
+      pageToken,
+      videoDuration, // Duración: "short", "medium" o "long"
+      order // Orden: "relevance" para videos relacionados o "viewCount" para los más vistos
     };
 
     const response = await axios.get(url, {
@@ -85,12 +32,12 @@ export const searchVideo = async (query, pageToken = "") => {
         const { title, channelTitle, description, publishedAt, thumbnails } =
           item.snippet;
         return {
-          videoId: item.id.videoId,
+          video_id: item.id.videoId,
           title: title || "Sin título",
-          channelTitle: channelTitle || "Canal desconocido",
+          channel: channelTitle || "Canal desconocido",
           description: description || "Sin descripción",
           thumbnail: thumbnails && thumbnails.high ? thumbnails.high.url : null,
-          publishedAt: publishedAt || "",
+          created_at: publishedAt || "",
           channelId: item.snippet.channelId || ""
         };
       });

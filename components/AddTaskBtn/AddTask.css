@@ -7,7 +7,7 @@
   border: none;
   cursor: pointer;
   gap: 0.3em;
-  background: var(--main-green);
+  background: var(--box-background);
   transition: all 0.3s;
   width: 10em;
   height: 4em;
@@ -17,8 +17,8 @@
 
 .add-task-btn:hover {
   background: var(--letter-general);
-  box-shadow: 0 0 5px var(--main-green), 0 0 25px var(--main-green),
-    0 0 50px var(--main-green), 0 0 100px var(--main-green);
+  box-shadow: 0 0 5px var(--lighter-main), 0 0 25px var(--lighter-main),
+    0 0 50px var(--lighter-main), 0 0 100px var(--lighter-main);
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
   color: var(--back-general);
 }
@@ -32,7 +32,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--main-green));
+  background: linear-gradient(90deg, transparent, var(--lighter-main));
   animation: animate1 1s linear infinite;
 }
 @keyframes animate1 {
@@ -49,7 +49,7 @@
   right: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(180deg, transparent, var(--main-green));
+  background: linear-gradient(180deg, transparent, var(--lighter-main));
   animation: animate2 1s linear infinite;
   animation-delay: 0.25s;
 }
@@ -67,7 +67,7 @@
   right: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(270deg, transparent, var(--main-green));
+  background: linear-gradient(270deg, transparent, var(--lighter-main));
   animation: animate3 1s linear infinite;
   animation-delay: 0.5s;
 }
@@ -86,7 +86,7 @@
   left: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(360deg, transparent, var(--main-green));
+  background: linear-gradient(360deg, transparent, var(--lighter-main));
   animation: animate4 1s linear infinite;
   animation-delay: 0.75s;
 }

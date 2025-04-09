@@ -44,6 +44,7 @@
   width: 100%;
   flex-direction: row;
   height: auto;
+  max-height: 18em;
   border-radius: 0.1em;
   overflow: hidden;
   border: 0.4vmin solid var(--letter-general);
@@ -58,7 +59,8 @@
 }
 
 .card-summary.expanded img {
-  width: 40%;
+  object-fit: contain;
+  width: 15em;
 }
 
 .bookcard-title {

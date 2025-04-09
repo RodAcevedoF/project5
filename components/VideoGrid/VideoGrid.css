@@ -6,16 +6,20 @@
 }
 
 .toggle-sect {
-  align-self: flex-end;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em 0;
 }
 
 .video-grid {
   display: grid;
-  grid-auto-rows: 250px;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.4fr));
   width: 100%;
   padding: 2em;
   justify-content: center;
+  align-items: center;
   align-self: center;
   gap: 3em;
 }
@@ -23,5 +27,6 @@
 .menu-sect {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

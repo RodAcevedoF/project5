@@ -22,7 +22,12 @@ export const VideoGrid = () => {
   loadMoreButton.style.display = "none";
 
   let showingSavedVideos = false;
-  let query = "";
+  // Objeto para manejar los parámetros de búsqueda
+  let searchParams = {
+    query: "",
+    videoDuration: "", // "short", "medium" o "long"
+    order: "" // "viewCount", "date", "relevance", etc.
+  };
   let nextPageToken = "";
   const maxResults = 10;
   let totalResults = 0;
@@ -53,17 +58,23 @@ export const VideoGrid = () => {
   };
 
   const searchVideos = async (isNewSearch = false) => {
-    if (!query || typeof query !== "string") {
-      console.error("Error: invalid query", query);
+    if (!searchParams.query || typeof searchParams.query !== "string") {
+      console.error("Error: invalid query", searchParams.query);
       return;
     }
     if (isNewSearch) showLoading();
-    const result = await searchVideo(query, nextPageToken);
+    // Llamamos a searchVideo extrayendo cada parámetro:
+    const result = await searchVideo(
+      searchParams.query,
+      nextPageToken,
+      searchParams.videoDuration || "medium",
+      searchParams.order || "relevance"
+    );
     updateResults(result, isNewSearch);
   };
 
   const loadSavedVideos = async () => {
-    grid.innerHTML = showLoading();
+    grid.innerHTML = LoadComp();
     try {
       const result = await getVideos();
       let videos = Array.isArray(result)
@@ -100,15 +111,19 @@ export const VideoGrid = () => {
     searchVideos(false);
   });
 
-  const searchBarElement = SearchBarVids((searchQuery) => {
-    if (!searchQuery || typeof searchQuery !== "string") {
-      console.error(
-        "Error: searchQuery inválida en SearchBarVids callback:",
-        searchQuery
-      );
+  // El callback del SearchBarVids ahora devuelve un objeto con { query, videoDuration, order }
+  const searchBarElement = SearchBarVids((params) => {
+    if (
+      !params ||
+      typeof params !== "object" ||
+      !params.query ||
+      params.query.trim() === ""
+    ) {
+      console.error("Error: invalid search parameters", params);
       return;
     }
-    query = searchQuery;
+    // Actualizamos la variable global con los nuevos parámetros y reiniciamos
+    searchParams = { ...params };
     nextPageToken = "";
     searchVideos(true);
   });
@@ -131,9 +146,9 @@ export const VideoGrid = () => {
     grid.innerHTML = LoadComp();
   };
 
-  // ✅ Iniciar con una búsqueda aleatoria
-  /* query = getRandomQuery();
-  searchVideos(true); */
+  // (Opcional) Iniciar con una búsqueda aleatoria
+  // searchParams.query = getRandomQuery();
+  // searchVideos(true);
 
   return { container, updateResults, showLoading };
 };

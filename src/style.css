@@ -9,11 +9,12 @@
   --back-general: rgb(250, 250, 250);
   --back-alt: #171717;
   --nav-light: rgba(245, 245, 245, 0.942);
-  --main-green: #53ff5e;
-  --box-background: linear-gradient(to right, #53ff5e, #2e2e2e);
-  --footer-background: linear-gradient(to right, #2e2e2e, #53ff5e, #2e2e2e);
-  --aside-background: linear-gradient(to right, #53ff5e9e, #2e2e2e);
-  --button-alt-background: linear-gradient(to right, #53ff5e, #000000);
+  --main-green: #3fb2ff;
+  --lighter-main: #84dcff;
+  --box-background: linear-gradient(to right, #3fb2ff, #4b4b4b99);
+  --footer-background: linear-gradient(to right, #2e2e2e, #3fb2ff, #2e2e2e);
+  --aside-background: linear-gradient(to right, #3fb2ff98, #2e2e2e);
+  --button-alt-background: linear-gradient(to right, #3fb2ff, #000000);
   --letter-general: rgb(20, 20, 22);
   --highlight-letter: #a3a3a3ab;
   --general-shadow: 0 8px 32px 0 rgba(53, 53, 53, 0.37);
@@ -32,6 +33,7 @@ ul {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 main {
@@ -46,7 +48,12 @@ body {
 .dark {
   background-color: var(--back-alt);
   color: var(--back-general);
-
+  .logo-btn {
+    filter: invert(1);
+  }
+  .yt-channel {
+    filter: invert(1);
+  }
   .nav-links {
     box-shadow: var(--alt-shadow);
   }
@@ -59,17 +66,12 @@ body {
     box-shadow: var(--alt-shadow);
     background-color: var(--back-alt);
   }
-
   .snap {
     filter: invert(1);
   }
   .alt-login {
     box-shadow: var(--alt-shadow);
   }
-  .quali-icons {
-    filter: invert(50%);
-  }
-
   #login-form,
   .services-ul,
   #register-form,
@@ -77,11 +79,14 @@ body {
     background: var(--back-alt);
     box-shadow: var(--alt-shadow);
   }
-  .go-back-btn span {
+  .go-back-btn span,
+  .weather-widget,
+  .quote-div {
     color: var(--back-general);
   }
   .todo-main,
-  .main-aside {
+  .main-aside,
+  .vidcard-header {
     background: var(--back-alt);
   }
   .page-btn {
@@ -99,7 +104,8 @@ body {
     color: var(--back-general);
     box-shadow: var(--alt-shadow);
   }
-  .nav-btn {
+  .nav-btn,
+  .vidcard-header {
     color: var(--back-general);
   }
   .todo-display-card {
@@ -124,7 +130,9 @@ body {
   .with,
   .without,
   #login-form,
-  #register-form {
+  #register-form,
+  .video-card,
+  .vidcard-header {
     border: 0.5vmin solid var(--back-general);
     box-shadow: 0.4rem 0.4rem var(--back-general);
   }
@@ -160,7 +168,9 @@ body {
     color: var(--back-general);
   }
   .input,
-  #category-select {
+  #category-select,
+  #duration-select,
+  #order-select {
     border: 0.25em solid var(--back-general);
     color: var(--back-general);
     background: var(--letter-general);
@@ -171,7 +181,9 @@ body {
     box-shadow: 5px 5px 0px var(--back-general);
     background-color: var(--back-alt);
   }
-  #category-select:focus {
+  #category-select:focus,
+  #duration-select:focus,
+  #order-select:focus {
     border: 0.5px solid var(--back-general);
     box-shadow: 5px 5px 0px var(--back-general);
     background-color: var(--back-alt);

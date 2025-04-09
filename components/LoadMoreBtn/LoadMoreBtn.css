@@ -3,7 +3,7 @@
 .load-more-button {
   margin: 0;
   height: auto;
-  background: var(--letter-general);
+  background: var(--back-general);
   padding: 0;
   border: none;
   cursor: pointer;
@@ -14,7 +14,7 @@
 .load-more-button {
   --border-right: 6px;
   --text-stroke-color: rgba(255, 255, 255, 0.6);
-  --animation-color: #53ff5e;
+  --animation-color: var(--lighter-main);
   --fs-size: 1.5em;
   letter-spacing: 3px;
   text-decoration: none;

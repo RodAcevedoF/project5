@@ -20,7 +20,7 @@ export const NavBar = () => {
 
   const menuContainer = MenuUl();
   const menuButton = menuBtn(menuContainer);
-  
+
   menuButton.style.display = "none";
   navLinks.appendChild(menuButton);
 
@@ -32,7 +32,7 @@ export const NavBar = () => {
   ) {
     nav.appendChild(menuContainer);
   } else {
-    menuContainer.classList.add("floating")
+    menuContainer.classList.add("floating");
     nav.appendChild(menuContainer);
     menuButton.style.display = "flex";
   }
@@ -50,4 +50,24 @@ export const NavBar = () => {
   header.appendChild(nav);
 };
 
-window.addEventListener("resize", NavBar);
+window.addEventListener("resize", () => {
+  const currentPage = getState("currentPage");
+  const width = window.innerWidth;
+
+  const header = document.querySelector("header");
+  const nav = header.querySelector("nav");
+  const hasFloatingMenu = nav?.querySelector(".floating") !== null;
+  const shouldHaveFloating =
+    currentPage !== "landing" && currentPage !== "signlogin" && width <= 810;
+
+  const shouldHaveInlineMenu =
+    (currentPage === "landing" || currentPage === "signlogin") && width > 810;
+
+  const needsRedraw =
+    (shouldHaveFloating && !hasFloatingMenu) ||
+    (shouldHaveInlineMenu && hasFloatingMenu);
+
+  if (needsRedraw) {
+    NavBar();
+  }
+});

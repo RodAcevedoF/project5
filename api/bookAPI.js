@@ -4,7 +4,7 @@ const API_URL = "https://service.todo-api.site/api/books";
 
 export const createBook = async (bookData) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const formData = new FormData();
 
     for (let key in bookData) {
@@ -19,7 +19,7 @@ export const createBook = async (bookData) => {
     }
 
     const response = await axios.post(API_URL, formData, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     });
 
     return response.data;
@@ -34,19 +34,17 @@ export const createBook = async (bookData) => {
 
 export const getBooks = async (limit = 10, offset = 0) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     const response = await axios.get(API_URL, {
       headers: {
         Authorization: `Bearer ${token}`
       },
       params: { limit, offset }
-    }); // Verifica que la respuesta sea un arreglo de libros
-   const books = Array.isArray(response.data.data) 
-      ? response.data.data.filter(book => book.id && book.title) // Solo incluir libros válidos
-      : [];
-      const books2 = Array.isArray(response.data.data) 
-      ? response.data.data.filter(book => book.id && book.title) // Solo incluir libros válidos
+    });
+    // Se filtran únicamente los libros válidos que tengan id y title.
+    const books = Array.isArray(response.data.data)
+      ? response.data.data.filter((book) => book.id && book.title)
       : [];
     return books;
   } catch (error) {
@@ -60,20 +58,18 @@ export const getBooks = async (limit = 10, offset = 0) => {
   }
 };
 
-
 export const updateBook = async (id, updateData) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     const hasFile = updateData.cover_image instanceof File;
-
     let response;
+
     if (hasFile) {
       const formData = new FormData();
       for (let key in updateData) {
         if (updateData.hasOwnProperty(key)) {
           if (Array.isArray(updateData[key])) {
-            // Si el campo es un arreglo (ej: categorías), convertirlo a JSON
             formData.append(key, JSON.stringify(updateData[key]));
           } else {
             formData.append(key, updateData[key]);
@@ -107,10 +103,9 @@ export const updateBook = async (id, updateData) => {
   }
 };
 
-
 export const deleteBook = async (id) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     const response = await axios.delete(`${API_URL}/${id}`, {
       headers: {
@@ -135,14 +130,14 @@ export const deleteBook = async (id) => {
 
 export const getBookCount = async () => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("accessToken");
 
     const response = await axios.get(API_URL, {
       headers: { Authorization: `Bearer ${token}` }
     });
-    return response.data.data.length; // Devuelve el número de libros guardados por el usuario
+    return response.data.data.length; // Retorna la cantidad de libros del usuario.
   } catch (error) {
-    console.error('Error obteniendo el número de libros:', error);
+    console.error("Error obteniendo el número de libros:", error);
     return 0;
   }
 };
