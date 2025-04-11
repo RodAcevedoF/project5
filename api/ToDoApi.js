@@ -12,7 +12,7 @@ export const createTodo = async (todoData) => {
         formData.append(key, todoData[key]);
       }
     }
-
+    console.log(formData);
     const response = await axios.post(API_URL, formData, {
       headers: {
         Authorization: `Bearer ${token}`,

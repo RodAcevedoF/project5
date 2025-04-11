@@ -3,6 +3,9 @@ import axios from "axios";
 const API_KEY = "424d07b523ca4860b52104831252602";
 const DEFAULT_LOCATION = "Madrid";
 
+// Crear una instancia de axios sin el interceptor
+const axiosNoAuthWeather = axios.create();
+
 export const getWeatherData = async () => {
   try {
     let location = DEFAULT_LOCATION;
@@ -22,7 +25,7 @@ export const getWeatherData = async () => {
       }
     }
 
-    const response = await axios.get(
+    const response = await axiosNoAuthWeather.get(
       "https://api.weatherapi.com/v1/current.json",
       {
         params: { key: API_KEY, q: location, aqi: "no" }

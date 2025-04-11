@@ -9,14 +9,12 @@ export const VideoCard = (video) => {
   card.classList.add("video-card");
 
   // Determinar si el video ya está guardado (tiene un id interno)
-  const isSaved = Boolean(video.id);
+  const isSaved = !!video.id; /* || video.video_id; */
+  //  const normVideoId = video.videoId || video.video_id;
+
   if (isSaved) {
     card.dataset.videoId = video.id;
-    const videoCards = getState("videoCards") || {};
-    videoCards[video.id] = card;
-    setState("videoCards", videoCards);
   }
-
   // Normalizar el identificador del video y del canal (ya que en búsquedas viene con otro nombre)
   const normVideoId = video.videoId || video.video_id;
   const normChannelId = video.channelId || video.channelid;
@@ -43,9 +41,9 @@ export const VideoCard = (video) => {
       <p>${formattedDate}</p>
     </div>
     <div class="vidcard-summary">
-      <img src="${
-        video.thumbnail || "../../public/images/defaultCover.png"
-      }" alt="${video.title}">
+      <img src="${video.thumbnail || "/images/defaultCover.png"}" alt="${
+    video.title
+  }">
       <p class="vid-description">${video.description}</p>
     </div>
     <div class="vidcard-title">
@@ -102,7 +100,6 @@ export const VideoCard = (video) => {
     vidInput.classList.toggle("expanded");
   };
 
-  // Listener en la tarjeta: si se hace clic en cualquier parte que NO sea un enlace, se alterna el estado
   card.addEventListener("click", (e) => {
     // Si el click sucede sobre un enlace (<a>) o dentro de uno, no se hace toggle.
     if (e.target.closest("a")) return;
@@ -124,14 +121,12 @@ export const VideoCard = (video) => {
     toggleCard();
   });
 
-  // Cierra la tarjeta si se hace click fuera de ella
   document.addEventListener("click", (e) => {
     if (card.classList.contains("expanded") && !card.contains(e.target)) {
       toggleCard();
     }
   });
 
-  // Manejo de acciones de guardado, actualización y borrado
   const handleVideoAction = async (action, data = {}) => {
     if (action === "delete" && !confirm("¿Eliminar este video?")) return;
     const apiCall = {
@@ -155,7 +150,6 @@ export const VideoCard = (video) => {
       } correctamente!`
     );
 
-    // Si el video fue eliminado, remover la tarjeta del DOM y actualizar el estado
     if (action === "delete") {
       card.remove();
       const videoCards = getState("videoCards") || {};
@@ -166,7 +160,6 @@ export const VideoCard = (video) => {
     document.dispatchEvent(new CustomEvent("videoSaved"));
   };
 
-  // Acciones según si el video está guardado o es resultado de búsqueda
   if (!isSaved) {
     saveButtonB.addEventListener("click", () => {
       handleVideoAction("save", {
@@ -174,7 +167,7 @@ export const VideoCard = (video) => {
         channel: video.channel,
         thumbnail: video.thumbnail,
         notes: notesInput.value,
-        videoId: normVideoId, // Usamos el identificador normalizado
+        videoId: normVideoId,
         description: video.description,
         created_at: video.created_at,
         channelId: normChannelId

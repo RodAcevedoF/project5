@@ -1,7 +1,12 @@
 import axios from "axios";
 
+// Tu API Key de YouTube
 const API_KEY = "AIzaSyALGkaEf_WYxE-VRKt3HC-K1sOet6n7anE";
 
+// Crear una instancia de axios sin el interceptor
+const axiosNoAuth = axios.create();
+
+// Configurar la función para buscar videos
 export const searchVideo = async (
   query,
   pageToken = "",
@@ -22,7 +27,8 @@ export const searchVideo = async (
       order // Orden: "relevance" para videos relacionados o "viewCount" para los más vistos
     };
 
-    const response = await axios.get(url, {
+    // Hacer la solicitud usando la instancia de axios sin el interceptor
+    const response = await axiosNoAuth.get(url, {
       params,
       headers: { "Cache-Control": "no-cache" }
     });

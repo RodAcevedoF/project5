@@ -57,7 +57,7 @@ export const refreshAccessToken = async (refreshToken) => {
 
     if (response.ok) {
       const data = await response.json();
-      const { accessToken: newAccessToken } = data.data;
+      const { accessToken: newAccessToken } = data;
       // Actualizamos el accessToken (puedes actualizar también el refreshToken si el backend lo retorna)
       setTokens(newAccessToken, refreshToken);
       return true;
@@ -66,5 +66,35 @@ export const refreshAccessToken = async (refreshToken) => {
   } catch (error) {
     console.error("Error al refrescar el token:", error);
     return false;
+  }
+};
+
+let refreshTimeout = null;
+
+export const scheduleTokenRefresh = () => {
+  const { accessToken, refreshToken } = getTokens();
+  if (!accessToken || !refreshToken) return;
+
+  try {
+    const decodedToken = jwtDecode(accessToken);
+    const expiresAt = decodedToken.exp * 1000; // milisegundos
+    const now = Date.now();
+
+    const timeUntilRefresh = expiresAt - now - 60_000; // 1 minuto antes de que expire
+
+    if (timeUntilRefresh <= 0) {
+      refreshAccessToken(refreshToken); // si ya está vencido o por vencer, lo refresca ya
+    } else {
+      clearTimeout(refreshTimeout); // evita duplicados
+      refreshTimeout = setTimeout(() => {
+        refreshAccessToken(refreshToken).then((ok) => {
+          if (ok) {
+            scheduleTokenRefresh(); // programa el siguiente refresh
+          }
+        });
+      }, timeUntilRefresh);
+    }
+  } catch (error) {
+    console.error("Error al programar el refresco automático:", error);
   }
 };

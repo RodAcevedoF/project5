@@ -1,17 +1,27 @@
+import toggleBtn from "../ToggleBtn/ToggleBtn";
 import "./SuggestionBtn.css";
 
 const SuggestionBtn = (callback, arr) => {
   const btn = document.createElement("button");
   btn.classList.add("suggestion-btn");
 
-  // Seleccionar un término aleatorio
+  // Seleccionar un término aleatorio del array
   const randomIndex = Math.floor(Math.random() * arr.length);
-  const query = arr[randomIndex];
+  const query =
+    typeof arr[randomIndex] === "string"
+      ? arr[randomIndex]
+      : arr[randomIndex]?.query;
 
-  // Configurar el botón con el término
+  if (!query || typeof query !== "string") {
+    console.error("Invalid suggestion:", arr[randomIndex]);
+    btn.innerHTML = `<span>Invalid</span>`;
+    return btn;
+  }
+
+  // Configurar el botón
   btn.innerHTML = `<span>${query}</span>`;
   btn.addEventListener("click", () => {
-    callback(query); // Llamar al callback con el query seleccionado
+    callback(query); // Pasar el término seleccionado al callback
   });
 
   return btn;

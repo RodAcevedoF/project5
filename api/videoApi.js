@@ -35,7 +35,6 @@ export const getVideos = async (limit = 10, offset = 0) => {
       },
       params: { limit, offset }
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(

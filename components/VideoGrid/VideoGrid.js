@@ -1,11 +1,19 @@
 import "./VideoGrid.css";
 import { VideoCard } from "../VideoCard/VideoCard.js";
 import { SearchBarVids } from "../SearchBarVids/SearchBarVids.js";
+import SavedVideosBar from "../SavedVidBar/SavedVidsBar.js";
 import { searchVideo } from "../../api/searchVideos.js";
 import { getVideos } from "../../api/videoApi";
 import ToggleBtn from "../ToggleBtn/ToggleBtn.js";
 import LoadComp from "../LoadComp/LoadComp.js";
 import { randomVidQueries } from "../../data/options.js";
+import VideoSuggestions from "../VideoSuggestions/VideoSuggestions.js";
+import { setState } from "../../utils/state.js";
+import { updateVideoCount } from "../../utils/updateVideoCount.js";
+import {
+  getChannels,
+  updateChannelSelect
+} from "../../utils/updateVideoCount.js";
 
 export const VideoGrid = () => {
   const container = document.createElement("article");
@@ -14,19 +22,19 @@ export const VideoGrid = () => {
   const grid = document.createElement("div");
   grid.classList.add("video-grid");
 
-  const toggleButton = ToggleBtn("Saved books", "Search books");
+  const toggleButton = ToggleBtn("Saved videos", "Search videos");
 
   const loadMoreButton = document.createElement("button");
   loadMoreButton.innerText = "Load more";
   loadMoreButton.classList.add("load-more-vids-button");
   loadMoreButton.style.display = "none";
 
+  const savedVidsBar = SavedVideosBar();
   let showingSavedVideos = false;
-  // Objeto para manejar los parámetros de búsqueda
   let searchParams = {
     query: "",
-    videoDuration: "", // "short", "medium" o "long"
-    order: "" // "viewCount", "date", "relevance", etc.
+    videoDuration: "",
+    order: ""
   };
   let nextPageToken = "";
   const maxResults = 10;
@@ -45,7 +53,9 @@ export const VideoGrid = () => {
       return;
     }
     if (result.videos.length === 0 && isNewSearch) {
-      grid.innerHTML = "<p>No Results</p>";
+      grid.innerHTML = "";
+      const suggestions = VideoSuggestions(searchVideos, toggleButton);
+      grid.appendChild(suggestions);
       return;
     }
     result.videos.forEach((video) => {
@@ -57,13 +67,18 @@ export const VideoGrid = () => {
     loadMoreButton.style.display = nextPageToken ? "block" : "none";
   };
 
-  const searchVideos = async (isNewSearch = false) => {
+  const searchVideos = async (isNewSearch = false, suggestedQuery = "") => {
+    // Usar el término sugerido si existe
+    if (suggestedQuery) {
+      searchParams.query = suggestedQuery;
+    }
+
     if (!searchParams.query || typeof searchParams.query !== "string") {
       console.error("Error: invalid query", searchParams.query);
       return;
     }
+
     if (isNewSearch) showLoading();
-    // Llamamos a searchVideo extrayendo cada parámetro:
     const result = await searchVideo(
       searchParams.query,
       nextPageToken,
@@ -88,22 +103,29 @@ export const VideoGrid = () => {
         { videos, nextPageToken: "", totalResults: videos.length },
         true
       );
+      setState("videoCards", videos);
+      updateVideoCount();
+      updateChannelSelect(getChannels);
     } catch (error) {
-      console.error("Error loading books:", error);
+      console.error("Error loading saved videos:", error);
       updateResults({ videos: [], nextPageToken: "", totalResults: 0 }, true);
     }
   };
 
-  toggleButton.addEventListener("click", () => {
+  toggleButton.addEventListener("click", async () => {
     showingSavedVideos = !showingSavedVideos;
     if (showingSavedVideos) {
+      await loadSavedVideos();
       searchBarElement.style.display = "none";
       loadMoreButton.style.display = "none";
-      loadSavedVideos();
+      savedVidsBar.style.display = "flex";
+      setState("currentToggle", "saved");
     } else {
       searchBarElement.style.display = "flex";
       grid.innerHTML = "";
       loadMoreButton.style.display = "none";
+      savedVidsBar.style.display = "none";
+      setState("currentToggle", "search");
     }
   });
 
@@ -111,7 +133,6 @@ export const VideoGrid = () => {
     searchVideos(false);
   });
 
-  // El callback del SearchBarVids ahora devuelve un objeto con { query, videoDuration, order }
   const searchBarElement = SearchBarVids((params) => {
     if (
       !params ||
@@ -122,13 +143,11 @@ export const VideoGrid = () => {
       console.error("Error: invalid search parameters", params);
       return;
     }
-    // Actualizamos la variable global con los nuevos parámetros y reiniciamos
     searchParams = { ...params };
     nextPageToken = "";
     searchVideos(true);
   });
   searchBarElement.style.display = "flex";
-
   const toggleSect = document.createElement("section");
   toggleSect.classList.add("toggle-sect");
   toggleSect.appendChild(toggleButton);
@@ -137,6 +156,7 @@ export const VideoGrid = () => {
   const menuSect = document.createElement("section");
   menuSect.classList.add("menu-sect");
   menuSect.appendChild(searchBarElement);
+  menuSect.appendChild(savedVidsBar);
   container.appendChild(menuSect);
 
   container.appendChild(grid);
@@ -145,10 +165,6 @@ export const VideoGrid = () => {
   const showLoading = () => {
     grid.innerHTML = LoadComp();
   };
-
-  // (Opcional) Iniciar con una búsqueda aleatoria
-  // searchParams.query = getRandomQuery();
-  // searchVideos(true);
 
   return { container, updateResults, showLoading };
 };

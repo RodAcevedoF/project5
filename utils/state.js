@@ -3,6 +3,7 @@ const appState = {
   currentUser: null,
   currentPage: "landing",
   currentForm: "",
+  currentToggle: "",
   bookCards: {}, // Cambiado a un objeto para evitar manipulación incorrecta como en el caso de los índices de arrays.
   currentSavedCard: null,
   categories: [],

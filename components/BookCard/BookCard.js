@@ -1,6 +1,7 @@
 import { createBook, updateBook, deleteBook } from "../../api/bookApi.js";
 import "./BookCard.css";
 import CardBtn from "../CardBtn/CardBtn.js";
+import { updateCategorySelect } from "../../utils/updateBookCount.js";
 
 export const BookCard = (book) => {
   const card = document.createElement("div");
@@ -10,7 +11,6 @@ export const BookCard = (book) => {
   if (isSaved) {
     card.dataset.bookId = book.id;
   }
-
   card.innerHTML = `
     <div class="card-summary">
       <img src="${book.cover_image || "default-cover.png"}" alt="${book.title}">
@@ -128,6 +128,7 @@ export const BookCard = (book) => {
       document.dispatchEvent(
         new CustomEvent("bookDeleted", { detail: { bookId: book.id } })
       );
+      updateCategorySelect();
       return;
     }
 
@@ -157,6 +158,7 @@ export const BookCard = (book) => {
         categories: book.categories || []
       })
     );
+    updateCategorySelect();
   }
 
   updateButton.addEventListener("click", () =>

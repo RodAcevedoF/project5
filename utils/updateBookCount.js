@@ -24,7 +24,10 @@ export const filterBooks = (query = "", maxPages = Infinity, category = "") => {
     let matchesCategory = true;
     if (category) {
       if (Array.isArray(book.categories)) {
-        if (book.categories.length > 0 && typeof book.categories[0] === "object") {
+        if (
+          book.categories.length > 0 &&
+          typeof book.categories[0] === "object"
+        ) {
           matchesCategory = book.categories.some(
             (cat) => cat.name.toLowerCase() === category.toLowerCase()
           );
@@ -47,11 +50,29 @@ export const filterBooks = (query = "", maxPages = Infinity, category = "") => {
 };
 
 export const updateBookCount = () => {
-  const visibleCards = Array.from(document.querySelectorAll(".book-card"))
-    .filter((card) => card.style.display !== "none").length;
-  const allCards = Object.keys(getState("bookCards")).length || 8;;
+  const visibleCards = Array.from(
+    document.querySelectorAll(".book-card")
+  ).filter((card) => card.style.display !== "none").length;
+  const allCards = Object.keys(getState("bookCards")).length || 8;
   const countElement = document.querySelector(".book-count");
   if (countElement) {
     countElement.textContent = `${visibleCards} / ${allCards}`;
   }
+};
+
+export const updateCategorySelect = async () => {
+  const categories = await getCategories();
+  const categorySelect = document.querySelector("#category-select");
+
+  if (!categorySelect) return;
+
+  categorySelect.innerHTML = `
+    <option value="">Select category</option>
+    ${categories
+      .map(
+        (category) =>
+          `<option value="${category.name}">${category.name}</option>`
+      )
+      .join("")}
+  `;
 };

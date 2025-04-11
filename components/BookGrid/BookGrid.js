@@ -42,7 +42,8 @@ export const BookGrid = () => {
 
     if (!result || !Array.isArray(result.books) || result.books.length === 0) {
       grid.innerHTML = ""; // Opcional: limpia la cuadrícula
-      grid.appendChild(BookSuggestions(searchBooks));
+      const bookSuggestions = BookSuggestions(searchBooks, toggleButton);
+      grid.appendChild(bookSuggestions);
       return;
     }
 
@@ -129,7 +130,6 @@ export const BookGrid = () => {
 
   toggleButton.addEventListener("click", async () => {
     showingSavedBooks = !showingSavedBooks;
-
     if (showingSavedBooks) {
       searchBarElement.style.display = "none";
       loadMoreButton.style.display = "none";
@@ -139,6 +139,7 @@ export const BookGrid = () => {
       if (savedBooksBar) {
         savedBooksBar.style.display = "flex";
       }
+      setState("currentToggle", "saved");
     } else {
       searchBarElement.style.display = "flex";
       loadMoreButton.style.display = "none";
@@ -146,7 +147,7 @@ export const BookGrid = () => {
       if (savedBooksBar) {
         savedBooksBar.style.display = "none";
       }
-
+      setState("currentToggle", "search");
       grid.innerHTML = "";
       searchBarElement.reset();
       getRandomQuery();

@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// Crear una instancia de axios sin el interceptor
+const axiosNoAuth = axios.create();
+
 export const searchBook = async (
   query = "",
   startIndex = 0,
@@ -11,13 +14,15 @@ export const searchBook = async (
     // Construye dinámicamente el parámetro de búsqueda
     let searchQuery = query ? encodeURIComponent(query) : "";
     if (category) {
-      searchQuery += (searchQuery ? "+" : "") + `subject:${encodeURIComponent(category)}`;
+      searchQuery +=
+        (searchQuery ? "+" : "") + `subject:${encodeURIComponent(category)}`;
     }
 
     // Construye la URL de la API
     const url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&startIndex=${startIndex}&maxResults=${maxResults}&random=${Math.random()}`;
 
-    const response = await axios.get(url, {
+    // Hacer la solicitud usando la instancia de axios sin el interceptor
+    const response = await axiosNoAuth.get(url, {
       headers: { "Cache-Control": "no-cache" }
     });
 
@@ -43,8 +48,10 @@ export const searchBook = async (
           }
 
           const isbn = industryIdentifiers
-            ? industryIdentifiers.find((id) => id.type === "ISBN_13")?.identifier ||
-              industryIdentifiers.find((id) => id.type === "ISBN_10")?.identifier ||
+            ? industryIdentifiers.find((id) => id.type === "ISBN_13")
+                ?.identifier ||
+              industryIdentifiers.find((id) => id.type === "ISBN_10")
+                ?.identifier ||
               "ISBN not available"
             : "ISBN not available";
 
@@ -68,7 +75,10 @@ export const searchBook = async (
 
     return { books: [], totalItems: 0 };
   } catch (error) {
-    console.error("Error retrieving books:", error.response?.data || error.message);
+    console.error(
+      "Error retrieving books:",
+      error.response?.data || error.message
+    );
     return { error: error.response?.data?.error || "Error retrieving books" };
   }
 };

@@ -170,7 +170,8 @@ body {
   .input,
   #category-select,
   #duration-select,
-  #order-select {
+  #order-select,
+  #channel-select {
     border: 0.25em solid var(--back-general);
     color: var(--back-general);
     background: var(--letter-general);
@@ -183,13 +184,15 @@ body {
   }
   #category-select:focus,
   #duration-select:focus,
-  #order-select:focus {
+  #order-select:focus,
+  #channel-select:focus {
     border: 0.5px solid var(--back-general);
     box-shadow: 5px 5px 0px var(--back-general);
     background-color: var(--back-alt);
     color: var(--back-general);
   }
-  .max-pages-label {
+  .max-pages-label,
+  .length-label {
     border: 0.15em solid var(--back-general);
   }
   .matches-info {
