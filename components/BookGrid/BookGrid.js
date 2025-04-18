@@ -15,17 +15,36 @@ import {
   filterBooks,
   updateBookCount
 } from "../../utils/updateBookCount.js";
+import SavedList from "../SavedList/SavedList.js";
+import ListElement from "../ListElement/ListElement.js";
 
 export const BookGrid = () => {
   const container = document.createElement("article");
   container.classList.add("book-article");
 
+  // DOM Elements
+  const menuSect = document.createElement("section");
+  menuSect.classList.add("menu-section");
+
   const grid = document.createElement("section");
   grid.classList.add("book-grid");
 
-  const toggleButton = ToggleBtn("SAVED BOOKS", "SEARCH BOOKS");
+  const toggleSect = document.createElement("section");
+  toggleSect.classList.add("toggle-section");
+
+  const savedSect = document.createElement("section");
+  savedSect.classList.add("saved-section");
+
+  const List = SavedList();
+  const currentToggleState = getState("currentToggle") || "search";
+  const toggleButton = ToggleBtn(
+    "TO SAVED BOOKS",
+    "TO SEARCH BOOKS",
+    currentToggleState
+  );
   const loadMoreButton = LoadMoreBtn("loadMore");
 
+  // App State
   let showingSavedBooks = false;
   let query = "";
   let startIndex = 0;
@@ -34,28 +53,27 @@ export const BookGrid = () => {
   let category = "";
   let maxPages = Infinity;
 
-  const updateResults = (result, isNewSearch = false) => {
+  const showLoading = (comp) => {
+    comp.innerHTML = LoadComp();
+  };
+
+  const updateResults = (comp, result, isNewSearch = false) => {
     if (isNewSearch) {
-      grid.innerHTML = "";
+      comp.innerHTML = "";
       startIndex = 0;
     }
 
-    if (!result || !Array.isArray(result.books) || result.books.length === 0) {
-      grid.innerHTML = ""; // Opcional: limpia la cuadrícula
-      const bookSuggestions = BookSuggestions(searchBooks, toggleButton);
-      grid.appendChild(bookSuggestions);
+    if (!result?.books?.length) {
+      comp.innerHTML = "";
+      comp.appendChild(BookSuggestions(searchBooks, toggleButton));
       return;
     }
 
     result.books.forEach((book) => {
-      const existingCard = grid.querySelector(`[data-book-id="${book.id}"]`);
-      if (existingCard) {
-        console.warn(`Duplicate card with ID: ${book.id}`);
-        return;
-      }
+      if (comp.querySelector(`[data-book-id="${book.id}"]`)) return;
 
-      const card = BookCard(book);
-      grid.appendChild(card);
+      const elem = comp === grid ? BookCard(book) : ListElement(book);
+      comp.appendChild(elem);
     });
 
     totalItems = result.totalItems;
@@ -80,7 +98,7 @@ export const BookGrid = () => {
       return;
     }
 
-    if (isNewSearch) showLoading();
+    if (isNewSearch) showLoading(grid);
 
     const result = await searchBook(
       searchQuery,
@@ -89,33 +107,77 @@ export const BookGrid = () => {
       searchCategory,
       searchMaxPages
     );
-    updateResults(result, isNewSearch);
+    updateResults(grid, result, isNewSearch);
   };
 
   const loadSavedBooks = async () => {
-    grid.innerHTML = LoadComp();
+    showLoading(List);
     try {
       const books = await getBooks();
       setState("bookCards", books);
-      updateResults({ books, totalItems: books.length }, true);
+      updateResults(List, { books, totalItems: books.length }, true);
+
       const categories = await getCategories();
-      const savedBooksBarElement = SavedBooksBar(categories);
-      const menuSection = document.querySelector(".menu-section");
-      const savedBooksBar = document.querySelector(".saved-books-bar");
-      if (!savedBooksBar) {
-        menuSection.appendChild(savedBooksBarElement);
-      }
+      const savedBooksBar =
+        document.querySelector(".saved-books-bar") || SavedBooksBar(categories);
+      if (!savedBooksBar.parentNode) menuSect.appendChild(savedBooksBar);
+
       filterBooks("", Infinity, "");
       updateBookCount();
     } catch (error) {
-      console.error("Error retrieveng books:", error);
+      console.error("Error retrieving books:", error);
       grid.innerHTML = "<p>Error loading your saved books</p>";
+    }
+  };
+
+  const handleToggle = async () => {
+    showingSavedBooks = !showingSavedBooks;
+
+    const savedBar = document.querySelector(".saved-books-bar");
+    if (showingSavedBooks) {
+      searchBarElement.style.display = "none";
+      grid.style.display = "none";
+      savedSect.style.display = "flex";
+      if (savedBar) savedBar.style.display = "flex";
+      setState("currentToggle", "saved");
+      await loadSavedBooks();
+    } else {
+      searchBarElement.style.display = "flex";
+      grid.style.display = "grid";
+      savedSect.style.display = "none";
+      if (savedBar) savedBar.style.display = "none";
+      grid.innerHTML = "";
+      searchBarElement.reset();
+      setState("currentToggle", "search");
+      getRandomQuery();
+    }
+  };
+
+  const handleBookDeleted = async ({ detail: { bookId } }) => {
+    const bookCards = getState("bookCards") || {};
+    if (bookCards[bookId]) {
+      delete bookCards[bookId];
+      setState("bookCards", bookCards);
+    }
+
+    updateBookCount();
+
+    try {
+      const newCategories = await getCategories();
+      const oldBar = document.querySelector(".saved-books-bar");
+      if (oldBar) {
+        const newBar = SavedBooksBar(newCategories);
+        oldBar.replaceWith(newBar);
+      }
+    } catch (error) {
+      console.error("Error al actualizar la barra de filtros:", error);
     }
   };
 
   const getRandomQuery = () => {
     const randomIndex = Math.floor(Math.random() * randomQueries.length);
     query = randomQueries[randomIndex];
+    setState("currentToggle", "search");
     searchBooks(true);
   };
 
@@ -128,66 +190,53 @@ export const BookGrid = () => {
     }
   );
 
-  toggleButton.addEventListener("click", async () => {
-    showingSavedBooks = !showingSavedBooks;
-    if (showingSavedBooks) {
+  // Event Listeners
+  toggleButton.addEventListener("click", handleToggle);
+  loadMoreButton.addEventListener("click", () => searchBooks());
+  document.addEventListener("bookDeleted", handleBookDeleted);
+
+  // Initial State
+  searchBarElement.style.display = "flex";
+  toggleSect.appendChild(toggleButton);
+  menuSect.appendChild(searchBarElement);
+  savedSect.appendChild(List);
+
+  container.append(toggleSect, menuSect, grid, loadMoreButton, savedSect);
+
+  if (getState("currentToggle") === "search" || !getState("currentToggle")) {
+    savedSect.style.display = "none"; // ← fuerza ocultarlo
+    getRandomQuery();
+  }
+
+  const initializeUI = async () => {
+    const currentToggle = getState("currentToggle");
+
+    if (currentToggle === "saved") {
+      showingSavedBooks = true;
+
       searchBarElement.style.display = "none";
-      loadMoreButton.style.display = "none";
-      grid.innerHTML = "";
+      grid.style.display = "none";
+      savedSect.style.display = "flex";
+
+      const savedBar = document.querySelector(".saved-books-bar");
+      if (savedBar) savedBar.style.display = "flex";
+
       await loadSavedBooks();
-      const savedBooksBar = document.querySelector(".saved-books-bar");
-      if (savedBooksBar) {
-        savedBooksBar.style.display = "flex";
-      }
-      setState("currentToggle", "saved");
     } else {
+      showingSavedBooks = false;
+
       searchBarElement.style.display = "flex";
-      loadMoreButton.style.display = "none";
-      const savedBooksBar = document.querySelector(".saved-books-bar");
-      if (savedBooksBar) {
-        savedBooksBar.style.display = "none";
-      }
-      setState("currentToggle", "search");
-      grid.innerHTML = "";
-      searchBarElement.reset();
+      grid.style.display = "grid";
+      savedSect.style.display = "none";
+
+      const savedBar = document.querySelector(".saved-books-bar");
+      if (savedBar) savedBar.style.display = "none";
+
       getRandomQuery();
     }
-  });
-
-  loadMoreButton.addEventListener("click", () => {
-    searchBooks();
-  });
-
-  document.addEventListener("bookDeleted", (event) => {
-    const { bookId } = event.detail;
-    const bookCards = getState("bookCards") || {};
-    if (bookCards[bookId]) {
-      delete bookCards[bookId];
-      setState("bookCards", bookCards);
-    }
-    updateBookCount();
-  });
-
-  const showLoading = () => {
-    grid.innerHTML = LoadComp();
   };
 
-  searchBarElement.style.display = "flex";
-
-  const toggleSect = document.createElement("section");
-  toggleSect.classList.add("toggle-section");
-  toggleSect.appendChild(toggleButton);
-
-  const menuSect = document.createElement("section");
-  menuSect.classList.add("menu-section");
-  menuSect.appendChild(searchBarElement);
-
-  container.appendChild(toggleSect);
-  container.appendChild(menuSect);
-  container.appendChild(grid);
-  container.appendChild(loadMoreButton);
-
-  getRandomQuery();
+  initializeUI();
 
   return { container, updateResults, showLoading, searchBooks };
 };

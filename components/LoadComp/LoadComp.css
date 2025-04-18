@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   gap: 1em;
+  padding: 3em 0;
 }
 
 .loader span {
@@ -18,12 +19,13 @@
   position: relative;
 }
 
- @keyframes blur {
-  0%, 90% {
-   filter: blur(0);
+@keyframes blur {
+  0%,
+  90% {
+    filter: blur(0);
   }
- 
+
   50% {
-   filter: blur(10px);
+    filter: blur(10px);
   }
- }
+}

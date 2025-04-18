@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setState } from "./state";
+import { getState, setState } from "./state";
 
 export const getPopularCategories = async () => {
   try {
@@ -62,7 +62,7 @@ export const getPopularCategories = async () => {
 export const loadCategories = async () => {
   try {
     const categories = await getPopularCategories();
-    setState("categories", categories);
+    setState("bookCategories", categories);
   } catch (error) {
     console.error("Error al cargar las categorías:", error);
     setState("categories", []);

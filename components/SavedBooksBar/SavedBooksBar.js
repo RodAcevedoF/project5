@@ -14,13 +14,10 @@ const SavedBooksBar = (categories) => {
       <p class="book-count">0</p>
     </div>
     ${SearchElement()}
-    <select id="category-select">
+    <select id="saved-category-select">
       <option value="">Select category</option>
       ${categories
-        .map(
-          (category) =>
-            `<option value="${category.name}">${category.name}</option>`
-        )
+        .map((category) => `<option value="${category}">${category}</option>`)
         .join("")}
     </select>
     ${RangeSlider()}
@@ -28,7 +25,7 @@ const SavedBooksBar = (categories) => {
 
   const attachEvents = () => {
     const searchInput = containerBar.querySelector("#search-input");
-    const categorySelect = containerBar.querySelector("#category-select");
+    const categorySelect = containerBar.querySelector("#saved-category-select");
     const maxPagesRange = containerBar.querySelector("#max-pages-range");
     const maxPagesValue = containerBar.querySelector("#max-pages-value");
     const clearButton = containerBar.querySelector("#clear-button");

@@ -81,7 +81,8 @@ body {
   }
   .go-back-btn span,
   .weather-widget,
-  .quote-div {
+  .quote-div,
+  .load-more-button {
     color: var(--back-general);
   }
   .todo-main,
@@ -118,11 +119,10 @@ body {
   .simple-calendar {
     background: var(--calendar-bg-alt);
   }
-  .book-article {
-    background: var(--back-alt);
-  }
   .todo-footer,
-  .nav-links {
+  .nav-links,
+  .load-more-button,
+  .book-article {
     background: var(--back-alt);
   }
   .book-card,
@@ -132,7 +132,9 @@ body {
   #login-form,
   #register-form,
   .video-card,
-  .vidcard-header {
+  .vidcard-header,
+  .book-li,
+  .card-title {
     border: 0.5vmin solid var(--back-general);
     box-shadow: 0.4rem 0.4rem var(--back-general);
   }
@@ -152,7 +154,8 @@ body {
   .task-editor,
   .card-summary.expanded,
   .nav-links,
-  .details textarea {
+  .details textarea,
+  .saved-label {
     border: 0.4vmin solid var(--back-general);
     box-shadow: 0.3rem 0.3rem var(--back-general);
   }
@@ -171,7 +174,8 @@ body {
   #category-select,
   #duration-select,
   #order-select,
-  #channel-select {
+  #channel-select,
+  #saved-category-select {
     border: 0.25em solid var(--back-general);
     color: var(--back-general);
     background: var(--letter-general);
@@ -185,7 +189,8 @@ body {
   #category-select:focus,
   #duration-select:focus,
   #order-select:focus,
-  #channel-select:focus {
+  #channel-select:focus,
+  #saved-category-select:focus {
     border: 0.5px solid var(--back-general);
     box-shadow: 5px 5px 0px var(--back-general);
     background-color: var(--back-alt);
@@ -204,8 +209,40 @@ body {
     color: var(--back-general);
     border-bottom: 3px solid var(--back-general);
   }
-  .icon {
+  .icon,
+  .card-title img {
     filter: invert(1);
+  }
+
+  .front-btns button,
+  .card-button,
+  .actions button {
+    border: 3px solid var(--back-general);
+    box-shadow: 5px 5px 0 var(--back-general);
+  }
+  .read-btn:hover,
+  .card-button:hover {
+    background-color: #296fbb;
+    border-color: #296fbb;
+    color: #fff;
+    box-shadow: 7px 7px 0 #004280;
+  }
+
+  .del-btn:hover,
+  #delete-btn:hover {
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: #fff;
+    box-shadow: 7px 7px 0 #800000;
+  }
+
+  .front-btns button:active {
+    transform: translate(5px, 5px);
+    box-shadow: none;
+  }
+
+  .todo-display-card h3 {
+    -webkit-text-stroke-color: var(--back-general);
   }
 }
 @font-face {

@@ -29,9 +29,15 @@ import { Home } from "../pages/Home/Home.js";
 import Footer from "../components/Footer/Footer.js";
 import { NavBar } from "../components/NavBar/NavBar.js";
 import checkSessionTheme from "../utils/sessionTheme.js";
+import axios from "axios";
 
 (async function init() {
   const authenticated = await initAuthFlow();
+  console.log("AccessToken al iniciar:", localStorage.getItem("accessToken"));
+  console.log(
+    "Authorization header global:",
+    axios.defaults.headers.common["Authorization"]
+  );
   checkSessionTheme();
   NavBar();
 

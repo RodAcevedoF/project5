@@ -20,7 +20,7 @@ export const filterVideos = (query = "", channel = "", maxDuration = 120) => {
 
 export const updateVideoCount = () => {
   const visibleCards = Array.from(
-    document.querySelectorAll(".video-card")
+    document.querySelectorAll(".video-li")
   ).filter((card) => card.style.display !== "none").length;
   const allCards = Object.keys(getState("videoCards")).length || 8;
   const countElement = document.querySelector(".video-count");

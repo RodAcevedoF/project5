@@ -1,9 +1,11 @@
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 // Coloca en localStorage los tokens
 export const setTokens = (accessToken, refreshToken) => {
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 };
 
 // Elimina los tokens de localStorage
@@ -44,25 +46,23 @@ export const isAuthenticated = async () => {
 // Función que realiza la llamada al backend para refrescar el accessToken.
 export const refreshAccessToken = async (refreshToken) => {
   try {
-    const response = await fetch(
+    const res = await axios.post(
       "https://service.todo-api.site/api/auth/refresh",
       {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ refreshToken })
+        refreshToken
       }
     );
 
-    if (response.ok) {
-      const data = await response.json();
-      const { accessToken: newAccessToken } = data;
-      // Actualizamos el accessToken (puedes actualizar también el refreshToken si el backend lo retorna)
-      setTokens(newAccessToken, refreshToken);
+    const tokenData = res.data?.data;
+
+    if (tokenData?.accessToken) {
+      const { accessToken, refreshToken: newRefreshToken } = tokenData;
+      setTokens(accessToken, newRefreshToken || refreshToken);
       return true;
+    } else {
+      console.warn("No se recibió un nuevo accessToken. Datos:", res.data);
+      return false;
     }
-    return false;
   } catch (error) {
     console.error("Error al refrescar el token:", error);
     return false;

@@ -3,7 +3,8 @@ import "./Books.css";
 import { BookGrid } from "../../components/BookGrid/BookGrid.js";
 import HeroBanner from "../../components/HeroBanner/HeroBanner.js";
 import InnerFooter from "../../components/InnerFooter/InnerFooter.js";
-import { loadCategories } from "../../utils/getPopularCategories.js"
+import { loadCategories } from "../../utils/getPopularCategories.js";
+import { getCategories } from "../../utils/updateBookCount.js";
 await loadCategories();
 
 export const Books = () => {
@@ -15,7 +16,7 @@ export const Books = () => {
 
   const bookGrid = BookGrid();
   section.appendChild(bookGrid.container);
-  
+
   section.appendChild(InnerFooter());
 
   return main;

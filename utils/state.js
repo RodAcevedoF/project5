@@ -7,6 +7,7 @@ const appState = {
   bookCards: {}, // Cambiado a un objeto para evitar manipulación incorrecta como en el caso de los índices de arrays.
   currentSavedCard: null,
   categories: [],
+  bookCategories: [],
   videoCards: {},
   videoCategories: []
 };

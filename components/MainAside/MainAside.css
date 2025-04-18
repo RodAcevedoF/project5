@@ -28,37 +28,31 @@
   filter: invert(1);
   width: 1.6em;
   position: absolute;
-  top: .25em;
+  top: 0.25em;
   visibility: hidden;
   cursor: pointer;
-  opacity: .5;
-  transition: all .3s ease;
+  opacity: 0.5;
+  transition: all 0.3s ease;
 }
 
 .mobile-close:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .main-aside h3 {
   cursor: pointer;
   font-size: 1em;
   width: 100%;
-  padding: .5em;/* 
-  background: rgba(54, 50, 138, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  backdrop-filter: blur(17px);
-  -webkit-backdrop-filter: blur(17px);
-  border-radius: 1em;
-  border: 1px solid rgba(255, 255, 255, 0.18); */
+  padding: 0.5em;
   border: 0.4vmin solid #05060f;
   box-shadow: 0.3rem 0.3rem #05060f;
   transition: all 0.2s ease-in-out;
   text-align: center;
-  border-radius: .1em;
+  border-radius: 0.1em;
 }
 
 .main-aside h3:hover {
- transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .todo-item {
@@ -71,14 +65,14 @@
   width: 100%;
   transition: all 0.2s ease;
   color: inherit;
-  border-radius: .2em;
+  border-radius: 0.2em;
 }
 
 .todo-item:hover {
   background: var(--button-alt-background);
   backdrop-filter: blur(17px);
   -webkit-backdrop-filter: blur(17px);
-  color: whitesmoke
+  color: whitesmoke;
 }
 
 #load-more-tasks {
@@ -87,7 +81,7 @@
   cursor: pointer;
   margin-top: 0.25em;
   width: 100%;
-  border-radius: .2em;
+  border-radius: 0.2em;
 }
 
 #load-more-tasks.visible {
@@ -100,6 +94,7 @@
   height: 0;
   opacity: 0;
   transition: all 0.3s ease;
+  margin-top: 0.5em;
 }
 
 .collapsible.visible {
@@ -108,22 +103,31 @@
   opacity: 1;
 }
 
+#upcoming-deadlines li {
+  flex-direction: column;
+}
+
+#latest-tasks {
+  overflow-y: scroll;
+  max-height: 10em;
+}
+
 @media screen and (max-width: 792px) {
   .main-aside {
     width: 15em;
     position: fixed;
     opacity: 0;
     left: 0;
-    top:10em;
+    top: 10em;
     padding: 2em 1em;
     height: auto;
-    border-radius: .2em;
+    border-radius: 0.2em;
     border: 1px solid var(--letter-general);
     background: inherit;
   }
 
   .main-aside h3 {
-    font-size: .8em;
+    font-size: 0.8em;
   }
 
   .main-aside.visible {
@@ -133,7 +137,7 @@
   }
 }
 
-@media screen and (max-width: 520px){
+@media screen and (max-width: 520px) {
   .mobile-close {
     visibility: visible;
   }

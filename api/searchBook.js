@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// Crear una instancia de axios sin el interceptor
 const axiosNoAuth = axios.create();
 
 export const searchBook = async (
@@ -11,17 +10,13 @@ export const searchBook = async (
   maxPages = Infinity
 ) => {
   try {
-    // Construye dinámicamente el parámetro de búsqueda
     let searchQuery = query ? encodeURIComponent(query) : "";
     if (category) {
       searchQuery +=
         (searchQuery ? "+" : "") + `subject:${encodeURIComponent(category)}`;
     }
-
-    // Construye la URL de la API
     const url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&startIndex=${startIndex}&maxResults=${maxResults}&random=${Math.random()}`;
 
-    // Hacer la solicitud usando la instancia de axios sin el interceptor
     const response = await axiosNoAuth.get(url, {
       headers: { "Cache-Control": "no-cache" }
     });
@@ -29,6 +24,7 @@ export const searchBook = async (
     if (response.data.items) {
       const books = response.data.items
         .map((item) => {
+          const info = item.volumeInfo || {};
           const {
             title,
             authors = [],
@@ -39,12 +35,13 @@ export const searchBook = async (
             industryIdentifiers,
             pageCount,
             categories
-          } = item.volumeInfo;
+          } = info;
 
-          // Verifica si publishedDate es solo el año (ej. "2023")
           let fullPublishedDate = publishedDate;
-          if (publishedDate && /^\d{4}$/.test(publishedDate)) {
+          if (/^\d{4}$/.test(publishedDate)) {
             fullPublishedDate = `${publishedDate}-01-01`;
+          } else if (/^\d{4}-\d{2}$/.test(publishedDate)) {
+            fullPublishedDate = `${publishedDate}-01`;
           }
 
           const isbn = industryIdentifiers
@@ -64,15 +61,18 @@ export const searchBook = async (
             publish_date: fullPublishedDate || "No description",
             cover_image: imageLinks ? imageLinks.thumbnail : null,
             isbn,
-            pages: pageCount || null,
+            pages: pageCount || 0,
             categories: categories || []
           };
         })
-        .filter((book) => book.pages === null || book.pages <= maxPages); // Filtra por cantidad de páginas
+        .filter(
+          (book) =>
+            book.pages === "Unknown" ||
+            (typeof book.pages === "number" && book.pages <= maxPages)
+        );
 
       return { books, totalItems: response.data.totalItems };
     }
-
     return { books: [], totalItems: 0 };
   } catch (error) {
     console.error(

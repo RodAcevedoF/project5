@@ -6,10 +6,9 @@ export const getCategories = async () => {
 
   Object.values(bookCards).forEach((book) => {
     if (Array.isArray(book.categories) && book.categories.length > 0) {
-      book.categories.forEach((category) => categories.add(category));
+      book.categories.forEach((category) => categories.add(category.name));
     }
   });
-
   return Array.from(categories);
 };
 
@@ -50,9 +49,9 @@ export const filterBooks = (query = "", maxPages = Infinity, category = "") => {
 };
 
 export const updateBookCount = () => {
-  const visibleCards = Array.from(
-    document.querySelectorAll(".book-card")
-  ).filter((card) => card.style.display !== "none").length;
+  const visibleCards = Array.from(document.querySelectorAll(".book-li")).filter(
+    (card) => card.style.display !== "none"
+  ).length;
   const allCards = Object.keys(getState("bookCards")).length || 8;
   const countElement = document.querySelector(".book-count");
   if (countElement) {
@@ -62,17 +61,14 @@ export const updateBookCount = () => {
 
 export const updateCategorySelect = async () => {
   const categories = await getCategories();
-  const categorySelect = document.querySelector("#category-select");
+  const categorySelect = document.querySelector("#saved-category-select");
 
   if (!categorySelect) return;
-
+  categorySelect.innerHTML = "";
   categorySelect.innerHTML = `
     <option value="">Select category</option>
     ${categories
-      .map(
-        (category) =>
-          `<option value="${category.name}">${category.name}</option>`
-      )
+      .map((category) => `<option value="${category}">${category}</option>`)
       .join("")}
   `;
 };

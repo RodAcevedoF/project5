@@ -19,8 +19,9 @@
   letter-spacing: 3px;
   text-decoration: none;
   font-size: var(--fs-size);
+  font-weight: bolder;
   position: relative;
-  color: transparent;
+  color: rgb(136, 136, 136);
   -webkit-text-stroke: 1px var(--text-stroke-color);
   border-radius: 0.1em;
 }

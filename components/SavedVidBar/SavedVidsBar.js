@@ -22,7 +22,7 @@ const RangeSlider = () => {
 
 const SavedVideosBar = () => {
   const containerBar = document.createElement("div");
-  containerBar.classList.add("saved-videos-bar");
+  containerBar.classList.add("saved-vids-bar");
   containerBar.innerHTML = `
     <div class="matches-info">
       <p class="head-info">Matches</p>

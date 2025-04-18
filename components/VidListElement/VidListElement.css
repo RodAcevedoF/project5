@@ -1,4 +1,4 @@
-.book-li {
+.video-li {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -6,9 +6,10 @@
   border: 0.5vmin solid var(--letter-general);
   box-shadow: 0.4rem 0.4rem var(--letter-general);
   padding: 1em;
+  flex-direction: column;
 }
 
-.savedbook-header {
+.savedvid-header {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -17,17 +18,17 @@
   gap: 1em;
 }
 
-.savedbook-title {
+.savedvid-title {
   gap: 1em;
   display: flex;
   flex-direction: column;
 }
-.savedbook-title:hover h3 {
+.savedvid-title:hover h3 {
   transform: scale(1.05) translateX(1em);
   color: var(--main-green);
 }
 
-.savedbook-title p {
+.savedvid-title p {
   font-size: 0.6em;
   width: fit-content;
   text-transform: uppercase;
@@ -40,49 +41,74 @@
   font-weight: bolder;
 }
 
-.savedbook-title h3 {
+.savedvid-title h3 {
   font-size: 1em;
   transition: all 0.25s ease;
   padding-left: 1em;
 }
 
-.input-saved-div,
-.book-li-summary {
+.video-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.vid-collapsibles {
   display: none;
   transition: all 0.25s ease;
 }
 
-.input-saved-div.visible,
-.book-li-summary.visible {
+.vid-collapsibles.visible {
   display: flex;
 }
 
-.book-li-summary {
+.vid-li-summary {
   margin-top: 1em;
   justify-content: space-evenly;
   width: 100%;
   align-items: center;
   padding: 0 1em;
-  gap: 1em;
+  gap: 2em;
 }
-.inner-summary {
+.inner-vid-info {
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.25em;
 }
 
-.savedcard-details {
+.saved-channel {
+  font-size: 0.9em;
+}
+.saved-channel a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: bolder;
+  transition: all 0.25s ease;
+  margin-bottom: 0.5em;
+}
+.saved-channel a:hover {
+  color: var(--main-green);
+}
+.channel-icon {
+  width: 5em;
+}
+
+.saved-publish-date {
+  font-size: 0.9em;
+}
+.saved-vidcard-details {
   display: flex;
   width: 100%;
-  border: 1px solid red;
   font-size: 0.75em;
   justify-content: flex-start;
   align-items: center;
   flex-flow: wrap;
   gap: 1em;
+  font-size: 0.8em;
 }
-.input-saved-div {
+.video-input-div {
   width: 100%;
   justify-content: center;
   gap: 2em;
@@ -100,7 +126,13 @@
   align-items: center;
   gap: 1em;
 }
-.saved-inner-label {
+.saved-vid-label {
   font-size: 0.75em;
   font-weight: bolder;
+}
+
+@media screen and (max-width: 815px) {
+  .vid-li-summary {
+    flex-flow: wrap;
+  }
 }

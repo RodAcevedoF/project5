@@ -8,17 +8,29 @@ export const SearchBar = (onSearchQuery) => {
   const form = document.createElement("form");
   form.classList.add("search-bar");
 
-  const categories = getState("categories") || ["science", "history", "art", "biography", "computers", "medical", "music]"];
+  const categories = getState("bookCategories") || [
+    "science",
+    "history",
+    "art",
+    "biography",
+    "computers",
+    "medical",
+    "music"
+  ];
   form.innerHTML = `
       ${SearchElement()}
       <select id="category-select">
-        <option value="">Select category</option>
-        ${categories.map((category) => `<option value="${category}">${category}</option>`).join("")}
+      <option value="">Select category</option>
       </select>
       ${RangeSlider()}
       ${MainBtn("submit", "searchbar-btn", "main-btn", "Search")}
   `;
-
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    form.querySelector("#category-select").appendChild(option);
+  });
   const maxPagesRange = form.querySelector("#max-pages-range");
   const maxPagesValue = form.querySelector("#max-pages-value");
 
@@ -48,4 +60,3 @@ export const SearchBar = (onSearchQuery) => {
 
   return form;
 };
- 

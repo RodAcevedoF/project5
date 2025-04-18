@@ -24,21 +24,16 @@ export const TodoCard = () => {
       <div class="form-btns"></div>
     </form>
   `;
-
-  
-    /* <input type="file" id="todo-file" /> 
+  // Incluir cuando se agregue subida de archivos fuera de profile
+  /* <input type="file" id="todo-file" /> 
     
       ${MainBtn("submit", "save-todo", "main-btn", "Save")}
       ${MainBtn("button", "delete-todo", "main-btn", "Delete")}
     */
-  
-
-
   const todoForm = cardContainer.querySelector("#todo-form");
   const formBtns = cardContainer.querySelector(".form-btns");
   formBtns.appendChild(CardBtn("Save", "save-todo", "/icon/add.png"));
   formBtns.appendChild(CardBtn("Delete", "delete-todo", "/icon/focus.png"));
-
 
   const loadTodoIntoEditor = (todo) => {
     const form = cardContainer.querySelector("#todo-form");
@@ -50,8 +45,8 @@ export const TodoCard = () => {
       ? todo.deadline.slice(0, 16)
       : "";
     form.querySelector(".tooltip").textContent = "Update";
-    const cont = document.querySelector(".editor-container"); 
-    cont.classList.add("visible")
+    const cont = document.querySelector(".editor-container");
+    cont.classList.add("visible");
     document.querySelector(".delete-todo-button").style.display = "block";
   };
 
@@ -59,7 +54,7 @@ export const TodoCard = () => {
     const todo = e.detail;
     loadTodoIntoEditor(todo);
     const cont = document.querySelector(".editor-container");
-    cont.classList.add("visible"); 
+    cont.classList.add("visible");
   });
 
   const resetForm = () => {
@@ -113,28 +108,30 @@ export const TodoCard = () => {
       alert(result.error || "Error al guardar la tarea");
     }
   });
-    formBtns.querySelector(".delete-todo-button").addEventListener("click", async () => {
-    const form = cardContainer.querySelector("#todo-form");
-    const id = form.querySelector("#todo-id").value;
-    if (id && confirm("¿Estás seguro de eliminar esta tarea?")) {
-      const result = await deleteTodo(id);
-      if (result.success) {
-        resetForm();
-        loadTodos(10, 0, (todo) => {
-          window.dispatchEvent(
-            new CustomEvent("loadTodoIntoEditor", { detail: todo })
-          );
-        });
-        loadUpcomingDeadlines();
-        const aside = document.querySelector("aside");
-        if (aside && typeof aside.calendarUpdate === "function") {
-          aside.calendarUpdate();
+  formBtns
+    .querySelector(".delete-todo-button")
+    .addEventListener("click", async () => {
+      const form = cardContainer.querySelector("#todo-form");
+      const id = form.querySelector("#todo-id").value;
+      if (id && confirm("¿Estás seguro de eliminar esta tarea?")) {
+        const result = await deleteTodo(id);
+        if (result.success) {
+          resetForm();
+          loadTodos(10, 0, (todo) => {
+            window.dispatchEvent(
+              new CustomEvent("loadTodoIntoEditor", { detail: todo })
+            );
+          });
+          loadUpcomingDeadlines();
+          const aside = document.querySelector("aside");
+          if (aside && typeof aside.calendarUpdate === "function") {
+            aside.calendarUpdate();
+          }
+        } else {
+          alert(result.error || "Error al eliminar la tarea");
         }
-      } else {
-        alert(result.error || "Error al eliminar la tarea");
       }
-    }
-  });
+    });
 
   return cardContainer;
 };

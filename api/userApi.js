@@ -1,6 +1,8 @@
 import axios from "axios";
 import { setState } from "../utils/state";
 import { setTokens, removeTokens } from "../utils/authUtils";
+import { changePage } from "../utils/changePage";
+import { Landing } from "../pages/Landing/Landing";
 
 const API_URL = "https://service.todo-api.site/api/auth";
 
@@ -56,4 +58,5 @@ export const logoutUser = () => {
   removeTokens();
   setState("isLoggedIn", false);
   setState("currentUser", null);
+  changePage(Landing, "landing");
 };

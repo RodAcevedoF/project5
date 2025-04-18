@@ -1,4 +1,4 @@
-import { createBook, updateBook, deleteBook } from "../../api/bookApi.js";
+import { createBook } from "../../api/bookApi.js";
 import "./BookCard.css";
 import CardBtn from "../CardBtn/CardBtn.js";
 import { updateCategorySelect } from "../../utils/updateBookCount.js";
@@ -6,14 +6,12 @@ import { updateCategorySelect } from "../../utils/updateBookCount.js";
 export const BookCard = (book) => {
   const card = document.createElement("div");
   card.classList.add("book-card");
-  const isSaved = !!book.id;
 
-  if (isSaved) {
-    card.dataset.bookId = book.id;
-  }
   card.innerHTML = `
     <div class="card-summary">
-      <img src="${book.cover_image || "default-cover.png"}" alt="${book.title}">
+      <img src="${book.cover_image || "default-cover.png"}" alt="${
+    book.title
+  } Cover Image">
       <div class="bookcard-title">
         <p class="label">Title</p>
         <h3>${book.title}</h3>
@@ -28,9 +26,14 @@ export const BookCard = (book) => {
         ${["Publisher", "Release", "Pages"]
           .map((label, i) => {
             const key = ["publisher", "publish_date", "pages"][i];
-            return book[key]
-              ? `<p><strong>${label}:</strong> ${book[key]}</p>`
-              : "";
+            let value = book[key];
+            if (
+              key === "pages" &&
+              (value === null || value === undefined || value === 0)
+            ) {
+              value = "Unknown"; // Mostrar 'Unknown' si no hay páginas
+            }
+            return value ? `<p><strong>${label}:</strong> ${value}</p>` : "";
           })
           .join("")}
         ${
@@ -58,19 +61,11 @@ export const BookCard = (book) => {
   const notesInput = card.querySelector(".notes-input");
   const detailsBtnDiv = card.querySelector(".details-button");
 
-  // Crear botones dinámicamente
+  // Botones: solo Save y Close
   const saveButton = CardBtn("Save", "save", "/icon/add.png");
-  const updateButton = CardBtn("Update", "update", "/icon/speed.png");
-  const deleteButton = CardBtn("Delete", "delete", "/icon/bolt.png");
   const collapseButton = CardBtn("Close", "collapse", "/icon/close.png");
 
-  // Añadir botones según el estado del libro
-  if (!isSaved) {
-    detailsBtnDiv.appendChild(saveButton);
-  } else {
-    detailsBtnDiv.appendChild(updateButton);
-    detailsBtnDiv.appendChild(deleteButton);
-  }
+  detailsBtnDiv.appendChild(saveButton);
   detailsBtnDiv.appendChild(collapseButton);
 
   const toggleCard = () => {
@@ -99,73 +94,31 @@ export const BookCard = (book) => {
     }
   });
 
-  const handleBookAction = async (action, data = {}) => {
-    if (action === "delete" && !confirm("¿Eliminar este libro?")) return;
-    const apiCall = {
-      save: createBook,
-      update: updateBook,
-      delete: deleteBook
-    }[action];
-    const result = await apiCall(book.id || data, data);
+  saveButton.addEventListener("click", async () => {
+    const result = await createBook({
+      title: book.title,
+      author: book.author,
+      cover_image: book.cover_image,
+      notes: notesInput.value,
+      apiId: book.apiId,
+      publisher: book.publisher,
+      publish_date: book.publish_date,
+      description: book.description,
+      isbn: book.isbn,
+      pages: book.pages,
+      categories: book.categories || []
+    });
 
     if (result.error) {
       alert(`Error: ${result.error}`);
       return;
     }
 
-    alert(
-      `¡Libro ${
-        action === "save"
-          ? "guardado"
-          : action === "update"
-          ? "actualizado"
-          : "eliminado"
-      } correctamente!`
-    );
+    alert("¡Libro guardado correctamente!");
+    await updateCategorySelect();
 
-    if (action === "delete") {
-      card.remove();
-      document.dispatchEvent(
-        new CustomEvent("bookDeleted", { detail: { bookId: book.id } })
-      );
-      updateCategorySelect();
-      return;
-    }
-
-    if (action === "save" && result.id) {
-      book.id = result.id;
-      book.notes = notesInput.value;
-      card.dataset.bookId = result.id;
-      saveButton.remove();
-      detailsBtnDiv.appendChild(updateButton);
-      detailsBtnDiv.appendChild(deleteButton);
-    }
-  };
-
-  if (!isSaved) {
-    saveButton.addEventListener("click", () =>
-      handleBookAction("save", {
-        title: book.title,
-        author: book.author,
-        cover_image: book.cover_image,
-        notes: notesInput.value,
-        apiId: book.apiId,
-        publisher: book.publisher,
-        publish_date: book.publish_date,
-        description: book.description,
-        isbn: book.isbn,
-        pages: book.pages,
-        categories: book.categories || []
-      })
-    );
-    updateCategorySelect();
-  }
-
-  updateButton.addEventListener("click", () =>
-    handleBookAction("update", { notes: notesInput.value })
-  );
-
-  deleteButton.addEventListener("click", () => handleBookAction("delete"));
+    document.dispatchEvent(new CustomEvent("bookSaved", { detail: result }));
+  });
 
   return card;
 };

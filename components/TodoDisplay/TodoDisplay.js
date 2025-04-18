@@ -9,7 +9,7 @@ export const TodoDisplay = (todo) => {
 
   card.innerHTML = `
     <div class="card-title">
-    <img src="/icon/target.png" alt="target icon">
+    <img src="../../public/icon/bolt.png" alt="target icon">
     <h3>${todo.title}</h3>
     </div>
     <div class="card-content">
@@ -21,8 +21,8 @@ export const TodoDisplay = (todo) => {
     </div>
     <div class="actions">
       ${MainBtn("button", "edit-btn", "main-btn", "Edit")}
-      ${MainBtn("button", "delete-btn", "main-btn", "Delete")}
       ${MainBtn("button", "close-btn", "main-btn", "Close")}
+      ${MainBtn("button", "delete-btn", "main-btn", "Delete")}
     </div>
   `;
 

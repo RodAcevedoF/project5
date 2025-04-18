@@ -175,9 +175,10 @@ export const loadUpcomingDeadlines = async () => {
     sortedTodos.forEach((todo) => {
       const todoItem = document.createElement("li");
       todoItem.classList.add("todo-item");
-      todoItem.textContent = `${todo.title} - ${new Date(
-        todo.deadline
-      ).toLocaleDateString()}`;
+      todoItem.innerHTML = `<p>${todo.title}</p>
+                            <p>${new Date(
+                              todo.deadline
+                            ).toLocaleDateString()}</p>`;
       todoItem.addEventListener("click", () => {
         const container = document.querySelector(".latest-container");
         container.innerHTML = "";

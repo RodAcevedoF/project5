@@ -3,26 +3,47 @@ import axios from "axios";
 import {
   isAuthenticated,
   scheduleTokenRefresh,
-  getTokens
+  getTokens,
+  setTokens
 } from "./authUtils.js";
 import { logoutUser } from "../api/userApi.js";
 import { setState } from "./state.js";
 
 // Interceptor que refresca el token antes de cada request
 const setupAxiosInterceptor = () => {
-  axios.interceptors.request.use(
-    async (config) => {
-      const auth = await isAuthenticated();
-      if (!auth) {
-        logoutUser(); // borra tokens y redirige si quieres
-        throw new axios.Cancel("Sesión expirada");
-      }
+  axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
 
-      const { accessToken } = getTokens();
-      config.headers.Authorization = `Bearer ${accessToken}`;
-      return config;
-    },
-    (error) => Promise.reject(error)
+      if (
+        error.response?.status === 401 &&
+        !originalRequest._retry &&
+        !originalRequest.url.includes("/auth/refresh")
+      ) {
+        originalRequest._retry = true;
+
+        const { refreshToken } = getTokens();
+
+        try {
+          const res = await axios.post(
+            "https://service.todo-api.site/api/auth/refresh",
+            { refreshToken }
+          );
+
+          const { accessToken, refreshToken: newRefreshToken } = res.data.data;
+          setTokens(accessToken, newRefreshToken);
+          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+
+          return axios(originalRequest);
+        } catch (refreshError) {
+          logoutUser();
+          return Promise.reject(refreshError);
+        }
+      }
+      logoutUser();
+      return Promise.reject(error);
+    }
   );
 };
 
@@ -30,10 +51,17 @@ export const initAuthFlow = async () => {
   const authenticated = await isAuthenticated();
   setState("isLoggedIn", authenticated);
 
-  if (authenticated) {
-    scheduleTokenRefresh(); // Programa el refresco automático
+  // 👇 Agregá esto para asegurar que axios tenga el token aunque no haya refresco
+  const { accessToken } = getTokens();
+  if (accessToken) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+    console.log("🛠 Header seteado desde initAuthFlow");
   }
 
-  setupAxiosInterceptor(); // Asegura que esté activo desde el principio
+  if (authenticated) {
+    scheduleTokenRefresh();
+  }
+
+  setupAxiosInterceptor();
   return authenticated;
 };
