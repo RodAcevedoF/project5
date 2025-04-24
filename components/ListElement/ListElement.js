@@ -63,7 +63,12 @@ const ListElement = (book) => {
     </div>
   </div>
     <div class="input-saved-div collapsibles">
-      <textarea class="saved-notes-input">${book.notes || ""}</textarea>
+    <p class="savedbook-notes"><strong>Notes:</strong> ${
+      book.notes || "No content yet"
+    }</p>
+      <textarea class="book-notes-input" placeholder="Add some notes!">${
+        book.notes || ""
+      }</textarea>
       <div class="li-button-group"></div>
     </div>
   `;
@@ -73,6 +78,8 @@ const ListElement = (book) => {
   const headerClick = li.querySelector(".savedbook-header");
   const updateButton = CardBtn("Update", "update", "/icon/speed.png");
   const closeButton = CardBtn("Close", "close", "/icon/close.png");
+  const notesDisplay = li.querySelector(".savedbook-notes");
+  const notesTextarea = li.querySelector(".book-notes-input");
 
   buttonGroup.appendChild(updateButton);
   buttonGroup.appendChild(closeButton); // fuera de la función ListElement
@@ -111,6 +118,31 @@ const ListElement = (book) => {
   );
   headerClick.appendChild(listButtons);
 
+  // Estado inicial: mostrar solo las notas
+  notesTextarea.style.display = "none";
+
+  notesDisplay.addEventListener("click", (e) => {
+    e.stopPropagation(); // evitamos que dispare el document.click
+    notesDisplay.style.display = "none";
+    notesTextarea.style.display = "block";
+    notesTextarea.focus();
+  });
+
+  /* closeButton.addEventListener("click", () => {
+    notesTextarea.style.display = "none";
+    notesDisplay.style.display = "block";
+  }); */
+
+  document.addEventListener("click", (e) => {
+    if (
+      !notesTextarea.contains(e.target) &&
+      notesTextarea.style.display === "block"
+    ) {
+      notesTextarea.style.display = "none";
+      notesDisplay.style.display = "block";
+    }
+  });
+
   updateButton.addEventListener("click", async () => {
     const result = await updateBook(book.id, { notes: notesInput.value });
     if (result.error) {
@@ -119,11 +151,15 @@ const ListElement = (book) => {
     }
     alert("¡Notas actualizadas!");
   });
+
   closeButton.addEventListener("click", () => {
     document
       .querySelectorAll(".collapsibles")
       .forEach((elem) => elem.classList.remove("visible"));
+    notesTextarea.style.display = "none";
+    notesDisplay.style.display = "block";
   });
+
   const deleteButton = li.querySelector("#delete-book-btn");
   deleteButton.addEventListener("click", async (e) => {
     e.stopPropagation();

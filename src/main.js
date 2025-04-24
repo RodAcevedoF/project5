@@ -33,11 +33,7 @@ import axios from "axios";
 
 (async function init() {
   const authenticated = await initAuthFlow();
-  console.log("AccessToken al iniciar:", localStorage.getItem("accessToken"));
-  console.log(
-    "Authorization header global:",
-    axios.defaults.headers.common["Authorization"]
-  );
+
   checkSessionTheme();
   NavBar();
 

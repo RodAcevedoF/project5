@@ -19,17 +19,13 @@ export const TodoCard = () => {
         <option value="medium">Medium</option>
         <option value="high">High</option>
       </select>
-      <input type="datetime-local" id="todo-deadline" />
+      <input type="date" id="todo-deadline" />
       </div>
       <div class="form-btns"></div>
     </form>
   `;
   // Incluir cuando se agregue subida de archivos fuera de profile
-  /* <input type="file" id="todo-file" /> 
-    
-      ${MainBtn("submit", "save-todo", "main-btn", "Save")}
-      ${MainBtn("button", "delete-todo", "main-btn", "Delete")}
-    */
+  /* <input type="file" id="todo-file" /> */
   const todoForm = cardContainer.querySelector("#todo-form");
   const formBtns = cardContainer.querySelector(".form-btns");
   formBtns.appendChild(CardBtn("Save", "save-todo", "/icon/add.png"));
@@ -72,10 +68,10 @@ export const TodoCard = () => {
     const title = form.querySelector("#todo-title").value;
     const description = form.querySelector("#todo-description").value;
     const urgency = form.querySelector("#todo-urgency").value;
-    const deadline = form.querySelector("#todo-deadline").value;
+    const deadlineDate = form.querySelector("#todo-deadline").value;
     /* const fileInput = form.querySelector("#todo-file");
     const file = fileInput.files[0]; */
-
+    const deadline = deadlineDate ? `${deadlineDate}T10:00:00` : "";
     const todoData = { title, description, priority: urgency, deadline };
     /* if (file) {
       todoData.file = file;

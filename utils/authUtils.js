@@ -53,7 +53,7 @@ export const refreshAccessToken = async (refreshToken) => {
       }
     );
 
-    const tokenData = res.data?.data;
+    const tokenData = res.data;
 
     if (tokenData?.accessToken) {
       const { accessToken, refreshToken: newRefreshToken } = tokenData;

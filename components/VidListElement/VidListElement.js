@@ -39,10 +39,8 @@ const VidListElement = (video) => {
   li.innerHTML = `
   <div class="savedvid-header">
     <div class="savedvid-title">
-      <p class="saved-label">Title</p>
-      <a href="${videoUrl}" target="_blank" rel="noopener noreferrer">  
-         <h3>${video.title || "No Title"}</h3>
-      </a>
+      <p class="saved-label">Title</p> 
+      <h3>${video.title || "No Title"}</h3>
     </div>
   </div>
   <div class="vid-li-summary vid-collapsibles">
@@ -51,19 +49,23 @@ const VidListElement = (video) => {
     video.title || "Sin título"
   }"  class="video-img">
     </a>
-    <div class="savedvideo-title">
+    <div class="savedvideo-main-info">
       <div class="inner-vid-info">
-        <p class="saved-vid-label">Channel</p>
-        <div class="saved-channel">
-          <a href="${channelUrl}" target="_blank" rel="noopener noreferrer">
-          <img class="channel-icon" src="/icon/youtube.png" alt="youtube icon"/>
-          ${video.channel || "Canal desconocido"}
-          </a>
+        <div>
+          <p class="saved-vid-label">Channel</p>
+          <div class="saved-channel">
+            <a href="${channelUrl}" target="_blank" rel="noopener noreferrer">
+              <img class="channel-icon" src="/icon/youtube.png" alt="youtube icon"/>
+              ${video.channel || "Canal desconocido"}
+            </a>
+          </div>
         </div>
-        <p class="saved-vid-label">Published</p>
-        <p class="saved-publish-date">${
-          formattedDate || "Fecha desconocida"
-        }</p>
+        <div class="video-date">
+          <p class="saved-vid-label">Published</p>
+          <p class="saved-publish-date">${
+            formattedDate || "Fecha desconocida"
+          }</p>
+        </div>
       </div>
       <div class="saved-vidcard-details">
         <p><strong>Description:</strong> ${formatValue(
@@ -74,12 +76,14 @@ const VidListElement = (video) => {
     </div>
   </div>
   <div class="video-input-div vid-collapsibles">
-    <p><strong>Notes:</strong> ${formatValue("notes", video.notes)}</p>
+    <p class="savedvid-notes"><strong>Notes:</strong> ${formatValue(
+      "notes",
+      video.notes
+    )}</p>
     <textarea class="saved-notes-input">${video.notes || ""}</textarea>
   <div class="li-button-group"></div>
   `;
 
-  const notesInput = li.querySelector(".saved-notes-input");
   const buttonGroup = li.querySelector(".li-button-group");
   const headerVidClick = li.querySelector(".savedvid-header");
 
@@ -124,20 +128,12 @@ const VidListElement = (video) => {
   );
   headerVidClick.appendChild(listButtons);
 
-  // Eventos para actualizar y eliminar
-  updateButton.addEventListener("click", async () => {
-    const result = await updateVideo(video.id, { notes: notesInput.value });
-    if (result.error) {
-      alert("Error al actualizar el video.");
-      return;
-    }
-    alert("¡Notas actualizadas!");
-  });
-
   closeButton.addEventListener("click", () => {
     document
       .querySelectorAll(".vid-collapsibles")
       .forEach((elem) => elem.classList.remove("visible"));
+    notesTextarea.style.display = "none";
+    notesDisplay.style.display = "block";
   });
   const deleteButton = li.querySelector("#delete-vid-btn");
   deleteButton.addEventListener("click", async () => {
@@ -155,6 +151,46 @@ const VidListElement = (video) => {
     setState("videoCards", updatedVids);
     updateVideoCount();
     updateChannelSelect();
+  });
+
+  const notesDisplay = li.querySelector(".savedvid-notes");
+  const notesTextarea = li.querySelector(".saved-notes-input");
+
+  // Estado inicial: mostrar solo las notas
+  notesTextarea.style.display = "none";
+
+  notesDisplay.addEventListener("click", (e) => {
+    e.stopPropagation(); // evitamos que dispare el document.click
+    notesDisplay.style.display = "none";
+    notesTextarea.style.display = "block";
+    notesTextarea.focus();
+  });
+  /* 
+  closeButton.addEventListener("click", () => {
+    notesTextarea.style.display = "none";
+    notesDisplay.style.display = "block";
+  }); */
+
+  document.addEventListener("click", (e) => {
+    if (
+      !notesTextarea.contains(e.target) &&
+      notesTextarea.style.display === "block"
+    ) {
+      notesTextarea.style.display = "none";
+      notesDisplay.style.display = "block";
+    }
+  });
+
+  updateButton.addEventListener("click", async () => {
+    const result = await updateVideo(video.id, { notes: notesTextarea.value });
+    if (result.error) {
+      alert("Error al actualizar el video.");
+      return;
+    }
+    alert("¡Notas actualizadas!");
+    notesDisplay.innerHTML = `<strong>Notes:</strong> ${notesTextarea.value}`;
+    notesTextarea.style.display = "none";
+    notesDisplay.style.display = "block";
   });
 
   return li;

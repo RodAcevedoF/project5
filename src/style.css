@@ -51,7 +51,8 @@ body {
   .logo-btn {
     filter: invert(1);
   }
-  .yt-channel {
+  .yt-channel,
+  .channel-icon {
     filter: invert(1);
   }
   .nav-links {
@@ -87,7 +88,9 @@ body {
   }
   .todo-main,
   .main-aside,
-  .vidcard-header {
+  .vidcard-header,
+  .video-card.expanded,
+  .title-url h3 {
     background: var(--back-alt);
   }
   .page-btn {
@@ -134,7 +137,7 @@ body {
   .video-card,
   .vidcard-header,
   .book-li,
-  .card-title {
+  .video-li {
     border: 0.5vmin solid var(--back-general);
     box-shadow: 0.4rem 0.4rem var(--back-general);
   }
@@ -155,7 +158,8 @@ body {
   .card-summary.expanded,
   .nav-links,
   .details textarea,
-  .saved-label {
+  .saved-label,
+  .card-title {
     border: 0.4vmin solid var(--back-general);
     box-shadow: 0.3rem 0.3rem var(--back-general);
   }

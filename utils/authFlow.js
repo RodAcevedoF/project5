@@ -8,6 +8,8 @@ import {
 } from "./authUtils.js";
 import { logoutUser } from "../api/userApi.js";
 import { setState } from "./state.js";
+import { changePage } from "./changePage.js";
+import { Home } from "../pages/Home/Home.js";
 
 // Interceptor que refresca el token antes de cada request
 const setupAxiosInterceptor = () => {
@@ -51,14 +53,13 @@ export const initAuthFlow = async () => {
   const authenticated = await isAuthenticated();
   setState("isLoggedIn", authenticated);
 
-  // 👇 Agregá esto para asegurar que axios tenga el token aunque no haya refresco
   const { accessToken } = getTokens();
   if (accessToken) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-    console.log("🛠 Header seteado desde initAuthFlow");
   }
 
   if (authenticated) {
+    changePage(Home, "home");
     scheduleTokenRefresh();
   }
 

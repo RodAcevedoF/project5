@@ -75,8 +75,7 @@
 .savedcard-details {
   display: flex;
   width: 100%;
-  border: 1px solid red;
-  font-size: 0.75em;
+  font-size: 0.9em;
   justify-content: flex-start;
   align-items: center;
   flex-flow: wrap;
@@ -85,11 +84,12 @@
 .input-saved-div {
   width: 100%;
   justify-content: center;
+  align-items: center;
   gap: 2em;
   padding: 1em;
-  height: 6em;
+  height: fit-content;
 }
-.saved-notes-input {
+.book-notes-input {
   width: 100%;
   border-radius: 0.1em;
 }
@@ -103,4 +103,29 @@
 .saved-inner-label {
   font-size: 0.75em;
   font-weight: bolder;
+}
+
+.savedbook-notes {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 538px) {
+  .savedbook-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .savedbook-title h3 {
+    font-size: 0.9em;
+  }
+  .book-li-summary {
+    padding: 1em 0;
+  }
+  .input-saved-div {
+    flex-direction: column;
+    align-items: center;
+  }
+  .savedcard-details,
+  .savedbook-notes {
+    font-size: 0.8em;
+  }
 }

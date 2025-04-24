@@ -2,54 +2,68 @@ import { createVideo } from "../../api/videoApi.js";
 import "./VideoCard.css";
 import CardBtn from "../CardBtn/CardBtn.js";
 import { updateChannelSelect } from "../../utils/updateVideoCount.js";
+import {
+  formatDuration,
+  formatViews,
+  formatDate
+} from "../../utils/videUtils.js";
 
 export const VideoCard = (video) => {
   const card = document.createElement("div");
   card.classList.add("video-card");
-  console.log(video);
+  const videoUrl = `https://www.youtube.com/watch?v=${video.video_id}`;
+  const channelUrl = `https://www.youtube.com/channel/${video.channelId}`;
+  const formattedDuration = formatDuration(video.duration);
+  const formattedViews = formatViews(video.views);
+  const formattedDate = formatDate(video.created_at);
+
   card.innerHTML = `
-    <div class="card-summary">
-      <img src="${video.thumbnail || "default-thumbnail.png"}" alt="${
-    video.title
-  } Thumbnail">
-      <div class="videocard-title">
-        <p class="label">Title</p>
-        <h3>${video.title}</h3>
-        <p class="label">Channel</p> 
-        <p class="channel">${video.channel}</p>
-        <p class="label">Published</p>
-        <p class="publish-date">${video.created_at}</p>
+    <div class="vidcard-header">
+      <a class="channel" href="${channelUrl}" target="_blank" rel="noopener noreferrer">
+        <img class="channel-icon" src="/icon/youtube.png" alt="youtube icon"/>
+        ${video.channel || "Canal desconocido"}
+      </a>
+    </div>
+    <div class="vidcard-summary">
+      <div class="thumbnail-title">
+        <img class="vid-thumbnail" src="${
+          video.thumbnail || "default-thumbnail.png"
+        }" alt="${video.title} Thumbnail">
+        <div class="vidcard-title">
+          <p class="label">Title</p>
+          <a class="title-url" href="${videoUrl}" target="_blank" rel="noopener noreferrer">
+            <h3>${video.title}</h3>
+          </a>
+          <p class="label">Published</p>
+          <p class="publish-date">${formattedDate}</p>          
+        </div>
+      </div>
+      <div class="midvid-info">
+        <p class="vid-description">
+         <strong>Description: </strong>${
+           video.description || "No description available."
+         }</p>
+        <div class="extra-details">
+          <p><strong>Duration: </strong>${formattedDuration}</p>
+          <p><strong>Views: </strong>${formattedViews}</p>
+        </div>
       </div>
     </div>
-    <div class="card-details">
-      <div class="extra-details">
-        ${["Duration", "Rating"]
-          .map((label, i) => {
-            const key = ["duration", "rating"][i];
-            let value = video[key];
-            if (value === null || value === undefined || value === 0) {
-              value = "Unknown";
-            }
-            return value ? `<p><strong>${label}:</strong> ${value}</p>` : "";
-          })
-          .join("")}
-      </div>  
-      <p class="card-description">${
-        video.description || "No description available."
-      }</p>
-      <div class="card-actions">
+    <div class="vidcard-details">
          <textarea class="notes-input" placeholder="Add some notes...">${
            video.notes || ""
          }</textarea>
-         <div class="details-button"></div>
-      </div>
+         <div class="vid-details-button"></div>
     </div>
   `;
 
-  const summaryDiv = card.querySelector(".card-summary");
-  const detailsDiv = card.querySelector(".card-details");
+  const summaryDiv = card.querySelector(".vidcard-summary");
+  const detailsDiv = card.querySelector(".vidcard-details");
   const notesInput = card.querySelector(".notes-input");
-  const detailsBtnDiv = card.querySelector(".details-button");
+  const detailsBtnDiv = card.querySelector(".vid-details-button");
+  const vidDescription = card.querySelector(".vid-description");
+  const videoCardTitle = card.querySelector(".vidcard-title");
+  const extraDetails = card.querySelector(".extra-details");
 
   const saveButton = CardBtn("Save", "save", "/icon/add.png");
   const collapseButton = CardBtn("Close", "collapse", "/icon/close.png");
@@ -61,11 +75,14 @@ export const VideoCard = (video) => {
     card.classList.toggle("expanded");
     detailsDiv.classList.toggle("expanded");
     summaryDiv.classList.toggle("expanded");
+    vidDescription.classList.toggle("expanded");
+    videoCardTitle.classList.toggle("expanded");
+    extraDetails.classList.toggle("expanded");
   };
 
   card.addEventListener("click", (e) => {
     if (
-      !e.target.closest(".details-button") &&
+      !e.target.closest(".vid-details-button") &&
       !e.target.closest(".notes-input")
     ) {
       toggleCard();

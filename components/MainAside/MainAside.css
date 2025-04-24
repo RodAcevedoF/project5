@@ -66,6 +66,7 @@
   transition: all 0.2s ease;
   color: inherit;
   border-radius: 0.2em;
+  text-align: center;
 }
 
 .todo-item:hover {
@@ -103,7 +104,8 @@
   opacity: 1;
 }
 
-#upcoming-deadlines li {
+#upcoming-deadlines li,
+#latest-tasks li {
   flex-direction: column;
 }
 

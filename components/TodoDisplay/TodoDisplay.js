@@ -16,7 +16,9 @@ export const TodoDisplay = (todo) => {
     <p>${todo.description || "No description available"}</p>
     <p>Priority: ${todo.priority}</p>
     <p>Deadline: ${
-      todo.deadline ? new Date(todo.deadline).toLocaleString() : "No deadline"
+      todo.deadline
+        ? new Date(todo.deadline).toLocaleDateString()
+        : "No deadline"
     }</p>
     </div>
     <div class="actions">
