@@ -19,6 +19,9 @@
   border-radius: 0.2em;
   border: 0.5vmin solid var(--letter-general);
   box-shadow: 0.4rem 0.4rem var(--letter-general);
+  background-image: url("/images/back_todo_display.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 .card-title img {
@@ -44,14 +47,14 @@
   border-radius: 0.2em;
 }
 
-.card-content p {
+.card-p {
   font-size: 0.9em;
 }
 
-.card-content p:first-of-type {
+.todo-description {
   font-weight: bold;
   font-size: 1.1em;
-  margin-bottom: 0.5em;
+  margin-bottom: 0;
 }
 
 .actions {
@@ -129,7 +132,7 @@
   }
 }
 
-@media screen and (max-width: 392px) {
+@media screen and (max-width: 431px) {
   .todo-display-card {
     width: 100%;
   }

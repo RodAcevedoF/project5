@@ -104,11 +104,33 @@
   font-size: 0.75em;
   font-weight: bolder;
 }
-
 .savedbook-notes {
   cursor: pointer;
 }
 
+.checked-book-div {
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+}
+.checked-book-div.visible {
+  display: flex;
+}
+.checked-book-div p {
+  border: none;
+  box-shadow: none;
+  font-weight: bolder;
+  font-size: 0.7em;
+}
+.checked-icon {
+  width: 1.5em;
+}
+.savedbook-label-div {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+}
 @media screen and (max-width: 538px) {
   .savedbook-header {
     flex-direction: column;

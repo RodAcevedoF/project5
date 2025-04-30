@@ -2,24 +2,27 @@ import "./TodoDisplay.css";
 import { deleteTodo } from "../../api/ToDoApi";
 import { loadTodos, loadUpcomingDeadlines } from "../MainAside/MainAside";
 import MainBtn from "../MainBtn/MainBtn";
+import { SwitchYesNo } from "../SwitchYesNo/SwitchYesNo";
+import { updateTodo } from "../../api/ToDoApi";
 
 export const TodoDisplay = (todo) => {
   const card = document.createElement("div");
   card.classList.add("todo-display-card");
-
   card.innerHTML = `
     <div class="card-title">
-    <img src="../../public/icon/bolt.png" alt="target icon">
+    <img src="/icon/done.png" alt="target icon">
     <h3>${todo.title}</h3>
     </div>
     <div class="card-content">
-    <p>${todo.description || "No description available"}</p>
-    <p>Priority: ${todo.priority}</p>
-    <p>Deadline: ${
-      todo.deadline
-        ? new Date(todo.deadline).toLocaleDateString()
-        : "No deadline"
-    }</p>
+      <p class="todo-description"><strong>Notes:</strong> ${
+        todo.description || "No description available"
+      }</p>
+      <p class="card-p"><strong>Priority:</strong> ${todo.priority}</p>
+      <p class="card-p"><strong>Deadline:</strong> ${
+        todo.deadline
+          ? new Date(todo.deadline).toLocaleDateString()
+          : "No deadline"
+      }</p>
     </div>
     <div class="actions">
       ${MainBtn("button", "edit-btn", "main-btn", "Edit")}
@@ -27,6 +30,9 @@ export const TodoDisplay = (todo) => {
       ${MainBtn("button", "delete-btn", "main-btn", "Delete")}
     </div>
   `;
+  const switchElement = SwitchYesNo(todo);
+  const cardContent = card.querySelector(".card-content");
+  cardContent.appendChild(switchElement);
 
   card.querySelector("#edit-btn").addEventListener("click", () => {
     window.dispatchEvent(
@@ -56,6 +62,20 @@ export const TodoDisplay = (todo) => {
 
   card.querySelector("#close-btn").addEventListener("click", () => {
     card.remove();
+  });
+
+  card.querySelector("#todo-checkbox").addEventListener("change", async (e) => {
+    const isChecked = e.target.checked;
+    const result = await updateTodo(todo.id, { checked: isChecked });
+    if (result.success) {
+      card.querySelector(".switch-label").textContent = `${
+        isChecked ? "Completed" : "Not completed"
+      }`;
+      loadTodos(10, 0);
+      loadUpcomingDeadlines();
+    } else {
+      alert(result.error || "Error al actualizar la tarea");
+    }
   });
 
   return card;

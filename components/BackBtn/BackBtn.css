@@ -1,30 +1,26 @@
 .go-back-btn {
-    display: flex;
-    position: relative;
-    bottom: 0em;
-    width: fit-content;
-    border: none;
-    background: inherit;
-    cursor: pointer;
-    justify-self: center;
-    align-self: center;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  position: relative;
+  bottom: 0em;
+  width: fit-content;
+  border: none;
+  cursor: pointer;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
 }
 
-.go-back-btn img {
-    width: 3.5em;
+.go-back-text {
+  position: absolute;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+  width: 5em;
+  left: 0.4em;
 }
 
-.go-back-btn span {
-    position: absolute;
-    font-weight: bold;
-    opacity: 0;
-    transition: all .25s ease-in-out;
-    width: 5em;
-}
-
-.go-back-btn:hover  span {
-    transform: translateY(200%);
-    opacity: 1;
+.go-back-btn:hover span.go-back-text {
+  transform: translateY(200%);
+  opacity: 1;
 }

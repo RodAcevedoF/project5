@@ -38,7 +38,7 @@ export const TodoCard = () => {
     form.querySelector("#todo-description").value = todo.description || "";
     form.querySelector("#todo-urgency").value = todo.priority || "low";
     form.querySelector("#todo-deadline").value = todo.deadline
-      ? todo.deadline.slice(0, 16)
+      ? new Date(todo.deadline).toISOString().slice(0, 10)
       : "";
     form.querySelector(".tooltip").textContent = "Update";
     const cont = document.querySelector(".editor-container");

@@ -30,3 +30,29 @@ export const formatDate = (videoDate) =>
     month: "2-digit",
     year: "numeric"
   });
+
+export const convertToSeconds = (duration) => {
+  const regex = /PT(\d+)M(\d+)S/;
+  const match = duration.match(regex);
+
+  if (match) {
+    const minutes = parseInt(match[1], 10);
+    const seconds = parseInt(match[2], 10);
+    return minutes * 60 + seconds;
+  } else {
+    return 0; // Si no coincide con el formato esperado, devuelve 0
+  }
+};
+
+export const formatDurationSecs = (seconds) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  if (minutes >= 90) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours}:${mins.toString().padStart(2, "0")} h`;
+  }
+
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")} min`;
+};

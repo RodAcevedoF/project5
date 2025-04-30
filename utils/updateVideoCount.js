@@ -10,8 +10,9 @@ export const filterVideos = (query = "", channel = "", maxDuration = 120) => {
       .toLowerCase()
       .includes(query.toLowerCase());
     const matchesChannel = channel ? video.channel === channel : true;
+    const minutesDuration = video.duration_seconds / 60;
     const matchesDuration =
-      maxDuration === Infinity || video.duration <= maxDuration;
+      maxDuration === Infinity || minutesDuration <= maxDuration;
 
     card.style.display =
       matchesTitle && matchesChannel && matchesDuration ? "block" : "none";

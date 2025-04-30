@@ -5,8 +5,9 @@ import { updateChannelSelect } from "../../utils/updateVideoCount.js";
 import {
   formatDuration,
   formatViews,
-  formatDate
-} from "../../utils/videUtils.js";
+  formatDate,
+  convertToSeconds
+} from "../../utils/videoUtils.js";
 
 export const VideoCard = (video) => {
   const card = document.createElement("div");
@@ -100,6 +101,7 @@ export const VideoCard = (video) => {
     }
   });
   saveButton.addEventListener("click", async () => {
+    const durationInSecs = convertToSeconds(video.duration);
     const result = await createVideo({
       video_id: video.video_id,
       title: video.title,
@@ -107,16 +109,9 @@ export const VideoCard = (video) => {
       thumbnail: video.thumbnail,
       notes: notesInput.value,
       description: video.description,
-      created_at: video.created_at
-    });
-    console.log("Datos que se envían a createVideo:", {
-      video_id: video.video_id,
-      title: video.title,
-      channel: video.channel,
-      thumbnail: video.thumbnail,
-      notes: notesInput.value,
-      description: video.description,
-      created_at: video.created_at
+      created_at: video.created_at,
+      views: video.views,
+      duration_seconds: durationInSecs
     });
     if (result.error) {
       alert(`Error: ${result.error}`);

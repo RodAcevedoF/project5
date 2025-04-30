@@ -84,10 +84,6 @@
   flex-direction: column;
   justify-content: center;
 }
-/* .saved-channel {
-  font-size: 0.9em;
-  padding: 0.5em;
-} */
 .saved-channel a {
   display: flex;
   justify-content: flex-start;
@@ -109,7 +105,7 @@
 }
 .saved-publish-date,
 .saved-channel {
-  font-size: 0.9em;
+  font-size: 1em;
   padding: 0.5em;
 }
 .saved-vidcard-details {
@@ -142,13 +138,43 @@
   gap: 1em;
 }
 .saved-vid-label {
-  font-size: 0.75em;
+  font-size: 0.9em;
   font-weight: bolder;
 }
 .savedvid-notes {
   cursor: pointer;
 }
-
+.views-duration {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+  gap: 6em;
+}
+.checked-video-div {
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+}
+.checked-video-div.visible {
+  display: flex;
+}
+.checked-video-div p {
+  border: none;
+  box-shadow: none;
+  font-weight: bolder;
+  font-size: 0.7em;
+}
+.checked-icon {
+  width: 1.5em;
+}
+.savedvid-label-div {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+}
 @media screen and (max-width: 815px) {
   .vid-li-summary {
     flex-flow: wrap;
@@ -183,5 +209,8 @@
   }
   .savedvid-title h3 {
     font-size: 0.9em;
+  }
+  .views-duration {
+    gap: 4em;
   }
 }

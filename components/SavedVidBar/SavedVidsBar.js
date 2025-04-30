@@ -15,7 +15,7 @@ import { getState } from "../../utils/state.js";
 const RangeSlider = () => {
   return `
       <label for="duration-range" class="length-label">
-        <input type="range" id="duration-range" min="0" max="360" value="360">
+        <input type="range" id="duration-range" min="0" max="60" value="0">
         <span id="span-nest">Length<span id="duration-value">∞</span>min</span>
       </label>`;
 };
@@ -49,7 +49,7 @@ const SavedVideosBar = () => {
       let duration = parseInt(durationRange.value, 10);
 
       // Si es 0 o 360, no aplicar filtro (representar como Infinity)
-      if (duration === 0 || duration === 360) {
+      if (duration === 0 || duration === 60) {
         duration = Infinity;
       }
 
@@ -61,7 +61,7 @@ const SavedVideosBar = () => {
     durationRange.addEventListener("input", () => {
       const numericValue = parseInt(durationRange.value, 10);
       durationValue.textContent =
-        numericValue === 0 || numericValue === 360 ? "∞" : numericValue;
+        numericValue === 0 || numericValue === 60 ? "∞" : numericValue;
       updateResults();
     });
 
@@ -72,7 +72,7 @@ const SavedVideosBar = () => {
       event.preventDefault();
       searchInput.value = "";
       channelSelect.value = "";
-      durationRange.value = "360";
+      durationRange.value = "0";
       durationValue.textContent = "∞";
       updateResults();
     });

@@ -171,7 +171,8 @@ body {
     border: 0.6vmin solid var(--back-general);
     box-shadow: 0.5rem 0.5rem var(--back-general);
   }
-  .loader span {
+  .loader span,
+  .button-elem {
     color: var(--back-general);
   }
   .input,
@@ -214,7 +215,7 @@ body {
     border-bottom: 3px solid var(--back-general);
   }
   .icon,
-  .card-title img {
+  .arrow-icon {
     filter: invert(1);
   }
 
@@ -247,6 +248,12 @@ body {
 
   .todo-display-card h3 {
     -webkit-text-stroke-color: var(--back-general);
+  }
+  .switch-container {
+    border: 3px solid var(--back-general);
+  }
+  .styled-wrapper .button:before {
+    border-color: var(--back-general);
   }
 }
 @font-face {

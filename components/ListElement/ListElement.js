@@ -27,7 +27,13 @@ const ListElement = (book) => {
   li.innerHTML = `
   <div class="savedbook-header">
     <div class="savedbook-title">
-      <p class="saved-label">Title</p>
+      <div class="savedbook-label-div">
+        <p class="saved-label">Title</p>
+        <div class="checked-book-div">
+          <p class="checked-info">Read</p>
+          <img src="/icon/checked.png" alt="check icon" class="checked-icon"/>
+        </div>
+      </div>
       <h3>${book.title}</h3>
     </div>
   </div>
@@ -80,12 +86,14 @@ const ListElement = (book) => {
   const closeButton = CardBtn("Close", "close", "/icon/close.png");
   const notesDisplay = li.querySelector(".savedbook-notes");
   const notesTextarea = li.querySelector(".book-notes-input");
+  const checkedInfo = li.querySelector(".checked-book-div");
+  if (book.checked) checkedInfo.classList.add("visible");
 
   buttonGroup.appendChild(updateButton);
-  buttonGroup.appendChild(closeButton); // fuera de la función ListElement
+  buttonGroup.appendChild(closeButton);
 
   headerClick.addEventListener("click", (e) => {
-    e.stopPropagation(); // evitamos que dispare el document.click
+    e.stopPropagation();
     if (currentOpenCard && currentOpenCard !== li) {
       currentOpenCard
         .querySelectorAll(".collapsibles")
@@ -128,11 +136,6 @@ const ListElement = (book) => {
     notesTextarea.focus();
   });
 
-  /* closeButton.addEventListener("click", () => {
-    notesTextarea.style.display = "none";
-    notesDisplay.style.display = "block";
-  }); */
-
   document.addEventListener("click", (e) => {
     if (
       !notesTextarea.contains(e.target) &&
@@ -146,10 +149,10 @@ const ListElement = (book) => {
   updateButton.addEventListener("click", async () => {
     const result = await updateBook(book.id, { notes: notesInput.value });
     if (result.error) {
-      alert("Error al actualizar el libro.");
+      alert("Error updating book.");
       return;
     }
-    alert("¡Notas actualizadas!");
+    alert("Updated notes!");
   });
 
   closeButton.addEventListener("click", () => {
@@ -163,10 +166,10 @@ const ListElement = (book) => {
   const deleteButton = li.querySelector("#delete-book-btn");
   deleteButton.addEventListener("click", async (e) => {
     e.stopPropagation();
-    if (!confirm("¿Eliminar este libro?")) return;
+    if (!confirm("Are you sure to delete this book?")) return;
     const result = await deleteBook(book.id);
     if (result.error) {
-      alert("Error al eliminar el libro.");
+      alert("Error deleting book.");
       return;
     }
     li.remove();
@@ -177,6 +180,17 @@ const ListElement = (book) => {
     setState("bookCards", updatedBooks);
     updateBookCount();
     updateCategorySelect();
+  });
+
+  const readButton = li.querySelector("#read-book-btn");
+  readButton.addEventListener("click", async (ev) => {
+    ev.stopPropagation();
+    const result = await updateBook(book.id, { checked: !book.checked });
+    if (result.error) {
+      alert("Error updating book.");
+      return;
+    }
+    checkedInfo.classList.toggle("visible");
   });
 
   return li;

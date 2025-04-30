@@ -141,6 +141,13 @@ export const loadTodos = async (limit = 5, offset = 0) => {
       const todoItem = document.createElement("li");
       todoItem.classList.add("todo-item");
       todoItem.textContent = todo.title;
+      const img = document.createElement("img");
+      img.src = "/icon/checked.png";
+      img.classList.add("todo-checked");
+      todoItem.append(img);
+      todo.checked
+        ? img.classList.add("visible")
+        : img.classList.remove("visible");
       todoItem.addEventListener("click", () => {
         const container = document.querySelector(".latest-container");
         container.innerHTML = "";

@@ -2,7 +2,7 @@
   background: var(--back-general);
   padding: 4em 1em 0 1em;
   width: 100%;
-  min-width: 11.5em;
+  min-width: 12em;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -56,8 +56,8 @@
 }
 
 .todo-item {
-  padding: 0.5em;
-  font-size: 0.8em;
+  padding: 0.3em 0;
+  font-size: 0.9em;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -104,14 +104,34 @@
   opacity: 1;
 }
 
-#upcoming-deadlines li,
-#latest-tasks li {
+#upcoming-deadlines li {
   flex-direction: column;
+  width: 100%;
+  font-weight: bold;
+}
+
+#latest-tasks li {
+  flex-direction: row;
+  width: 100%;
+  gap: 0.25em;
+  justify-content: space-between;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.25em;
 }
 
 #latest-tasks {
   overflow-y: scroll;
-  max-height: 10em;
+  max-height: 11em;
+}
+
+.todo-checked {
+  width: 1.5em;
+  display: none;
+}
+
+.todo-checked.visible {
+  display: block;
 }
 
 @media screen and (max-width: 792px) {

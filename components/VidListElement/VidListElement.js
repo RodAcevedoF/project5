@@ -4,6 +4,11 @@ import {
   updateVideoCount,
   updateChannelSelect
 } from "../../utils/updateVideoCount.js";
+import {
+  formatDate,
+  formatDurationSecs,
+  formatViews
+} from "../../utils/videoUtils.js";
 import CardBtn from "../CardBtn/CardBtn.js";
 import SavedListBtn from "../SavedListBtn/SavedListBtn";
 import "./VidListElement.css";
@@ -17,29 +22,22 @@ const VidListElement = (video) => {
   if (isSaved) {
     li.dataset.videoId = video.id;
   }
-
   const videoUrl = `https://www.youtube.com/watch?v=${video.video_id}`;
   const channelUrl = `https://www.youtube.com/channel/${video.channelid}`;
-  const formattedDate = new Date(video.created_at).toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric"
-  });
-
-  const formatValue = (key, value) => {
-    if (
-      (key === "description" || key === "notes") &&
-      (!value || value.trim() === "")
-    ) {
-      return "No disponible"; // Si el valor está vacío o nulo
-    }
-    return value || "Unknown";
-  };
+  const formattedDate = formatDate(video.created_at);
+  const formattedViews = formatViews(video.views);
+  const formattedDuration = formatDurationSecs(video.duration_seconds);
 
   li.innerHTML = `
   <div class="savedvid-header">
     <div class="savedvid-title">
-      <p class="saved-label">Title</p> 
+      <div class="savedvid-label-div">
+        <p class="saved-label">Title</p>
+        <div class="checked-video-div">
+          <p class="checked-info">Seen</p>
+          <img src="/icon/checked.png" alt="check icon" class="checked-icon"/>
+        </div> 
+      </div> 
       <h3>${video.title || "No Title"}</h3>
     </div>
   </div>
@@ -67,30 +65,41 @@ const VidListElement = (video) => {
           }</p>
         </div>
       </div>
+      <div class="views-duration">
+        <p><strong>Length: </strong>${formattedDuration || "Not Available"}</p>
+        <p><strong>Views: </strong> ${formattedViews || "Not Available"}</p>
+      </div>
       <div class="saved-vidcard-details">
-        <p><strong>Description:</strong> ${formatValue(
-          "description",
-          video.description
-        )}</p>
+        <p><strong>Description:</strong> ${
+          video.description || "Not Available"
+        }</p>
       </div>
     </div>
   </div>
   <div class="video-input-div vid-collapsibles">
-    <p class="savedvid-notes"><strong>Notes:</strong> ${formatValue(
-      "notes",
-      video.notes
-    )}</p>
+    <p class="savedvid-notes"><strong>Notes:</strong> ${
+      video.notes || "Not Available"
+    }</p>
     <textarea class="saved-notes-input">${video.notes || ""}</textarea>
   <div class="li-button-group"></div>
   `;
 
   const buttonGroup = li.querySelector(".li-button-group");
   const headerVidClick = li.querySelector(".savedvid-header");
+  const checkedInfo = li.querySelector(".checked-video-div");
+  if (video.checked) checkedInfo.classList.add("visible");
 
   // Botones de acción
+  const listButtons = SavedListBtn(
+    "seen",
+    "seen-vid-btn",
+    "Delete",
+    "delete-vid-btn"
+  );
   const updateButton = CardBtn("Update", "update", "/icon/speed.png");
   const closeButton = CardBtn("Close", "close", "/icon/close.png");
 
+  headerVidClick.appendChild(listButtons);
   buttonGroup.appendChild(updateButton);
   buttonGroup.appendChild(closeButton);
 
@@ -120,14 +129,6 @@ const VidListElement = (video) => {
     }
   });
 
-  const listButtons = SavedListBtn(
-    "seen",
-    "seen-vid-btn",
-    "Delete",
-    "delete-vid-btn"
-  );
-  headerVidClick.appendChild(listButtons);
-
   closeButton.addEventListener("click", () => {
     document
       .querySelectorAll(".vid-collapsibles")
@@ -135,12 +136,13 @@ const VidListElement = (video) => {
     notesTextarea.style.display = "none";
     notesDisplay.style.display = "block";
   });
+
   const deleteButton = li.querySelector("#delete-vid-btn");
   deleteButton.addEventListener("click", async () => {
-    if (!confirm("¿Eliminar este video?")) return;
+    if (!confirm("Delete this video?")) return;
     const result = await deleteVideo(video.id);
     if (result.error) {
-      alert("Error al eliminar el video.");
+      alert("Error deleting video.");
       return;
     }
     li.remove();
@@ -165,11 +167,6 @@ const VidListElement = (video) => {
     notesTextarea.style.display = "block";
     notesTextarea.focus();
   });
-  /* 
-  closeButton.addEventListener("click", () => {
-    notesTextarea.style.display = "none";
-    notesDisplay.style.display = "block";
-  }); */
 
   document.addEventListener("click", (e) => {
     if (
@@ -191,6 +188,17 @@ const VidListElement = (video) => {
     notesDisplay.innerHTML = `<strong>Notes:</strong> ${notesTextarea.value}`;
     notesTextarea.style.display = "none";
     notesDisplay.style.display = "block";
+  });
+
+  const seenButton = li.querySelector("#seen-vid-btn");
+  seenButton.addEventListener("click", async (ev) => {
+    ev.stopPropagation(); // evitamos que dispare el document.click
+    const result = await updateVideo(video.id, { checked: !video.checked });
+    if (result.error) {
+      alert("Error updating video.");
+      return;
+    }
+    checkedInfo.classList.toggle("visible");
   });
 
   return li;
