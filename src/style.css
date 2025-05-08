@@ -12,7 +12,7 @@
   --main-green: #3fb2ff;
   --lighter-main: #84dcff;
   --box-background: linear-gradient(to right, #3fb2ff, #4b4b4b99);
-  --footer-background: linear-gradient(to right, #2e2e2e, #3fb2ff, #2e2e2e);
+  --footer-background: linear-gradient(to right, #3fb2ff, #666666);
   --aside-background: linear-gradient(to right, #3fb2ff98, #2e2e2e);
   --button-alt-background: linear-gradient(to right, #3fb2ff, #000000);
   --letter-general: rgb(20, 20, 22);
@@ -50,6 +50,9 @@ body {
   color: var(--back-general);
   .logo-btn {
     filter: invert(1);
+  }
+  main {
+    background: var(--back-alt);
   }
   .yt-channel,
   .channel-icon {
@@ -266,6 +269,14 @@ body {
 @font-face {
   font-family: "IndieFlower";
   src: url("/fonts/indieflower-regular/IndieFlower-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Jersey 15";
+  src: url("/fonts/jersey15-regular/jersey-15-latin-400-normal.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }

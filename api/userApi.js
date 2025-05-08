@@ -53,6 +53,51 @@ export const loginUser = async (email, password) => {
   }
 };
 
+export const getProfile = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/profile`);
+    return res.data.data;
+  } catch (error) {
+    console.error(
+      "Failed to fetch profile:",
+      error.response?.data || error.message
+    );
+    return { error: error.response?.data?.error || "Could not fetch profile" };
+  }
+};
+
+// Update user profile
+export const updateProfile = async (updates) => {
+  try {
+    const res = await axios.put(`${API_URL}/profile`, updates);
+    const updatedUser = res.data.data;
+    setState("currentUser", updatedUser);
+    localStorage.setItem("name", updatedUser.name);
+    return updatedUser;
+  } catch (error) {
+    console.error(
+      "Failed to update profile:",
+      error.response?.data || error.message
+    );
+    return { error: error.response?.data?.error || "Could not update profile" };
+  }
+};
+
+// Delete user account
+export const deleteUser = async () => {
+  try {
+    const res = await axios.delete(`${API_URL}/deleteUser`);
+    logoutUser(); // Clear session and app state
+    return res.data;
+  } catch (error) {
+    console.error(
+      "Failed to delete account:",
+      error.response?.data || error.message
+    );
+    return { error: error.response?.data?.error || "Could not delete account" };
+  }
+};
+
 // Cierre de sesión
 export const logoutUser = () => {
   removeTokens();

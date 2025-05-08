@@ -1,0 +1,8 @@
+.profile-settings-section {
+  display: flex;
+}
+
+.profile-settings-section.inactive {
+  height: 0;
+  opacity: 0;
+}

@@ -1,0 +1,45 @@
+.profile-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 4em 2em 4em;
+  flex-direction: column;
+}
+
+.profile-header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+  gap: 1em;
+}
+
+.default-avatar {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  padding: 0;
+}
+
+.title-profile {
+  justify-self: flex-start;
+  margin-bottom: 2em;
+  font-family: "Jersey 15";
+  font-size: 2em;
+}
+
+.profile-nav {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  border-top: 3px solid var(--letter-general);
+}
+
+.profile-nav li {
+  cursor: pointer;
+}

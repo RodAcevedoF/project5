@@ -1,0 +1,9 @@
+.profile-activity-section {
+  display: flex;
+  transition: all 0.25s ease;
+}
+
+.profile-activity-section.inactive {
+  height: 0;
+  opacity: 0;
+}

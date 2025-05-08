@@ -1,0 +1,100 @@
+:root {
+  --easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 18em;
+  border: 1px solid red;
+}
+
+.carousel .slides {
+  position: relative;
+  top: -4em;
+  left: 10em;
+}
+
+.carousel .slides img {
+  position: absolute;
+  width: auto;
+  height: 400px;
+  opacity: 0;
+  z-index: 20; /* por debajo del .bar.active (z-index 30) */
+  transition: opacity 0.3s;
+}
+
+.carousel .slides img.active {
+  opacity: 1;
+  z-index: 30; /* se asegura que esté sobre los overlays */
+}
+
+.carousel .overlays {
+  position: relative;
+  width: 36em;
+  height: 18em;
+}
+
+.carousel .overlays .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bar-color);
+  transform-origin: left;
+  z-index: 10; /* base para todas las barras */
+  transform: scaleX(0); /* escondidas por defecto */
+}
+
+.carousel .overlays .bar.active {
+  z-index: 25; /* justo debajo de la img.active (30), por encima de otras bars (10) */
+  transform: scaleX(1);
+}
+
+/* Colores por clase */
+.bar-blue {
+  --bar-color: rgb(87, 178, 239);
+}
+
+.bar-green {
+  --bar-color: #218c74;
+}
+
+.bar-pink {
+  --bar-color: #dd6b7b;
+}
+
+.carousel .home-nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0 2em;
+  list-style-type: none;
+  gap: 1em;
+}
+
+.carousel .home-nav-links .home-nav-link {
+  font-size: 2em;
+  font-family: "Jersey 15";
+  line-height: 2;
+  text-decoration: none;
+  color: #7f8c8d;
+  transition: 0.2s;
+  width: 8em;
+}
+
+.home-nav-link {
+  cursor: pointer;
+}
+
+.carousel .home-nav-links .home-nav-link:hover {
+  color: #1c1e1f;
+}
+
+.carousel .home-nav-links .home-nav-link.active {
+  color: black;
+}

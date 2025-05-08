@@ -1,4 +1,4 @@
-import { setState } from "../utils/state.js";
+import { setState, getState } from "../utils/state.js";
 import { NavBar } from "../components/NavBar/NavBar.js";
 
 export const changePage = (PageComponent, pageName) => {
@@ -6,6 +6,15 @@ export const changePage = (PageComponent, pageName) => {
   if (!main) return;
 
   setState("currentPage", pageName);
+
+  if (
+    getState("currentPage") === "home" &&
+    !document.body.classList.contains("dark")
+  ) {
+    main.style.background = "#FFFFFF";
+  } else {
+    main.style.background = "";
+  }
 
   NavBar();
 
