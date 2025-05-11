@@ -6,6 +6,18 @@ import { Landing } from "../pages/Landing/Landing";
 
 const API_URL = "https://service.todo-api.site/api/auth";
 
+const authAxios = axios.create({
+  baseURL: "https://service.todo-api.site/api/auth"
+});
+
+authAxios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("accessToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // Registro de usuario
 export const registerUser = async (name, email, password) => {
   try {
@@ -53,9 +65,16 @@ export const loginUser = async (email, password) => {
   }
 };
 
+export const logoutUser = () => {
+  removeTokens();
+  setState("isLoggedIn", false);
+  setState("currentUser", null);
+  changePage(Landing, "landing");
+};
+
 export const getProfile = async () => {
   try {
-    const res = await axios.get(`${API_URL}/profile`);
+    const res = await authAxios.get(`${API_URL}/profile`);
     return res.data.data;
   } catch (error) {
     console.error(
@@ -69,7 +88,7 @@ export const getProfile = async () => {
 // Update user profile
 export const updateProfile = async (updates) => {
   try {
-    const res = await axios.put(`${API_URL}/profile`, updates);
+    const res = await authAxios.put(`${API_URL}/profile`, updates);
     const updatedUser = res.data.data;
     setState("currentUser", updatedUser);
     localStorage.setItem("name", updatedUser.name);
@@ -86,7 +105,7 @@ export const updateProfile = async (updates) => {
 // Delete user account
 export const deleteUser = async () => {
   try {
-    const res = await axios.delete(`${API_URL}/deleteUser`);
+    const res = await authAxios.delete(`${API_URL}/deleteUser`);
     logoutUser(); // Clear session and app state
     return res.data;
   } catch (error) {
@@ -98,10 +117,38 @@ export const deleteUser = async () => {
   }
 };
 
-// Cierre de sesión
-export const logoutUser = () => {
-  removeTokens();
-  setState("isLoggedIn", false);
-  setState("currentUser", null);
-  changePage(Landing, "landing");
+// Update credentials (email and/or password)
+export const updateCredentials = async ({
+  currentPassword,
+  email,
+  password
+}) => {
+  try {
+    const payload = { currentPassword };
+    if (email) payload.email = email;
+    if (password) payload.password = password;
+
+    if (!email && !password) {
+      return { error: "Nothing to update." };
+    }
+
+    const res = await authAxios.put(`${API_URL}/credentials`, payload);
+    const { user } = res.data.data;
+
+    // Si cambiamos email, actualizamos estado y localStorage
+    if (user.email) {
+      setState("currentUser", user);
+      localStorage.setItem("email", user.email);
+    }
+
+    return { success: true, user };
+  } catch (error) {
+    console.error(
+      "Failed to update credentials:",
+      error.response?.data || error.message
+    );
+    return {
+      error: error.response?.data?.error || "Could not update credentials"
+    };
+  }
 };

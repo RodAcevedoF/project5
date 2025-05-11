@@ -1,0 +1,15 @@
+.profile-settings-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: all 0.25s ease;
+}
+
+.profile-settings-section.inactive,
+.email-pass-div.inactive,
+#email-pass-form.inactive,
+.delete-acc-div.email-pass-div.inactive {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}

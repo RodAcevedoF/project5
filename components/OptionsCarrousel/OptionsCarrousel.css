@@ -6,23 +6,30 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 18em;
-  border: 1px solid red;
+  height: 16em;
 }
 
 .carousel .slides {
   position: relative;
-  top: -4em;
-  left: 10em;
+  top: -2em;
+  left: 8em;
 }
 
 .carousel .slides img {
   position: absolute;
   width: auto;
-  height: 400px;
   opacity: 0;
+  height: 300px;
   z-index: 20; /* por debajo del .bar.active (z-index 30) */
   transition: opacity 0.3s;
+}
+
+.carousel .slides img:nth-child(1) {
+  height: 350px;
+}
+
+.carousel .slides img:nth-child(2) {
+  height: 285px;
 }
 
 .carousel .slides img.active {
@@ -33,7 +40,7 @@
 .carousel .overlays {
   position: relative;
   width: 36em;
-  height: 18em;
+  height: 16em;
 }
 
 .carousel .overlays .bar {
@@ -46,6 +53,20 @@
   transform-origin: left;
   z-index: 10; /* base para todas las barras */
   transform: scaleX(0); /* escondidas por defecto */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
 }
 
 .carousel .overlays .bar.active {
@@ -55,15 +76,18 @@
 
 /* Colores por clase */
 .bar-blue {
-  --bar-color: rgb(87, 178, 239);
+  --bar-color: rgba(64, 153, 247, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 .bar-green {
-  --bar-color: #218c74;
+  --bar-color: rgba(98, 214, 118, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 .bar-pink {
-  --bar-color: #dd6b7b;
+  --bar-color: rgba(223, 74, 74, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 .carousel .home-nav-links {

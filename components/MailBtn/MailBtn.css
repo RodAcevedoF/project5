@@ -1,33 +1,18 @@
-.mail-btn {
+.mail-button {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   text-decoration: none;
-  font-size: 3em;
+  font-size: 1em;
   background-color: inherit;
   font-weight: bolder;
-  border: none;
   color: inherit;
   cursor: pointer;
+  border: none;
 }
 
-.mail-btn span:first-of-type {
-  background-color: var(--underline);
-  height: 0.2em;
-  width: 100%;
-  bottom: 0.3em;
-  position: relative;
-  transition: all 0.2s ease-in-out;
-  border-radius: 0.5em;
-}
-
-.mail-btn:hover span {
-  height: 0.25em;
-  filter: brightness(2);
-}
-
-.mail-form {
+.mail-pop-form {
   opacity: 0;
   display: flex;
   flex-direction: column;
@@ -38,15 +23,16 @@
   left: 0;
   transform: translateY(-50%);
   padding: 3em 1.5em;
-  border-radius: 1em;
-  border: 2px solid var(--back-general);
+  border-radius: 0.1em;
+  border: 0.6vmin solid var(--back-general);
+  box-shadow: 0.5rem 0.5rem var(--back-general);
   background-color: var(--letter-general);
   z-index: -1;
 }
 
-.mail-form.get-form {
+.mail-pop-form.get-form {
   animation: slideIn 0.5s ease forwards;
-  z-index: 15;
+  z-index: 40;
 }
 
 @keyframes slideIn {
@@ -64,65 +50,63 @@
   }
 }
 
-.field input,
+.mail-field input,
 textarea {
   width: 100%;
   padding: 0.5em;
-  font-family: "Lilita One";
   font-size: 1.2em;
-  border-radius: 0.5em;
+  border-radius: 0.1em;
 }
 
-.field label {
-  font-family: "Lilita One";
+.mail-field label {
   font-size: 1.2em;
   color: var(--back-general);
 }
 
-.field textarea {
+.mail-field textarea {
   resize: none;
 }
 
-.overlay {
+.mail-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 9;
+  z-index: 35;
   visibility: hidden;
   transition: all 0.25s ease-in-out;
 }
 
-.overlay.visible {
+.mail-overlay.visible {
   visibility: visible;
   height: 100%;
 }
 
-#send-button {
+#send-mail-button {
   border: none;
-  font-family: "Tungsten Medium";
-  font-size: 1.5em;
-  letter-spacing: 0.2em;
-  font-weight: bolder;
-  width: 7em;
-  border-radius: 0.25em;
-  padding: 0.25em;
+  font-family: "Jersey 15";
+  font-size: 2em;
+  letter-spacing: 0.25em;
+  font-weight: bold;
+  width: 8em;
+  border-radius: 0.1em;
+  padding: 0.5em 0.25em 0.25em 0.25em;
   cursor: pointer;
   color: var(--back-general);
   background-color: var(--letter-general);
-  box-shadow: 0.3em 0.3em 0 0 rgb(52, 124, 226),
-    inset 0.3em 0.3em 0 0 rgb(52, 124, 226);
+  box-shadow: 0.3em 0.3em 0 0 var(--main-green),
+    inset 0.3em 0.3em 0 0 var(--main-green);
   transition: all 0.25s ease-in-out;
 }
 
-#send-button:hover {
-  box-shadow: 0 0 0 0 blueviolet, inset 6em 3.5em 0 0 blueviolet;
+#send-mail-button:hover {
+  box-shadow: 0 0 0 0 rgb(32, 43, 201), inset 6em 3.5em 0 0 rgb(32, 43, 201);
 }
 
 @media (max-width: 430px) {
-  .mail-btn {
+  .mail-button {
     font-size: 1.8em;
   }
 

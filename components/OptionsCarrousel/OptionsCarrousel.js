@@ -6,8 +6,8 @@ const OptionsCarrousel = () => {
   div.innerHTML = `
     <div class="slides">
       <img src="/images/todomenu.png" alt="todo menu image" />
-      <img src="https://i.loli.net/2020/01/20/YWA6RhCcESgN3Ty.png" alt="book menu image" />
-      <img src="https://i.loli.net/2020/01/19/4HaLyI7NQRf3teO.png" alt="video menu image" />
+      <img src="/images/bookmenu.png" alt="book menu image" />
+      <img src="/images/videomenu.png" alt="video menu image" />
     </div>
     <div class="overlays">
       <div class="bar bar-blue"></div>

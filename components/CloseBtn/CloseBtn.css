@@ -1,0 +1,62 @@
+.outer-close {
+  width: 6em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  background-color: inherit;
+  margin: auto;
+  flex-direction: column;
+}
+
+.inner-paragraph {
+  font-size: 1em;
+  color: var(--back-general);
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-family: "Jersey 15";
+  font-size: 2em;
+  letter-spacing: 0.25em;
+}
+.close-span-btn {
+  position: relative;
+  content: "";
+  height: 0.5em;
+  width: 100%;
+  background: var(--main-green);
+  left: 0;
+  transition: all 0.3s ease-in;
+  text-align: center;
+}
+
+.outer-close span:first-of-type {
+  top: 1em;
+  transform: rotate(45deg);
+  width: 55%;
+}
+
+.outer-close span:last-of-type {
+  bottom: 1.5em;
+  transform: rotate(-45deg);
+  width: 55%;
+}
+
+.outer-close:hover .inner-paragraph {
+  opacity: 1;
+}
+
+.outer-close:hover span:first-of-type,
+.outer-close:hover span:last-of-type {
+  transform: rotate(0);
+  width: 100%;
+}
+
+.outer-close:hover span:first-of-type {
+  top: 0;
+}
+
+.outer-close:hover span:last-of-type {
+  bottom: 0;
+}

@@ -9,11 +9,11 @@ export const changePage = (PageComponent, pageName) => {
 
   if (
     getState("currentPage") === "home" &&
-    !document.body.classList.contains("dark")
+    document.body.classList.contains("dark")
   ) {
-    main.style.background = "#FFFFFF";
+    main.style.background = "black";
   } else {
-    main.style.background = "";
+    main.style.background = "inherit";
   }
 
   NavBar();

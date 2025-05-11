@@ -94,7 +94,7 @@ export const BookGrid = () => {
 
     if (!searchQuery && !searchCategory) {
       grid.innerHTML =
-        "<p>Por favor, ingrese un término de búsqueda o seleccione una categoría.</p>";
+        "<p>Please, enter a search term or a valid category.</p>";
       return;
     }
 

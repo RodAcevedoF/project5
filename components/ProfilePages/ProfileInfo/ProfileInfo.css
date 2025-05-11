@@ -11,6 +11,7 @@
 .profile-info-container.inactive {
   height: 0;
   opacity: 0;
+  overflow: hidden;
 }
 
 #profile-form {
@@ -18,6 +19,7 @@
   opacity: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 #profile-form.active {
   height: 100%;
@@ -35,4 +37,5 @@
 .profile-info-container div.inactive {
   height: 0;
   opacity: 0;
+  overflow: hidden;
 }

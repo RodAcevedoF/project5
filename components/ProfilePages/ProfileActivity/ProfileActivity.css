@@ -6,4 +6,5 @@
 .profile-activity-section.inactive {
   height: 0;
   opacity: 0;
+  overflow: hidden;
 }

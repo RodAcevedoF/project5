@@ -3,8 +3,8 @@ import { changePage } from "../../utils/changePage";
 import { Todo } from "../../pages/ToDo/Todo";
 import { Videos } from "../../pages/VideoPage/Videos";
 import { Books } from "../../pages/Books/Books";
-import HeroHome from "./HeroHome/HeroHome";
-import OptionsCarrousel from "./OptionsCarrousel/OptionsCarrousel";
+import HeroHome from "../../components/HeroHome/HeroHome";
+import OptionsCarrousel from "../../components/OptionsCarrousel/OptionsCarrousel";
 import { getState } from "../../utils/state";
 
 export const Home = () => {
