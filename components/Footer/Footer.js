@@ -1,7 +1,7 @@
-import Contact from "../Contact/Contact";
 import QualityList from "../QualityList/QualityList";
 import "./Footer.css";
 import { MailBtn } from "../MailBtn/MailBtn";
+import Contact from "../Contact/Contact";
 
 const Footer = () => {
   const foot = document.querySelector("footer");
@@ -21,6 +21,7 @@ const Footer = () => {
   const mailLi = foot.querySelector(".mail-li");
   section.insertAdjacentElement("afterbegin", QualityList());
   article.insertAdjacentElement("afterbegin", Contact());
+
   mailLi.appendChild(MailBtn("Get in touch"));
 };
 

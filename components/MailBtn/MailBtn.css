@@ -106,9 +106,9 @@ textarea {
 }
 
 @media (max-width: 430px) {
-  .mail-button {
+  /* .mail-button {
     font-size: 1.8em;
-  }
+  } */
 
   @keyframes slideIn {
     0% {

@@ -5,7 +5,6 @@ import { Videos } from "../../pages/VideoPage/Videos";
 import { Books } from "../../pages/Books/Books";
 import HeroHome from "../../components/HeroHome/HeroHome";
 import OptionsCarrousel from "../../components/OptionsCarrousel/OptionsCarrousel";
-import { getState } from "../../utils/state";
 
 export const Home = () => {
   const main = document.querySelector("main");
@@ -26,8 +25,8 @@ export const Home = () => {
   const navLinks = main.querySelectorAll(".home-nav-link");
 
   navLinks[0].addEventListener("click", () => changePage(Todo, "todo"));
-  navLinks[1].addEventListener("click", () => changePage(Videos, "videos"));
-  navLinks[2].addEventListener("click", () => changePage(Books, "books"));
+  navLinks[1].addEventListener("click", () => changePage(Books, "books"));
+  navLinks[2].addEventListener("click", () => changePage(Videos, "videos"));
 
   return main;
 };
