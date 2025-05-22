@@ -11,6 +11,11 @@ import profileActivity from "../../components/ProfilePages/ProfileActivity/Profi
 import ProfileSettings from "../../components/ProfilePages/ProfileSettings/ProfileSettings";
 import { getDashboardData } from "../../api/dashboardApi";
 import LoadComp from "../../components/LoadComp/LoadComp";
+import { deleteUser as apiDeleteUser } from "../../api/userApi";
+import { removeTokens } from "../../utils/authUtils"; // asegurate de tener esto
+import { changePage } from "../../utils/changePage";
+import { Landing } from "../Landing/Landing";
+import Swal from "sweetalert2";
 
 export const Profile = async () => {
   const container = document.querySelector("main");
@@ -24,16 +29,7 @@ export const Profile = async () => {
   profileSection.classList.add("profile-section");
   const innerFooter = InnerFooter();
 
-  let user = {
-    name: "Unknown",
-    nick: "unknown",
-    profile_image: null
-  };
-
-  const res = await getProfile();
-  console.log("Fetched profile:", res);
-  user = res.user;
-
+  const { user } = await getProfile();
   const userData = await getDashboardData();
   console.log("Dashboard data: ", userData);
 
@@ -43,14 +39,11 @@ export const Profile = async () => {
     );
     const res = await updateProfile(cleanedData);
     if (res.error) {
-      alert(`Error: ${res.error}`);
+      await Swal.fire("Error", res.error, "error");
       return;
     }
-    alert("Profile updated successfully!");
-    console.log(res);
-    // 1. Obtener el nuevo perfil actualizado desde la API
+    await Swal.fire("Success", "Profile updated successfully!", "success");
     const refreshedUser = (await getProfile()).user;
-    // 2. Reemplazar el contenido de ProfileInfo
     const newProfileInfo = ProfileInfo(refreshedUser, postData);
     const infoSect = profileSection.querySelector(".profile-info-container");
     infoSect.replaceWith(newProfileInfo);
@@ -62,10 +55,14 @@ export const Profile = async () => {
     );
     const res = await updateCredentials(cleanedData); // <-- este método debe estar definido en userApi.js
     if (res.error) {
-      alert(`Error: ${res.error}`);
+      await Swal.fire("Error", res.error, "error");
       return;
     }
-    alert("Sensitive data updated successfully!");
+    await Swal.fire(
+      "Success",
+      "Sensitive data updated successfully!",
+      "success"
+    );
 
     const refreshedUser = (await getProfile()).user;
     const newProfileSettings = ProfileSettings(
@@ -81,7 +78,32 @@ export const Profile = async () => {
   };
 
   const deleteUser = async () => {
-    console.log("deleted user");
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This action is permanent. You will lose your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it"
+    });
+
+    if (result.isConfirmed) {
+      const res = await apiDeleteUser();
+
+      if (res?.success) {
+        Swal.fire("Deleted!", "Your account has been removed.", "success");
+
+        removeTokens(); // remueve localStorage/sessionStorage/tokens
+        localStorage.clear();
+        sessionStorage.clear();
+
+        // redirigir al landing
+        changePage(Landing, "landing");
+      } else {
+        Swal.fire("Error", res?.error || "Could not delete account", "error");
+      }
+    }
   };
 
   const profileHeader = ProfileHeader(user);

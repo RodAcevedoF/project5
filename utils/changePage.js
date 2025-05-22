@@ -6,11 +6,8 @@ export const changePage = (PageComponent, pageName) => {
   if (!main) return;
 
   setState("currentPage", pageName);
-
-  if (
-    getState("currentPage") === "home" &&
-    document.body.classList.contains("dark")
-  ) {
+  console.log(getState("currentPage"));
+  if (pageName === "home" && document.body.classList.contains("dark")) {
     main.style.background = "black";
   } else {
     main.style.background = "inherit";

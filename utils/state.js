@@ -9,7 +9,8 @@ const appState = {
   categories: [],
   bookCategories: [],
   videoCards: {},
-  videoCategories: []
+  videoCategories: [],
+  justRegistered: ""
 };
 
 // Función para actualizar el estado global
@@ -20,11 +21,7 @@ export const setState = (key, value) => {
     );
     return;
   }
-
-  // Clonar el estado actual y actualizar la propiedad para evitar mutaciones directas.
   appState[key] = value;
-
-  // Evento personalizado para notificar cambios en el estado (opcional)
   document.dispatchEvent(
     new CustomEvent("stateUpdated", { detail: { key, value } })
   );
@@ -38,8 +35,6 @@ export const getState = (key) => {
     );
     return null;
   }
-
-  // Retornar una copia inmutable para evitar modificaciones accidentales.
   return JSON.parse(JSON.stringify(appState[key]));
 };
 

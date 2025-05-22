@@ -79,7 +79,8 @@ body {
   #login-form,
   .services-ul,
   #register-form,
-  .services-ul.floating {
+  .services-ul.floating,
+  #password-form {
     background: var(--back-alt);
     box-shadow: var(--alt-shadow);
   }
@@ -137,6 +138,7 @@ body {
   .without,
   #login-form,
   #register-form,
+  #password-form,
   .video-card,
   .vidcard-header,
   .book-li,

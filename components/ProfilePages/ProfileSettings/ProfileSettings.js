@@ -1,4 +1,3 @@
-// ProfileSettings.js
 import "./ProfileSettings.css";
 
 const ProfileSettings = (userData, fn1, fn2) => {
@@ -63,6 +62,8 @@ const ProfileSettings = (userData, fn1, fn2) => {
       credentialsForm.reset();
     }
   });
+
+  deleteBtn.addEventListener("click", fn2);
 
   credentialsForm.addEventListener("submit", async (e) => {
     e.preventDefault();

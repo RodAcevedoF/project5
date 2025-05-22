@@ -1,100 +1,96 @@
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
-// Coloca en localStorage los tokens
+// Guarda los tokens en localStorage y configura el header por defecto
 export const setTokens = (accessToken, refreshToken) => {
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
   axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 };
 
-// Elimina los tokens de localStorage
+// Elimina los tokens del almacenamiento local
 export const removeTokens = () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
 };
 
-// Extrae los tokens desde localStorage
+// Recupera los tokens del almacenamiento local
 export const getTokens = () => ({
   accessToken: localStorage.getItem("accessToken"),
   refreshToken: localStorage.getItem("refreshToken")
 });
 
-// Verifica si el usuario está autenticado.
-// Si el accessToken ha expirado, se intenta refrescarlo.
+// Verifica si el usuario está autenticado o intenta refrescar el token si expiró
 export const isAuthenticated = async () => {
   const { accessToken, refreshToken } = getTokens();
   if (!accessToken || !refreshToken) return false;
 
   try {
     const decodedToken = jwtDecode(accessToken);
+    const isExpired = decodedToken.exp * 1000 <= Date.now();
 
-    // Si el token aún no ha expirado, retornamos true.
-    if (decodedToken.exp * 1000 > Date.now()) {
-      return true;
-    }
+    if (!isExpired) return true;
 
-    // Si expiró, se intenta refrescar el accessToken usando el refreshToken.
+    // Token expirado, intentamos refrescar
     const refreshed = await refreshAccessToken(refreshToken);
     return refreshed;
   } catch (error) {
+    console.warn("❌ Token inválido o corrupto. Cerrando sesión.");
     removeTokens();
     return false;
   }
 };
 
-// Función que realiza la llamada al backend para refrescar el accessToken.
+// Realiza la llamada al backend para obtener un nuevo accessToken usando el refreshToken
 export const refreshAccessToken = async (refreshToken) => {
   try {
     const res = await axios.post(
       "https://service.todo-api.site/api/auth/refresh",
-      {
-        refreshToken
-      }
+      { refreshToken }
     );
 
-    const tokenData = res.data;
+    const tokenData = res.data.data; // 🧠 FIX: usamos la propiedad "data" anidada
 
     if (tokenData?.accessToken) {
       const { accessToken, refreshToken: newRefreshToken } = tokenData;
+      console.log("🔁 Token refreshed:", accessToken);
       setTokens(accessToken, newRefreshToken || refreshToken);
       return true;
     } else {
-      console.warn("No se recibió un nuevo accessToken. Datos:", res.data);
+      console.warn("⚠️ No se recibió un nuevo accessToken.");
       return false;
     }
   } catch (error) {
-    console.error("Error al refrescar el token:", error);
+    console.error("❌ Error al refrescar el token:", error);
+    removeTokens();
     return false;
   }
 };
 
 let refreshTimeout = null;
 
+// Programa el refresco automático antes de que expire el accessToken
 export const scheduleTokenRefresh = () => {
   const { accessToken, refreshToken } = getTokens();
   if (!accessToken || !refreshToken) return;
 
   try {
     const decodedToken = jwtDecode(accessToken);
-    const expiresAt = decodedToken.exp * 1000; // milisegundos
+    const expiresAt = decodedToken.exp * 1000;
     const now = Date.now();
-
-    const timeUntilRefresh = expiresAt - now - 60_000; // 1 minuto antes de que expire
+    const timeUntilRefresh = expiresAt - now - 60_000; // refresco 1 minuto antes
 
     if (timeUntilRefresh <= 0) {
-      refreshAccessToken(refreshToken); // si ya está vencido o por vencer, lo refresca ya
+      refreshAccessToken(refreshToken);
     } else {
-      clearTimeout(refreshTimeout); // evita duplicados
+      clearTimeout(refreshTimeout);
       refreshTimeout = setTimeout(() => {
         refreshAccessToken(refreshToken).then((ok) => {
-          if (ok) {
-            scheduleTokenRefresh(); // programa el siguiente refresh
-          }
+          if (ok) scheduleTokenRefresh(); // cadena de refrescos
         });
       }, timeUntilRefresh);
     }
   } catch (error) {
-    console.error("Error al programar el refresco automático:", error);
+    console.error("❌ Error al programar el refresco automático:", error);
   }
 };

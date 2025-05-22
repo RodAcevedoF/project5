@@ -25,21 +25,24 @@ export const NavBar = () => {
   navLinks.appendChild(menuButton);
 
   const currentPage = getState("currentPage");
+  const alwaysFloating =
+    currentPage !== "landing" && currentPage !== "signlogin";
 
-  if (
-    (currentPage === "landing" && window.innerWidth > 810) ||
-    (currentPage === "signlogin" && window.innerWidth > 810)
-  ) {
-    nav.appendChild(menuContainer);
-  } else {
+  if (alwaysFloating || window.innerWidth <= 810) {
     menuContainer.classList.add("floating");
-    nav.appendChild(menuContainer);
     menuButton.style.display = "flex";
+  } else {
+    menuButton.style.display = "none";
   }
+
+  nav.appendChild(menuContainer);
 
   if (getState("isLoggedIn")) {
     navLinks.insertAdjacentElement("afterbegin", LogOutBtn());
     navLinks.appendChild(ProfileBtn());
+    menuButton.style.display = "flex";
+  } else if (currentPage === "verify-pending") {
+    navLinks.insertAdjacentElement("afterbegin", LogOutBtn());
     menuButton.style.display = "flex";
   } else {
     navLinks.appendChild(SignBtn("sign-up-btn", "Sign Up", "register"));
@@ -57,15 +60,15 @@ window.addEventListener("resize", () => {
   const header = document.querySelector("header");
   const nav = header.querySelector("nav");
   const hasFloatingMenu = nav?.querySelector(".floating") !== null;
-  const shouldHaveFloating =
-    currentPage !== "landing" && currentPage !== "signlogin" && width <= 810;
 
-  const shouldHaveInlineMenu =
-    (currentPage === "landing" || currentPage === "signlogin") && width > 810;
+  const alwaysFloating =
+    currentPage !== "landing" && currentPage !== "signlogin";
+  const shouldHaveFloating = alwaysFloating || width <= 810;
+  const shouldHaveInline = !alwaysFloating && width > 810;
 
   const needsRedraw =
     (shouldHaveFloating && !hasFloatingMenu) ||
-    (shouldHaveInlineMenu && hasFloatingMenu);
+    (shouldHaveInline && hasFloatingMenu);
 
   if (needsRedraw) {
     NavBar();

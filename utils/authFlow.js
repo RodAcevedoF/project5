@@ -1,68 +1,33 @@
-// utils/authFlow.js
-import axios from "axios";
-import {
-  isAuthenticated,
-  scheduleTokenRefresh,
-  getTokens,
-  setTokens
-} from "./authUtils.js";
-import { logoutUser } from "../api/userApi.js";
+import { getTokens, scheduleTokenRefresh, setTokens } from "./authUtils.js";
+import { logoutUser } from "../api/authApi.js";
 import { setState } from "./state.js";
-import { changePage } from "./changePage.js";
-import { Home } from "../pages/Home/Home.js";
-
-// Interceptor que refresca el token antes de cada request
-const setupAxiosInterceptor = () => {
-  axios.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const originalRequest = error.config;
-
-      if (
-        error.response?.status === 401 &&
-        !originalRequest._retry &&
-        !originalRequest.url.includes("/auth/refresh")
-      ) {
-        originalRequest._retry = true;
-
-        const { refreshToken } = getTokens();
-
-        try {
-          const res = await axios.post(
-            "https://service.todo-api.site/api/auth/refresh",
-            { refreshToken }
-          );
-
-          const { accessToken, refreshToken: newRefreshToken } = res.data.data;
-          setTokens(accessToken, newRefreshToken);
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-
-          return axios(originalRequest);
-        } catch (refreshError) {
-          logoutUser();
-          return Promise.reject(refreshError);
-        }
-      }
-      logoutUser();
-      return Promise.reject(error);
-    }
-  );
-};
+import { getProfile } from "../api/userApi.js";
 
 export const initAuthFlow = async () => {
-  const authenticated = await isAuthenticated();
-  setState("isLoggedIn", authenticated);
-
   const { accessToken } = getTokens();
-  if (accessToken) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
+  if (!accessToken) {
+    setState("isLoggedIn", false);
+    return { authenticated: false, needsVerification: false };
   }
 
-  if (authenticated) {
-    changePage(Home, "home");
+  try {
+    const { user } = await getProfile();
+    console.log(user);
+
+    setState("currentUser", user);
+
+    if (!user.is_verified) {
+      setState("isLoggedIn", false);
+      return { authenticated: false, needsVerification: true };
+    }
+
+    setState("isLoggedIn", true);
     scheduleTokenRefresh();
+    return { authenticated: true, needsVerification: false };
+  } catch (error) {
+    console.error("❌ Error fetching profile:", error);
+    logoutUser();
+    return { authenticated: false, needsVerification: false };
   }
-
-  setupAxiosInterceptor();
-  return authenticated;
 };
