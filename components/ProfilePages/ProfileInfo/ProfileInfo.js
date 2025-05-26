@@ -1,31 +1,18 @@
+import Swal from "sweetalert2";
 import "./ProfileInfo.css";
 
-const ProfileInfo = (user, fn) => {
+const ProfileInfo = (user, postAll) => {
   const sect = document.createElement("section");
   sect.classList.add("profile-info-container");
-
-  /*user: 
-  name: "haster"
-  nickname: null
-  birth_date: null
-  description: null
-  email: "haster@rat.com"
-  github_url: null
-  hobbies: null
-  id: 1
-  location: null
-  phone: null
-  profile_image: nullwebsite: null
-*/
-
   sect.innerHTML = `
          <div>
-            <h2>Profile</h2>
             <p>Name: ${user.name}</p>
             <p>Nickname: ${user.nickname || "add a nick"}</p>
             <p>Birthdate: ${user.birth_date || "add your b-day"}</p>
             <p>Location: ${user.location || "add your location"}</p>
             <p>Hobbies: ${user.hobbies || "add your hobbies"}</p>
+            <p>GitHub: ${user.github_url || "add your GitHub profile"}</p>
+            <p>Website: ${user.website || "add your website"}</p>
             <p>About me: ${user.description || "tell us"}</p>
             <button type="button" class="edit-button">Edit</button>
           </div>
@@ -48,6 +35,16 @@ const ProfileInfo = (user, fn) => {
                 <input type="text" id="hobbies-input" value="${
                   user.hobbies || ""
                 }" >
+                <label for="github-input">GitHub:</label>
+                <input type="text" id="github-input" value="${
+                  user.github_url || ""
+                }" >
+                <label for="website-input">Website:</label>
+                <input type="text" id="website-input" value="${
+                  user.website || ""
+                }" >
+                <label for="profile-image-input">Profile Image:</label>
+                <input type="file" id="profile-image-input" accept="image/*" />
                 <label for="description-input">About me:</label>
                 <textarea id="description-input" >${
                   user.description || ""
@@ -59,9 +56,10 @@ const ProfileInfo = (user, fn) => {
   const editButton = sect.querySelector(".edit-button");
   const submitButton = sect.querySelector(".submit-profile");
   const cancelButton = sect.querySelector(".cancel-edit-btn");
-
+  const profileImageInput = sect.querySelector("#profile-image-input");
   const form = sect.querySelector("#profile-form");
   const infoDiv = sect.querySelector(".profile-info-container div");
+  let selectedFile = null;
 
   editButton.addEventListener("click", () => {
     infoDiv.classList.add("inactive");
@@ -85,8 +83,13 @@ const ProfileInfo = (user, fn) => {
       description: sect.querySelector("#description-input").value
     };
 
-    await fn(updatedUser);
+    await postAll(updatedUser, selectedFile);
+    selectedFile = null;
     cancelButton.click();
+  });
+
+  profileImageInput.addEventListener("change", (e) => {
+    selectedFile = e.target.files[0] || null;
   });
 
   return sect;

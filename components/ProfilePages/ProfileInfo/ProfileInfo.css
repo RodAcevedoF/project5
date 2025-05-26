@@ -6,6 +6,7 @@
   padding: 2em;
   background-color: var(--color-light);
   transition: all 0.25s ease;
+  /* border: 1px solid red; */
 }
 
 .profile-info-container.inactive {

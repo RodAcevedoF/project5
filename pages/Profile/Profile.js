@@ -4,7 +4,8 @@ import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import {
   getProfile,
   updateProfile,
-  updateCredentials
+  updateCredentials,
+  uploadProfileImage
 } from "../../api/userApi";
 import ProfileInfo from "../../components/ProfilePages/ProfileInfo/ProfileInfo";
 import profileActivity from "../../components/ProfilePages/ProfileActivity/ProfileActivity";
@@ -20,7 +21,7 @@ import Swal from "sweetalert2";
 export const Profile = async () => {
   const container = document.querySelector("main");
   container.innerHTML = "";
-  container.style.padding = "10em 0";
+  container.style.padding = "12em 0";
 
   const loading = LoadComp();
   container.innerHTML = loading;
@@ -30,6 +31,7 @@ export const Profile = async () => {
   const innerFooter = InnerFooter();
 
   const { user } = await getProfile();
+  console.log(user);
   const userData = await getDashboardData();
   console.log("Dashboard data: ", userData);
 
@@ -40,13 +42,13 @@ export const Profile = async () => {
     const res = await updateProfile(cleanedData);
     if (res.error) {
       await Swal.fire("Error", res.error, "error");
-      return;
+      return false;
     }
-    await Swal.fire("Success", "Profile updated successfully!", "success");
     const refreshedUser = (await getProfile()).user;
-    const newProfileInfo = ProfileInfo(refreshedUser, postData);
+    const newProfileInfo = ProfileInfo(refreshedUser, postAllProfileData);
     const infoSect = profileSection.querySelector(".profile-info-container");
     infoSect.replaceWith(newProfileInfo);
+    return true;
   };
 
   const postPrivData = async (privData) => {
@@ -106,13 +108,48 @@ export const Profile = async () => {
     }
   };
 
+  const postImage = async (file) => {
+    const res = await uploadProfileImage(file);
+    if (res.error) {
+      await Swal.fire("Error", res.error, "error");
+      return false;
+    }
+
+    const refreshedUser = (await getProfile()).user;
+
+    const newProfileInfo = ProfileInfo(refreshedUser, postAllProfileData);
+    const infoSect = profileSection.querySelector(".profile-info-container");
+    infoSect.replaceWith(newProfileInfo);
+
+    const newProfileHeader = ProfileHeader(refreshedUser);
+    const oldHeader = profileSection.querySelector(".profile-header");
+    oldHeader.replaceWith(newProfileHeader);
+    return true;
+  };
+
+  const postAllProfileData = async (data, file) => {
+    let didUpdate = false;
+    const hasDataChanges = Object.values(data).some((val) => val !== "");
+    if (hasDataChanges) {
+      const okData = await postData(data);
+      if (okData) didUpdate = true;
+    }
+    if (file) {
+      const okImage = await postImage(file);
+      if (okImage) didUpdate = true;
+    }
+    if (didUpdate) {
+      await Swal.fire("Success", "Profile updated successfully!", "success");
+    }
+  };
+
   const profileHeader = ProfileHeader(user);
   profileSection.appendChild(profileHeader);
 
   const pagesDiv = document.createElement("div");
   pagesDiv.classList.add("profile-pages-container");
 
-  const profileInfo = ProfileInfo(user, postData);
+  const profileInfo = ProfileInfo(user, postData, postImage);
   pagesDiv.appendChild(profileInfo);
   profileSection.appendChild(pagesDiv);
 

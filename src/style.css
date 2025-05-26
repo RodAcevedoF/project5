@@ -260,6 +260,9 @@ body {
   .styled-wrapper .button:before {
     border-color: var(--back-general);
   }
+  .profile-nav {
+    border-color: var(--back-general);
+  }
 }
 @font-face {
   font-family: "Monda";

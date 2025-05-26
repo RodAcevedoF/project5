@@ -8,6 +8,10 @@ export const ProfileHeader = (user) => {
     return span.outerHTML;
   };
 
+  const displayNick = user.nickname.startsWith("@")
+    ? user.nickname
+    : `@${user.nickname}`;
+
   const header = document.createElement("header");
   header.classList.add("profile-header");
   header.innerHTML = `
@@ -24,7 +28,7 @@ export const ProfileHeader = (user) => {
             }
             <h2>${user.name}</h2>
             </div>
-            <p>@${user.nickname}</p>
+            <p>${displayNick}</p>
             <ul class="profile-nav">
               <li id="edit-profile">Edit profile</li>
               <li id="activity-profile">Activity</li>

@@ -104,3 +104,30 @@ export const updateCredentials = async ({
     };
   }
 };
+
+export const uploadProfileImage = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append("profileImage", file); // el backend espera este campo
+
+    const res = await authAxios.post(`${USER_URL}/profile-image`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+
+    const { user } = res.data.data;
+    setState("currentUser", user);
+    localStorage.setItem("", user.profile_image); // opcional
+
+    return { success: true, user };
+  } catch (error) {
+    console.error(
+      "Error uploading profile image:",
+      error.response?.data || error.message
+    );
+    return {
+      error: error.response?.data?.error || "Could not upload profile image"
+    };
+  }
+};
