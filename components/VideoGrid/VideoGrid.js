@@ -38,7 +38,7 @@ export const VideoGrid = () => {
   menuSect.appendChild(savedVideosBar);
 
   const List = SavedVideoList();
-  const toggleButton = ToggleBtn("SAVED VIDEOS", "SEARCH VIDEOS");
+  const toggleButton = ToggleBtn("TO SAVED VIDEOS", "TO SEARCH VIDEOS");
   const loadMoreButton = LoadMoreBtn("loadMore");
 
   let showingSavedVideos = false;

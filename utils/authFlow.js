@@ -13,7 +13,6 @@ export const initAuthFlow = async () => {
 
   try {
     const { user } = await getProfile();
-    console.log(user);
 
     setState("currentUser", user);
 
@@ -26,7 +25,7 @@ export const initAuthFlow = async () => {
     scheduleTokenRefresh();
     return { authenticated: true, needsVerification: false };
   } catch (error) {
-    console.error("❌ Error fetching profile:", error);
+    console.error("Error fetching profile:", error);
     logoutUser();
     return { authenticated: false, needsVerification: false };
   }

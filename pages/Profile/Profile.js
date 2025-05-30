@@ -1,15 +1,17 @@
 import "./Profile.css";
 import InnerFooter from "../../components/InnerFooter/InnerFooter";
-import { ProfileHeader } from "../../components/ProfileHeader/ProfileHeader";
 import {
   getProfile,
   updateProfile,
   updateCredentials,
   uploadProfileImage
 } from "../../api/userApi";
-import ProfileInfo from "../../components/ProfilePages/ProfileInfo/ProfileInfo";
-import profileActivity from "../../components/ProfilePages/ProfileActivity/ProfileActivity";
-import ProfileSettings from "../../components/ProfilePages/ProfileSettings/ProfileSettings";
+import {
+  ProfileInfo,
+  ProfileActivity,
+  ProfileSettings,
+  ProfileHeader
+} from "../../components";
 import { getDashboardData } from "../../api/dashboardApi";
 import LoadComp from "../../components/LoadComp/LoadComp";
 import { deleteUser as apiDeleteUser } from "../../api/userApi";
@@ -31,9 +33,8 @@ export const Profile = async () => {
   const innerFooter = InnerFooter();
 
   const { user } = await getProfile();
-  console.log(user);
+
   const userData = await getDashboardData();
-  console.log("Dashboard data: ", userData);
 
   const postData = async (updatedData) => {
     const cleanedData = Object.fromEntries(
@@ -55,7 +56,7 @@ export const Profile = async () => {
     const cleanedData = Object.fromEntries(
       Object.entries(privData).filter(([_, value]) => value !== "")
     );
-    const res = await updateCredentials(cleanedData); // <-- este método debe estar definido en userApi.js
+    const res = await updateCredentials(cleanedData);
     if (res.error) {
       await Swal.fire("Error", res.error, "error");
       return;
@@ -149,11 +150,11 @@ export const Profile = async () => {
   const pagesDiv = document.createElement("div");
   pagesDiv.classList.add("profile-pages-container");
 
-  const profileInfo = ProfileInfo(user, postData, postImage);
+  const profileInfo = ProfileInfo(user, postAllProfileData);
   pagesDiv.appendChild(profileInfo);
   profileSection.appendChild(pagesDiv);
 
-  const profileDash = profileActivity(userData);
+  const profileDash = ProfileActivity(userData);
   pagesDiv.appendChild(profileDash);
 
   const profileSettings = ProfileSettings(user, postPrivData, deleteUser);

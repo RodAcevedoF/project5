@@ -35,13 +35,12 @@ export const isAuthenticated = async () => {
     const refreshed = await refreshAccessToken(refreshToken);
     return refreshed;
   } catch (error) {
-    console.warn("❌ Token inválido o corrupto. Cerrando sesión.");
+    console.warn("Invalid token, closing session.");
     removeTokens();
     return false;
   }
 };
 
-// Realiza la llamada al backend para obtener un nuevo accessToken usando el refreshToken
 export const refreshAccessToken = async (refreshToken) => {
   try {
     const res = await axios.post(
@@ -49,19 +48,22 @@ export const refreshAccessToken = async (refreshToken) => {
       { refreshToken }
     );
 
-    const tokenData = res.data.data; // 🧠 FIX: usamos la propiedad "data" anidada
+    const tokenData = res.data.data;
 
-    if (tokenData?.accessToken) {
-      const { accessToken, refreshToken: newRefreshToken } = tokenData;
-      console.log("🔁 Token refreshed:", accessToken);
-      setTokens(accessToken, newRefreshToken || refreshToken);
-      return true;
-    } else {
-      console.warn("⚠️ No se recibió un nuevo accessToken.");
+    if (!tokenData?.accessToken || !tokenData?.refreshToken) {
+      console.warn("⚠️ Access o refresh token faltante en respuesta.");
       return false;
     }
+
+    const { accessToken, refreshToken: newRefreshToken } = tokenData;
+    console.log("🔁 Tokens actualizados:");
+    console.log("  Access:", accessToken);
+    console.log("  Refresh:", newRefreshToken);
+
+    setTokens(accessToken, newRefreshToken);
+    return true;
   } catch (error) {
-    console.error("❌ Error al refrescar el token:", error);
+    console.error("Error setting tokens", error);
     removeTokens();
     return false;
   }
@@ -86,11 +88,15 @@ export const scheduleTokenRefresh = () => {
       clearTimeout(refreshTimeout);
       refreshTimeout = setTimeout(() => {
         refreshAccessToken(refreshToken).then((ok) => {
-          if (ok) scheduleTokenRefresh(); // cadena de refrescos
+          if (ok) {
+            scheduleTokenRefresh(); // cadena de refrescos
+          } else {
+            console.warn("Failed refresh, deleted tokens.");
+          }
         });
       }, timeUntilRefresh);
     }
   } catch (error) {
-    console.error("❌ Error al programar el refresco automático:", error);
+    console.error("Error on refresh schedule:", error);
   }
 };

@@ -13,6 +13,7 @@
   overflow: hidden;
   padding: 1em 3em;
   width: 17em;
+  text-wrap: nowrap;
 }
 
 .toggle-btn:hover {

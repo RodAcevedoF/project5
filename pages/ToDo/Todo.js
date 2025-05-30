@@ -3,9 +3,9 @@ import { MainAside } from "../../components/MainAside/MainAside";
 import { TodoCard } from "../../components/TodoCard/TodoCard";
 import QuoteWidget from "../../components/QuoteWidget/QuoteWidget";
 import WeatherWidget from "../../components/WeatherWidget/WeatherWidget";
-import AddTaskBtn from "../../components/AddTaskBtn/AddTaskBtn";
+import { AddTaskBtn } from "../../components";
 import InnerFooter from "../../components/InnerFooter/InnerFooter";
-import AsideBtn from "../../components/AsideBtn/AsideBtn";
+import { AsideBtn } from "../../components";
 
 export const Todo = () => {
   const container = document.querySelector("main");
@@ -23,7 +23,6 @@ export const Todo = () => {
   header.appendChild(quote);
   const weather = WeatherWidget();
   header.appendChild(weather);
-  
 
   const mainArticle = document.createElement("article");
   mainArticle.classList.add("todo-tasks");
@@ -34,7 +33,6 @@ export const Todo = () => {
 
   const latestContainer = document.createElement("div");
   latestContainer.classList.add("latest-container");
-
 
   const editorContainer = document.createElement("div");
   editorContainer.classList.add("editor-container");

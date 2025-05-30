@@ -1,12 +1,6 @@
 import "./LoadComp.css";
-const LoadComp = () => `<div class="loader">
-                          <span>L</span>
-                          <span>O</span>
-                          <span>A</span>
-                          <span>D</span>
-                          <span>I</span>
-                          <span>N</span>
-                          <span>G</span>
-                        </div>`;
+const LoadComp = () => `<div class="glitch-wrapper">
+   <div class="glitch" data-glitch="Loading">Loading</div>
+</div>`;
 
 export default LoadComp;

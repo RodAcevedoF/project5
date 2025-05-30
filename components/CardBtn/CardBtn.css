@@ -38,7 +38,7 @@
 }
 
 .card-button:hover {
-  animation: jello-vertical 0.75s both;
+  /*   animation: jello-vertical 0.5s both; */
   background-color: #296fbb;
   border-color: #296fbb;
   color: #fff;

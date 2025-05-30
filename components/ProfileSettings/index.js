@@ -1,17 +1,36 @@
 import "./ProfileSettings.css";
+import CardBtn from "../CardBtn/CardBtn";
 
 const ProfileSettings = (userData, fn1, fn2) => {
   const sect = document.createElement("section");
   sect.className = "profile-settings-section";
   sect.classList.add("inactive");
 
+  const editSensitiveBtn = CardBtn("Edit", "edit-sensitive", "/icon/add.png");
+  const submitSensitiveBtn = CardBtn(
+    "Submit",
+    "submit-sensitive",
+    "/icon/add.png",
+    "submit"
+  );
+  const cancelSensitiveBtn = CardBtn(
+    "Cancel",
+    "cancel-sensitive",
+    "/icon/add.png"
+  );
+  const deleteSensitiveBtn = CardBtn(
+    "Delete",
+    "delete-sensitive",
+    "/icon/add.png"
+  );
+
   sect.innerHTML = `
+  <div class="profile-settings-body">
     <h2>Settings</h2>
     <div>
       <div class="email-pass-div">
         <p><strong>Email:</strong> ${userData.email}</p>
         <p><strong>Password:</strong> ********</p>
-        <button type="button" class="btn-edit-sensitive">Edit</button>
       </div>
       <form id="email-pass-form" class="inactive">
         <label>
@@ -30,21 +49,24 @@ const ProfileSettings = (userData, fn1, fn2) => {
           Repeat new password:
           <input type="password" id="password-change-repeat" placeholder="At least 8 characters"/>
         </label>
-        <button type="submit" class="btn-form-sensitive">Edit</button>
-        <button type="button" class="btn-form-cancel">Cancel
-        </button>
+        <div class="sensitive-form-buttons"></div>
       </form>
       <div class="delete-acc-div">
         <p>Delete account</p>
-        <button type="button" class="delete-user-btn">Delete</button>
       </div>
     </div>
+  </div>
   `;
 
-  const editBtn = sect.querySelector(".btn-edit-sensitive");
-  const submitBtn = sect.querySelector(".btn-form-sensitive");
-  const cancelBtn = sect.querySelector(".btn-form-cancel");
-  const deleteBtn = sect.querySelector(".delete-user-btn");
+  sect.querySelector(".email-pass-div").appendChild(editSensitiveBtn);
+  sect.querySelector(".sensitive-form-buttons").appendChild(submitSensitiveBtn);
+  sect.querySelector(".sensitive-form-buttons").appendChild(cancelSensitiveBtn);
+  sect.querySelector(".delete-acc-div").appendChild(deleteSensitiveBtn);
+
+  const editBtn = sect.querySelector(".edit-sensitive-button");
+  const submitBtn = sect.querySelector(".submit-sensitive-button");
+  const cancelBtn = sect.querySelector(".cancel-sensitive-button");
+  const deleteBtn = sect.querySelector(".delete-sensitive-button");
   const credentialsDiv = sect.querySelector(".email-pass-div");
   const credentialsForm = sect.querySelector("#email-pass-form");
 
@@ -77,7 +99,6 @@ const ProfileSettings = (userData, fn1, fn2) => {
       .querySelector("#password-change-repeat")
       .value.trim();
 
-    // Validación de campos
     if (!currentPassword) {
       alert("Current password is required.");
       return;

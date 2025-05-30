@@ -6,17 +6,66 @@
   flex-direction: column;
 }
 
-.profile-header div {
+.profile-header div:nth-child(1) {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 1em;
+  justify-content: flex-start;
   gap: 1em;
+  width: 100%;
 }
 
-.default-avatar {
-  width: 8em;
-  height: 8em;
+.title-profile {
+  justify-self: flex-start;
+  font-family: "Jersey 15";
+  font-size: 4em;
+  color: var(--main-green);
+  -webkit-text-stroke: 2px var(--letter-general);
+  margin-bottom: 1em;
+}
+
+.profile-header-body {
+  position: relative;
+  display: flex;
+  width: 10em;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  padding-bottom: 4em;
+}
+
+.profile-header-body p,
+h2 {
+  font-family: "Jersey 15";
+  font-size: 2.5em;
+  font-weight: 500;
+}
+.profile-header-body:hover {
+  transform: rotateY(180deg);
+}
+
+.profile-header-nick,
+.hover-profile-header {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hover-profile-header {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-start;
+  align-items: center;
+  transition: transform 0.25s ease;
+  transform: rotateY(180deg);
+}
+
+.default-header-avatar {
+  width: 3em;
+  height: 3em;
   border-radius: 50%;
   background-color: #ccc;
   display: flex;
@@ -26,26 +75,39 @@
   padding: 0;
 }
 
-.avatar {
-  width: 8em;
-  height: 8em;
+.header-avatar {
+  width: 3em;
+  height: 3em;
   border-radius: 50%;
   object-fit: cover;
 }
-.title-profile {
-  justify-self: flex-start;
-  margin-bottom: 2em;
-  font-family: "Jersey 15";
-  font-size: 2em;
+
+.divider {
+  background: var(--main-green);
+  height: 5px;
+  width: 100%;
 }
 
 .profile-nav {
   display: flex;
   gap: 1em;
   width: 100%;
-  border-top: 3px solid var(--letter-general);
 }
 
 .profile-nav li {
   cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: all 0.25s ease;
+  margin-top: 0.2em;
+}
+
+.profile-nav li:hover {
+  color: var(--main-green);
+}
+
+@media screen and (width < 421px) {
+  .profile-header {
+    padding: 0 1em;
+  }
 }

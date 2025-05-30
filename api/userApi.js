@@ -54,7 +54,14 @@ export const updateProfile = async (updates) => {
       "Failed to update profile:",
       error.response?.data || error.message
     );
-    return { error: error.response?.data?.error || "Could not update profile" };
+
+    const data = error.response?.data;
+
+    return {
+      error: data?.error,
+      errors: data?.errors,
+      message: data?.message || "Could not update profile"
+    };
   }
 };
 

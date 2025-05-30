@@ -1,7 +1,6 @@
 import "./TodoCard.css";
 import { createTodo, updateTodo, deleteTodo } from "../../api/ToDoApi";
 import { loadTodos, loadUpcomingDeadlines } from "../MainAside/MainAside";
-import MainBtn from "../MainBtn/MainBtn";
 import CardBtn from "../CardBtn/CardBtn";
 
 export const TodoCard = () => {
@@ -24,11 +23,10 @@ export const TodoCard = () => {
       <div class="form-btns"></div>
     </form>
   `;
-  // Incluir cuando se agregue subida de archivos fuera de profile
-  /* <input type="file" id="todo-file" /> */
+
   const todoForm = cardContainer.querySelector("#todo-form");
   const formBtns = cardContainer.querySelector(".form-btns");
-  formBtns.appendChild(CardBtn("Save", "save-todo", "/icon/add.png"));
+  formBtns.appendChild(CardBtn("Save", "save-todo", "/icon/add.png", "submit"));
   formBtns.appendChild(CardBtn("Delete", "delete-todo", "/icon/focus.png"));
 
   const loadTodoIntoEditor = (todo) => {
@@ -69,14 +67,10 @@ export const TodoCard = () => {
     const description = form.querySelector("#todo-description").value;
     const urgency = form.querySelector("#todo-urgency").value;
     const deadlineDate = form.querySelector("#todo-deadline").value;
-    /* const fileInput = form.querySelector("#todo-file");
-    const file = fileInput.files[0]; */
     const deadline = deadlineDate ? `${deadlineDate}T10:00:00` : "";
     const todoData = { title, description, priority: urgency, deadline };
-    /* if (file) {
-      todoData.file = file;
-    } */
 
+    console.log(todoData);
     let result;
     if (id) {
       result = await updateTodo(id, todoData);

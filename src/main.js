@@ -10,7 +10,6 @@ import { SignLogin } from "../pages/SignLogin/SignLogin.js";
 
 (async function init() {
   checkSessionTheme();
-  NavBar();
 
   const params = new URLSearchParams(window.location.search);
   const status = params.get("status");
@@ -19,18 +18,20 @@ import { SignLogin } from "../pages/SignLogin/SignLogin.js";
 
   if (["success", "invalid"].includes(status)) {
     changePage(VerifyPending, "verify-pending");
+    NavBar();
     Footer();
     return;
   }
 
   if (token && email) {
     changePage(SignLogin, "signlogin");
+    NavBar();
     Footer();
     return;
   }
 
   const { authenticated, needsVerification } = await initAuthFlow();
-
+  NavBar();
   if (authenticated) {
     changePage(Home, "home");
   } else if (needsVerification) {

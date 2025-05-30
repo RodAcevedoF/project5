@@ -6,17 +6,10 @@ export const createTodo = async (todoData) => {
   try {
     const token = localStorage.getItem("accessToken");
 
-    const formData = new FormData();
-    for (let key in todoData) {
-      if (todoData.hasOwnProperty(key)) {
-        formData.append(key, todoData[key]);
-      }
-    }
-    console.log(formData);
-    const response = await axios.post(API_URL, formData, {
+    const response = await axios.post(API_URL, todoData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "application/json" // opcional, axios lo pone solo
       }
     });
 
@@ -55,17 +48,10 @@ export const updateTodo = async (id, updateData) => {
   try {
     const token = localStorage.getItem("accessToken");
 
-    const formData = new FormData();
-    for (let key in updateData) {
-      if (updateData.hasOwnProperty(key)) {
-        formData.append(key, updateData[key]);
-      }
-    }
-
-    const response = await axios.put(`${API_URL}/${id}`, formData, {
+    const response = await axios.put(`${API_URL}/${id}`, updateData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "application/json" // opcional con axios
       }
     });
 

@@ -10,8 +10,10 @@
   --back-alt: #171717;
   --nav-light: rgba(245, 245, 245, 0.942);
   --main-green: #3fb2ff;
-  --lighter-main: #84dcff;
+  --lighter-main: #3fb2ff65;
+  --darker-main: rgb(1, 31, 40);
   --box-background: linear-gradient(to right, #3fb2ff, #4b4b4b99);
+  --box-danger-background: linear-gradient(to right, #fa6767, #4b4b4b99);
   --footer-background: linear-gradient(to right, #3fb2ff, #666666);
   --aside-background: linear-gradient(to right, #3fb2ff98, #2e2e2e);
   --button-alt-background: linear-gradient(to right, #3fb2ff, #000000);
@@ -87,7 +89,8 @@ body {
   .go-back-btn span,
   .weather-widget,
   .quote-div,
-  .load-more-button {
+  .load-more-button,
+  .glitch {
     color: var(--back-general);
   }
   .todo-main,
@@ -172,7 +175,8 @@ body {
     border: 0.2vmin solid var(--back-general);
     box-shadow: 0.2rem 0.2rem var(--back-general);
   }
-  .landing-box {
+  .landing-box,
+  .aside-profile {
     border: 0.6vmin solid var(--back-general);
     box-shadow: 0.5rem 0.5rem var(--back-general);
   }
@@ -239,7 +243,8 @@ body {
   }
 
   .del-btn:hover,
-  #delete-btn:hover {
+  #delete-btn:hover,
+  .delete-sensitive-button:hover {
     background-color: #ff0000;
     border-color: #ff0000;
     color: #fff;
@@ -254,14 +259,43 @@ body {
   .todo-display-card h3 {
     -webkit-text-stroke-color: var(--back-general);
   }
-  .switch-container {
+  .switch-container,
+  .profile-plain-info li {
     border: 3px solid var(--back-general);
+  }
+  .profile-plain-info {
+    border: 0.5em solid var(--lighter-main);
   }
   .styled-wrapper .button:before {
     border-color: var(--back-general);
   }
   .profile-nav {
     border-color: var(--back-general);
+  }
+  .profile-plain-info li:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0 var(--lighter-main);
+  }
+  .profile-plain-info li {
+    background: linear-gradient(
+      to right,
+      rgba(245, 245, 245, 0.542),
+      transparent 20%
+    );
+  }
+  .profile-plain-info li:last-of-type {
+    border: none;
+    box-shadow: none;
+    background: none;
+  }
+  .edit-form-container.active,
+  .profile-settings-body {
+    background: #f8f9fd;
+    background: linear-gradient(0deg, #848484 0%, var(--darker-main) 100%);
+    border: 10px solid rgb(162, 161, 161);
+  }
+  .title-profile {
+    -webkit-text-stroke: 2px var(--back-general);
   }
 }
 @font-face {

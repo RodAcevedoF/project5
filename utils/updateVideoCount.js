@@ -43,7 +43,7 @@ export const getChannels = () => {
   return Array.from(channels);
 };
 
-export const updateChannelSelect = (getChannels) => {
+export const updateChannelSelect = () => {
   const select = document.querySelector("#channel-select");
   if (!select) return;
 
