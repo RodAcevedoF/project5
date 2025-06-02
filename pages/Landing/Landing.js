@@ -3,6 +3,7 @@ import { SignBtn } from "../../components/SignBtn/SignBtn.js";
 import Brands from "../../components/Brands/Brands.js";
 export const Landing = () => {
   const main = document.querySelector("main");
+  //  const landingHero = `<div class="landing-hero"></div>`;
   main.innerHTML = `
     <section class="landing">
         <article class="landing-container">

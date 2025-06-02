@@ -1,12 +1,3 @@
-import emailjs from "@emailjs/browser";
-
-// Configuración de EmailJS
-const serviceID = "service_hzpaiyd";
-const templateID = "template_1irdetr";
-const publicKey = "64s8LY0LFxfWYJTrH";
-
-emailjs.init(publicKey);
-
 /**
  * Envía un mail al usuario con EmailJS
  * @param {string} email - Email del usuario
@@ -15,6 +6,15 @@ emailjs.init(publicKey);
  * @param {"verify" | "reset"} mode - Tipo de mensaje a enviar
  * @returns {Promise<void>}
  */
+
+import emailjs from "@emailjs/browser";
+
+const serviceID = "service_hzpaiyd";
+const templateID = "template_1irdetr";
+const publicKey = "64s8LY0LFxfWYJTrH";
+
+emailjs.init(publicKey);
+
 export const sendUserEmail = async ({
   email,
   name,
@@ -22,7 +22,7 @@ export const sendUserEmail = async ({
   mode = "verify"
 }) => {
   try {
-    const frontendBase = window.location.origin; // ← Esto va a ser http://localhost:5173 o el dominio de Vercel
+    const frontendBase = window.location.origin;
     const backendBase = "https://service.todo-api.site/api/security";
 
     const link =

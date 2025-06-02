@@ -4,7 +4,7 @@ import {
   updateBookCount,
   updateCategorySelect
 } from "../../utils/updateBookCount";
-import CardBtn from "../CardBtn/CardBtn";
+import CardBtn from "../CardBtn";
 import SavedListBtn from "../SavedListBtn/SavedListBtn";
 import "./ListElement.css";
 

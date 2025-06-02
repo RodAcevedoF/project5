@@ -1,6 +1,6 @@
 import { createVideo } from "../../api/videoApi.js";
 import "./VideoCard.css";
-import CardBtn from "../CardBtn/CardBtn.js";
+import CardBtn from "../CardBtn/index.js";
 import { updateChannelSelect } from "../../utils/updateVideoCount.js";
 import {
   formatDuration,
@@ -8,6 +8,7 @@ import {
   formatDate,
   convertToSeconds
 } from "../../utils/videoUtils.js";
+import { observeNewCards } from "../../utils/cardOberserver.js";
 
 export const VideoCard = (video) => {
   const card = document.createElement("div");
@@ -123,6 +124,8 @@ export const VideoCard = (video) => {
 
     document.dispatchEvent(new CustomEvent("videoSaved", { detail: result }));
   });
+
+  observeNewCards("video");
 
   return card;
 };

@@ -4,6 +4,7 @@ const OptionsCarrousel = () => {
   div.classList.add("carousel");
 
   div.innerHTML = `
+    <div>
     <div class="slides">
       <img src="/images/todomenu.png" alt="todo menu image" />
       <img src="/images/bookmenu.png" alt="book menu image" />
@@ -13,6 +14,7 @@ const OptionsCarrousel = () => {
       <div class="bar bar-blue"></div>
       <div class="bar bar-green"></div>
       <div class="bar bar-pink"></div>
+    </div>
     </div>
     <ul class="home-nav-links">
       <li><button class="home-nav-link">To-do List</button></li>

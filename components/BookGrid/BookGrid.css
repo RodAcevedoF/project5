@@ -1,3 +1,7 @@
+html {
+  scroll-timeline: --scroll-fade y;
+}
+
 .book-article {
   width: 100%;
   display: flex;

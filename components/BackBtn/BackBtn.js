@@ -5,10 +5,7 @@ import "./BackBtn.css";
 const BackBtn = (PageComponent, page) => {
   const btn = document.createElement("div");
   btn.classList.add("go-back-btn");
-  /*   const img = document.createElement("img");
-  img.src = "/icon/goback.png"; */
   const img = AnimBtn;
-  /*   img.alt = "back button"; */
   const span = document.createElement("span");
   span.classList.add("go-back-text");
   span.innerText = "Go Back";

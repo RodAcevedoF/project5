@@ -7,9 +7,11 @@ import { NavBar } from "../components/NavBar/NavBar.js";
 import checkSessionTheme from "../utils/sessionTheme.js";
 import { VerifyPending } from "../pages/VerifyPending/VerifyPending.js";
 import { SignLogin } from "../pages/SignLogin/SignLogin.js";
+import { hideGlobalLoader, showGlobalLoader } from "../components/index.js";
 
 (async function init() {
   checkSessionTheme();
+  showGlobalLoader();
 
   const params = new URLSearchParams(window.location.search);
   const status = params.get("status");
@@ -20,6 +22,7 @@ import { SignLogin } from "../pages/SignLogin/SignLogin.js";
     changePage(VerifyPending, "verify-pending");
     NavBar();
     Footer();
+    hideGlobalLoader();
     return;
   }
 
@@ -27,11 +30,13 @@ import { SignLogin } from "../pages/SignLogin/SignLogin.js";
     changePage(SignLogin, "signlogin");
     NavBar();
     Footer();
+    hideGlobalLoader();
     return;
   }
 
   const { authenticated, needsVerification } = await initAuthFlow();
   NavBar();
+
   if (authenticated) {
     changePage(Home, "home");
   } else if (needsVerification) {
@@ -41,4 +46,5 @@ import { SignLogin } from "../pages/SignLogin/SignLogin.js";
   }
 
   Footer();
+  hideGlobalLoader();
 })();

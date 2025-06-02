@@ -1,5 +1,5 @@
 import "./ProfileSettings.css";
-import CardBtn from "../CardBtn/CardBtn";
+import { CardBtn } from "..";
 
 const ProfileSettings = (userData, fn1, fn2) => {
   const sect = document.createElement("section");

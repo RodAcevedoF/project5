@@ -9,7 +9,7 @@ import {
   formatDurationSecs,
   formatViews
 } from "../../utils/videoUtils.js";
-import CardBtn from "../CardBtn/CardBtn.js";
+import CardBtn from "../CardBtn/index.js";
 import SavedListBtn from "../SavedListBtn/SavedListBtn";
 import "./VidListElement.css";
 

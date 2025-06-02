@@ -1,25 +1,26 @@
 import axios from "axios";
 import { setState } from "../utils/state";
-import { authAxios } from "../utils/authAxios"; // ✅ lo separamos si querés (ver más abajo)
+import { authAxios } from "../utils/authAxios";
 
 const USER_URL = "https://service.todo-api.site/api/user";
 
 export const registerUser = async (name, email, password) => {
   try {
-    const response = await axios.post(`${USER_URL}/register`, {
+    const { data } = await axios.post(`${USER_URL}/register`, {
       name,
       email,
       password
     });
 
-    if (response.data) {
-      const { user } = response.data.data;
+    const user = data?.data?.user;
+    if (user) {
       setState("justRegistered", true);
       setState("currentUser", user);
       localStorage.setItem("email", user.email);
       localStorage.setItem("name", user.name);
-      return response.data;
     }
+
+    return data;
   } catch (error) {
     console.error(
       "Error en el registro:",
@@ -125,7 +126,6 @@ export const uploadProfileImage = async (file) => {
 
     const { user } = res.data.data;
     setState("currentUser", user);
-    localStorage.setItem("", user.profile_image); // opcional
 
     return { success: true, user };
   } catch (error) {

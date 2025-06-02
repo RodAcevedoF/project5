@@ -24,7 +24,7 @@
 }
 .savedbook-title:hover h3 {
   transform: scale(1.05) translateX(1em);
-  color: var(--main-green);
+  color: var(--main-color);
 }
 
 .savedbook-title p {

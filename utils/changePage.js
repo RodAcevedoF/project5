@@ -7,12 +7,10 @@ export const changePage = (PageComponent, pageName) => {
 
   setState("currentPage", pageName);
   console.log(getState("currentPage"));
-  if (pageName === "home" && document.body.classList.contains("dark")) {
-    main.style.background = "black";
-  } else {
-    main.style.background = "inherit";
-  }
-
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
   NavBar();
 
   main.style.transition = "opacity 0.4s ease";

@@ -45,7 +45,7 @@
   text-align: center;
   font-weight: 500;
   font-size: 4em;
-  color: var(--main-green);
+  color: var(--main-color);
   font-family: "Jersey 15";
 }
 
@@ -58,7 +58,7 @@
 }
 
 .email-pass-div p {
-  color: var(--main-green);
+  color: var(--main-color);
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -86,7 +86,7 @@
 }
 
 #email-pass-form label {
-  color: var(--main-green);
+  color: var(--main-color);
   font-weight: bold;
 }
 
@@ -112,11 +112,11 @@
   font-weight: bold;
 }
 
-.delete-sensitive-button {
+.delete-acc-div button {
   background: var(--box-danger-background);
 }
 
-.delete-sensitive-button:hover {
+.delete-acc-div button:hover {
   background-color: #ef1414;
   border-color: #b30101;
   color: #fff;

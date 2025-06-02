@@ -1,17 +1,10 @@
-import axios from "axios";
+import { authAxios } from "../utils/authAxios";
 
 const API_URL = "https://service.todo-api.site/api/todos";
 
 export const createTodo = async (todoData) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.post(API_URL, todoData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json" // opcional, axios lo pone solo
-      }
-    });
+    const response = await authAxios.post("todos", todoData);
 
     return response.data;
   } catch (error) {
@@ -25,12 +18,7 @@ export const createTodo = async (todoData) => {
 
 export const getTodos = async (limit = 10, offset = 0) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.get(API_URL, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
+    const response = await authAxios.get("todos", {
       params: { limit, offset }
     });
 
@@ -46,14 +34,7 @@ export const getTodos = async (limit = 10, offset = 0) => {
 
 export const updateTodo = async (id, updateData) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.put(`${API_URL}/${id}`, updateData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json" // opcional con axios
-      }
-    });
+    const response = await authAxios.put(`todos/${id}`, updateData);
 
     return response.data;
   } catch (error) {
@@ -67,13 +48,7 @@ export const updateTodo = async (id, updateData) => {
 
 export const deleteTodo = async (id) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.delete(`${API_URL}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const response = await authAxios.delete(`todos/${id}`);
 
     if (response.status === 204) {
       return { success: true };
@@ -86,20 +61,5 @@ export const deleteTodo = async (id) => {
       error.response?.data || error.message
     );
     return { error: error.response?.data?.error || "Error deleting todo" };
-  }
-};
-
-export const getTodoFile = async (filename) => {
-  try {
-    const response = await axios.get(`${API_URL}/file/${filename}`, {
-      responseType: "blob"
-    });
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Error getting todo file:",
-      error.response?.data || error.message
-    );
-    return { error: error.response?.data?.error || "Error getting file" };
   }
 };

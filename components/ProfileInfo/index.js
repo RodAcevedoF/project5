@@ -1,5 +1,5 @@
 import "./ProfileInfo.css";
-import CardBtn from "../CardBtn/CardBtn";
+import { CardBtn } from "..";
 import { ProfileContact } from "..";
 import normalizeUrl from "../../utils/normalizeUrl";
 import { ProfileForm } from "..";

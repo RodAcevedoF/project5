@@ -96,8 +96,8 @@ textarea {
   cursor: pointer;
   color: var(--back-general);
   background-color: var(--letter-general);
-  box-shadow: 0.3em 0.3em 0 0 var(--main-green),
-    inset 0.3em 0.3em 0 0 var(--main-green);
+  box-shadow: 0.3em 0.3em 0 0 var(--main-color),
+    inset 0.3em 0.3em 0 0 var(--main-color);
   transition: all 0.25s ease-in-out;
 }
 

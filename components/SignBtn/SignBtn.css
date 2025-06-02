@@ -1,33 +1,33 @@
 .sign-in-button {
-    padding: .5em;
-    background: var(--box-background);
-    color: var(--back-general);
-    border: none;
-    border-radius: .2em;
-    cursor: pointer;
-    width: 6em;
-    font-weight: bolder;
-    background-size: 200% 100%;
-    transition: background-position .25s ease-in-out;
-  }
-  
-  .sign-in-button:hover {
-    background-position: 100% 0;
-    background-image: var(--button-alt-background);
-  }
-  
-  #sign-up-btn {
-    padding: .5em;
-    background: inherit;
-    color: var(--letter-general);
-    border: none;
-    border-radius: .2em;
-    cursor: pointer;
-    width: 6em;
-    font-weight: bolder;
-    transition: background .25s ease-in-out;
-  }
+  padding: 0.5em;
+  background: var(--box-background);
+  color: var(--back-general);
+  border: none;
+  border-radius: 0.2em;
+  cursor: pointer;
+  width: 6em;
+  font-weight: bolder;
+  background-size: 200% 100%;
+  transition: background-position 0.25s ease-in-out;
+}
 
-  #sign-up-btn:hover {
-    background: var(--highlight-letter);
-  }
+.sign-in-button:hover {
+  background-position: 100% 0;
+  background-image: var(--button-alt-background);
+}
+
+#sign-up-btn {
+  padding: 0.5em;
+  background: inherit;
+  color: var(--letter-general);
+  border: none;
+  border-radius: 0.2em;
+  cursor: pointer;
+  width: 6em;
+  font-weight: bolder;
+  transition: background 0.25s ease-in-out;
+}
+
+#sign-up-btn:hover {
+  background: var(--highlight-letter);
+}

@@ -1,11 +1,12 @@
-import { createBook } from "../../api/bookApi.js";
 import "./BookCard.css";
-import CardBtn from "../CardBtn/CardBtn.js";
+import { createBook } from "../../api/bookApi.js";
+import CardBtn from "../CardBtn/index.js";
 import { updateCategorySelect } from "../../utils/updateBookCount.js";
+import { observeNewCards } from "../../utils/cardOberserver.js";
 
 export const BookCard = (book) => {
   const card = document.createElement("div");
-  card.classList.add("book-card");
+  card.classList.add("book-card", "appear");
 
   card.innerHTML = `
     <div class="card-summary">
@@ -114,11 +115,11 @@ export const BookCard = (book) => {
       return;
     }
 
-    alert("¡Libro guardado correctamente!");
+    alert("Book saved successfully!");
     await updateCategorySelect();
 
     document.dispatchEvent(new CustomEvent("bookSaved", { detail: result }));
   });
-
+  observeNewCards("book");
   return card;
 };

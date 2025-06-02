@@ -1,6 +1,9 @@
 .profile-activity-section {
   display: flex;
   transition: all 0.25s ease;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-activity-section.inactive {
@@ -8,3 +11,56 @@
   opacity: 0;
   overflow: hidden;
 }
+.activity-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.activity-books,
+.activity-todo,
+.activity-videos,
+.session-timer,
+.activity-counter {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: all 0.25s ease;
+  padding: 0em 2em;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.1em;
+  border: 1px solid red;
+}
+
+.session-timer {
+  justify-content: space-around;
+}
+.session-timer {
+  flex-flow: row wrap;
+}
+#session-duration span {
+  font-family: "Jersey 15";
+  font-size: 3em;
+  transition: all 0.25s ease;
+}
+
+#session-duration {
+  border: 5px solid black;
+  display: flex;
+  width: 15em;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+/* 
+.activity-todo {
+  width: fit-content;
+}
+
+.activity-books {
+  width: fit-content;
+}
+
+.activity-videos {
+  width: fit-content;
+} */

@@ -15,6 +15,7 @@
   width: 100%;
   height: auto;
   position: relative;
+  overflow: hidden;
 }
 
 .button-container {
@@ -22,7 +23,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 5em;
-  padding: 5em 0;
+  width: 100%;
 }
 
 .menu-btn {

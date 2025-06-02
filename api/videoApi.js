@@ -1,18 +1,8 @@
-import axios from "axios";
-
-const API_URL = "https://service.todo-api.site/api/videos";
+import { authAxios } from "../utils/authAxios";
 
 export const createVideo = async (videoData) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.post(API_URL, videoData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
-    });
-
+    const response = await authAxios.post("videos", videoData);
     return response.data;
   } catch (error) {
     console.error(
@@ -27,12 +17,7 @@ export const createVideo = async (videoData) => {
 
 export const getVideos = async (limit = 10, offset = 0) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.get(API_URL, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
+    const response = await authAxios.get("videos", {
       params: { limit, offset }
     });
     return response.data;
@@ -49,33 +34,7 @@ export const getVideos = async (limit = 10, offset = 0) => {
 
 export const updateVideo = async (id, updateData) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const hasFile = updateData.thumbnail instanceof File;
-
-    let response;
-    if (hasFile) {
-      const formData = new FormData();
-      for (let key in updateData) {
-        if (updateData.hasOwnProperty(key)) {
-          formData.append(key, updateData[key]);
-        }
-      }
-
-      response = await axios.patch(`${API_URL}/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    } else {
-      response = await axios.patch(`${API_URL}/${id}`, updateData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      });
-    }
-
+    const response = await authAxios.patch(`videos/${id}`, updateData);
     return response.data;
   } catch (error) {
     console.error(
@@ -90,14 +49,7 @@ export const updateVideo = async (id, updateData) => {
 
 export const deleteVideo = async (id) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.delete(`${API_URL}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-
+    const response = await authAxios.delete(`videos/${id}`);
     if (response.status === 204) {
       return { success: true };
     }

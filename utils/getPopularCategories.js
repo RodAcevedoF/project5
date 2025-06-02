@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getState, setState } from "./state";
+import { setState } from "./state";
 
 export const getPopularCategories = async () => {
   try {

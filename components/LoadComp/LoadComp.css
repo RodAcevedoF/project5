@@ -1,36 +1,3 @@
-/* .loader {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-  padding: 3em 0;
-}
-
-.loader span {
-  font-size: 2em;
-  font-weight: 600;
-  animation: blur 1s linear infinite;
-  line-height: 20px;
-  transition: all 0.2s;
-  position: relative;
-}
-
-@keyframes blur {
-  0%,
-  90% {
-    filter: blur(0);
-  }
-
-  50% {
-    filter: blur(10px);
-  }
-}
-
- */
 .glitch-wrapper {
   width: 100%;
   height: 100%;

@@ -6,3 +6,6 @@ export { default as ProfileInfo } from "./ProfileInfo";
 export { default as ProfileSettings } from "./ProfileSettings";
 export { default as ProfileActivity } from "./ProfileActivity";
 export * from "./ProfileHeader";
+export { default as CardBtn } from "./CardBtn";
+export * from "./GlobalLoader";
+export { default as HomeOptions } from "./HomeOptions";

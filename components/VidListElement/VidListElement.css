@@ -26,7 +26,7 @@
 }
 .savedvid-title:hover h3 {
   transform: scale(1.05) translateX(1em);
-  color: var(--main-green);
+  color: var(--main-color);
 }
 
 .savedvid-title p {
@@ -94,7 +94,7 @@
   margin-bottom: 0.5em;
 }
 .saved-channel a:hover {
-  color: var(--main-green);
+  color: var(--main-color);
 }
 .channel-icon {
   width: 4em;

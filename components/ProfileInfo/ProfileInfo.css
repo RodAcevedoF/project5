@@ -11,8 +11,8 @@
 }
 
 .profile-info-container.inactive {
-  height: 0;
   opacity: 0;
+  height: 0;
   overflow: hidden;
 }
 
@@ -58,7 +58,7 @@
   justify-content: center;
   background: linear-gradient(
     to bottom,
-    var(--main-green),
+    var(--main-color),
     #57bfff 40%,
     #8fd2fc 60%,
     #c1e7ff 80%,

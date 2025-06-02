@@ -1,8 +1,8 @@
 .section-bg {
   position: relative;
   width: 100%;
-  height: 80vh;
-  background: var(--main-green);
+  height: 90vh;
+  background: var(--main-color);
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
     to bottom,
@@ -18,6 +18,10 @@
     black 85%,
     transparent 100%
   );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .section-bg .air {
@@ -72,4 +76,34 @@
   100% {
     background-position-x: -1000px;
   }
+}
+
+.section-bg h1 {
+  font-size: 6em;
+  font-family: "Jersey 15";
+  font-weight: 100;
+  color: var(--back-general);
+}
+
+.loop-hero {
+  position: relative;
+  height: 3rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.subtitle {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  text-align: center;
+  font-size: 1.5em;
+  color: var(--back-general);
+}
+
+.active-sub {
+  opacity: 1;
+  transform: translateY(0);
 }

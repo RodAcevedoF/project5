@@ -18,7 +18,7 @@
   justify-self: flex-start;
   font-family: "Jersey 15";
   font-size: 4em;
-  color: var(--main-green);
+  color: var(--main-color);
   -webkit-text-stroke: 2px var(--letter-general);
   margin-bottom: 1em;
 }
@@ -34,7 +34,7 @@
 }
 
 .profile-header-body p,
-h2 {
+.profile-header-body h2 {
   font-family: "Jersey 15";
   font-size: 2.5em;
   font-weight: 500;
@@ -83,7 +83,7 @@ h2 {
 }
 
 .divider {
-  background: var(--main-green);
+  background: var(--main-color);
   height: 5px;
   width: 100%;
 }
@@ -103,7 +103,7 @@ h2 {
 }
 
 .profile-nav li:hover {
-  color: var(--main-green);
+  color: var(--main-color);
 }
 
 @media screen and (width < 421px) {

@@ -1,16 +1,12 @@
-import axios from "axios";
-
-const API_URL = "https://service.todo-api.site/api/books";
+import { authAxios } from "../utils/authAxios";
 
 export const createBook = async (bookData) => {
   try {
-    const token = localStorage.getItem("accessToken");
     const formData = new FormData();
 
     for (let key in bookData) {
       if (bookData.hasOwnProperty(key)) {
         if (Array.isArray(bookData[key])) {
-          // Procesar arreglos (ej.: categorías)
           formData.append(key, JSON.stringify(bookData[key]));
         } else {
           formData.append(key, bookData[key]);
@@ -18,34 +14,27 @@ export const createBook = async (bookData) => {
       }
     }
 
-    const response = await axios.post(API_URL, formData, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
+    const response = await authAxios.post("/books", formData);
     return response.data;
   } catch (error) {
     console.error(
-      "Error creando el libro:",
+      "Error creating book:",
       error.response?.data || error.message
     );
-    return { error: error.response?.data?.error || "Error creando el libro" };
+    return { error: error.response?.data?.error || "Error creatin book" };
   }
 };
 
 export const getBooks = async (limit = 10, offset = 0) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.get(API_URL, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
+    const response = await authAxios.get("books", {
       params: { limit, offset }
     });
-    // Se filtran únicamente los libros válidos que tengan id y title.
-    const books = Array.isArray(response.data.data)
+
+    const books = Array.isArray(response.data?.data)
       ? response.data.data.filter((book) => book.id && book.title)
       : [];
+
     return books;
   } catch (error) {
     console.error(
@@ -60,84 +49,51 @@ export const getBooks = async (limit = 10, offset = 0) => {
 
 export const updateBook = async (id, updateData) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const hasFile = updateData.cover_image instanceof File;
-    let response;
-
-    if (hasFile) {
-      const formData = new FormData();
-      for (let key in updateData) {
-        if (updateData.hasOwnProperty(key)) {
-          if (Array.isArray(updateData[key])) {
-            formData.append(key, JSON.stringify(updateData[key]));
-          } else {
-            formData.append(key, updateData[key]);
-          }
-        }
+    const response = await authAxios.patch(`books/${id}`, updateData, {
+      headers: {
+        "Content-Type": "application/json"
       }
-
-      response = await axios.patch(`${API_URL}/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    } else {
-      response = await axios.patch(`${API_URL}/${id}`, updateData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      });
-    }
+    });
 
     return response.data;
   } catch (error) {
     console.error(
-      "Error actualizando el libro:",
+      "Error updating book:",
       error.response?.data || error.message
     );
     return {
-      error: error.response?.data?.error || "Error actualizando el libro"
+      error: error.response?.data?.error || "Error updating book"
     };
   }
 };
 
 export const deleteBook = async (id) => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.delete(`${API_URL}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const response = await authAxios.delete(`books/${id}`);
 
     if (response.status === 204) {
       return { success: true };
     }
-    return response.data;
+
+    return { error: "Unexpected response from server." };
   } catch (error) {
     console.error(
-      "Error eliminando el libro:",
+      "Error deleting book:",
       error.response?.data || error.message
     );
     return {
-      error: error.response?.data?.error || "Error eliminando el libro"
+      error: error.response?.data?.error || "Error deleting book"
     };
   }
 };
 
 export const getBookCount = async () => {
   try {
-    const token = localStorage.getItem("accessToken");
-
-    const response = await axios.get(API_URL, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    return response.data.data.length; // Retorna la cantidad de libros del usuario.
+    const response = await authAxios.get("books");
+    const books = Array.isArray(response.data?.data) ? response.data.data : [];
+    return books.length;
   } catch (error) {
-    console.error("Error obteniendo el número de libros:", error);
+    console.error("Error fetching book count:", error);
     return 0;
   }
 };

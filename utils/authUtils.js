@@ -5,7 +5,6 @@ import axios from "axios";
 export const setTokens = (accessToken, refreshToken) => {
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
-  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 };
 
 // Elimina los tokens del almacenamiento local

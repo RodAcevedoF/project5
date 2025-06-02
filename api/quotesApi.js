@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// Crear una instancia de axios sin el interceptor
 const axiosNoAuthQuote = axios.create();
 
 export async function getBookQuote() {

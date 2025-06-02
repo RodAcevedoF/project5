@@ -6,6 +6,14 @@
   background: var(--box-background);
   border: 0.5vmin solid var(--letter-general);
   box-shadow: 0.4rem 0.4rem var(--letter-general);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.video-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .vidcard-header {
@@ -125,7 +133,7 @@
   color: inherit;
 }
 .title-url h3:hover {
-  color: var(--main-green);
+  color: var(--main-color);
   text-shadow: 2px 2px 15px rgb(143, 143, 143);
 }
 .publish-date {
