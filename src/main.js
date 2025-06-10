@@ -2,16 +2,22 @@ import { initAuthFlow } from "../utils/authFlow.js";
 import { changePage } from "../utils/changePage.js";
 import { Landing } from "../pages/Landing/Landing.js";
 import { Home } from "../pages/Home/Home.js";
-import Footer from "../components/Footer/Footer.js";
-import { NavBar } from "../components/NavBar/NavBar.js";
+import { Footer } from "../components";
+import { NavBar } from "../components";
 import checkSessionTheme from "../utils/sessionTheme.js";
 import { VerifyPending } from "../pages/VerifyPending/VerifyPending.js";
 import { SignLogin } from "../pages/SignLogin/SignLogin.js";
 import { hideGlobalLoader, showGlobalLoader } from "../components/index.js";
 
-(async function init() {
+(async function initApp() {
   checkSessionTheme();
   showGlobalLoader();
+
+  const renderLayout = () => {
+    NavBar();
+    Footer();
+    hideGlobalLoader();
+  };
 
   const params = new URLSearchParams(window.location.search);
   const status = params.get("status");
@@ -20,22 +26,16 @@ import { hideGlobalLoader, showGlobalLoader } from "../components/index.js";
 
   if (["success", "invalid"].includes(status)) {
     changePage(VerifyPending, "verify-pending");
-    NavBar();
-    Footer();
-    hideGlobalLoader();
-    return;
+    return renderLayout();
   }
 
   if (token && email) {
     changePage(SignLogin, "signlogin");
-    NavBar();
-    Footer();
-    hideGlobalLoader();
-    return;
+    return renderLayout();
   }
 
   const { authenticated, needsVerification } = await initAuthFlow();
-  NavBar();
+  console.log("🔐 Auth flow result:", { authenticated, needsVerification });
 
   if (authenticated) {
     changePage(Home, "home");
@@ -45,6 +45,5 @@ import { hideGlobalLoader, showGlobalLoader } from "../components/index.js";
     changePage(Landing, "landing");
   }
 
-  Footer();
-  hideGlobalLoader();
+  renderLayout();
 })();

@@ -1,0 +1,46 @@
+.landing-ideas-ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2.5em;
+  margin-top: 2em;
+}
+
+.landing-ideas-li {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  gap: 1em;
+  background: rgba(237, 237, 237, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 0.1em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.landing-ideas-li p {
+  font-family: "Jersey 15";
+  color: var(--back-general);
+  -webkit-text-stroke: 1px var(--letter-general);
+  font-size: 4em;
+}
+
+.landing-ideas-li img {
+  width: 4em;
+}
+
+@media screen and (width < 950px) {
+  .landing-ideas-li p {
+    font-size: 3em;
+  }
+}
+@media screen and (width < 730px) {
+  .landing-ideas-li p {
+    font-size: 2.5em;
+  }
+}

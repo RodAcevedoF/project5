@@ -1,10 +1,13 @@
 import "./Navbar.css";
-import { MenuUl, menuBtn } from "../MenuUl/MenuUl.js";
-import { UpBtn } from "../UpBtn/UpBtn.js";
-import { LogOutBtn } from "../LogOutBtn/LogOutBtn.js";
-import { SignBtn } from "../SignBtn/SignBtn.js";
+import {
+  MenuUl,
+  menuBtn,
+  LogOutBtn,
+  ProfileBtn,
+  SignBtn,
+  UpBtn
+} from "../index.js";
 import { getState } from "../../utils/state.js";
-import ProfileBtn from "../ProfileBtn/ProfileBtn.js";
 
 export const NavBar = () => {
   const header = document.querySelector("header");

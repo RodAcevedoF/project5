@@ -1,5 +1,4 @@
 import "./Profile.css";
-import InnerFooter from "../../components/InnerFooter/InnerFooter";
 import {
   getProfile,
   updateProfile,
@@ -13,11 +12,12 @@ import {
   ProfileHeader
 } from "../../components";
 import { getDashboardData } from "../../api/dashboardApi";
-import LoadComp from "../../components/LoadComp/LoadComp";
+import { LoadComp, InnerFooter } from "../../components";
 import { deleteUser as apiDeleteUser } from "../../api/userApi";
 import { removeTokens } from "../../utils/authUtils"; // asegurate de tener esto
 import { changePage } from "../../utils/changePage";
 import { Landing } from "../Landing/Landing";
+import { setState } from "../../utils/state";
 import Swal from "sweetalert2";
 
 export const Profile = async () => {
@@ -98,9 +98,10 @@ export const Profile = async () => {
         Swal.fire("Deleted!", "Your account has been removed.", "success");
 
         removeTokens(); // remueve localStorage/sessionStorage/tokens
+        setState("isLoggedIn", false);
+        setState("currentUser", null);
         localStorage.clear();
         sessionStorage.clear();
-
         // redirigir al landing
         changePage(Landing, "landing");
       } else {

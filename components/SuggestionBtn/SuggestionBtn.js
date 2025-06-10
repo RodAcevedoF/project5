@@ -1,4 +1,3 @@
-import toggleBtn from "../ToggleBtn/ToggleBtn";
 import "./SuggestionBtn.css";
 
 const SuggestionBtn = (callback, arr) => {
@@ -21,7 +20,9 @@ const SuggestionBtn = (callback, arr) => {
   // Configurar el botón
   btn.innerHTML = `<span>${query}</span>`;
   btn.addEventListener("click", () => {
-    callback(query); // Pasar el término seleccionado al callback
+    callback(query);
+    document.querySelector(".book-grid").classList.remove("height");
+    document.querySelector(".video-grid").classList.remove("height");
   });
 
   return btn;

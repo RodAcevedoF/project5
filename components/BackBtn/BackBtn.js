@@ -1,5 +1,5 @@
 import { changePage } from "../../utils/changePage";
-import { AnimBtn } from "./AnimBtn";
+import { AnimBtn } from "..";
 import "./BackBtn.css";
 
 const BackBtn = (PageComponent, page) => {

@@ -1,16 +1,18 @@
 // Calendar.js
 import "./Calendar.css";
 import { getTodos } from "../../api/ToDoApi";
-import { TodoDisplay } from "../TodoDisplay/TodoDisplay";
+import { TodoDisplay } from "..";
 
 export const Calendar = () => {
   const container = document.createElement("div");
   container.classList.add("simple-calendar");
   const hideAllSections = () => {
-    document.querySelectorAll('.collapsible').forEach(section => section.classList.remove('visible'));
-    document.querySelector("#load-more-tasks").classList.remove('visible');
-    if(window.innerWidth < 792) {
-    document.querySelector(".main-aside").classList.remove('visible');
+    document
+      .querySelectorAll(".collapsible")
+      .forEach((section) => section.classList.remove("visible"));
+    document.querySelector("#load-more-tasks").classList.remove("visible");
+    if (window.innerWidth < 792) {
+      document.querySelector(".main-aside").classList.remove("visible");
     }
   };
 

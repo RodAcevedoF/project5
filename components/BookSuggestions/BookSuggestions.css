@@ -1,0 +1,37 @@
+.book-suggestions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  height: 60vh;
+  background: rgba(77, 162, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 0.2em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.book-grid.height {
+  min-height: 70vh;
+}
+
+.opt-btns-div {
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.book-suggestions p {
+  font-size: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.book-suggestions h3 {
+  font-size: 3em;
+  text-align: center;
+  font-family: "Jersey 15";
+  margin-bottom: 0.5em;
+}

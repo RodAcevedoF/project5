@@ -1,3 +1,4 @@
+import "./VidListElement.css";
 import { updateVideo, deleteVideo, getVideos } from "../../api/videoApi.js";
 import { setState } from "../../utils/state.js";
 import {
@@ -9,13 +10,12 @@ import {
   formatDurationSecs,
   formatViews
 } from "../../utils/videoUtils.js";
-import CardBtn from "../CardBtn/index.js";
-import SavedListBtn from "../SavedListBtn/SavedListBtn";
-import "./VidListElement.css";
+import { CardBtn, SavedListBtn } from "../index.js";
 
 let currentOpenCard = null;
 
 const VidListElement = (video) => {
+  console.log(video);
   const li = document.createElement("li");
   li.classList.add("video-li");
   const isSaved = !!video.id;

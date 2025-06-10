@@ -1,74 +1,106 @@
 .book-card {
   width: 100%;
-  padding: 1rem;
-  border: 0.5vmin solid var(--letter-general);
-  box-shadow: 0.4rem 0.4rem var(--letter-general);
+  border: 0.5vmin solid var(--darker-main);
+  box-shadow: 0.4rem 0.4rem var(--darker-main);
   overflow: hidden;
   display: flex;
-  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease-in-out;
   border-radius: 0.1em;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  background: rgba(215, 231, 255, 0.268);
+  cursor: pointer;
 }
 
-.book-card.visible {
-  opacity: 1;
-  transform: translateY(0);
+.book-card:hover {
+  filter: contrast(1.8);
+  box-shadow: var(--general-shadow);
 }
 
 .book-card.expanded {
   position: fixed;
   width: 50%;
+  background: var(--back-general);
   height: auto;
   max-height: 80vh;
-  transform: scale(1.1);
   z-index: 10;
   box-shadow: var(--general-shadow);
   padding: 15px;
   display: flex;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
+  top: 15%;
+  left: 25%;
+  translate: -50% -50%;
+  scale: 1.1;
+}
+
+.book-card.expanded:hover {
+  filter: none;
+}
+
+.bookcard-header {
   background: var(--back-general);
-  box-shadow: var(--general-shadow);
-  flex-direction: column;
+  border: 0.3vmin solid var(--darker-main);
+  box-shadow: 0.2rem 0.2rem var(--darker-main);
+  width: 100%;
+  font-size: 0.9em;
+  font-weight: bolder;
+  padding: 0.2em 0.5em;
+  color: var(--darker-main);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 0.5em;
 }
 
 .card-summary {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 90%;
   justify-content: center;
   align-items: center;
   gap: 0.5em;
-  border-radius: 1em;
 }
 
 .card-summary.expanded {
   width: 100%;
+  height: 100%;
   flex-direction: row;
   height: auto;
   max-height: 18em;
   border-radius: 0.1em;
   overflow: hidden;
-  border: 0.4vmin solid var(--letter-general);
-  box-shadow: 0.3rem 0.3rem var(--letter-general);
+  border: 0.4vmin solid var(--darker-main);
+  box-shadow: 0.3rem 0.3rem var(--darker-main);
   margin-bottom: 0.5em;
 }
 
 .card-summary img {
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  max-height: 100%;
   object-fit: contain;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  margin-left: 10px;
 }
 
 .card-summary.expanded img {
   object-fit: contain;
   width: 15em;
+  height: auto;
 }
 
 .bookcard-title {
@@ -136,8 +168,7 @@
   overflow-x: hidden;
   padding: 0.5em;
   border-radius: 0.1em;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: var(--general-shadow);
+  background: rgb(255, 255, 255);
   margin: 0.5em 0;
 }
 
@@ -174,8 +205,8 @@
   resize: none;
   padding: 0.25em;
   border-radius: 0.1em;
-  border: 0.4vmin solid var(--letter-general);
-  box-shadow: 0.3rem 0.3rem var(--letter-general);
+  border: 0.4vmin solid var(--darker-main);
+  box-shadow: 0.3rem 0.3rem var(--darker-main);
 }
 
 .details-button {
@@ -189,17 +220,23 @@
 @media screen and (max-width: 792px) {
   .book-card.book-card.expanded {
     width: 80%;
+    left: 10%;
   }
 }
 
 @media screen and (max-width: 520px) {
   .book-card.book-card.expanded {
     width: 95%;
+    left: 2.5%;
   }
-}
-
-@media screen and (max-width: 520px) {
-  .book-card {
+  .card-actions {
     flex-wrap: wrap;
+  }
+  .card-actions textarea {
+    height: 2.5em;
+  }
+  .details-button {
+    transform: scale(0.9);
+    gap: 2em;
   }
 }

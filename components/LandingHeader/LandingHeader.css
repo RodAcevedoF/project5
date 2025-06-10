@@ -1,0 +1,90 @@
+.general-test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-image: url("/images/cloudbg.png");
+  background-size: contain;
+  background-position: bottom;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  gap: 1em;
+}
+
+#anime-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  padding-top: 6em;
+}
+
+#anime-card h1 {
+  font-size: 6em;
+  font-family: "Jersey 15";
+  font-weight: 100;
+  text-align: center;
+  width: 100%;
+  color: var(--back-general);
+  -webkit-text-stroke: 2px var(--letter-general);
+  z-index: 1;
+  padding: 0 0.1em;
+}
+
+.big-cloud {
+  width: 20%;
+  position: absolute;
+  top: -20%;
+  left: 5%;
+}
+
+.small-cloud {
+  width: 14%;
+  position: absolute;
+  top: -5%;
+  right: 5%;
+}
+
+.icons-landing {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+  gap: 1em;
+}
+.landing-header-icons {
+  width: 3em;
+}
+
+@media screen and (width < 845px) {
+  #anime-card h1 {
+    font-size: 4.5em;
+  }
+}
+
+@media screen and (width < 474px) {
+  #anime-card h1 {
+    font-size: 3.5em;
+  }
+  .icons-landing {
+    transform: scale(0.8);
+  }
+}

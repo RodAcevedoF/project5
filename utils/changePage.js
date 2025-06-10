@@ -1,5 +1,5 @@
 import { setState, getState } from "../utils/state.js";
-import { NavBar } from "../components/NavBar/NavBar.js";
+import { NavBar } from "../components";
 
 export const changePage = (PageComponent, pageName) => {
   const main = document.querySelector("main");
@@ -11,6 +11,13 @@ export const changePage = (PageComponent, pageName) => {
     top: 0,
     behavior: "smooth"
   });
+
+  if (getState("currentPage") === "landing") {
+    main.style.marginTop = 0;
+  } else {
+    main.style.marginTop = "6rem";
+  }
+
   NavBar();
 
   main.style.transition = "opacity 0.4s ease";

@@ -118,6 +118,7 @@
   font-size: 1em;
   font-weight: bold;
   padding: 0.25em;
+  text-align: start;
 }
 
 #latest-tasks {

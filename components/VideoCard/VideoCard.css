@@ -4,31 +4,37 @@
   height: 100%;
   flex-direction: column;
   background: var(--box-background);
-  border: 0.5vmin solid var(--letter-general);
-  box-shadow: 0.4rem 0.4rem var(--letter-general);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  border: 0.5vmin solid var(--darker-main);
+  box-shadow: 0.4rem 0.4rem var(--darker-main);
+  border-radius: 0.1em;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-.video-card.visible {
-  opacity: 1;
-  transform: translateY(0);
+.video-card:hover,
+.video-card:hover .vidcard-header {
+  filter: contrast(1.6);
+  box-shadow: var(--general-shadow);
+}
+
+.video-card.expanded:hover {
+  filter: none;
 }
 
 .vidcard-header {
   background: var(--back-general);
-  border: 0.5vmin solid var(--letter-general);
-  box-shadow: 0.4rem 0.4rem var(--letter-general);
+  border: 0.5vmin solid var(--darker-main);
+  box-shadow: 0.4rem 0.4rem var(--darker-main);
   width: 100%;
   font-size: 0.9em;
   font-weight: bolder;
   padding: 0.2em 0.5em;
-  color: var(--letter-general);
+  color: var(--darker-main);
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 1em;
+  transition: all 0.3s ease-in-out;
 }
 
 .vidcard-header a {
@@ -41,20 +47,20 @@
 .video-card.expanded {
   position: fixed;
   width: 50%;
+  background: var(--back-general);
   height: auto;
-  max-height: 100vh;
-  transform: scale(1.1);
+  max-height: 95vh;
   z-index: 10;
   box-shadow: var(--general-shadow);
   padding: 1em;
   display: flex;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
-  background: var(--back-general);
-  box-shadow: var(--general-shadow);
   flex-direction: column;
+  top: 15%;
+  left: 25%;
+  transform: none;
+  translate: -50% -50%;
+  scale: 1.1;
+  z-index: 10;
 }
 
 .vidcard-summary {
@@ -79,8 +85,14 @@
 .midvid-info {
   display: flex;
   flex-direction: column;
-  padding: 0.5em 0;
+  padding: 0.5em;
   gap: 0.5em;
+  font-size: 1em;
+  width: 100%;
+  max-height: 11em;
+  border-radius: 0.1em;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: var(--general-shadow);
 }
 .video-card.expanded .vid-thumbnail {
   width: 40%;
@@ -175,23 +187,30 @@
 
 .notes-input {
   width: 100%;
+  resize: none;
+  border: 0.4vmin solid var(--darker-main);
+  box-shadow: 0.3rem 0.3rem var(--darker-main);
+  margin-bottom: 0.75em;
 }
 
 @media screen and (max-width: 1064px) {
   .video-card.expanded {
     width: 70%;
+    left: 15%;
   }
 }
 
 @media screen and (max-width: 892px) {
   .video-card.expanded {
     width: 80%;
+    left: 10%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .video-card.expanded {
     width: 90%;
+    left: 5%;
   }
   .vid-thumbnail {
     min-width: 15em;
@@ -201,24 +220,19 @@
 @media screen and (max-width: 577px) {
   .video-card.expanded {
     width: 95%;
+    left: 2.5%;
+    top: 12%;
+  }
+  .notes-input {
+    height: 2.5em;
+    font-size: 0.8em;
   }
   .thumbnail-title {
     flex-flow: wrap;
     justify-content: center;
   }
   .vid-thumbnail {
-    min-width: 60%;
-    object-fit: cover;
-  }
-}
-
-@media screen and (max-width: 577px) {
-  .thumbnail-title {
-    flex-flow: wrap;
-    justify-content: center;
-  }
-  .vid-thumbnail {
-    min-width: 65%;
+    min-width: 55%;
     object-fit: cover;
   }
   .title-url h3,
@@ -231,10 +245,10 @@
     gap: 0;
   }
   .vid-details-button {
-    transform: scale(0.7);
+    transform: scale(0.75);
     transform-origin: center;
     padding: 0;
-    border: 1px solid yellowgreen;
+    gap: 3em;
   }
   .vidcard-title {
     padding: 1em 1em 0 1em;

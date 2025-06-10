@@ -1,8 +1,6 @@
 import "./SavedBookBar.css";
 import { filterBooks, updateBookCount } from "../../utils/updateBookCount.js";
-import { SearchElement } from "../SeachElement/SearchElement";
-import { RangeSlider } from "../RangeSlider/RangeSlider";
-import MainBtn from "../MainBtn/MainBtn";
+import { MainBtn, RangeSlider, SearchElement } from "../index.js";
 
 const SavedBooksBar = (categories) => {
   const containerBar = document.createElement("div");

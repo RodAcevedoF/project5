@@ -1,14 +1,25 @@
 import "./BookCard.css";
 import { createBook } from "../../api/bookApi.js";
-import CardBtn from "../CardBtn/index.js";
+import { CardBtn } from "../index.js";
 import { updateCategorySelect } from "../../utils/updateBookCount.js";
-import { observeNewCards } from "../../utils/cardOberserver.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const BookCard = (book) => {
   const card = document.createElement("div");
-  card.classList.add("book-card", "appear");
+  card.classList.add("book-card");
 
   card.innerHTML = `
+    <div class="bookcard-header">
+      <p>${
+        book.categories[0] === undefined
+          ? "Not categorized"
+          : book.categories[0]
+      }</p>
+      <img src="" alt="">
+    </div>
     <div class="card-summary">
       <img src="${book.cover_image || "default-cover.png"}" alt="${
     book.title
@@ -109,7 +120,7 @@ export const BookCard = (book) => {
       pages: book.pages,
       categories: book.categories || []
     });
-
+    console.log(result);
     if (result.error) {
       alert(`Error: ${result.error}`);
       return;
@@ -120,6 +131,20 @@ export const BookCard = (book) => {
 
     document.dispatchEvent(new CustomEvent("bookSaved", { detail: result }));
   });
-  observeNewCards("book");
+
+  requestAnimationFrame(() => {
+    gsap.from(card, {
+      opacity: 0,
+      y: 50,
+      duration: 0.4,
+      ease: "power2.out",
+      yPercent: 0, // por si el transform preexistente intenta meterse
+      scrollTrigger: {
+        trigger: card,
+        start: "top 95%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  });
   return card;
 };

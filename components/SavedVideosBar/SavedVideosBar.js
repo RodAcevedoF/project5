@@ -1,4 +1,4 @@
-import "./SavedVidsBar.css";
+import "./SavedVideosBar.css";
 import {
   filterVideos,
   updateVideoCount
@@ -7,9 +7,7 @@ import {
   getChannels,
   updateChannelSelect
 } from "../../utils/updateVideoCount.js";
-import { SearchElement } from "../SeachElement/SearchElement.js";
-import MainBtn from "../MainBtn/MainBtn.js";
-import { getState } from "../../utils/state.js";
+import { MainBtn, SearchElement } from "../index.js";
 
 // RangeSlider para la duración
 const RangeSlider = () => {

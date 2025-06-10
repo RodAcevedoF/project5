@@ -1,4 +1,5 @@
 import "./ProfileForm.css";
+import { InputFileBtn } from "..";
 
 const ProfileForm = (user) => {
   const div = document.createElement("div");
@@ -43,17 +44,26 @@ const ProfileForm = (user) => {
                 <input type="text" id="instagram-input" class="edit-form-input" value="${
                   user.instagram || ""
                 }" >
-                <label for="profile-image-input">Profile Image:</label>
-                <input type="file" id="profile-image-input" class="edit-form-input" accept="image/*" />
-                <label for="description-input">About me:</label>
+                <div class="file-textarea-div">
+                <label for="profile-image-input" class="input-image-label" >PFP:</label>
+                <label for="description-input" class="description-input-label" >About me:
                 <textarea id="description-input" class="edit-form-input" >${
                   user.description || ""
                 }</textarea>
+                </label>
+                </div>
                 <div class="form-profile-buttons"></div>
               </form>
   `;
+
+  const fileBtn = InputFileBtn();
+  div.querySelector(".input-image-label").appendChild(fileBtn);
 
   return div;
 };
 
 export default ProfileForm;
+/*
+                <input type="file" id="profile-image-input" class="edit-form-input" accept="image/*" />
+                                <label for="profile-image-input" class="input-image-label" >Profile Image:</label>
+                */

@@ -1,6 +1,6 @@
 import "./LoginForm.css";
 import { loginUser } from "../../api/authApi";
-import MainBtn from "../MainBtn/MainBtn";
+import { MainBtn } from "..";
 import { handleAuthSuccess } from "../../pages/SignLogin/SignLogin";
 export const LoginForm = () => {
   const div = document.createElement("div");

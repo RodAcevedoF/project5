@@ -1,6 +1,6 @@
 import "./SavedVideoList.css";
 import { getVideos } from "../../api/videoApi";
-import VidListElement from "../VidListElement/VidListElement";
+import { VidListElement } from "..";
 const SavedVideoList = () => {
   const ul = document.createElement("ul");
   ul.classList.add("saved-vid-list");

@@ -1,8 +1,6 @@
 import "./SearchBar.css";
 import { getState } from "../../utils/state";
-import { SearchElement } from "../SeachElement/SearchElement";
-import { RangeSlider } from "../RangeSlider/RangeSlider";
-import MainBtn from "../MainBtn/MainBtn";
+import { MainBtn, SearchElement, RangeSlider } from "..";
 
 export const SearchBar = (onSearchQuery) => {
   const form = document.createElement("form");

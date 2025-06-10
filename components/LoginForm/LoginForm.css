@@ -51,5 +51,10 @@
 
 .no-registered:hover,
 .forgot-password:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+}
+
+#login-error {
+  width: 100%;
+  text-align: center;
 }

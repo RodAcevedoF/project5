@@ -1,7 +1,7 @@
 import "./MailBtn.css";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
-import { CloseBtn } from "../CloseBtn/CloseBtn";
+import { CloseBtn } from "..";
 
 export const MailBtn = (txt) => {
   const divFooterMail = document.createElement("div");

@@ -4,6 +4,7 @@
   background-color: var(--nav-light);
   width: 100%;
   height: auto;
+  min-height: 90vh;
   overflow: hidden;
   margin-top: 6em;
 }
@@ -17,6 +18,7 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
+  background: var(--back-general);
 }
 
 .todo-header {

@@ -1,22 +1,25 @@
 import "./VideoGrid.css";
-import { VideoCard } from "../VideoCard/VideoCard.js";
-import { SearchBarVids } from "../SearchBarVids/SearchBarVids.js";
-import SavedVidsBar from "../SavedVidBar/SavedVidsBar.js";
+import {
+  LoadComp,
+  LoadMoreBtn,
+  SavedVideoList,
+  SavedVideosBar,
+  ToggleBtn,
+  VideoSuggestions,
+  VideoCard,
+  SearchBarVids,
+  VidListElement,
+  SavedListsSuggestions
+} from "..";
 import { searchVideo } from "../../api/searchVideos.js";
 import { getVideos } from "../../api/videoApi.js";
-import ToggleBtn from "../ToggleBtn/ToggleBtn.js";
-import LoadComp from "../LoadComp/LoadComp.js";
 import { randomVidQueries } from "../../data/options.js";
-import VideoSuggestions from "../VideoSuggestions/VideoSuggestions.js";
 import { setState, getState } from "../../utils/state.js";
-import { updateVideoCount } from "../../utils/updateVideoCount.js";
-import VidListElement from "../VidListElement/VidListElement.js";
-import SavedVideoList from "../SavedVideoList/SavedVideoList.js";
 import {
+  updateVideoCount,
   getChannels,
   updateChannelSelect
 } from "../../utils/updateVideoCount.js";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.js";
 
 export const VideoGrid = () => {
   const container = document.createElement("article");
@@ -34,7 +37,7 @@ export const VideoGrid = () => {
   const savedSect = document.createElement("section");
   savedSect.classList.add("saved-section");
 
-  const savedVideosBar = SavedVidsBar(getChannels());
+  const savedVideosBar = SavedVideosBar(getChannels());
   menuSect.appendChild(savedVideosBar);
 
   const List = SavedVideoList();
@@ -60,9 +63,16 @@ export const VideoGrid = () => {
       comp.innerHTML = "";
     }
 
-    if (!result?.videos?.length) {
+    if (!result?.videos?.length && getState("currentToggle") === "search") {
       comp.innerHTML = "";
       comp.appendChild(VideoSuggestions(searchVideos, toggleButton));
+      return;
+    } else if (
+      !result?.videos?.length &&
+      getState("currentToggle") === "saved"
+    ) {
+      comp.innerHTML = "";
+      comp.appendChild(SavedListsSuggestions("video", toggleButton));
       return;
     }
 
@@ -110,9 +120,8 @@ export const VideoGrid = () => {
       setState("videoCards", videos);
       updateResults(List, { videos, totalResults: videos.length }, true);
 
-      const channels = getChannels();
       updateVideoCount();
-      updateChannelSelect(getChannels);
+      updateChannelSelect();
     } catch (error) {
       console.error("Error retrieving videos:", error);
       grid.innerHTML = "<p>Error loading your saved videos</p>";
@@ -140,13 +149,6 @@ export const VideoGrid = () => {
       setState("currentToggle", "search");
       //getRandomQuery();
     }
-  };
-
-  const getRandomQuery = () => {
-    const randomIndex = Math.floor(Math.random() * randomVidQueries.length);
-    searchParams.query = randomVidQueries[randomIndex];
-    setState("currentToggle", "search");
-    searchVideos(true);
   };
 
   const handleVideoDeleted = async ({ detail: { videoId } }) => {
@@ -199,6 +201,12 @@ export const VideoGrid = () => {
   // Init state
   savedSect.style.display = "none";
   loadMoreButton.style.display = "none";
+
+  const getDefaultQuery = () => {
+    searchParams.query = "youtube";
+    setState("currentToggle", "search");
+    searchVideos(true);
+  };
 
   return { container, updateResults, showLoading };
 };

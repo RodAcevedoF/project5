@@ -1,8 +1,6 @@
 import "./ProfileInfo.css";
-import { CardBtn } from "..";
-import { ProfileContact } from "..";
+import { CardBtn, ProfileContact, ProfileForm } from "..";
 import normalizeUrl from "../../utils/normalizeUrl";
-import { ProfileForm } from "..";
 import displayNick from "../../utils/displayNickname";
 
 const ProfileInfo = (user, postAll) => {

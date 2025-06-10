@@ -5,116 +5,48 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  gap: 2em;
-  padding-top: 2em;
 }
 
 .landing-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   align-self: center;
-  padding-left: 0;
-  gap: 0.5em;
+  width: 100%;
+  overflow: hidden;
+  position: sticky;
+  overflow: hidden;
+  height: auto;
 }
 
-.landing-hero {
-  height: 5em;
-  width: 80%;
-  background: red;
+.landing-header {
+  display: flex;
+  height: auto;
+  will-change: transform;
+  width: 100%;
 }
-
-.landing-box {
-  height: 80%;
+.landing-header-ideas {
+  top: 80%;
+  height: 60%;
+  width: 100%;
   padding: 2em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 20em;
-  max-width: 30em;
-  border-radius: 0.1em;
-  box-shadow: var(--general-shadow);
-  z-index: 10;
-  gap: 1em;
-  background: var(--back-general);
-  border: 0.5vmin solid var(--back-alt);
-  box-shadow: 0.4rem 0.4rem var(--back-alt);
-}
-
-.landing-box > p:nth-child(1) {
-  font-size: 0.8em;
-  background-color: var(--highlight-letter);
-  width: 8em;
-  padding: 0.2em;
-  border-radius: 0.2em;
-  text-align: center;
-}
-
-.landing-box h1 {
-  font-size: clamp(2em, 4vw, 3.5em);
-  color: var(--letter-general);
-}
-
-.landing-box em {
-  font-weight: bolder;
-}
-
-.back-landing {
-  z-index: 0;
-  width: 50vw;
-  height: 30vh;
+  will-change: transform;
   position: absolute;
-  object-fit: cover;
-}
-
-.back-landing:first-of-type {
-  left: 0;
-}
-
-.back-landing:last-of-type {
-  right: 0;
-}
-
-.alt-login {
+  opacity: 0;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1em;
-  border-radius: 0.2em;
-  width: fit-content;
-  box-shadow: var(--general-shadow);
-  padding: 0.5em;
-  width: 17em;
 }
-
-.alt-login p {
-  font-size: clamp(0.5em, 0.8em, 1em);
-}
-
-.reviews {
+.landing-box {
+  top: 200%;
+  height: 60%;
+  width: 100%;
+  will-change: transform;
+  position: absolute;
+  opacity: 0;
   display: flex;
-  font-size: 0.8em;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  gap: 0.2em;
-  flex-flow: row wrap;
 }
-
-.stars {
-  width: 1.5em;
-  height: auto;
-}
-
-.rev-apps {
-  width: 9em;
-  height: auto;
-}
-
-#sign-in-alt {
-  width: 10em;
-}
-
 .article-exp {
   display: flex;
   flex-direction: column;

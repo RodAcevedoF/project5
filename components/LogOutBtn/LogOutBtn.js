@@ -14,7 +14,6 @@ export const LogOutBtn = () => {
 
   button.addEventListener("click", () => {
     logoutUser();
-    setState("isLoggedIn", false);
     NavBar();
     changePage(Landing, "landing");
   });

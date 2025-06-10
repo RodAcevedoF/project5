@@ -1,11 +1,13 @@
 import "./ToDo.css";
-import { MainAside } from "../../components/MainAside/MainAside";
-import { TodoCard } from "../../components/TodoCard/TodoCard";
-import QuoteWidget from "../../components/QuoteWidget/QuoteWidget";
-import WeatherWidget from "../../components/WeatherWidget/WeatherWidget";
-import { AddTaskBtn } from "../../components";
-import InnerFooter from "../../components/InnerFooter/InnerFooter";
-import { AsideBtn } from "../../components";
+import {
+  AsideBtn,
+  MainAside,
+  AddTaskBtn,
+  InnerFooter,
+  QuoteWidget,
+  TodoCard,
+  WeatherWidget
+} from "../../components";
 
 export const Todo = () => {
   const container = document.querySelector("main");

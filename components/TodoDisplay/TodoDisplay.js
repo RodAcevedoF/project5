@@ -1,9 +1,6 @@
 import "./TodoDisplay.css";
-import { deleteTodo } from "../../api/ToDoApi";
-import { loadTodos, loadUpcomingDeadlines } from "../MainAside/MainAside";
-import MainBtn from "../MainBtn/MainBtn";
-import { SwitchYesNo } from "../SwitchYesNo/SwitchYesNo";
-import { updateTodo } from "../../api/ToDoApi";
+import { deleteTodo, updateTodo } from "../../api/ToDoApi";
+import { MainBtn, SwitchYesNo, loadTodos, loadUpcomingDeadlines } from "..";
 
 export const TodoDisplay = (todo) => {
   const card = document.createElement("div");

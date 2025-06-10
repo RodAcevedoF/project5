@@ -2,26 +2,14 @@ import { authAxios } from "../utils/authAxios";
 
 export const createBook = async (bookData) => {
   try {
-    const formData = new FormData();
-
-    for (let key in bookData) {
-      if (bookData.hasOwnProperty(key)) {
-        if (Array.isArray(bookData[key])) {
-          formData.append(key, JSON.stringify(bookData[key]));
-        } else {
-          formData.append(key, bookData[key]);
-        }
-      }
-    }
-
-    const response = await authAxios.post("/books", formData);
+    const response = await authAxios.post("/books", bookData);
     return response.data;
   } catch (error) {
     console.error(
       "Error creating book:",
       error.response?.data || error.message
     );
-    return { error: error.response?.data?.error || "Error creatin book" };
+    return { error: error.response?.data?.error || "Error creating book" };
   }
 };
 

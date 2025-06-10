@@ -14,11 +14,11 @@
   height: 3.5em;
   translate: -6px -6px;
   background: var(--box-background);
-  border: 0.5vmin solid var(--letter-general);
-  box-shadow: 0.3rem 0.3rem var(--letter-general);
+  border: 0.5vmin solid var(--darker-main);
+  box-shadow: 0.3rem 0.3rem var(--darker-main);
   overflow: hidden;
   transition: all 0.3s ease;
-  color: var(--letter-general);
+  color: var(--darker-main);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -32,9 +32,9 @@
   font-weight: 900;
   width: 100%;
   height: 100%;
-  background: var(--back-general);
-  color: var(--letter-general);
-  border-bottom: 3px solid var(--letter-general);
+  background: var(da--darker-main);
+  color: var(--darker-main);
+  border-bottom: 3px solid var(--darker-main);
   text-align: center;
 }
 
@@ -51,7 +51,7 @@
 #saved-category-select {
   height: 3em;
   border-radius: 0.1em;
-  border: 0.25em solid var(--letter-general);
+  border: 0.25em solid var(--darker-main);
   text-transform: uppercase;
   transition: 0.2s linear;
   width: 15em;
@@ -59,13 +59,13 @@
 }
 
 #saved-category-select:focus {
-  border: 0.5px solid var(--letter-general);
-  box-shadow: 5px 5px 0px var(--letter-general);
+  border: 0.5px solid var(--darker-main);
+  box-shadow: 5px 5px 0px var(--darker-main);
 }
 
 #clear-button {
   height: 3em;
-  color: var(--letter-general);
+  color: var(--darker-main);
   font-weight: bolder;
 }
 

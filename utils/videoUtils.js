@@ -6,7 +6,7 @@ export const formatViews = (views) => {
   if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
   if (num >= 1_000) return (num / 1_000).toFixed(1) + "k";
 
-  return num.toLocaleString("es-ES"); // Agrega puntos o comas según la región
+  return num.toLocaleString("es-ES");
 };
 
 export const formatDuration = (isoDuration) => {
@@ -40,7 +40,7 @@ export const convertToSeconds = (duration) => {
     const seconds = parseInt(match[2], 10);
     return minutes * 60 + seconds;
   } else {
-    return 0; // Si no coincide con el formato esperado, devuelve 0
+    return 0;
   }
 };
 

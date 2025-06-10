@@ -5,7 +5,7 @@ const HomeOptions = () => {
   div.classList.add("options-caroussel-div");
   div.innerHTML = `
     <div class="pages-links">
-  <ul class="links-ul-list"">
+  <ul class="links-ul-list">
     <li class="links-pages-item">
       <button class="links-pages-link">
         <img class="links-pages-icon" src="/images/todolist.svg" alt="to-do list icon"/>

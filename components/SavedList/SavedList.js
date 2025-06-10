@@ -1,6 +1,6 @@
 import "./SavedList.css";
 import { getBooks } from "../../api/bookApi";
-import ListElement from "../ListElement/ListElement";
+import { ListElement } from "..";
 const SavedList = () => {
   const ul = document.createElement("ul");
   ul.classList.add("saved-list");

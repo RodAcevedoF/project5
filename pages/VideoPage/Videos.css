@@ -1,0 +1,9 @@
+.video-main {
+  display: flex;
+  flex-direction: column;
+  background: inherit;
+  width: 100%;
+  height: auto;
+  min-height: 90vh;
+  overflow: hidden;
+}

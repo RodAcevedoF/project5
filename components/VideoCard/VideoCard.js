@@ -1,6 +1,6 @@
-import { createVideo } from "../../api/videoApi.js";
 import "./VideoCard.css";
-import CardBtn from "../CardBtn/index.js";
+import { createVideo } from "../../api/videoApi.js";
+import { CardBtn } from "..";
 import { updateChannelSelect } from "../../utils/updateVideoCount.js";
 import {
   formatDuration,
@@ -8,9 +8,13 @@ import {
   formatDate,
   convertToSeconds
 } from "../../utils/videoUtils.js";
-import { observeNewCards } from "../../utils/cardOberserver.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const VideoCard = (video) => {
+  console.log(video);
   const card = document.createElement("div");
   card.classList.add("video-card");
   const videoUrl = `https://www.youtube.com/watch?v=${video.video_id}`;
@@ -107,6 +111,7 @@ export const VideoCard = (video) => {
       video_id: video.video_id,
       title: video.title,
       channel: video.channel,
+      channelid: video.channelId,
       thumbnail: video.thumbnail,
       notes: notesInput.value,
       description: video.description,
@@ -125,7 +130,20 @@ export const VideoCard = (video) => {
     document.dispatchEvent(new CustomEvent("videoSaved", { detail: result }));
   });
 
-  observeNewCards("video");
+  requestAnimationFrame(() => {
+    gsap.from(card, {
+      opacity: 0,
+      y: 50,
+      duration: 0.4,
+      ease: "power2.out",
+      yPercent: 0,
+      scrollTrigger: {
+        trigger: card,
+        start: "top 95%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  });
 
   return card;
 };

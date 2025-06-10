@@ -1,8 +1,6 @@
 import "./MainAside.css";
 import { getTodos } from "../../api/ToDoApi";
-import { Calendar } from "../Calendar/Calendar";
-import { TodoDisplay } from "../TodoDisplay/TodoDisplay";
-import MainBtn from "../MainBtn/MainBtn";
+import { MainBtn, TodoDisplay, Calendar } from "..";
 import { getState } from "../../utils/state";
 
 export const MainAside = () => {

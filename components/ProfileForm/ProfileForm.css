@@ -5,7 +5,6 @@
   flex-direction: column;
   overflow: hidden;
   transition: all 0.25s ease;
-  padding: 0em 2em;
   justify-content: center;
   align-items: center;
   width: 60%;
@@ -26,8 +25,7 @@
 .edit-form-container.active {
   height: 100%;
   opacity: 1;
-  margin: 2em;
-  padding: 25px 35px;
+  padding: 2em;
   border: 10px solid rgb(255, 255, 255);
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
   border-radius: 0.1em;
@@ -76,8 +74,39 @@
   gap: 1em;
 }
 
+.file-textarea-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0.5em;
+  gap: 0.5em;
+}
+
+.input-image-label {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 2em;
+}
+
 @media screen and (width < 953px) {
   .edit-form-container {
     width: 80%;
+  }
+}
+@media screen and (width < 683px) {
+  .edit-form-container.active {
+    width: 95%;
+    padding: 1em;
+  }
+  .form-heading {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+  }
+  #profile-form {
+    padding: 0;
   }
 }

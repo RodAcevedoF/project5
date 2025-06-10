@@ -1,5 +1,5 @@
 import "./UpBtn.css";
-import { ThemeSwitch } from "../ThemeSwitch/ThemeSwitch";
+import { ThemeSwitch } from "..";
 
 export const UpBtn = (icon, txt) => {
   const btn = document.createElement("button");
@@ -10,7 +10,7 @@ export const UpBtn = (icon, txt) => {
   const checkbox = btn.querySelector("#input");
 
   // Al cargar el botón, revisar sessionStorage para setear el estado
-  const theme = sessionStorage.getItem("theme");
+  const theme = localStorage.getItem("theme");
   if (theme === "dark") {
     document.body.classList.add("dark");
     checkbox.checked = true;
@@ -23,9 +23,9 @@ export const UpBtn = (icon, txt) => {
   checkbox.addEventListener("change", () => {
     document.body.classList.toggle("dark");
     if (document.body.classList.contains("dark")) {
-      sessionStorage.setItem("theme", "dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      sessionStorage.setItem("theme", "light");
+      localStorage.setItem("theme", "light");
     }
   });
 

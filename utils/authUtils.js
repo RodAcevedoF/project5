@@ -1,25 +1,23 @@
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
+import { refreshAccessToken } from "../api/authApi";
 
-// Guarda los tokens en localStorage y configura el header por defecto
+// Guarda los tokens en localStorage
 export const setTokens = (accessToken, refreshToken) => {
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
+  console.log("🧪 Guardado en localStorage:", refreshToken);
 };
 
-// Elimina los tokens del almacenamiento local
 export const removeTokens = () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
 };
 
-// Recupera los tokens del almacenamiento local
 export const getTokens = () => ({
   accessToken: localStorage.getItem("accessToken"),
   refreshToken: localStorage.getItem("refreshToken")
 });
 
-// Verifica si el usuario está autenticado o intenta refrescar el token si expiró
 export const isAuthenticated = async () => {
   const { accessToken, refreshToken } = getTokens();
   if (!accessToken || !refreshToken) return false;
@@ -27,42 +25,12 @@ export const isAuthenticated = async () => {
   try {
     const decodedToken = jwtDecode(accessToken);
     const isExpired = decodedToken.exp * 1000 <= Date.now();
-
     if (!isExpired) return true;
 
-    // Token expirado, intentamos refrescar
-    const refreshed = await refreshAccessToken(refreshToken);
-    return refreshed;
+    const wasRefreshed = await refreshAccessToken(refreshToken);
+    return wasRefreshed;
   } catch (error) {
     console.warn("Invalid token, closing session.");
-    removeTokens();
-    return false;
-  }
-};
-
-export const refreshAccessToken = async (refreshToken) => {
-  try {
-    const res = await axios.post(
-      "https://service.todo-api.site/api/auth/refresh",
-      { refreshToken }
-    );
-
-    const tokenData = res.data.data;
-
-    if (!tokenData?.accessToken || !tokenData?.refreshToken) {
-      console.warn("⚠️ Access o refresh token faltante en respuesta.");
-      return false;
-    }
-
-    const { accessToken, refreshToken: newRefreshToken } = tokenData;
-    console.log("🔁 Tokens actualizados:");
-    console.log("  Access:", accessToken);
-    console.log("  Refresh:", newRefreshToken);
-
-    setTokens(accessToken, newRefreshToken);
-    return true;
-  } catch (error) {
-    console.error("Error setting tokens", error);
     removeTokens();
     return false;
   }
@@ -79,20 +47,15 @@ export const scheduleTokenRefresh = () => {
     const decodedToken = jwtDecode(accessToken);
     const expiresAt = decodedToken.exp * 1000;
     const now = Date.now();
-    const timeUntilRefresh = expiresAt - now - 60_000; // refresco 1 minuto antes
+    const timeUntilRefresh = expiresAt - now - 60_000;
+
+    clearTimeout(refreshTimeout); // por las dudas
 
     if (timeUntilRefresh <= 0) {
-      refreshAccessToken(refreshToken);
+      refreshAccessToken(refreshToken); // Esto ya reprograma
     } else {
-      clearTimeout(refreshTimeout);
       refreshTimeout = setTimeout(() => {
-        refreshAccessToken(refreshToken).then((ok) => {
-          if (ok) {
-            scheduleTokenRefresh(); // cadena de refrescos
-          } else {
-            console.warn("Failed refresh, deleted tokens.");
-          }
-        });
+        refreshAccessToken(refreshToken); // el refresh se encarga del schedule
       }, timeUntilRefresh);
     }
   } catch (error) {

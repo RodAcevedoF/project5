@@ -1,7 +1,6 @@
 import "./TodoCard.css";
 import { createTodo, updateTodo, deleteTodo } from "../../api/ToDoApi";
-import { loadTodos, loadUpcomingDeadlines } from "../MainAside/MainAside";
-import { CardBtn } from "..";
+import { CardBtn, loadTodos, loadUpcomingDeadlines } from "..";
 
 export const TodoCard = () => {
   const cardContainer = document.createElement("div");

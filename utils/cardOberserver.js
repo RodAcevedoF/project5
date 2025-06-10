@@ -14,7 +14,7 @@ const observer = new IntersectionObserver(
 );
 
 // Observar dinámicamente cuando se agregan nuevas cards
-export const observeNewCards = (elem) => {
+const observeNewCards = (elem) => {
   document.querySelectorAll(`.${elem}-card:not(.observed)`).forEach((card) => {
     observer.observe(card);
     card.classList.add("observed");

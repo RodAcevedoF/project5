@@ -1,8 +1,10 @@
 import "./Signlogin.css";
-import { RegisterForm } from "../../components/RegisterForm/RegisterForm";
-import { LoginForm } from "../../components/LoginForm/LoginForm";
-import { PasswordForm } from "../../components/PasswordForm/PasswordForm";
-import BackBtn from "../../components/BackBtn/BackBtn";
+import {
+  BackBtn,
+  LoginForm,
+  PasswordForm,
+  RegisterForm
+} from "../../components";
 import { Landing } from "../Landing/Landing";
 import { getState, setState } from "../../utils/state";
 import { setTokens } from "../../utils/authUtils";
@@ -83,7 +85,7 @@ export const handleAuthSuccess = async (response) => {
 
   if (!user.is_verified) {
     try {
-      const token = await requestEmailVerification(); // ⚠️ debería devolver el token directo
+      const token = await requestEmailVerification();
 
       if (token) {
         await sendUserEmail({

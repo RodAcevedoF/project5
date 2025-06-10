@@ -1,7 +1,5 @@
-import QualityList from "../QualityList/QualityList";
 import "./Footer.css";
-import { MailBtn } from "../MailBtn/MailBtn";
-import Contact from "../Contact/Contact";
+import { Contact, MailBtn, QualityList } from "..";
 
 const Footer = () => {
   const foot = document.querySelector("footer");

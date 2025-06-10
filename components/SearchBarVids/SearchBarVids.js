@@ -1,30 +1,5 @@
-/* import "./SearchBarVids.css";
-import MainBtn from "../MainBtn/MainBtn";
-import { SearchElement } from "../SeachElement/SearchElement";
-
-export const SearchBarVids = (onSearchQuery) => {
-  const form = document.createElement("form");
-  form.classList.add("search-vids-form");
-
-  form.innerHTML = `
-      ${SearchElement()}
-      ${MainBtn("submit", "searchvid-btn", "main-btn", "Search")}
-  `;
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const input = form.querySelector("#search-input");
-    const query = input.value.trim();
-    if (!query) return;
-    onSearchQuery(query);
-  });
-
-  return form;
-};
- */
 import "./SearchBarVids.css";
-import MainBtn from "../MainBtn/MainBtn";
-import { SearchElement } from "../SeachElement/SearchElement";
+import { MainBtn, SearchElement } from "..";
 
 export const SearchBarVids = (onSearchQuery) => {
   const form = document.createElement("form");

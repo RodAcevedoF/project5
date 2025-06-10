@@ -3,8 +3,12 @@ import { changePage } from "../../utils/changePage";
 import { Todo } from "../../pages/ToDo/Todo";
 import { Videos } from "../../pages/VideoPage/Videos";
 import { Books } from "../../pages/Books/Books";
-import HeroHome from "../../components/HeroHome/HeroHome";
+import { HeroHome } from "../../components";
 import { HomeOptions } from "../../components";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Home = () => {
   const main = document.querySelector("main");
@@ -27,14 +31,17 @@ export const Home = () => {
   navLinks[0].addEventListener("click", () => changePage(Todo, "todo"));
   navLinks[1].addEventListener("click", () => changePage(Books, "books"));
   navLinks[2].addEventListener("click", () => changePage(Videos, "videos"));
-
-  window.addEventListener("scroll", () => {
-    const parallax = document.querySelector(".section-bg");
-    const scrollY = window.scrollY;
-    if (parallax) {
-      parallax.style.transform = `translateY(${scrollY * 0.4}px)`;
-    }
+  requestAnimationFrame(() => {
+    gsap.to(".section-bg", {
+      y: () => window.innerHeight * 0.5,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".home-container",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
   });
-
   return main;
 };

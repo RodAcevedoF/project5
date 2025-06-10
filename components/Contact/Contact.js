@@ -1,5 +1,5 @@
 import "./Contact.css";
-import MicrosoftBtn from "../MicrosoftBtn/MicrosoftBtn";
+import { MicrosoftBtn } from "..";
 
 const Contact = () => {
   const div = document.createElement("div");

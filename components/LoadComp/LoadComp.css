@@ -67,3 +67,10 @@
     transform: translate(0);
   }
 }
+
+@media screen and (width < 591px) {
+  .glitch {
+    font-size: 4.5em;
+    letter-spacing: 0.2em;
+  }
+}

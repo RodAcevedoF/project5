@@ -1,23 +1,25 @@
-// Limpieza aplicada: sin persistencia de currentToggle y prevención de duplicados
-import { BookCard } from "../BookCard/BookCard.js";
+import {
+  BookCard,
+  BookSuggestions,
+  ListElement,
+  LoadComp,
+  LoadMoreBtn,
+  SavedBooksBar,
+  SavedList,
+  SavedListsSuggestions,
+  SearchBar,
+  ToggleBtn
+} from "../index.js";
 import "./BookGrid.css";
-import { SearchBar } from "../SearchBar/SearchBar.js";
 import { searchBook } from "../../api/searchBook.js";
 import { getBooks } from "../../api/bookApi.js";
-import ToggleBtn from "../ToggleBtn/ToggleBtn.js";
-import LoadComp from "../LoadComp/LoadComp.js";
 import { setState, getState } from "../../utils/state.js";
 import { randomQueries } from "../../data/options.js";
-import BookSuggestions from "../BookSuggestions/BookSuggestions.js";
-import SavedBooksBar from "../SavedBooksBar/SavedBooksBar.js";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.js";
 import {
   getCategories,
   filterBooks,
   updateBookCount
 } from "../../utils/updateBookCount.js";
-import SavedList from "../SavedList/SavedList.js";
-import ListElement from "../ListElement/ListElement.js";
 
 export const BookGrid = () => {
   const container = document.createElement("article");
@@ -31,6 +33,7 @@ export const BookGrid = () => {
 
   const toggleSect = document.createElement("section");
   toggleSect.classList.add("toggle-section");
+  setState("currentToggle", "search");
 
   const savedSect = document.createElement("section");
   savedSect.classList.add("saved-section");
@@ -57,9 +60,15 @@ export const BookGrid = () => {
       startIndex = 0;
     }
 
-    if (!result?.books?.length) {
+    let toggleState = getState("currentToggle");
+
+    if (!result?.books?.length && toggleState === "search") {
       comp.innerHTML = "";
       comp.appendChild(BookSuggestions(searchBooks, toggleButton));
+      return;
+    } else if (!result?.books?.length && toggleState === "saved") {
+      const suggestion = SavedListsSuggestions("book", toggleButton);
+      comp.appendChild(suggestion);
       return;
     }
 
@@ -134,18 +143,22 @@ export const BookGrid = () => {
 
     const savedBar = document.querySelector(".saved-books-bar");
     if (showingSavedBooks) {
+      setState("currentToggle", "saved");
       searchBarElement.style.display = "none";
       grid.style.display = "none";
       savedSect.style.display = "flex";
       if (savedBar) savedBar.style.display = "flex";
+      loadMoreButton.style.display = "none";
       await loadSavedBooks();
     } else {
+      setState("currentToggle", "search");
       searchBarElement.style.display = "flex";
       grid.style.display = "grid";
       savedSect.style.display = "none";
       if (savedBar) savedBar.style.display = "none";
       grid.innerHTML = "";
       searchBarElement.reset();
+      loadMoreButton.style.display = "block";
       getRandomQuery();
     }
   };
@@ -202,8 +215,6 @@ export const BookGrid = () => {
 
   container.append(toggleSect, menuSect, grid, loadMoreButton, savedSect);
 
-  // Estado inicial: search
-  savedSect.style.display = "none";
   getRandomQuery();
 
   return { container, updateResults, showLoading, searchBooks };

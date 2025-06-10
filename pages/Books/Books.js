@@ -1,20 +1,21 @@
-// Books.js
 import "./Books.css";
-import { BookGrid } from "../../components/BookGrid/BookGrid.js";
-import HeroBanner from "../../components/HeroBanner/HeroBanner.js";
-import InnerFooter from "../../components/InnerFooter/InnerFooter.js";
+import { BookGrid, HeroBanner, InnerFooter } from "../../components";
 import { loadCategories } from "../../utils/getPopularCategories.js";
-import { getCategories } from "../../utils/updateBookCount.js";
 await loadCategories();
 
 export const Books = () => {
   const main = document.querySelector("main");
   main.innerHTML = `<section class="book-main"></section>`;
 
-  const section = main.querySelector(".book-main");
-  section.appendChild(HeroBanner("Searching books?"));
-
+  const hero = HeroBanner({
+    header: "Books",
+    messages: ["Search books", "Save Books", "Read books"]
+  });
   const bookGrid = BookGrid();
+
+  const section = main.querySelector(".book-main");
+  section.appendChild(hero);
+
   section.appendChild(bookGrid.container);
 
   section.appendChild(InnerFooter());

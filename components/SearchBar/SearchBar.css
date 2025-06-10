@@ -10,7 +10,7 @@
 #category-select {
   height: 3em;
   border-radius: 0.1em;
-  border: 0.25em solid var(--letter-general);
+  border: 0.25em solid var(--darker-main);
   text-transform: uppercase;
   transition: 0.2s linear;
   width: 15em;
@@ -18,16 +18,16 @@
 }
 
 #category-select:focus {
-  border: 0.5px solid var(--letter-general);
-  box-shadow: 5px 5px 0px var(--letter-general);
+  border: 0.5px solid var(--darker-main);
+  box-shadow: 5px 5px 0px var(--darker-main);
 }
 
 #searchbar-btn {
   height: 3em;
-  color: var(--letter-general);
+  color: var(--darker-main);
   font-weight: bolder;
 }
 
 #searchbar-btn:hover {
-  color: var(--back-general);
+  color: var(--darker-main);
 }

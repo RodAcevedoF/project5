@@ -1,41 +1,84 @@
 import "./Landing.css";
-import { SignBtn } from "../../components/SignBtn/SignBtn.js";
-import Brands from "../../components/Brands/Brands.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  LandingCard,
+  LandingHeader,
+  LandingIdeas,
+  Brands
+} from "../../components";
+gsap.registerPlugin(ScrollTrigger);
+
 export const Landing = () => {
   const main = document.querySelector("main");
-  //  const landingHero = `<div class="landing-hero"></div>`;
+
+  // 💥 PRIMERO setear el HTML
   main.innerHTML = `
     <section class="landing">
-        <article class="landing-container">
-          <img src="/images/gradient.png" alt="background img" class="back-landing">
-          <div class="landing-box">
-            <p>GetDone tasks</p>
-            <h1>Welcome to <em>GetDone</em> App</h1>
-            <p>Plan and organize your tasks and study goals.</p>
-            <div class="alt-login">
-              <div>
-                <p>Free forever.</p>
-                <p>No credit card.</p>
-              </div>
-            </div>
-            <div class="reviews">
-              <img src="/images/stars.png" alt="4.5 stars" class="stars">
-              <p>5000+ reviews from</p>
-              <img src="/images/reviewApps.png" alt="review apps" class="rev-apps">
-            </div>
-          </div> 
-         <img src="/images/gradient.png" alt="background img" class="back-landing">
-        </article>
-        <article class="article-exp">
-        </article>
+      <article class="landing-container">
+        <div class="landing-header"></div>
+        <div class="landing-header-ideas"></div>
+        <div class="landing-box"></div>
+      </article>
+      <article class="article-exp"></article>
     </section>
   `;
 
-  const divAltLogin = main.querySelector(".alt-login");
-  divAltLogin.insertAdjacentElement(
-    "afterbegin",
-    SignBtn("sign-in-alt", "Get Started ►", "register")
-  );
+  // 💡 DESPUÉS instanciar los componentes
+  const headerComp = LandingHeader();
+  const headerIdeas = LandingIdeas();
+  const landingCard = LandingCard();
+
   const articleExp = main.querySelector(".article-exp");
   articleExp.appendChild(Brands());
+
+  main.querySelector(".landing-header").appendChild(headerComp);
+  main.querySelector(".landing-header-ideas").appendChild(headerIdeas);
+  main.querySelector(".landing-box").appendChild(landingCard);
+
+  // 👇 Animaciones
+  requestAnimationFrame(() => {
+    gsap.set(".landing-header-ideas", { opacity: 0 });
+    gsap.set(".landing-box", { opacity: 0 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".landing",
+        start: "top top",
+        end: "+=280%",
+        scrub: true,
+        pin: true,
+        onLeave: () => {
+          gsap.set(".landing-container", {
+            position: "relative",
+            height: "auto"
+          });
+        }
+      }
+    });
+
+    tl.to(".landing-header-ideas", {
+      y: "-60vh",
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out"
+    });
+    tl.to(".landing-header-ideas", {
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".landing-ideas-li:last-of-type",
+        start: "top top"
+      }
+    });
+    tl.to(".landing-box", {
+      y: "-175vh",
+      opacity: 1,
+      duration: 1.5,
+      ease: "power2.out"
+    });
+  });
+
+  return main;
 };

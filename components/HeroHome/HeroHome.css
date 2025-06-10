@@ -83,6 +83,8 @@
   font-family: "Jersey 15";
   font-weight: 100;
   color: var(--back-general);
+  text-align: center;
+  margin-bottom: 0.5em;
 }
 
 .loop-hero {

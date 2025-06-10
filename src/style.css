@@ -7,11 +7,12 @@
 
 :root {
   --back-general: rgb(237, 237, 237);
-  --back-alt: #202020;
-  --nav-light: rgba(245, 245, 245, 0.942);
+  --back-alt: #062340;
+  --back-alt-light: #062340c8;
+  --nav-light: rgba(245, 245, 245, 0.821);
   --main-color: #3fb2ff;
   --lighter-main: #3fb2ff65;
-  --darker-main: rgb(1, 31, 40);
+  --darker-main: rgb(4, 21, 48);
   --box-background: linear-gradient(to right, #3fb2ff, #4b4b4b99);
   --box-danger-background: linear-gradient(to right, #fa6767, #4b4b4b99);
   --footer-background: linear-gradient(to right, #3fb2ff, #666666);
@@ -19,8 +20,9 @@
   --button-alt-background: linear-gradient(to right, #3fb2ff, #000000);
   --letter-general: rgb(20, 20, 22);
   --highlight-letter: #a3a3a3ab;
-  --general-shadow: 0 8px 32px 0 rgba(53, 53, 53, 0.37);
-  --alt-shadow: 0px 10px 40px rgba(231, 229, 229, 0.471);
+  --general-shadow: 2px 10px 15px 0 rgba(19, 33, 85, 0.719);
+  --dark-calendar-shadow: 0 8px 32px 0 rgb(0, 0, 0);
+  --alt-shadow: 5px 10px 20px rgba(255, 255, 255, 0.471);
   --card-light-bg: linear-gradient(to right, #e7e7e7cf, #cacacac7);
   --card-dark-bg: radial-gradient(
     circle,
@@ -38,276 +40,15 @@ a {
   color: inherit;
 }
 
-main {
-  margin-top: 6rem;
-}
-
 body {
   background-color: var(--back-general);
   transition: background-color 0.3s ease-in-out;
 }
+/* ========== FONTS ========== */
 
-.dark {
-  background-color: var(--back-alt);
-  color: var(--back-general);
-  .logo-btn {
-    filter: invert(1);
-  }
-  main {
-    background: var(--back-alt);
-  }
-  .yt-channel,
-  .channel-icon {
-    filter: invert(1);
-  }
-  .nav-links {
-    box-shadow: var(--alt-shadow);
-  }
-  #sign-up-btn,
-  .landing-container h1,
-  .service-li {
-    color: var(--back-general);
-  }
-  .landing-box {
-    box-shadow: var(--alt-shadow);
-    background-color: var(--back-alt);
-  }
-  .snap {
-    filter: invert(1);
-  }
-  .alt-login {
-    box-shadow: var(--alt-shadow);
-  }
-  #login-form,
-  .services-ul,
-  #register-form,
-  .services-ul.floating,
-  #password-form {
-    background: var(--back-alt);
-    box-shadow: var(--alt-shadow);
-  }
-  .go-back-btn span,
-  .weather-widget,
-  .quote-div,
-  .load-more-button,
-  .glitch {
-    color: var(--back-general);
-  }
-  .todo-main,
-  .main-aside,
-  .vidcard-header,
-  .video-card.expanded,
-  .title-url h3 {
-    background: var(--back-alt);
-  }
-  .page-btn {
-    box-shadow: var(--alt-shadow);
-  }
-
-  .task-editor {
-    box-shadow: var(--alt-shadow);
-  }
-  .main-aside {
-    box-shadow: var(--alt-shadow);
-  }
-  .simple-calendar {
-    background: var(--back-alt);
-    color: var(--back-general);
-    box-shadow: var(--alt-shadow);
-  }
-  .nav-btn,
-  .vidcard-header {
-    color: var(--back-general);
-  }
-  .todo-display-card {
-    box-shadow: var(--alt-shadow);
-  }
-  .calendar-table th,
-  .calendar-table td {
-    border: 1px solid var(--back-general);
-  }
-  .simple-calendar {
-    background: var(--calendar-bg-alt);
-  }
-  .todo-footer,
-  .nav-links,
-  .load-more-button,
-  .book-article {
-    background: var(--back-alt);
-  }
-  .book-card,
-  .todo-display-card,
-  .with,
-  .without,
-  #login-form,
-  #register-form,
-  #password-form,
-  .video-card,
-  .vidcard-header,
-  .book-li,
-  .video-li {
-    border: 0.5vmin solid var(--back-general);
-    box-shadow: 0.4rem 0.4rem var(--back-general);
-  }
-
-  .book-card.expanded {
-    background: var(--back-alt);
-    box-shadow: var(--alt-shadow);
-  }
-  .card-summary.expanded {
-    box-shadow: var(--alt-shadow);
-  }
-
-  .card-details p:nth-child(3) {
-    box-shadow: var(--alt-shadow);
-  }
-  .main-aside h3,
-  .task-editor,
-  .card-summary.expanded,
-  .nav-links,
-  .details textarea,
-  .saved-label,
-  .card-title {
-    border: 0.4vmin solid var(--back-general);
-    box-shadow: 0.3rem 0.3rem var(--back-general);
-  }
-  .service-li:hover {
-    border: 0.2vmin solid var(--back-general);
-    box-shadow: 0.2rem 0.2rem var(--back-general);
-  }
-  .landing-box,
-  .aside-profile {
-    border: 0.6vmin solid var(--back-general);
-    box-shadow: 0.5rem 0.5rem var(--back-general);
-  }
-  .loader span,
-  .button-elem {
-    color: var(--back-general);
-  }
-  .input,
-  #category-select,
-  #duration-select,
-  #order-select,
-  #channel-select,
-  #saved-category-select {
-    border: 0.25em solid var(--back-general);
-    color: var(--back-general);
-    background: var(--letter-general);
-  }
-
-  .input:focus {
-    border: 0.5px solid var(--back-general);
-    box-shadow: 5px 5px 0px var(--back-general);
-    background-color: var(--back-alt);
-  }
-  #category-select:focus,
-  #duration-select:focus,
-  #order-select:focus,
-  #channel-select:focus,
-  #saved-category-select:focus {
-    border: 0.5px solid var(--back-general);
-    box-shadow: 5px 5px 0px var(--back-general);
-    background-color: var(--back-alt);
-    color: var(--back-general);
-  }
-  .max-pages-label,
-  .length-label {
-    border: 0.15em solid var(--back-general);
-  }
-  .matches-info {
-    border: 0.5vmin solid var(--back-general);
-    box-shadow: 0.3rem 0.3rem var(--back-general);
-  }
-  .head-info {
-    background: var(--letter-general);
-    color: var(--back-general);
-    border-bottom: 3px solid var(--back-general);
-  }
-  .icon,
-  .arrow-icon {
-    filter: invert(1);
-  }
-
-  .front-btns button,
-  .card-button,
-  .actions button {
-    border: 3px solid var(--back-general);
-    box-shadow: 5px 5px 0 var(--back-general);
-  }
-  .read-btn:hover,
-  .card-button:hover {
-    background-color: #296fbb;
-    border-color: #296fbb;
-    color: #fff;
-    box-shadow: 7px 7px 0 #004280;
-  }
-
-  .del-btn:hover,
-  #delete-btn:hover,
-  .delete-acc-div button:hover {
-    background-color: #ff0000;
-    border-color: #ff0000;
-    color: #fff;
-    box-shadow: 7px 7px 0 #800000;
-  }
-
-  .front-btns button:active {
-    transform: translate(5px, 5px);
-    box-shadow: none;
-  }
-
-  .todo-display-card h3 {
-    -webkit-text-stroke-color: var(--back-general);
-  }
-  .switch-container,
-  .profile-plain-info li {
-    border: 3px solid var(--back-general);
-  }
-  .profile-plain-info {
-    border: 0.5em solid var(--lighter-main);
-  }
-  .styled-wrapper .button:before {
-    border-color: var(--back-general);
-  }
-  .profile-nav {
-    border-color: var(--back-general);
-  }
-  .profile-plain-info li:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 10px 10px 0 var(--lighter-main);
-  }
-  .profile-plain-info li {
-    background: linear-gradient(
-      to right,
-      rgba(245, 245, 245, 0.542),
-      transparent 20%
-    );
-  }
-  .profile-plain-info li:last-of-type {
-    border: none;
-    box-shadow: none;
-    background: none;
-  }
-  .edit-form-container.active,
-  .profile-settings-body {
-    background: #f8f9fd;
-    background: linear-gradient(0deg, #848484 0%, var(--darker-main) 100%);
-    border: 10px solid rgb(162, 161, 161);
-  }
-  .title-profile {
-    -webkit-text-stroke: 2px var(--back-general);
-  }
-}
 @font-face {
   font-family: "Monda";
   src: url("/fonts/monda_regular/monda_regular.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "IndieFlower";
-  src: url("/fonts/indieflower-regular/IndieFlower-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -318,4 +59,277 @@ body {
     format("woff2");
   font-weight: normal;
   font-style: normal;
+}
+
+/* ========== DARK MODE ========== */
+
+.dark {
+  background-color: var(--back-alt);
+  color: var(--back-general);
+}
+
+.dark .logo-btn,
+.dark .yt-channel,
+.dark .channel-icon,
+.dark .snap,
+.dark .icon,
+.dark .arrow-icon {
+  filter: invert(1);
+}
+
+.dark main,
+.dark .todo-main,
+.dark .main-aside,
+.dark .vidcard-header,
+.dark .video-card.expanded,
+.dark .title-url h3,
+.dark .todo-footer,
+.dark .nav-links,
+.dark .load-more-button,
+.dark .book-article,
+.dark .bookcard-header,
+.dark .book-card,
+.dark .card-details,
+.dark .input:focus,
+.dark #category-select:focus,
+.dark #duration-select:focus,
+.dark #order-select:focus,
+.dark #channel-select:focus,
+.dark #saved-category-select:focus,
+.dark .head-info,
+.dark .book-card.expanded,
+.dark .card-actions textarea,
+.dark .notes-input,
+.dark #global-loader,
+.dark .landing-card,
+.dark .todo-tasks,
+.dark .book-li,
+.dark .video-li {
+  background: var(--back-alt);
+}
+
+.dark .landing-card,
+.dark .alt-login,
+.dark .task-editor,
+.dark .page-btn,
+.dark .main-aside,
+.dark .todo-display-card,
+.dark .video-card,
+.dark .card-summary.expanded,
+.dark .book-card.expanded,
+.dark .video-card.expanded,
+.dark .matches-info,
+.dark .switch-container,
+.dark .profile-plain-info li,
+.dark .book-card:hover,
+.dark .book-li:hover,
+.dark .video-li:hover,
+.dark .video-card:hover,
+.dark .video-card:hover .vidcard-header {
+  box-shadow: var(--alt-shadow);
+}
+
+.dark .card-summary.expanded,
+.dark .main-aside h3,
+.dark .task-editor,
+.dark .nav-links,
+.dark .details textarea,
+.dark .saved-label,
+.dark .card-title,
+.dark .matches-info,
+.dark .switch-container,
+.dark .card-actions textarea,
+.dark .notes-input {
+  border: 0.4vmin solid var(--back-general);
+  box-shadow: 0.3rem 0.3rem var(--back-general);
+}
+
+.dark .service-li:hover,
+.dark .bookcard-header {
+  border: 0.2vmin solid var(--back-general);
+  box-shadow: 0.2rem 0.2rem var(--back-general);
+}
+
+.dark .landing-card,
+.dark .aside-profile,
+.dark .verify-box {
+  border: 0.6vmin solid var(--back-general);
+  box-shadow: 0.5rem 0.5rem var(--back-general);
+}
+
+.dark #sign-up-btn,
+.dark .landing-container h1,
+.dark .service-li,
+.dark .go-back-btn span,
+.dark .weather-widget,
+.dark .quote-div,
+.dark .load-more-button,
+.dark .glitch,
+.dark .bookcard-header,
+.dark .nav-btn,
+.dark .vidcard-header,
+.dark .loader span,
+.dark .button-elem,
+.dark .input,
+.dark #category-select,
+.dark #duration-select,
+.dark #order-select,
+.dark #channel-select,
+.dark #saved-category-select,
+.dark .max-pages-label,
+.dark .length-label,
+.dark .todo-display-card h3,
+.dark .profile-plain-info li,
+.dark .verify-box h2,
+.dark .head-info,
+.dark .card-actions textarea,
+.dark .notes-input,
+.dark .simple-calendar,
+.dark .style-activity {
+  color: var(--back-general);
+}
+
+.dark .input,
+.dark #category-select,
+.dark #duration-select,
+.dark #order-select,
+.dark #channel-select,
+.dark #saved-category-select {
+  border: 0.25em solid var(--back-general);
+  background: var(--darker-main);
+}
+.dark .simple-calendar {
+  box-shadow: var(--dark-calendar-shadow);
+}
+.dark .input:focus,
+.dark #category-select:focus,
+.dark #duration-select:focus,
+.dark #order-select:focus,
+.dark #channel-select:focus,
+.dark #saved-category-select:focus,
+.dark .book-card,
+.dark .todo-display-card,
+.dark .with,
+.dark .without,
+.dark #login-form,
+.dark #register-form,
+.dark #password-form,
+.dark .video-card,
+.dark .vidcard-header,
+.dark .book-li,
+.dark .video-li,
+.dark .landing-card,
+.dark .activity-clock-div,
+.dark .video-card {
+  border: 0.5vmin solid var(--back-general);
+  box-shadow: 0.4rem 0.4rem var(--back-general);
+}
+
+.dark .card-details p:nth-child(3) {
+  box-shadow: var(--alt-shadow);
+}
+
+.dark #login-form,
+.dark .services-ul,
+.dark #register-form,
+.dark .services-ul.floating,
+.dark #password-form,
+.dark .verify-box {
+  background: var(--back-alt-light);
+  box-shadow: var(--alt-shadow);
+}
+
+.dark .calendar-table th,
+.dark .calendar-table td {
+  border: 1px solid var(--back-general);
+}
+
+.dark .front-btns button,
+.dark .card-button,
+.dark .actions button,
+.dark .resend-btn,
+.dark .back-to-login-button,
+.dark #sign-in-alt,
+.dark #last-sign-in,
+.dark .suggestion-btn {
+  border: 3px solid var(--back-general);
+  box-shadow: 5px 5px 0 var(--back-general);
+}
+
+.dark .read-btn:hover,
+.dark .card-button:hover {
+  background-color: #296fbb;
+  border-color: #296fbb;
+  color: #fff;
+  box-shadow: 7px 7px 0 #004280;
+}
+
+.dark .del-btn:hover,
+.dark #delete-btn:hover,
+.dark .delete-acc-div button:hover {
+  background-color: #ff0000;
+  border-color: #ff0000;
+  color: #fff;
+  box-shadow: 7px 7px 0 #800000;
+}
+
+.dark .front-btns button:active {
+  transform: translate(5px, 5px);
+  box-shadow: none;
+}
+
+.dark .profile-plain-info li,
+.dark .style-activity {
+  border: 3px solid var(--lighter-main);
+  box-shadow: none;
+}
+
+.dark .profile-plain-info li:hover,
+.dark .style-activity:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 var(--lighter-main);
+}
+
+.dark .profile-plain-info li {
+  background: linear-gradient(
+    to right,
+    rgba(245, 245, 245, 0.112) 5%,
+    var(--darker-main)
+  );
+}
+
+.dark .profile-plain-info li:last-of-type {
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.dark .edit-form-container.active,
+.dark .profile-settings-body {
+  background: linear-gradient(0deg, #848484 0%, var(--darker-main) 100%);
+  border: 10px solid rgb(162, 161, 161);
+}
+
+.dark .styled-wrapper .button:before,
+.dark .head-info {
+  border-color: var(--back-general);
+}
+
+.dark .task-editor input,
+.dark .task-editor textarea,
+.dark .task-editor select {
+  border: 0.5vmin solid rgb(98, 98, 98);
+  box-shadow: 0.4rem 0.4rem rgb(98, 98, 98);
+}
+
+.dark .title-profile {
+  -webkit-text-stroke: 2px var(--back-general);
+}
+
+.dark .book-card:hover {
+  filter: contrast(1.2);
+}
+
+.dark .card-description {
+  background: #ffffff11;
 }

@@ -1,11 +1,14 @@
 import "./Brands.css";
 import brandInfo from "../../data/brands";
-import { SignBtn } from "../SignBtn/SignBtn";
+import { SignBtn } from "..";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const Brands = () => {
-    const div = document.createElement("div");
-    div.classList.add("brand-div")
-    div.innerHTML= `<div class="brand-article">
+  const div = document.createElement("div");
+  div.classList.add("brand-div");
+  div.innerHTML = `<div class="brand-article">
                       <h4>Trusted by hundreds+ of teams</h4>
                       <ul class="brand-ul"></ul>
                     </div>  
@@ -56,14 +59,31 @@ const Brands = () => {
                         </ul>
                     </div>`;
 
-    const ul = div.querySelector(".brand-ul");
-    for (let brand of brandInfo) {
-        let newLi = document.createElement("li");
-        newLi.innerHTML = `<img src=${brand.url} class="${brand.className} logo">`;
-        ul.appendChild(newLi);
-    }
-    div.appendChild(SignBtn("last-sign-in", "Get Started for free! ►", "register"));
-    return div;
-}
+  const ul = div.querySelector(".brand-ul");
+  for (let brand of brandInfo) {
+    let newLi = document.createElement("li");
+    newLi.innerHTML = `<img src=${brand.url} class="${brand.className} logo">`;
+    ul.appendChild(newLi);
+  }
+  div.appendChild(
+    SignBtn("last-sign-in", "Get Started for free! ►", "register")
+  );
+
+  requestAnimationFrame(() => {
+    gsap.to(".brand-ul li", {
+      y: -5,
+      duration: 1,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: {
+        amount: 1.5,
+        from: "start"
+      }
+    });
+  });
+
+  return div;
+};
 
 export default Brands;

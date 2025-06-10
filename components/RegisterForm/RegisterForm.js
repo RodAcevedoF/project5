@@ -1,7 +1,11 @@
 import "./RegisterForm.css";
 import { registerUser } from "../../api/userApi";
-import MainBtn from "../MainBtn/MainBtn";
+import { MainBtn } from "..";
 import { handleAuthSuccess } from "../../pages/SignLogin/SignLogin";
+import {
+  showGlobalLoader,
+  hideGlobalLoader
+} from "../GlobalLoader/GlobalLoader";
 
 export const RegisterForm = () => {
   const div = document.createElement("div");
@@ -31,9 +35,8 @@ export const RegisterForm = () => {
       </div>
 
       <p class="registered">You have an account? Login!</p>
-    </form>
-
-    <p id="register-error" class="error-message"></p>
+      <p id="register-error" class="error-message"></p>
+      </form>
   `;
 
   const form = div.querySelector("#register-form");
@@ -53,10 +56,12 @@ export const RegisterForm = () => {
     }
 
     try {
+      showGlobalLoader(); // 🚀 Mostramos loader antes de iniciar
+
       const response = await registerUser(name, email, password);
 
       if (response?.data) {
-        await handleAuthSuccess(response);
+        await handleAuthSuccess(response); // ⚠️ Esto puede tardar
       } else {
         throw new Error(response?.error || "Registration failed");
       }
@@ -66,6 +71,8 @@ export const RegisterForm = () => {
         error?.response?.data?.error ||
         error.message ||
         "Unexpected error during registration.";
+    } finally {
+      hideGlobalLoader(); // 🧹 Siempre se oculta
     }
   });
 

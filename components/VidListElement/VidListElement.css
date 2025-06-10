@@ -4,10 +4,23 @@
   height: auto;
   justify-content: center;
   align-items: center;
-  border: 0.5vmin solid var(--letter-general);
-  box-shadow: 0.4rem 0.4rem var(--letter-general);
+  border: 0.5vmin solid var(--darker-main);
+  box-shadow: 0.4rem 0.4rem var(--darker-main);
   padding: 1em;
   flex-direction: column;
+  transition: all 0.3s ease-in-out;
+  border-radius: 0.1em;
+  background: rgba(215, 231, 255, 0.268);
+  cursor: pointer;
+}
+
+.video-li:hover {
+  filter: contrast(1.5);
+  box-shadow: var(--general-shadow);
+}
+
+.video-li.open:hover {
+  filter: none;
 }
 
 .savedvid-header {

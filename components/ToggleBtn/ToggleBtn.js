@@ -6,7 +6,6 @@ const toggleBtn = (txt1, txt2, initialState = "search") => {
   const img = document.createElement("img");
   btn.classList.add("toggle-btn");
 
-  // Ajustar el texto inicial según el estado
   p.textContent = initialState === "saved" ? txt2 : txt1;
   img.src = "../../public/icon/btn_arrow.png";
   btn.appendChild(p);
