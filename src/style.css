@@ -10,12 +10,13 @@
   --back-alt: #062340;
   --back-alt-light: #062340c8;
   --nav-light: rgba(245, 245, 245, 0.821);
-  --main-color: #3fb2ff;
+  --main-color: #2fa4f3;
   --lighter-main: #3fb2ff65;
+  --plus-lighter-main: #3fb2ff19;
   --darker-main: rgb(4, 21, 48);
-  --box-background: linear-gradient(to right, #3fb2ff, #4b4b4b99);
+  --box-background: linear-gradient(to right, #3c99f0, #4b4b4b99);
   --box-danger-background: linear-gradient(to right, #fa6767, #4b4b4b99);
-  --footer-background: linear-gradient(to right, #3fb2ff, #666666);
+  --footer-background: linear-gradient(to right, #3c99f0, #666666);
   --aside-background: linear-gradient(to right, #3fb2ff98, #2e2e2e);
   --button-alt-background: linear-gradient(to right, #3fb2ff, #000000);
   --letter-general: rgb(20, 20, 22);
@@ -43,7 +44,9 @@ a {
 body {
   background-color: var(--back-general);
   transition: background-color 0.3s ease-in-out;
+  color: var(--darker-main);
 }
+
 /* ========== FONTS ========== */
 
 @font-face {
@@ -125,7 +128,14 @@ body {
 .dark .book-li:hover,
 .dark .video-li:hover,
 .dark .video-card:hover,
-.dark .video-card:hover .vidcard-header {
+.dark .video-card:hover .vidcard-header,
+.dark .with:hover,
+.dark .without:hover,
+.dark .weather-widget,
+.dark .card-details p:nth-child(3),
+.dark .activity-counter p,
+.dark .activity-clock-div,
+.dark .aside-profile {
   box-shadow: var(--alt-shadow);
 }
 
@@ -151,7 +161,6 @@ body {
 }
 
 .dark .landing-card,
-.dark .aside-profile,
 .dark .verify-box {
   border: 0.6vmin solid var(--back-general);
   box-shadow: 0.5rem 0.5rem var(--back-general);
@@ -219,14 +228,9 @@ body {
 .dark .book-li,
 .dark .video-li,
 .dark .landing-card,
-.dark .activity-clock-div,
 .dark .video-card {
   border: 0.5vmin solid var(--back-general);
   box-shadow: 0.4rem 0.4rem var(--back-general);
-}
-
-.dark .card-details p:nth-child(3) {
-  box-shadow: var(--alt-shadow);
 }
 
 .dark #login-form,
@@ -251,7 +255,10 @@ body {
 .dark .back-to-login-button,
 .dark #sign-in-alt,
 .dark #last-sign-in,
-.dark .suggestion-btn {
+.dark .suggestion-btn,
+.dark .task-editor input,
+.dark .task-editor textarea,
+.dark .task-editor select {
   border: 3px solid var(--back-general);
   box-shadow: 5px 5px 0 var(--back-general);
 }
@@ -278,14 +285,12 @@ body {
   box-shadow: none;
 }
 
-.dark .profile-plain-info li,
-.dark .style-activity {
+.dark .profile-plain-info li {
   border: 3px solid var(--lighter-main);
   box-shadow: none;
 }
 
-.dark .profile-plain-info li:hover,
-.dark .style-activity:hover {
+.dark .profile-plain-info li:hover {
   transform: translate(-2px, -2px);
   box-shadow: 10px 10px 0 var(--lighter-main);
 }
@@ -305,25 +310,25 @@ body {
 }
 
 .dark .edit-form-container.active,
-.dark .profile-settings-body {
+.dark .profile-settings-body,
+.dark .profile-activity-section,
+.dark .aside-profile {
   background: linear-gradient(0deg, #848484 0%, var(--darker-main) 100%);
   border: 10px solid rgb(162, 161, 161);
 }
 
 .dark .styled-wrapper .button:before,
-.dark .head-info {
+.dark .head-info,
+.dark .with:hover,
+.dark .without:hover {
   border-color: var(--back-general);
 }
 
 .dark .task-editor input,
 .dark .task-editor textarea,
 .dark .task-editor select {
-  border: 0.5vmin solid rgb(98, 98, 98);
-  box-shadow: 0.4rem 0.4rem rgb(98, 98, 98);
-}
-
-.dark .title-profile {
-  -webkit-text-stroke: 2px var(--back-general);
+  background: var(--back-alt);
+  color: var(--back-general);
 }
 
 .dark .book-card:hover {
@@ -332,4 +337,8 @@ body {
 
 .dark .card-description {
   background: #ffffff11;
+}
+
+.dark #todo-deadline {
+  color-scheme: dark;
 }

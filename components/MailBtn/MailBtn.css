@@ -26,7 +26,7 @@
   border-radius: 0.1em;
   border: 0.6vmin solid var(--back-general);
   box-shadow: 0.5rem 0.5rem var(--back-general);
-  background-color: var(--letter-general);
+  background: var(--darker-main);
   z-index: -1;
 }
 

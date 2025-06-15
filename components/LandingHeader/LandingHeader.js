@@ -25,7 +25,6 @@ const LandingHeader = () => {
   `;
 
   requestAnimationFrame(() => {
-    // 1. Estado inicial y animación de entrada (sin scroll)
     gsap.set("#anime-card", { opacity: 0, yPercent: 50, scale: 1 });
     gsap.to("#anime-card", {
       opacity: 1,
@@ -34,7 +33,6 @@ const LandingHeader = () => {
       ease: "power2.out"
     });
 
-    // 2. ScrollTrigger reversible para disipar
     const cardScrollTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#anime-card",

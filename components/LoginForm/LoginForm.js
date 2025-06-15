@@ -18,7 +18,6 @@ export const LoginForm = () => {
       </form>
   `;
 
-  // Manejador para iniciar sesión
   div.querySelector("#login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = div.querySelector("#login-email").value.trim();

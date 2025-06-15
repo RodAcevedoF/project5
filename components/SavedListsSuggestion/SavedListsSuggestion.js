@@ -3,7 +3,6 @@ import { CardBtn } from "..";
 import { getState } from "../../utils/state";
 
 const SavedListsSuggestions = (keyword, toggleButton) => {
-  //document.querySelector(`${keyword}-grid`).classList.add("height");
   const div = document.createElement("div");
   div.classList.add("saved-lists-suggestions");
   div.innerHTML = `<p>No elements found</p>
@@ -20,6 +19,7 @@ const SavedListsSuggestions = (keyword, toggleButton) => {
     .querySelector(`.search-${keyword}-button`)
     .addEventListener("click", () => {
       if (getState("currentToggle") === "saved") toggleButton.click();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   return div;
 };

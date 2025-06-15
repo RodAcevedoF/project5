@@ -14,16 +14,14 @@ import {
 import { getDashboardData } from "../../api/dashboardApi";
 import { LoadComp, InnerFooter } from "../../components";
 import { deleteUser as apiDeleteUser } from "../../api/userApi";
-import { removeTokens } from "../../utils/authUtils"; // asegurate de tener esto
-import { changePage } from "../../utils/changePage";
-import { Landing } from "../Landing/Landing";
+import { removeTokens } from "../../utils/authUtils";
 import { setState } from "../../utils/state";
-import Swal from "sweetalert2";
+import { navigate } from "../../utils/router";
+import { showConfirm, showError, showSuccess } from "../../utils/SwalHandler";
 
 export const Profile = async () => {
   const container = document.querySelector("main");
   container.innerHTML = "";
-  container.style.padding = "12em 0";
 
   const loading = LoadComp();
   container.innerHTML = loading;
@@ -42,7 +40,7 @@ export const Profile = async () => {
     );
     const res = await updateProfile(cleanedData);
     if (res.error) {
-      await Swal.fire("Error", res.error, "error");
+      await showError(res.error);
       return false;
     }
     const refreshedUser = (await getProfile()).user;
@@ -58,14 +56,10 @@ export const Profile = async () => {
     );
     const res = await updateCredentials(cleanedData);
     if (res.error) {
-      await Swal.fire("Error", res.error, "error");
+      await showError(res.error);
       return;
     }
-    await Swal.fire(
-      "Success",
-      "Sensitive data updated successfully!",
-      "success"
-    );
+    await showSuccess("Sensitive data updated successfully!");
 
     const refreshedUser = (await getProfile()).user;
     const newProfileSettings = ProfileSettings(
@@ -81,31 +75,25 @@ export const Profile = async () => {
   };
 
   const deleteUser = async () => {
-    const result = await Swal.fire({
+    const result = await showConfirm({
       title: "Are you sure?",
       text: "This action is permanent. You will lose your account.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it"
+      confirmText: "Yes, delete it"
     });
 
     if (result.isConfirmed) {
       const res = await apiDeleteUser();
 
       if (res?.success) {
-        Swal.fire("Deleted!", "Your account has been removed.", "success");
-
-        removeTokens(); // remueve localStorage/sessionStorage/tokens
+        await showSuccess("Your account has been removed.");
+        removeTokens();
         setState("isLoggedIn", false);
         setState("currentUser", null);
         localStorage.clear();
         sessionStorage.clear();
-        // redirigir al landing
-        changePage(Landing, "landing");
+        navigate("/");
       } else {
-        Swal.fire("Error", res?.error || "Could not delete account", "error");
+        await showError(res?.error || "Could not delete account");
       }
     }
   };
@@ -113,7 +101,7 @@ export const Profile = async () => {
   const postImage = async (file) => {
     const res = await uploadProfileImage(file);
     if (res.error) {
-      await Swal.fire("Error", res.error, "error");
+      await showError(res.error);
       return false;
     }
 
@@ -141,7 +129,7 @@ export const Profile = async () => {
       if (okImage) didUpdate = true;
     }
     if (didUpdate) {
-      await Swal.fire("Success", "Profile updated successfully!", "success");
+      await showSuccess("Profile updated successfully!");
     }
   };
 

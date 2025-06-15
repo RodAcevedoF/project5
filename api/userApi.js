@@ -2,7 +2,7 @@ import axios from "axios";
 import { setState } from "../utils/state";
 import { authAxios } from "../utils/authAxios";
 
-const USER_URL = "https://service.todo-api.site/api/user";
+const USER_URL = import.meta.env.VITE_BACKEND_USER_URL;
 
 export const registerUser = async (name, email, password) => {
   try {
@@ -116,7 +116,7 @@ export const updateCredentials = async ({
 export const uploadProfileImage = async (file) => {
   try {
     const formData = new FormData();
-    formData.append("profileImage", file); // el backend espera este campo
+    formData.append("profileImage", file);
 
     const res = await authAxios.post(`${USER_URL}/profile-image`, formData, {
       headers: {

@@ -1,9 +1,8 @@
 import "./ProfileActivity.css";
-import "./clock.css";
 import { formatZuluToLocal } from "../../utils/formatZuluToLocal";
 
 const clock = ` 
-<div class="loader">
+<div class="clock-timer">
   <span class="hour"></span>
   <span class="min"></span>
   <span class="circel"></span>
@@ -19,43 +18,62 @@ const ProfileActivity = (userData) => {
     <h2>Activity</h2>
     <div class="activity-content">
       <div class="session-timer style-activity">
-        <p><strong>Last connection:</strong> ${lastLoginFormatted}</p>
+        <p>Last connection: ${lastLoginFormatted}</p>
         <div class="activity-clock-div">
           ${clock}
           <p><span id="session-duration">Calculating...</span></p>
         </div>
       </div>
       <div class="activity-counter style-activity">
-        <p><strong>To-do's count:</strong> ${userData.counts.todos}</p>
-        <p><strong>Video's count:</strong> ${userData.counts.videos}</p>
-        <p><strong>Book's count:</strong> ${userData.counts.books}</p>
+        <h4>Counter</h4>
+        <div>
+          <p><img src="/images/todolist.png" alt="to-do icon" class="dash-icons"> To-do's: ${
+            userData.counts.todos
+          }</p>
+          <p><img src="/images/videoicon.png" alt="videos icon" class="dash-icons"> Video's: ${
+            userData.counts.videos
+          }</p>
+          <p><img src="/images/booklanding.png" alt="books icon" class="dash-icons"> Book's: ${
+            userData.counts.books
+          }</p>
+        </div>
       </div>   
       <div class="activity-todo style-activity">
-        <h3>Last saved to-do</h3>
-        <p><strong>Title:</strong> ${
-          userData.todo.lastTodoTitle || "No data"
-        }</p>              
-        <p><strong>Date:</strong> ${formatZuluToLocal(
-          userData.todo.lastTodoActivity
-        )}</p>
+        <h3>Last To-do</h3>
+        <div class="inner-activity">
+          <p><span class="inner-span"><img src="/icon/check.png" alt="ok icon">Title:</span> ${
+            userData.todo.lastTodoTitle || "No data yet"
+          }</p>              
+          <p><span class="inner-span"><img src="/icon/lasttime.png
+          " alt="date icon">Date:</span> ${formatZuluToLocal(
+            userData.todo.lastTodoActivity
+          )}</p>
+        </div>
       </div>
       <div class="activity-books style-activity">
-        <h3>Last saved books</h3>
-        <p><strong>Title:</strong> ${
-          userData.book.lastBookTitle || "No data"
-        }</p>              
-        <p><strong>Date:</strong> ${formatZuluToLocal(
-          userData.book.lastBookActivity
-        )}</p>
+        <h3>Last Book</h3>
+        <div class="inner-activity">
+          <p><span class="inner-span"><img src="/icon/check.png" alt="ok icon">Title:</span> ${
+            userData.book.lastBookTitle || "No data yet"
+          }</p>              
+          <p><span class="inner-span"><img 
+          src="/icon/lasttime.png
+          " alt="date icon">Date:</span> ${formatZuluToLocal(
+            userData.book.lastBookActivity
+          )}</p>
+        </div>
       </div>
       <div class="activity-videos style-activity">
-        <h3>Last saved videos</h3>
-        <p><strong>Title:</strong> ${
-          userData.video.lastVideoTitle || "No data"
-        }</p>              
-        <p><strong>Date:</strong> ${formatZuluToLocal(
-          userData.video.lastVideoActivity
-        )}</p>
+        <h3>Last Video</h3>
+        <div class="inner-activity">
+          <p><span class="inner-span"><img src="/icon/check.png" alt="ok icon">Title:</span> ${
+            userData.video.lastVideoTitle || "No data yet"
+          }</p>              
+          <p><span class="inner-span"><img src="/icon/lasttime.png
+          " alt="date icon">Date:</span> ${formatZuluToLocal(
+            userData.video.lastVideoActivity
+          )}</p>
+        </div>
       </div>
     </div>
   `;
@@ -81,7 +99,6 @@ const ProfileActivity = (userData) => {
   updateDuration();
   const intervalId = setInterval(updateDuration, 1000);
 
-  // 👉 Simple cleanup por si lo querés desmontar manualmente después
   sect.cleanup = () => clearInterval(intervalId);
 
   return sect;

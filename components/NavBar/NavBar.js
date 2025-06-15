@@ -9,7 +9,7 @@ import {
 } from "../index.js";
 import { getState } from "../../utils/state.js";
 
-export const NavBar = () => {
+export const NavBar = (currentPage = getState("currentPage")) => {
   const header = document.querySelector("header");
   header.innerHTML = "";
 
@@ -27,7 +27,6 @@ export const NavBar = () => {
   menuButton.style.display = "none";
   navLinks.appendChild(menuButton);
 
-  const currentPage = getState("currentPage");
   const alwaysFloating =
     currentPage !== "landing" && currentPage !== "signlogin";
 
@@ -74,6 +73,17 @@ window.addEventListener("resize", () => {
     (shouldHaveInline && hasFloatingMenu);
 
   if (needsRedraw) {
-    NavBar();
+    NavBar(currentPage);
+  }
+});
+
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector(".navbar");
+  if (!nav) return;
+
+  if (window.scrollY === 0) {
+    nav.classList.add("top-bg");
+  } else {
+    nav.classList.remove("top-bg");
   }
 });

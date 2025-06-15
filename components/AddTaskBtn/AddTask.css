@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--letter-general);
+  color: var(--back-general);
   border: none;
   cursor: pointer;
   gap: 0.3em;
@@ -107,8 +107,5 @@
 .add-task-btn img {
   width: 3em;
   background: transparent;
-}
-
-.add-task-btn:hover img {
   filter: invert(1);
 }

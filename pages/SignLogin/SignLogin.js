@@ -5,14 +5,12 @@ import {
   PasswordForm,
   RegisterForm
 } from "../../components";
-import { Landing } from "../Landing/Landing";
 import { getState, setState } from "../../utils/state";
 import { setTokens } from "../../utils/authUtils";
-import { changePage } from "../../utils/changePage";
-import { Home } from "../Home/Home";
-import { VerifyPending } from "../VerifyPending/VerifyPending";
 import { requestEmailVerification } from "../../api/securityApi";
 import { sendUserEmail } from "../../utils/sendUserEmail";
+import { showToast } from "../../utils/SwalHandler";
+import { navigate } from "../../utils/router";
 
 export const SignLogin = () => {
   const main = document.querySelector("main");
@@ -24,15 +22,15 @@ export const SignLogin = () => {
   `;
 
   const section = main.querySelector(".sign-page");
-  section.appendChild(BackBtn(Landing, "landing"));
+  section.appendChild(BackBtn("/"));
 
   const params = new URLSearchParams(window.location.search);
-  let formType = "register";
+  let formType = params.get("form") || "register";
 
   if (params.get("token") && params.get("email")) {
     formType = "reset";
   } else {
-    formType = getState("currentForm") || "register";
+    formType = getState("currentForm") || formType;
   }
 
   renderForms(formType);
@@ -73,6 +71,15 @@ const renderForms = (type) => {
       }
       break;
   }
+  setState("currentForm", type);
+  if (
+    window.location.pathname === "/login" ||
+    window.location.pathname === "/register"
+  ) {
+    const params = new URLSearchParams(window.location.search);
+    params.set("form", type);
+    history.replaceState({}, "", `/login?${params.toString()}`);
+  }
 };
 
 export const handleAuthSuccess = async (response) => {
@@ -86,7 +93,6 @@ export const handleAuthSuccess = async (response) => {
   if (!user.is_verified) {
     try {
       const token = await requestEmailVerification();
-
       if (token) {
         await sendUserEmail({
           email: user.email,
@@ -94,18 +100,15 @@ export const handleAuthSuccess = async (response) => {
           token,
           mode: "verify"
         });
-        // 👈 le pasás el token
-      } else {
-        console.warn("No se pudo obtener token de verificación.");
       }
     } catch (err) {
-      console.error("Fallo al enviar email de verificación:", err);
+      console.error("Failed to send verification email", err);
     }
 
-    changePage(VerifyPending, "verify-pending");
-    return;
+    return navigate("/verify");
   }
 
   setState("isLoggedIn", true);
-  changePage(Home, "home");
+  await showToast("Signed in successfully");
+  navigate("/home");
 };

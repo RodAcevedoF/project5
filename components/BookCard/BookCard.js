@@ -4,6 +4,7 @@ import { CardBtn } from "../index.js";
 import { updateCategorySelect } from "../../utils/updateBookCount.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { showError, showSuccess } from "../../utils/swalHandler.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +22,7 @@ export const BookCard = (book) => {
       <img src="" alt="">
     </div>
     <div class="card-summary">
-      <img src="${book.cover_image || "default-cover.png"}" alt="${
+      <img src="${book.cover_image || "/images/defaultCover.png"}" alt="${
     book.title
   } Cover Image">
       <div class="bookcard-title">
@@ -43,7 +44,7 @@ export const BookCard = (book) => {
               key === "pages" &&
               (value === null || value === undefined || value === 0)
             ) {
-              value = "Unknown"; // Mostrar 'Unknown' si no hay páginas
+              value = "Unknown";
             }
             return value ? `<p><strong>${label}:</strong> ${value}</p>` : "";
           })
@@ -73,7 +74,6 @@ export const BookCard = (book) => {
   const notesInput = card.querySelector(".notes-input");
   const detailsBtnDiv = card.querySelector(".details-button");
 
-  // Botones: solo Save y Close
   const saveButton = CardBtn("Save", "save", "/icon/add.png");
   const collapseButton = CardBtn("Close", "collapse", "/icon/close.png");
 
@@ -105,6 +105,15 @@ export const BookCard = (book) => {
       toggleCard();
     }
   });
+  const getValidPublishDate = (date) => {
+    if (!date || typeof date !== "string") return null;
+
+    const parsed = Date.parse(date);
+    if (isNaN(parsed)) return null;
+
+    const isoString = new Date(parsed).toISOString();
+    return isoString === date ? date : null;
+  };
 
   saveButton.addEventListener("click", async () => {
     const result = await createBook({
@@ -114,22 +123,25 @@ export const BookCard = (book) => {
       notes: notesInput.value,
       apiId: book.apiId,
       publisher: book.publisher,
-      publish_date: book.publish_date,
+      publish_date: getValidPublishDate(book.publish_date),
       description: book.description,
       isbn: book.isbn,
       pages: book.pages,
       categories: book.categories || []
     });
-    console.log(result);
+    console.log(book.publish_date);
     if (result.error) {
-      alert(`Error: ${result.error}`);
+      console.log(result);
+      await showError(result.error || "Error while saving book");
+      toggleCard();
       return;
     }
 
-    alert("Book saved successfully!");
-    await updateCategorySelect();
+    await showSuccess("Your book was saved successfully!");
 
+    await updateCategorySelect();
     document.dispatchEvent(new CustomEvent("bookSaved", { detail: result }));
+    toggleCard();
   });
 
   requestAnimationFrame(() => {
@@ -138,7 +150,7 @@ export const BookCard = (book) => {
       y: 50,
       duration: 0.4,
       ease: "power2.out",
-      yPercent: 0, // por si el transform preexistente intenta meterse
+      yPercent: 0,
       scrollTrigger: {
         trigger: card,
         start: "top 95%",
@@ -146,5 +158,6 @@ export const BookCard = (book) => {
       }
     });
   });
+
   return card;
 };

@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 10em;
+  padding: 0 1em;
 }
 
 .verify-box {
@@ -29,20 +29,21 @@
 }
 
 .verify-box h2 {
-  color: var(--main-color);
-  -webkit-text-stroke: 1px var(--letter-general);
-  font-size: 3em;
+  font-family: "Jersey 15";
+  font-size: 5em;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+  font-weight: 100;
 }
 
 .verify-box p:nth-child(2) {
-  font-size: 1.1em;
+  font-size: 1.5em;
   text-align: center;
-  font-weight: bolder;
+  font-weight: 100;
+  font-family: "Jersey 15";
 }
 
 .verify-box p:nth-child(3),
@@ -53,8 +54,24 @@
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+  font-weight: bold;
 }
 
 .verify-box img {
   width: 2em;
+}
+
+@media screen and (width < 675px) {
+  .verify-box h2 {
+    font-size: 3em;
+  }
+
+  .verify-box p:nth-child(2) {
+    font-size: 1.2em;
+  }
+
+  .verify-box p:nth-child(3),
+  .verify-box p:nth-child(5) {
+    font-size: 0.9em;
+  }
 }

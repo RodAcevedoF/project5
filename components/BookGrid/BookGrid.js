@@ -45,7 +45,7 @@ export const BookGrid = () => {
 
   let query = "";
   let startIndex = 0;
-  const maxResults = 10;
+  const maxResults = 12;
   let totalItems = 0;
   let category = "";
   let maxPages = Infinity;
@@ -59,11 +59,12 @@ export const BookGrid = () => {
       comp.innerHTML = "";
       startIndex = 0;
     }
-
+    const loadBtn = document.querySelector(".load-more-button");
     let toggleState = getState("currentToggle");
 
     if (!result?.books?.length && toggleState === "search") {
       comp.innerHTML = "";
+      loadBtn.style.display = "none";
       comp.appendChild(BookSuggestions(searchBooks, toggleButton));
       return;
     } else if (!result?.books?.length && toggleState === "saved") {
@@ -209,6 +210,7 @@ export const BookGrid = () => {
   });
 
   searchBarElement.style.display = "flex";
+  savedSect.style.display = "none";
   toggleSect.appendChild(toggleButton);
   menuSect.appendChild(searchBarElement);
   savedSect.appendChild(List);

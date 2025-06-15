@@ -1,17 +1,8 @@
-/**
- * Envía un mail al usuario con EmailJS
- * @param {string} email - Email del usuario
- * @param {string} name - Nombre del usuario
- * @param {string} token - Token generado por backend
- * @param {"verify" | "reset"} mode - Tipo de mensaje a enviar
- * @returns {Promise<void>}
- */
-
 import emailjs from "@emailjs/browser";
 
-const serviceID = "service_hzpaiyd";
-const templateID = "template_1irdetr";
-const publicKey = "64s8LY0LFxfWYJTrH";
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateID = import.meta.env.VITE_EMAILJS_VERIFY_TEMPLATE;
 
 emailjs.init(publicKey);
 
@@ -23,7 +14,7 @@ export const sendUserEmail = async ({
 }) => {
   try {
     const frontendBase = window.location.origin;
-    const backendBase = "https://service.todo-api.site/api/security";
+    const backendBase = import.meta.env.VITE_BACKEND_EMAIL_BASE;
 
     const link =
       mode === "verify"

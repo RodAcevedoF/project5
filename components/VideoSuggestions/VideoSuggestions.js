@@ -18,11 +18,10 @@ const VideoSuggestions = (searchVideos, toggleButton) => {
         return;
       }
       console.log(`Suggestion selected: ${query}`);
-      searchVideos(true, query); // Pasamos el término seleccionado al callback
+      searchVideos(true, query);
       const currentToggle = getState("currentToggle");
-      // Disparar toggleButton si la vista es "search"
       if (currentToggle === "saved") {
-        toggleButton.click(); // Dispara el clic de toggleButton para cambiar entre vistas
+        toggleButton.click();
       }
     }, youtubeOptions);
     optsVideos.appendChild(btn);

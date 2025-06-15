@@ -1,10 +1,10 @@
+import { getState } from "../../utils/state";
 import "./SuggestionBtn.css";
 
 const SuggestionBtn = (callback, arr) => {
   const btn = document.createElement("button");
   btn.classList.add("suggestion-btn");
 
-  // Seleccionar un término aleatorio del array
   const randomIndex = Math.floor(Math.random() * arr.length);
   const query =
     typeof arr[randomIndex] === "string"
@@ -17,14 +17,17 @@ const SuggestionBtn = (callback, arr) => {
     return btn;
   }
 
-  // Configurar el botón
   btn.innerHTML = `<span>${query}</span>`;
   btn.addEventListener("click", () => {
     callback(query);
-    document.querySelector(".book-grid").classList.remove("height");
-    document.querySelector(".video-grid").classList.remove("height");
+    const page = getState("currentPage");
+    if (page === "books") {
+      document.querySelector(".book-grid").classList.remove("height");
+    } else {
+      document.querySelector(".video-grid").classList.remove("height");
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-
   return btn;
 };
 

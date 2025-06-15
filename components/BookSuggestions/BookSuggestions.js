@@ -1,7 +1,7 @@
 import "./BookSuggestions.css";
 import { arrayOptions } from "../../data/options";
 import { SuggestionBtn } from "..";
-import { getState } from "../../utils/state"; // Asegúrate de importar getState
+import { getState } from "../../utils/state";
 
 const BookSuggestions = (searchBooks, toggleButton) => {
   document.querySelector(".book-grid").classList.add("height");
@@ -14,10 +14,10 @@ const BookSuggestions = (searchBooks, toggleButton) => {
   const btnsDiv = div.querySelector(".opt-btns-div");
   for (let i = 0; i < 3; i++) {
     let btn = SuggestionBtn((query) => {
-      searchBooks(true, query); // Realiza la búsqueda con la sugerencia
+      searchBooks(true, query);
       const currentToggle = getState("currentToggle");
       if (currentToggle === "saved") {
-        toggleButton.click(); // Dispara el clic de toggleButton para cambiar entre vistas
+        toggleButton.click();
       }
     }, arrayOptions);
     btnsDiv.appendChild(btn);

@@ -1,3 +1,10 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  overflow-x: hidden;
+}
+
 .not-found-container::before {
   content: "";
   position: absolute;
@@ -10,16 +17,60 @@
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.4) 100%
   );
-  z-index: 500;
+  z-index: 110;
   mix-blend-mode: overlay;
   pointer-events: none;
+}
+
+.notfound-message-div {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 150;
+  color: var(--back-general);
+  justify-self: center;
+  align-self: center;
+  padding: 1em;
+}
+.notfound-message-div h2,
+h4 {
+  font-family: "Jersey 15";
+  font-weight: 100;
+  font-size: 12em;
+}
+.notfound-message-div h4 {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+.notfound-message-div .arrow-icon {
+  filter: invert(1);
+}
+
+.notfound-message-div .styled-wrapper .button::before {
+  border-color: var(--back-general);
+}
+
+.notfound-inner-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.notfound-inner-div img {
+  width: 6em;
+  filter: invert(1);
 }
 
 .noise {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   z-index: 400;
@@ -40,7 +91,7 @@
 
 .noise-moving {
   opacity: 1;
-  z-index: 450;
+  z-index: 100;
 }
 
 .noise-moving::before {
@@ -52,10 +103,10 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   pointer-events: none;
-  z-index: 300;
+  z-index: 90;
   opacity: 0.6;
   will-change: opacity;
   animation: opacity 3s linear infinite;
@@ -80,25 +131,25 @@
 }
 
 .intro-wrap {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  font-family: "Press Start 2P", cursive;
-  color: #fff;
+  font-family: "Jersey 15";
+  color: white;
   font-size: 2rem;
-  width: 100vw;
-  height: 100vh;
-  background: #2b52ff;
+  width: 100%;
+  height: 100%;
+  background: #215ef8;
 }
 
 .intro-wrap .noise::before {
-  background-size: 200%;
+  background-size: 100%;
 }
 
 .intro-wrap .play {
   position: absolute;
   left: 2rem;
-  top: 2rem;
+  top: 5rem;
   will-change: text-shadow;
   animation: rgbText 2s steps(9) 0s infinite alternate;
 }
@@ -119,8 +170,8 @@
 
 .intro-wrap .recordSpeed {
   position: absolute;
-  left: 2rem;
-  bottom: 2rem;
+  right: 2rem;
+  bottom: 8rem;
   will-change: text-shadow;
   animation: rgbText 1s steps(9) 0s infinite alternate;
 }

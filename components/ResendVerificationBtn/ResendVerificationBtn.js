@@ -1,7 +1,7 @@
-import Swal from "sweetalert2";
 import { requestEmailVerification } from "../../api/securityApi";
 import { getState } from "../../utils/state";
 import { sendUserEmail } from "../../utils/sendUserEmail";
+import { showError, showSuccess } from "../../utils/swalHandler";
 import "./ResendVerificationBtn.css";
 
 export const ResendVerificationBtn = () => {
@@ -12,38 +12,11 @@ export const ResendVerificationBtn = () => {
 
   const button = container.querySelector("#resend-verification-btn");
 
-  /*   button.addEventListener("click", async () => {
-    const user = getState("currentUser");
-
-    if (!user || !user.email) {
-      Swal.fire("Oops!", "No email found for current user.", "error");
-      return;
-    }
-
-    try {
-      // 1) Pedimos un nuevo token
-      const { token } = await requestEmailVerification();
-      console.log(token);
-      // 2) Enviamos email vía EmailJS
-      await sendUserEmail({
-        email: user.email,
-        name: user.name,
-        token,
-        mode: "verify"
-      });
-
-      Swal.fire("Email Sent", "Please check your inbox (and spam)", "success");
-    } catch (error) {
-      console.error("Error al reenviar email:", error);
-      Swal.fire("Error", "Could not resend verification email.", "error");
-    }
-  }); */
-
   button.addEventListener("click", async () => {
     const user = getState("currentUser");
 
     if (!user || !user.email) {
-      Swal.fire("Oops!", "No email found for current user.", "error");
+      await showError("No email found for current user.");
       return;
     }
 
@@ -51,7 +24,7 @@ export const ResendVerificationBtn = () => {
       const token = await requestEmailVerification();
 
       if (!token) {
-        Swal.fire("Oops!", "No verification token received.", "error");
+        await showError("No verification token received.");
         return;
       }
 
@@ -62,10 +35,10 @@ export const ResendVerificationBtn = () => {
         mode: "verify"
       });
 
-      Swal.fire("Email Sent", "Please check your inbox (and spam)", "success");
+      await showSuccess("Verification email sent. Please check your inbox.");
     } catch (error) {
       console.error("Error al reenviar email:", error);
-      Swal.fire("Error", "Could not resend verification email.", "error");
+      await showError("Could not resend verification email.");
     }
   });
 

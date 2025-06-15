@@ -26,9 +26,9 @@ export const MailBtn = (txt) => {
     <div class="mail-overlay"></div>
   `;
 
-  const serviceID = "service_hzpaiyd";
-  const templateID = "template_le1zewq";
-  const publicKey = "64s8LY0LFxfWYJTrH";
+  const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateID = import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE;
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   emailjs.init(publicKey);
 

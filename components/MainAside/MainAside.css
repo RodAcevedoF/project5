@@ -147,6 +147,7 @@
     border-radius: 0.2em;
     border: 1px solid var(--letter-general);
     background: inherit;
+    z-index: -10;
   }
 
   .main-aside h3 {

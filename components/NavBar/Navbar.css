@@ -9,13 +9,18 @@
   top: 0;
   gap: 1em;
   z-index: 20;
-  opacity: .9;
+  opacity: 0.9;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
+  transition: background-color 0.3s ease;
+}
+
+.navbar.top-bg {
+  background: rgba(17, 128, 255, 0.147);
 }
 
 .nav-links {
-  border-radius: .1em;
+  border-radius: 0.1em;
   padding: 0.2em;
   width: fit-content;
   display: flex;
@@ -27,3 +32,13 @@
   box-shadow: 0.4rem 0.4rem #05060f;
 }
 
+@media screen and (width < 420px) {
+  .nav-links {
+    transform: scale(0.8);
+    position: absolute;
+    right: -3%;
+  }
+  .navbar {
+    padding: 0.5em 0.25em;
+  }
+}

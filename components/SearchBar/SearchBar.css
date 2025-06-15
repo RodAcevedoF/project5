@@ -24,10 +24,9 @@
 
 #searchbar-btn {
   height: 3em;
-  color: var(--darker-main);
   font-weight: bolder;
 }
 
 #searchbar-btn:hover {
-  color: var(--darker-main);
+  color: var(--back-general);
 }

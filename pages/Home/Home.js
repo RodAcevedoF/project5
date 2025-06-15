@@ -1,12 +1,9 @@
 import "./Home.css";
-import { changePage } from "../../utils/changePage";
-import { Todo } from "../../pages/ToDo/Todo";
-import { Videos } from "../../pages/VideoPage/Videos";
-import { Books } from "../../pages/Books/Books";
 import { HeroHome } from "../../components";
 import { HomeOptions } from "../../components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { navigate } from "../../utils/router";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,20 +25,19 @@ export const Home = () => {
 
   const navLinks = main.querySelectorAll(".links-pages-link");
 
-  navLinks[0].addEventListener("click", () => changePage(Todo, "todo"));
-  navLinks[1].addEventListener("click", () => changePage(Books, "books"));
-  navLinks[2].addEventListener("click", () => changePage(Videos, "videos"));
-  requestAnimationFrame(() => {
-    gsap.to(".section-bg", {
-      y: () => window.innerHeight * 0.5,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".home-container",
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-      }
-    });
+  navLinks[0].addEventListener("click", () => navigate("/todos"));
+  navLinks[1].addEventListener("click", () => navigate("/books"));
+  navLinks[2].addEventListener("click", () => navigate("/videos"));
+
+  gsap.to(".section-bg", {
+    y: () => window.innerHeight * 0.5,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".home-container",
+      start: "top top",
+      end: "bottom top",
+      scrub: true
+    }
   });
   return main;
 };

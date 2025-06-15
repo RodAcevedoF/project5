@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const API_KEY = "AIzaSyALGkaEf_WYxE-VRKt3HC-K1sOet6n7anE";
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+const searchUrl = import.meta.env.VITE_YOUTUBE_SEARCH_URL;
+const videosUrl = import.meta.env.VITE_YOUTUBE_VIDEOS_URL;
+
 const axiosNoAuth = axios.create();
 
 export const searchVideo = async (
@@ -10,13 +13,11 @@ export const searchVideo = async (
   order = "relevance"
 ) => {
   try {
-    const searchUrl = "https://www.googleapis.com/youtube/v3/search";
-
     const searchParams = {
       part: "snippet",
       q: query,
       type: "video",
-      maxResults: 10,
+      maxResults: 12,
       key: API_KEY,
       pageToken,
       videoDuration,
@@ -38,7 +39,6 @@ export const searchVideo = async (
     }
 
     // Segunda llamada para obtener detalles (duración y vistas)
-    const videosUrl = "https://www.googleapis.com/youtube/v3/videos";
     const videosParams = {
       part: "contentDetails,statistics",
       id: videoIds,

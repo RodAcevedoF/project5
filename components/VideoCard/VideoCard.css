@@ -55,10 +55,10 @@
   padding: 1em;
   display: flex;
   flex-direction: column;
-  top: 15%;
-  left: 25%;
+  top: 16%;
+  left: 23%;
   transform: none;
-  translate: -50% -50%;
+  /*translate: -50% -50%;*/
   scale: 1.1;
   z-index: 10;
 }
@@ -81,6 +81,20 @@
   min-width: 18em;
   height: 100%;
   object-fit: cover;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
 }
 .midvid-info {
   display: flex;
@@ -219,9 +233,9 @@
 
 @media screen and (max-width: 577px) {
   .video-card.expanded {
-    width: 95%;
-    left: 2.5%;
-    top: 12%;
+    left: 5%;
+    top: 15.5%;
+    max-height: 80vh;
   }
   .notes-input {
     height: 2.5em;
@@ -232,8 +246,9 @@
     justify-content: center;
   }
   .vid-thumbnail {
-    min-width: 55%;
+    margin-top: 0.25em;
     object-fit: cover;
+    min-width: 9em;
   }
   .title-url h3,
   .publish-date {
@@ -252,5 +267,11 @@
   }
   .vidcard-title {
     padding: 1em 1em 0 1em;
+  }
+  .vid-description {
+    font-size: 0.7em;
+  }
+  .extra-details p {
+    font-size: 0.7em;
   }
 }

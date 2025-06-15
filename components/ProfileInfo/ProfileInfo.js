@@ -1,5 +1,5 @@
 import "./ProfileInfo.css";
-import { CardBtn, ProfileContact, ProfileForm } from "..";
+import { CardBtn, ProfileContact, ProfileForm, DefaultAvatar } from "..";
 import normalizeUrl from "../../utils/normalizeUrl";
 import displayNick from "../../utils/displayNickname";
 
@@ -7,41 +7,25 @@ const ProfileInfo = (user, postAll) => {
   const sect = document.createElement("section");
   sect.classList.add("profile-info-container");
 
-  const defaultAvatar = () => {
-    const span = document.createElement("span");
-    span.classList.add("default-avatar");
-    span.textContent = user.name.charAt(0).toUpperCase();
-    return span.outerHTML;
-  };
-
   const nickname = displayNick(user.nickname);
 
-  const editProfileBtn = CardBtn("Edit", "edit-profile", "/icon/add.png");
+  const editProfileBtn = CardBtn("Edit", "edit-profile", "/icon/editicon.png");
   const submitProfileBtn = CardBtn(
     "Submit",
     "submit-profile",
-    "/icon/add.png",
+    "/icon/submiticon.png",
     "submit"
   );
-  const cancelEditBtn = CardBtn("Cancel", "cancel-edit", "/icon/add.png");
+  const cancelEditBtn = CardBtn("Cancel", "cancel-edit", "/icon/close.png");
   const profileContact = ProfileContact(user);
   const profileForm = ProfileForm(user);
+  const avatar = DefaultAvatar("info", user);
 
   sect.innerHTML = `
         <div class="profile-info-body">
          <aside class="aside-profile">
-          <div class="picture-name"">
-           <div>
-            ${
-              user.profile_image !== null
-                ? `<img
-                  src=${user.profile_image}
-                  alt="Avatar"
-                  class="avatar"
-                />`
-                : defaultAvatar()
-            }
-            </div>
+          <div class="picture-name">
+           <div class="pfp-div"></div>
             <h2>${user.name}</h2>
             <p>${nickname}</p>
             </div>
@@ -75,6 +59,7 @@ const ProfileInfo = (user, postAll) => {
   sect.querySelector(".form-profile-buttons").appendChild(submitProfileBtn);
   sect.querySelector(".form-profile-buttons").appendChild(cancelEditBtn);
   sect.querySelector(".aside-profile").appendChild(profileContact);
+  sect.querySelector(".pfp-div").appendChild(avatar);
 
   const editButton = sect.querySelector(".edit-profile-button");
   const submitButton = sect.querySelector(".submit-profile-button");

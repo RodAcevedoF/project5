@@ -17,7 +17,16 @@ export const initAuthFlow = async () => {
   if (!valid) return reject();
 
   try {
-    const { user } = await getProfile();
+    const profile = await getProfile();
+
+    if (profile.error) {
+      if (profile.error.includes("not verified")) {
+        return reject(true);
+      }
+      return reject();
+    }
+
+    const user = profile.user || profile;
     setState("currentUser", user);
 
     if (!user.is_verified) return reject(true);

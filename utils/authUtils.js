@@ -1,11 +1,9 @@
 import { jwtDecode } from "jwt-decode";
 import { refreshAccessToken } from "../api/authApi";
 
-// Guarda los tokens en localStorage
 export const setTokens = (accessToken, refreshToken) => {
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
-  console.log("🧪 Guardado en localStorage:", refreshToken);
 };
 
 export const removeTokens = () => {
@@ -38,7 +36,6 @@ export const isAuthenticated = async () => {
 
 let refreshTimeout = null;
 
-// Programa el refresco automático antes de que expire el accessToken
 export const scheduleTokenRefresh = () => {
   const { accessToken, refreshToken } = getTokens();
   if (!accessToken || !refreshToken) return;
@@ -49,13 +46,13 @@ export const scheduleTokenRefresh = () => {
     const now = Date.now();
     const timeUntilRefresh = expiresAt - now - 60_000;
 
-    clearTimeout(refreshTimeout); // por las dudas
+    clearTimeout(refreshTimeout);
 
     if (timeUntilRefresh <= 0) {
-      refreshAccessToken(refreshToken); // Esto ya reprograma
+      refreshAccessToken(refreshToken);
     } else {
       refreshTimeout = setTimeout(() => {
-        refreshAccessToken(refreshToken); // el refresh se encarga del schedule
+        refreshAccessToken(refreshToken);
       }, timeUntilRefresh);
     }
   } catch (error) {

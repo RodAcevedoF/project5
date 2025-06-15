@@ -5,7 +5,7 @@ const axiosNoAuth = axios.create();
 export const searchBook = async (
   query = "",
   startIndex = 0,
-  maxResults = 10,
+  maxResults = 12,
   category = "",
   maxPages = Infinity
 ) => {
@@ -15,7 +15,9 @@ export const searchBook = async (
       searchQuery +=
         (searchQuery ? "+" : "") + `subject:${encodeURIComponent(category)}`;
     }
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&startIndex=${startIndex}&maxResults=${maxResults}&random=${Math.random()}`;
+    const url = `${
+      import.meta.env.VITE_GOOGLE_BOOKS_URL
+    }/volumes?q=${searchQuery}&startIndex=${startIndex}&maxResults=${maxResults}&random=${Math.random()}`;
 
     const response = await axiosNoAuth.get(url, {
       headers: { "Cache-Control": "no-cache" }

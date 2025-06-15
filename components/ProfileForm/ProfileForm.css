@@ -35,7 +35,6 @@
   text-align: center;
   font-weight: 500;
   font-size: 4em;
-  color: var(--main-color);
   font-family: "Jersey 15";
 }
 
@@ -62,7 +61,6 @@
 }
 
 #profile-form label {
-  color: var(--main-color);
   font-weight: bold;
 }
 

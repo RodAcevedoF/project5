@@ -4,13 +4,16 @@
   height: auto;
   margin: 10em 0 4em 0;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
+  min-height: 72.3vh;
 }
 
 .sign-container {
   display: flex;
   flex-direction: column;
   z-index: 10;
+  padding: 0 1em;
 }
 
 .back-design {

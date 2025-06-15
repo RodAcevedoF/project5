@@ -4,7 +4,6 @@
   width: 100%;
   height: fit-content;
   padding: 2em 6em;
-  background-color: var(--color-light);
   transition: all 0.25s ease;
   justify-content: center;
   align-items: center;
@@ -14,6 +13,7 @@
   opacity: 0;
   height: 0;
   overflow: hidden;
+  padding: 0;
 }
 
 .profile-info-body {
@@ -27,25 +27,6 @@
   height: 0;
   opacity: 0;
   overflow: hidden;
-}
-
-.default-avatar {
-  width: 10em;
-  height: 10em;
-  border-radius: 50%;
-  background-color: #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1em;
-  padding: 0;
-}
-
-.avatar {
-  width: 10em;
-  height: 10em;
-  border-radius: 50%;
-  object-fit: cover;
 }
 
 .aside-profile {
@@ -70,13 +51,11 @@
 .aside-profile h2 {
   font-family: "Jersey 15";
   font-size: 4em;
-  color: var(--letter-general);
 }
 
 .aside-profile p {
   font-size: 1.1em;
   font-weight: bold;
-  color: var(--letter-general);
 }
 
 .picture-name {
@@ -85,6 +64,10 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 1em;
+}
+
+.picture-name div {
+  display: flex;
 }
 
 .profile-plain-info {

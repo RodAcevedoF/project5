@@ -1,20 +1,20 @@
 .main-btn {
   display: flex;
   width: 10em;
-  padding: .5em;
+  padding: 0.5em;
   cursor: pointer;
   justify-content: center;
   align-items: center;
   background-size: 200% 100%;
   background-image: var(--box-background);
-  transition: background-position .3s ease-in-out;
-  color: var(--back-general);
+  transition: background-position 0.3s ease-in-out;
   border: none;
   box-shadow: var(--general-shadow);
-  border-radius: .2em;
+  border-radius: 0.2em;
 }
 
 .main-btn:hover {
-  background-position: 100% 0;
+  background-position: 90% 0;
   background-image: var(--button-alt-background);
+  color: var(--back-general);
 }

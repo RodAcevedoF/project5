@@ -1,68 +1,109 @@
-import { getWeatherData } from "../../api/weatherApi";
+import { getWeatherData, weatherIconMap } from "../../api/weatherApi";
 import "./WeatherWidget.css";
 
-const WeatherWidget = () => {
-  const container = document.createElement("div");
+const createWeatherElement = (label, value, iconSrc, alt) => {
+  const div = document.createElement("div");
+  div.classList.add("weather-div");
+
+  const text = document.createElement("p");
+  text.textContent = `${label}: ${value}`;
+
+  const icon = document.createElement("img");
+  icon.src = iconSrc;
+  icon.alt = alt;
+
+  div.appendChild(text);
+  div.appendChild(icon);
+
+  return div;
+};
+
+const WeatherWidget = async () => {
+  const container = document.createElement("section");
   container.classList.add("weather-widget");
 
-  const cont = document.createElement("div");
-  cont.classList.add("weather-div");
-
-  const txtCont = document.createElement("div");
-  txtCont.classList.add("txt-div");
-
   const loadingMessage = document.createElement("p");
-  loadingMessage.textContent = "Cargando clima...";
+  loadingMessage.textContent = "Loading weather...";
   container.appendChild(loadingMessage);
 
-  getWeatherData()
-    .then((weather) => {
-      if (!weather) throw new Error("No weather data found");
+  try {
+    const weather = await getWeatherData();
+    if (!weather) throw new Error("No weather data found");
 
-      // Remueve el mensaje de carga
-      container.innerHTML = "";
+    container.innerHTML = "";
 
-      const cityElement = document.createElement("h3");
-      const tempElement = document.createElement("p");
-      const humidityElement = document.createElement("p");
-      const feelsElement = document.createElement("p");
-      const timeElement = document.createElement("p");
-      const weatherIcon = document.createElement("img");
+    const cityElement = document.createElement("h3");
+    cityElement.textContent = weather.city;
 
-      weatherIcon.src = weather.iconUrl || "fallback-image.png";
-      weatherIcon.alt = "Weather icon";
-      weatherIcon.classList.add("weather-icon");
+    const locationIcon = document.createElement("img");
+    locationIcon.src = "/icon/weathericons/locationicon.png";
+    locationIcon.alt = "location icon";
+    locationIcon.classList.add("weather-icon");
 
-      cityElement.textContent = weather.city;
-      tempElement.textContent = `Temp: ${weather.temperature}°C`;
-      humidityElement.textContent = `Humidity: ${weather.humidity}%`;
-      feelsElement.textContent = `Feel: ${weather.feel}°C`;
-      const updateDynamicTime = () => {
-        const currentTime = new Date();
-        const formattedTime = currentTime.toLocaleTimeString("es-ES", {
+    const cityDiv = document.createElement("div");
+    cityDiv.classList.add("weather-div");
+    cityDiv.appendChild(cityElement);
+    cityDiv.appendChild(locationIcon);
+    container.appendChild(cityDiv);
+
+    const weatherIcon =
+      weatherIconMap[weather.iconKey] ||
+      "/icon/weathericons/fallbackweather.png";
+
+    container.appendChild(
+      createWeatherElement(
+        "Temp",
+        `${weather.temperature}°C`,
+        weatherIcon,
+        "Weather icon"
+      )
+    );
+    container.appendChild(
+      createWeatherElement(
+        "Humidity",
+        `${weather.humidity}%`,
+        "/icon/weathericons/humidityicon.png",
+        "humidity icon"
+      )
+    );
+    container.appendChild(
+      createWeatherElement(
+        "Feel",
+        `${weather.feel}°C`,
+        "/icon/weathericons/feelsicon.png",
+        "feels icon"
+      )
+    );
+
+    const timeElement = document.createElement("p");
+    timeElement.classList.add("time-element");
+    const updateDynamicTime = () => {
+      const currentTime = new Date();
+      timeElement.textContent = `Time: ${currentTime.toLocaleTimeString(
+        "es-ES",
+        {
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit"
-        });
-        timeElement.textContent = `Time: ${formattedTime}`;
-      };
+        }
+      )}`;
+    };
+    updateDynamicTime();
+    setInterval(updateDynamicTime, 1000);
 
-      updateDynamicTime();
-      setInterval(updateDynamicTime, 1000);
-
-      txtCont.appendChild(tempElement);
-      txtCont.appendChild(humidityElement);
-      txtCont.appendChild(feelsElement);
-      txtCont.appendChild(timeElement);
-      cont.appendChild(txtCont);
-      cont.appendChild(weatherIcon);
-      container.appendChild(cityElement);
-      container.appendChild(cont);
-    })
-    .catch((error) => {
-      console.error("Error cargando el clima", error);
-      container.innerHTML = "<p>Error al cargar el clima</p>";
-    });
+    const timeIcon = "/icon/weathericons/timeicon.png";
+    const timeDiv = document.createElement("div");
+    timeDiv.classList.add("weather-div");
+    const timeImg = document.createElement("img");
+    timeImg.src = timeIcon;
+    timeImg.alt = "time icon";
+    timeDiv.appendChild(timeElement);
+    timeDiv.appendChild(timeImg);
+    container.appendChild(timeDiv);
+  } catch (error) {
+    console.error("Error loading weather", error);
+    container.innerHTML = `<p class="weather-error">Error loading weather</p>`;
+  }
 
   return container;
 };

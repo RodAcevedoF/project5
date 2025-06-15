@@ -35,7 +35,6 @@ const LandingIdeas = () => {
         scale: 1.5,
         duration: 1,
         ease: "power2.out",
-        pin: true,
         scrollTrigger: {
           trigger: li,
           start: "top 30%",
@@ -60,7 +59,6 @@ const LandingIdeas = () => {
       yoyo: true
     });
   });
-
   return ul;
 };
 

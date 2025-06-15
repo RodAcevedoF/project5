@@ -1,5 +1,5 @@
 export const formatZuluToLocal = (zulu) => {
-  if (!zulu) return "No data";
+  if (!zulu) return "No data yet";
   const date = new Date(zulu);
-  return date.toLocaleString(); // Usa la configuración local del navegador
+  return date.toLocaleString();
 };

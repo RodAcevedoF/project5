@@ -1,14 +1,16 @@
 import "./TodoDisplay.css";
 import { deleteTodo, updateTodo } from "../../api/ToDoApi";
-import { MainBtn, SwitchYesNo, loadTodos, loadUpcomingDeadlines } from "..";
+import { MainBtn, SwitchYesNo } from "..";
+import { showConfirm, showError, showSuccess } from "../../utils/swalHandler";
 
-export const TodoDisplay = (todo) => {
+export const TodoDisplay = (todo, { onUpdate }) => {
   const card = document.createElement("div");
   card.classList.add("todo-display-card");
+
   card.innerHTML = `
     <div class="card-title">
-    <img src="/icon/done.png" alt="target icon">
-    <h3>${todo.title}</h3>
+      <img src="../../public/images/todolanding.png" alt="todo icon">
+      <h3>${todo.title}</h3>
     </div>
     <div class="card-content">
       <p class="todo-description"><strong>Notes:</strong> ${
@@ -27,51 +29,50 @@ export const TodoDisplay = (todo) => {
       ${MainBtn("button", "delete-btn", "main-btn", "Delete")}
     </div>
   `;
+
+  // Switch de completado
   const switchElement = SwitchYesNo(todo);
-  const cardContent = card.querySelector(".card-content");
-  cardContent.appendChild(switchElement);
+  card.querySelector(".card-content").appendChild(switchElement);
+
+  // Eventos
+  card
+    .querySelector("#close-btn")
+    .addEventListener("click", () => card.remove());
 
   card.querySelector("#edit-btn").addEventListener("click", () => {
-    window.dispatchEvent(
-      new CustomEvent("loadTodoIntoEditor", { detail: todo })
-    );
+    window.dispatchEvent(new CustomEvent("editTodo", { detail: todo }));
     card.remove();
-    const p = document.querySelector(".add-task-btn > p");
-    p.textContent = "Hide";
   });
 
   card.querySelector("#delete-btn").addEventListener("click", async () => {
-    if (confirm("¿Estás seguro de eliminar esta tarea?")) {
-      const result = await deleteTodo(todo.id);
-      if (result.success) {
-        card.remove();
-        loadTodos(10, 0);
-        loadUpcomingDeadlines();
-        const aside = document.querySelector("aside");
-        if (aside && typeof aside.calendarUpdate === "function") {
-          aside.calendarUpdate();
-        }
-      } else {
-        alert(result.error || "Error al eliminar la tarea");
-      }
-    }
-  });
+    const confirmed = await showConfirm({
+      title: "Delete task",
+      text: "Are you sure you want to delete this task?",
+      confirmButtonText: "Yes, delete it"
+    });
+    if (!confirmed) return;
 
-  card.querySelector("#close-btn").addEventListener("click", () => {
-    card.remove();
+    const result = await deleteTodo(todo.id);
+    if (result.success) {
+      card.remove();
+      onUpdate?.({ reload: true });
+      await showSuccess("Task deleted");
+    } else {
+      await showError(result.error || "Error deleting task");
+    }
   });
 
   card.querySelector("#todo-checkbox").addEventListener("change", async (e) => {
     const isChecked = e.target.checked;
     const result = await updateTodo(todo.id, { checked: isChecked });
+
     if (result.success) {
-      card.querySelector(".switch-label").textContent = `${
-        isChecked ? "Completed" : "Not completed"
-      }`;
-      loadTodos(10, 0);
-      loadUpcomingDeadlines();
+      card.querySelector(".switch-label").textContent = isChecked
+        ? "Completed"
+        : "Not completed";
+      onUpdate?.({ reload: true });
     } else {
-      alert(result.error || "Error al actualizar la tarea");
+      await showError(result.error || "Error updating task");
     }
   });
 

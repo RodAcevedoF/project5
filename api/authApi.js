@@ -1,15 +1,13 @@
 import axios from "axios";
+import { authAxios } from "../utils/authAxios";
 import {
   setTokens,
   removeTokens,
   scheduleTokenRefresh
 } from "../utils/authUtils";
 import { setState } from "../utils/state";
-import { changePage } from "../utils/changePage";
-import { Landing } from "../pages/Landing/Landing";
 
-const AUTH_URL = "https://service.todo-api.site/api/auth";
-
+const AUTH_URL = import.meta.env.VITE_BACKEND_AUTH_URL;
 export const loginUser = async (email, password) => {
   try {
     const response = await axios.post(`${AUTH_URL}/login`, { email, password });
@@ -51,6 +49,16 @@ export const refreshAccessToken = async (refreshToken) => {
   } catch (error) {
     console.error("Error setting tokens", error);
     removeTokens();
+    return false;
+  }
+};
+
+export const pingAuth = async () => {
+  try {
+    const res = await authAxios.get("/auth/ping");
+    return res.data; // o simplemente `return true;`
+  } catch (error) {
+    console.warn("Ping failed:", error.response?.data || error.message);
     return false;
   }
 };

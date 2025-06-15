@@ -1,11 +1,9 @@
 import "./VerifyPending.css";
 import { CardBtn, ResendVerificationBtn } from "../../components";
-import { changePage } from "../../utils/changePage.js";
-import { SignLogin } from "../SignLogin/SignLogin.js";
-import { Home } from "../Home/Home.js";
 import { initAuthFlow } from "../../utils/authFlow.js";
 import Swal from "sweetalert2";
 import gsap from "gsap";
+import { navigate } from "../../utils/router.js";
 
 export const VerifyPending = async () => {
   const main = document.querySelector("main");
@@ -40,11 +38,10 @@ export const VerifyPending = async () => {
       .appendChild(ResendVerificationBtn());
     contentBox.appendChild(cardButton);
   } else {
-    // Vista cuando recién se registró y está esperando verificación
     contentBox.innerHTML = `
       <h2>Just one step left!</h2>
       <p>We’ve sent a verification email to your inbox. Please confirm your email to access all features.</p>
-      <p><strong>Didn't receive it?</strong> Click below to resend it <img class="verify-page-icon" src="/icon/arrowverify.png" alt="arrow icon"></p>
+      <p>Didn't receive it? Click below to resend it <img class="verify-page-icon" src="/icon/arrowverify.png" alt="arrow icon"></p>
       <div id="resend-btn-container"></div>
       <p class="small-hint"><img class="verify-page-icon" src="/icon/warningverify.png" alt="warning icon">Check your spam folder just in case.</p>
     `;
@@ -59,22 +56,20 @@ export const VerifyPending = async () => {
     window.history.replaceState({}, document.title, "/");
   }
 
-  requestAnimationFrame(() => {
-    const img = contentBox.querySelectorAll(".verify-page-icon");
-    img.forEach((i) => {
-      gsap.to(i, {
-        y: -10,
-        duration: 1,
-        ease: "power1.inOut",
-        repeat: -1,
-        yoyo: true
-      });
+  const img = contentBox.querySelectorAll(".verify-page-icon");
+  img.forEach((i) => {
+    gsap.to(i, {
+      y: -10,
+      duration: 1,
+      ease: "power1.inOut",
+      repeat: -1,
+      yoyo: true
     });
   });
 };
 
 const renderMessage = (title, message) => {
-  const goHomeButton = CardBtn("Go Home", "go-home", "/icon/emailprofile.svg");
+  const goHomeButton = CardBtn("Go Home", "go-home", "/icon/home.png");
   const contentBox = document.querySelector("#verify-content");
   contentBox.innerHTML = `
     <h2><img class="verify-page-icon" src="/icon/check.png" alt="check icon" icon">${title}</h2>
@@ -89,19 +84,17 @@ const setupListeners = () => {
 
   if (goHomeBtn) {
     goHomeBtn.addEventListener("click", async () => {
-      const { authenticated } = await initAuthFlow(); // ← esto te setea isLoggedIn y currentUser
+      const { authenticated } = await initAuthFlow();
 
       if (authenticated) {
-        changePage(Home, "home");
+        navigate("home");
       } else {
-        changePage(SignLogin, "signlogin");
+        navigate("signlogin");
       }
     });
   }
 
   if (backLoginBtn) {
-    backLoginBtn.addEventListener("click", () =>
-      changePage(SignLogin, "signlogin")
-    );
+    backLoginBtn.addEventListener("click", () => navigate("signlogin"));
   }
 };

@@ -25,6 +25,24 @@
   height: auto;
   will-change: transform;
   width: 100%;
+  background-image: url("/images/cloudbg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
 }
 .landing-header-ideas {
   top: 80%;
@@ -37,7 +55,7 @@
   display: flex;
 }
 .landing-box {
-  top: 200%;
+  top: 195%;
   height: 60%;
   width: 100%;
   will-change: transform;

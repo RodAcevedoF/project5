@@ -10,11 +10,11 @@ import {
 } from "../../utils/videoUtils.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Swal from "sweetalert2";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const VideoCard = (video) => {
-  console.log(video);
   const card = document.createElement("div");
   card.classList.add("video-card");
   const videoUrl = `https://www.youtube.com/watch?v=${video.video_id}`;
@@ -107,6 +107,7 @@ export const VideoCard = (video) => {
   });
   saveButton.addEventListener("click", async () => {
     const durationInSecs = convertToSeconds(video.duration);
+
     const result = await createVideo({
       video_id: video.video_id,
       title: video.title,
@@ -119,31 +120,44 @@ export const VideoCard = (video) => {
       views: video.views,
       duration_seconds: durationInSecs
     });
+
     if (result.error) {
-      alert(`Error: ${result.error}`);
+      await Swal.fire({
+        icon: "error",
+        title: "Error while saving video",
+        text: result.error,
+        confirmButtonColor: "#d33"
+      });
+      toggleCard();
       return;
     }
 
-    alert("¡Video guardado correctamente!");
-    updateChannelSelect();
+    await Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "Your video was saved successfully!",
+      timer: 1000,
+      showConfirmButton: false
+    });
 
+    updateChannelSelect();
     document.dispatchEvent(new CustomEvent("videoSaved", { detail: result }));
+    toggleCard();
   });
 
   requestAnimationFrame(() => {
     gsap.from(card, {
       opacity: 0,
-      y: 50,
+      y: 25,
       duration: 0.4,
       ease: "power2.out",
       yPercent: 0,
       scrollTrigger: {
         trigger: card,
-        start: "top 95%",
+        start: "top 85%",
         toggleActions: "play none none reverse"
       }
     });
   });
-
   return card;
 };

@@ -14,7 +14,9 @@ export const getPopularCategories = async () => {
     ];
 
     const requests = keywords.map((keyword) => {
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=40&fields=items(volumeInfo/categories)`;
+      const url = `${
+        import.meta.env.VITE_GOOGLE_BOOKS_URL
+      }/volumes?q=${keyword}&maxResults=40&fields=items(volumeInfo/categories)`;
       return axios.get(url);
     });
 
@@ -28,9 +30,7 @@ export const getPopularCategories = async () => {
     }, []);
 
     if (allItems.length === 0) {
-      console.warn(
-        "No se han encontrado categorías en las respuestas de la API."
-      );
+      console.warn("No API categories found.");
       return [];
     }
 
@@ -47,7 +47,7 @@ export const getPopularCategories = async () => {
 
     return sortedCategories;
   } catch (error) {
-    console.error("Error al obtener las categorías:", error);
+    console.error("Error obtaining categories:", error);
     return [];
   }
 };
@@ -57,7 +57,7 @@ export const loadCategories = async () => {
     const categories = await getPopularCategories();
     setState("bookCategories", categories);
   } catch (error) {
-    console.error("Error al cargar las categorías:", error);
+    console.error("Error loading categories:", error);
     setState("categories", []);
   }
 };

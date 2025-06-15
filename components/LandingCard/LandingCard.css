@@ -149,6 +149,7 @@
   .landing-card {
     width: 90vw;
     padding: 2.5em 1.5em;
+    max-height: 55vh;
   }
   .landing-card h1 {
     font-size: 3em;
@@ -157,6 +158,12 @@
 
 @media screen and (width < 399px) {
   .landing-card {
-    padding: 2.5em 1em;
+    padding: 2.5em 0.6em;
+  }
+}
+@media screen and (width < 376px) {
+  .landing-card {
+    padding: 2.5em 0.6em;
+    max-height: 57vh;
   }
 }

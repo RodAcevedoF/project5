@@ -12,7 +12,7 @@ const Brands = () => {
                       <h4>Trusted by hundreds+ of teams</h4>
                       <ul class="brand-ul"></ul>
                     </div>  
-                    <h4>Organize is the secret to success</h4>
+                    <h4>Simple organization is the secret to success</h4>
                     <p>The difference between chaos and seamless workflow.</p>
                     <div class="comparative">
                         <ul class="without">
@@ -81,8 +81,29 @@ const Brands = () => {
         from: "start"
       }
     });
+    gsap.to(".without li img", {
+      scale: 1.2,
+      duration: 0.25,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: {
+        amount: 0.5,
+        from: "start"
+      }
+    });
+    gsap.to(".with li img", {
+      scale: 1.3,
+      duration: 0.25,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      stagger: {
+        amount: 0.5,
+        from: "start"
+      }
+    });
   });
-
   return div;
 };
 

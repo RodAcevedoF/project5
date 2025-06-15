@@ -10,21 +10,23 @@ const AddTaskBtn = (todoEditor) => {
   img.alt = "add button icon";
   btn.appendChild(p);
   btn.appendChild(img);
+
   for (let i = 0; i < 4; i++) {
-    let span = document.createElement("span");
+    const span = document.createElement("span");
     span.classList.add(`animation-span${i + 1}`);
     btn.appendChild(span);
   }
+
   btn.addEventListener("click", () => {
     const cont = document.querySelector(".editor-container");
     if (!cont.classList.contains("visible")) {
       const form = todoEditor.querySelector("#todo-form");
       form.reset();
-      document.getElementById("todo-id").value = "";
-      document.querySelector(".tooltip").textContent = "Save";
-      document.querySelector(".delete-todo-button").style.display = "none";
       cont.classList.add("visible");
       p.textContent = "HIDE";
+
+      const displayCard = document.querySelector(".todo-display-card");
+      if (displayCard) displayCard.remove();
     } else {
       cont.classList.remove("visible");
       p.textContent = "ADD TASK";

@@ -1,21 +1,52 @@
 .hero-article {
-    
-}
-.hero-article img {
-    height: 100%;
-    object-fit: contain;
-    filter: invert(1);
-}
-
-.title-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border-radius: 2em;
-    padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 3em 3em 4em 5em;
 }
 
-.title-div h3{
+.hero-banner-title span {
+  font-family: "Jersey 15";
+  font-size: 6em;
+  font-weight: 100;
+}
+
+.loop-hero-ul {
+  position: relative;
+  width: 100%;
+}
+
+.subtitle-li {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bolder;
+  display: flex;
+  gap: 0.25em;
+  left: 0.25em;
+}
+
+.hero-def-icons {
+  width: 1.5em;
+}
+
+.active-sub-li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+@media screen and (width < 581px) {
+  .hero-article {
+    padding: 3em 0.5em 4em 1.5em;
+  }
 }

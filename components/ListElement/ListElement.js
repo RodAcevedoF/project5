@@ -6,6 +6,11 @@ import {
   updateCategorySelect
 } from "../../utils/updateBookCount";
 import { CardBtn, SavedListBtn } from "..";
+import {
+  showSuccess,
+  showError,
+  showConfirm
+} from "../../utils/swalHandler.js";
 
 let currentOpenCard = null;
 
@@ -24,53 +29,53 @@ const ListElement = (book) => {
   };
 
   li.innerHTML = `
-  <div class="savedbook-header">
-    <div class="savedbook-title">
-      <div class="savedbook-label-div">
-        <p class="saved-label">Title</p>
-        <div class="checked-book-div">
-          <p class="checked-info">Read</p>
-          <img src="/icon/checked.png" alt="check icon" class="checked-icon"/>
+    <div class="savedbook-header">
+      <div class="savedbook-title">
+        <div class="savedbook-label-div">
+          <p class="saved-label">Title</p>
+          <div class="checked-book-div">
+            <p class="checked-info">Read</p>
+            <img src="/icon/checked.png" alt="check icon" class="checked-icon"/>
+          </div>
         </div>
+        <h3>${book.title}</h3>
       </div>
-      <h3>${book.title}</h3>
     </div>
-  </div>
-  <div class="book-li-summary collapsibles">
-      <img src="${book.cover_image || "/images/defaultCover.png"}" alt="${
+    <div class="book-li-summary collapsibles">
+        <img src="${book.cover_image || "/images/defaultCover.png"}" alt="${
     book.title
   } over">
-   <div class="inner-summary">
-      <div class="savedbook-info">
-        <p class="saved-inner-label">Author</p> 
-        <p class="saved-author">${book.author}</p>
-        <p class="saved-inner-label">ISBN</p>
-        <p class="saved-isbn">${book.isbn}</p>
+      <div class="inner-summary">
+        <div class="savedbook-info">
+          <p class="saved-inner-label">Author</p> 
+          <p class="saved-author">${book.author}</p>
+          <p class="saved-inner-label">ISBN</p>
+          <p class="saved-isbn">${book.isbn}</p>
+        </div>
+        <div class="savedcard-details">
+          ${["Publisher", "Release", "Pages"]
+            .map((label, i) => {
+              const key = ["publisher", "publish_date", "pages"][i];
+              const value = formatValue(key, book[key]);
+              return `<p><strong>${label}:</strong> ${value}</p>`;
+            })
+            .join("")}
+          ${
+            book.categories && book.categories.length > 0
+              ? `<p><strong>Categories:</strong> ${book.categories
+                  .map((category) =>
+                    typeof category === "object" ? category.name : category
+                  )
+                  .join(", ")}</p>`
+              : ""
+          }
+        </div>
       </div>
-      <div class="savedcard-details">
-    ${["Publisher", "Release", "Pages"]
-      .map((label, i) => {
-        const key = ["publisher", "publish_date", "pages"][i];
-        const value = formatValue(key, book[key]);
-        return `<p><strong>${label}:</strong> ${value}</p>`;
-      })
-      .join("")}
-    ${
-      book.categories && book.categories.length > 0
-        ? `<p><strong>Categories:</strong> ${book.categories
-            .map((category) =>
-              typeof category === "object" ? category.name : category
-            )
-            .join(", ")}</p>`
-        : ""
-    }
     </div>
-    </div>
-  </div>
     <div class="input-saved-div collapsibles">
-    <p class="savedbook-notes"><strong>Notes:</strong> ${
-      book.notes || "No content yet"
-    }</p>
+      <p class="savedbook-notes"><strong>Notes:</strong> ${
+        book.notes || "No content yet"
+      }</p>
       <textarea class="book-notes-input" placeholder="Add some notes!">${
         book.notes || ""
       }</textarea>
@@ -81,7 +86,7 @@ const ListElement = (book) => {
   const notesInput = li.querySelector(".notes-input");
   const buttonGroup = li.querySelector(".li-button-group");
   const headerClick = li.querySelector(".savedbook-header");
-  const updateButton = CardBtn("Update", "update", "/icon/speed.png");
+  const updateButton = CardBtn("Update", "update", "/icon/editicon.png");
   const closeButton = CardBtn("Close", "close", "/icon/close.png");
   const notesDisplay = li.querySelector(".savedbook-notes");
   const notesTextarea = li.querySelector(".book-notes-input");
@@ -125,11 +130,10 @@ const ListElement = (book) => {
   );
   headerClick.appendChild(listButtons);
 
-  // Estado inicial: mostrar solo las notas
   notesTextarea.style.display = "none";
 
   notesDisplay.addEventListener("click", (e) => {
-    e.stopPropagation(); // evitamos que dispare el document.click
+    e.stopPropagation();
     notesDisplay.style.display = "none";
     notesTextarea.style.display = "block";
     notesTextarea.focus();
@@ -148,10 +152,10 @@ const ListElement = (book) => {
   updateButton.addEventListener("click", async () => {
     const result = await updateBook(book.id, { notes: notesInput.value });
     if (result.error) {
-      alert("Error updating book.");
+      await showError("Error updating book");
       return;
     }
-    alert("Updated notes!");
+    await showSuccess("Updated notes!");
   });
 
   closeButton.addEventListener("click", () => {
@@ -165,12 +169,21 @@ const ListElement = (book) => {
   const deleteButton = li.querySelector("#delete-book-btn");
   deleteButton.addEventListener("click", async (e) => {
     e.stopPropagation();
-    if (!confirm("Are you sure to delete this book?")) return;
+
+    const confirmation = await showConfirm({
+      title: "Delete",
+      text: "Are you sure to delete this book?"
+    });
+
+    if (!confirmation) return;
+
     const result = await deleteBook(book.id);
     if (result.error) {
-      alert("Error deleting book.");
+      await showError("Error deleting book");
       return;
     }
+
+    await showSuccess("Deleted book!");
     li.remove();
     document.dispatchEvent(
       new CustomEvent("bookDeleted", { detail: { bookId: book.id } })
@@ -186,7 +199,7 @@ const ListElement = (book) => {
     ev.stopPropagation();
     const result = await updateBook(book.id, { checked: !book.checked });
     if (result.error) {
-      alert("Error updating book.");
+      await showError("Error updating book");
       return;
     }
     checkedInfo.classList.toggle("visible");

@@ -1,7 +1,5 @@
 :root {
   --base-grid: 8px;
-  --colour-white: var(--back-general);
-  --colour-black: var(--back-alt);
 }
 
 .options-caroussel-div {
@@ -34,7 +32,7 @@
 }
 .pages-links {
   --link-size: calc(var(--base-grid) * 25);
-  color: var(--colour-black);
+  color: var(--back-alt);
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -52,6 +50,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding: 0 2em;
 }
 
 .links-pages-item {
@@ -67,7 +66,7 @@
   height: 100%;
   border-radius: 0.1em;
   position: relative;
-  background-color: var(--colour-white);
+  background-color: var(--back-general);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,7 +81,7 @@
   width: calc(var(--base-grid) * 11);
   height: calc(var(--base-grid) * 11);
   transition: all 0.3s ease-in-out;
-  fill: var(--colour-black);
+  fill: var(--back-alt);
 }
 
 .links-pages-text {
@@ -106,7 +105,6 @@
   height: var(--link-size);
   border: 5px dashed var(--main-color);
   display: block;
-  /*   border-radius: 50%; */
   position: absolute;
   transition: all 0.3s cubic-bezier(0.53, -0.67, 0.73, 0.74);
   transform: none;
@@ -158,14 +156,14 @@
   }
 }
 
-@media screen and (width < 741px) {
+@media screen and (width < 807px) {
   .pages-links {
     height: 45em;
     padding-bottom: 5em;
   }
 }
 
-@media screen and (width < 482px) {
+@media screen and (width < 543px) {
   .pages-links {
     height: 58em;
     padding-bottom: 6em;

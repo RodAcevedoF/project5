@@ -1,8 +1,10 @@
 import { changePage } from "../../utils/changePage";
 import { AnimBtn } from "..";
 import "./BackBtn.css";
+import { getState } from "../../utils/state";
+import { navigate } from "../../utils/router";
 
-const BackBtn = (PageComponent, page) => {
+const BackBtn = (page) => {
   const btn = document.createElement("div");
   btn.classList.add("go-back-btn");
   const img = AnimBtn;
@@ -13,7 +15,7 @@ const BackBtn = (PageComponent, page) => {
   btn.appendChild(span);
 
   btn.addEventListener("click", () => {
-    changePage(PageComponent, page);
+    navigate(page);
   });
 
   return btn;

@@ -1,18 +1,18 @@
 import { authAxios } from "../utils/authAxios";
 
-const API_URL = "https://service.todo-api.site/api/todos";
-
 export const createTodo = async (todoData) => {
   try {
     const response = await authAxios.post("todos", todoData);
-
-    return response.data;
+    return { success: true, data: response.data };
   } catch (error) {
-    console.error(
-      "Error creating todo:",
-      error.response?.data || error.message
-    );
-    return { error: error.response?.data?.error || "Error creating todo" };
+    const data = error.response?.data || {};
+    console.error("Error creating todo:", data);
+
+    return {
+      success: false,
+      error: data.errors?.[0] || data.error || "Error creating todo",
+      errors: data.errors || []
+    };
   }
 };
 
@@ -21,14 +21,17 @@ export const getTodos = async (limit = 10, offset = 0) => {
     const response = await authAxios.get("todos", {
       params: { limit, offset }
     });
-
-    return response.data;
+    return { success: true, data: response.data.data };
   } catch (error) {
     console.error(
       "Error getting todos:",
       error.response?.data || error.message
     );
-    return { error: error.response?.data?.error || "Error getting todos" };
+    const data = error.response?.data || {};
+    return {
+      success: false,
+      error: data.error || "Error getting todos"
+    };
   }
 };
 

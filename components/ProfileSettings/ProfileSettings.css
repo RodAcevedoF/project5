@@ -17,6 +17,7 @@
   height: 0;
   opacity: 0;
   overflow: hidden;
+  padding: 0;
 }
 
 .profile-settings-body {
@@ -24,7 +25,7 @@
   flex-direction: column;
   overflow: hidden;
   transition: all 0.25s ease;
-  padding: 0em 2em;
+  padding: 2em;
   justify-content: center;
   align-items: center;
   width: 60%;
@@ -35,7 +36,6 @@
     rgb(186, 217, 255) 100%
   );
   margin: 2em;
-  padding: 25px 35px;
   border: 10px solid rgb(255, 255, 255);
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
   border-radius: 0.1em;
@@ -45,7 +45,6 @@
   text-align: center;
   font-weight: 500;
   font-size: 4em;
-  color: var(--main-color);
   font-family: "Jersey 15";
 }
 
@@ -58,7 +57,6 @@
 }
 
 .email-pass-div p {
-  color: var(--main-color);
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -86,7 +84,6 @@
 }
 
 #email-pass-form label {
-  color: var(--main-color);
   font-weight: bold;
 }
 
@@ -132,6 +129,7 @@
 @media screen and (width < 549px) {
   .profile-settings-body {
     width: 100%;
+    padding: 2em 1em;
   }
   .email-pass-div p,
   .delete-acc-div p {

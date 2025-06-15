@@ -20,6 +20,7 @@
   padding: 0.5em;
   gap: 0.5em;
   flex-flow: wrap;
+  margin-top: 1em;
 }
 
 .legal li {

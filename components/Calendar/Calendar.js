@@ -1,48 +1,25 @@
-// Calendar.js
 import "./Calendar.css";
-import { getTodos } from "../../api/ToDoApi";
-import { TodoDisplay } from "..";
 
-export const Calendar = () => {
+export const Calendar = ({ tasks = [], onTaskClick = () => {} }) => {
   const container = document.createElement("div");
   container.classList.add("simple-calendar");
-  const hideAllSections = () => {
-    document
-      .querySelectorAll(".collapsible")
-      .forEach((section) => section.classList.remove("visible"));
-    document.querySelector("#load-more-tasks").classList.remove("visible");
-    if (window.innerWidth < 792) {
-      document.querySelector(".main-aside").classList.remove("visible");
-    }
-  };
 
   let currentDate = new Date();
+  let currentTasks = tasks;
 
-  const render = async () => {
-    const result = await getTodos(100, 0);
-    let tasks = [];
-    if (result.success) {
-      tasks = result.data.filter((task) => task.deadline && task.priority);
-    }
-
+  const render = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
 
     const eventsMap = {};
-    tasks.forEach((task) => {
+    currentTasks.forEach((task) => {
       const d = new Date(task.deadline);
       if (d.getFullYear() === year && d.getMonth() === month) {
         const day = d.getDate();
         if (!eventsMap[day]) {
-          eventsMap[day] = { high: [], medium: [], low: [] };
+          eventsMap[day] = [];
         }
-        if (task.priority === "high") {
-          eventsMap[day].high.push(task);
-        } else if (task.priority === "medium") {
-          eventsMap[day].medium.push(task);
-        } else if (task.priority === "low") {
-          eventsMap[day].low.push(task);
-        }
+        eventsMap[day].push(task);
       }
     });
 
@@ -54,7 +31,8 @@ export const Calendar = () => {
     const prevBtn = document.createElement("button");
     prevBtn.textContent = "<";
     prevBtn.classList.add("nav-btn");
-    prevBtn.addEventListener("click", () => {
+    prevBtn.addEventListener("click", (ev) => {
+      ev.stopPropagation();
       currentDate = new Date(year, month - 1, 1);
       render();
     });
@@ -62,7 +40,8 @@ export const Calendar = () => {
     const nextBtn = document.createElement("button");
     nextBtn.textContent = ">";
     nextBtn.classList.add("nav-btn");
-    nextBtn.addEventListener("click", () => {
+    nextBtn.addEventListener("click", (ev) => {
+      ev.stopPropagation();
       currentDate = new Date(year, month + 1, 1);
       render();
     });
@@ -107,17 +86,14 @@ export const Calendar = () => {
 
     const firstDayOfMonth = new Date(year, month, 1);
     let startIndex = firstDayOfMonth.getDay() - 1;
-    if (firstDayOfMonth.getDay() === 0) {
-      startIndex = 6;
-    }
+    if (firstDayOfMonth.getDay() === 0) startIndex = 6;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     const tbody = document.createElement("tbody");
     let row = document.createElement("tr");
 
     for (let i = 0; i < startIndex; i++) {
-      const cell = document.createElement("td");
-      row.appendChild(cell);
+      row.appendChild(document.createElement("td"));
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
@@ -125,60 +101,42 @@ export const Calendar = () => {
         tbody.appendChild(row);
         row = document.createElement("tr");
       }
+
       const cell = document.createElement("td");
       const dayDiv = document.createElement("div");
       dayDiv.classList.add("day-number");
       dayDiv.textContent = day;
       cell.appendChild(dayDiv);
 
-      if (eventsMap[day]) {
+      const dayTasks = eventsMap[day];
+
+      if (dayTasks && dayTasks.length > 0) {
+        // Elegir la tarea más próxima a vencer (menor fecha)
+        const nearestTask = dayTasks.reduce((nearest, current) => {
+          return new Date(current.deadline) < new Date(nearest.deadline)
+            ? current
+            : nearest;
+        });
+
+        const dot = document.createElement("span");
+        dot.classList.add("dot", nearestTask.priority);
+        dot.title = nearestTask.title;
+        dot.addEventListener("click", (e) => {
+          e.stopPropagation();
+          onTaskClick(nearestTask);
+        });
+
         const dotsDiv = document.createElement("div");
         dotsDiv.classList.add("dots");
-        if (eventsMap[day].high.length > 0) {
-          const dotHigh = document.createElement("span");
-          dotHigh.classList.add("dot", "high");
-          dotHigh.title = eventsMap[day].high.map((t) => t.title).join(", ");
-          dotHigh.addEventListener("click", () => {
-            const container = document.querySelector(".latest-container");
-            container.innerHTML = "";
-            container.appendChild(TodoDisplay(eventsMap[day].high[0]));
-            hideAllSections();
-          });
-          dotsDiv.appendChild(dotHigh);
-        }
-        if (eventsMap[day].medium.length > 0) {
-          const dotMed = document.createElement("span");
-          dotMed.classList.add("dot", "medium");
-          dotMed.title = eventsMap[day].medium.map((t) => t.title).join(", ");
-          dotMed.addEventListener("click", () => {
-            const container = document.querySelector(".latest-container");
-            container.innerHTML = "";
-            container.appendChild(TodoDisplay(eventsMap[day].medium[0]));
-            hideAllSections();
-          });
-          dotsDiv.appendChild(dotMed);
-        }
-        if (eventsMap[day].low.length > 0) {
-          const dotLow = document.createElement("span");
-          dotLow.classList.add("dot", "low");
-          dotLow.title = eventsMap[day].low.map((t) => t.title).join(", ");
-          dotLow.addEventListener("click", () => {
-            const container = document.querySelector(".latest-container");
-            container.innerHTML = "";
-            container.appendChild(TodoDisplay(eventsMap[day].low[0]));
-            hideAllSections();
-          });
-          dotsDiv.appendChild(dotLow);
-        }
+        dotsDiv.appendChild(dot);
         cell.appendChild(dotsDiv);
       }
+
       row.appendChild(cell);
     }
 
-    while (row.children.length < 7) {
-      const cell = document.createElement("td");
-      row.appendChild(cell);
-    }
+    while (row.children.length < 7)
+      row.appendChild(document.createElement("td"));
     tbody.appendChild(row);
     table.appendChild(tbody);
 
@@ -187,7 +145,11 @@ export const Calendar = () => {
 
   render();
 
-  container.updateCalendar = render;
-
-  return container;
+  return {
+    element: container,
+    updateCalendar: (newTasks = []) => {
+      currentTasks = newTasks;
+      render();
+    }
+  };
 };

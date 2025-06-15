@@ -9,34 +9,21 @@ const InnerFooter = () => {
   const footer = document.createElement("footer");
   footer.classList.add("todo-footer");
   footer.appendChild(
-    PageBtn(Home, "/icon/home.png", "home-footer-link", "home", "Home")
+    PageBtn("home", "/icon/home.png", "home-footer-link", "Home")
+  );
+  footer.appendChild(
+    PageBtn("todos", "/icon/todolist.png", "todo-footer-link", "To-do's list")
   );
   footer.appendChild(
     PageBtn(
-      Todo,
-      "/icon/todolist.png",
-      "todo-footer-link",
-      "todo",
-      "To-do's list"
-    )
-  );
-  footer.appendChild(
-    PageBtn(
-      Videos,
+      "videos",
       "/icon/videolist.png",
       "videos-footer-link",
-      "videos",
       "Video's list"
     )
   );
   footer.appendChild(
-    PageBtn(
-      Books,
-      "/icon/booklist.png",
-      "books-footer-link",
-      "books",
-      "Book's list"
-    )
+    PageBtn("books", "/icon/booklist.png", "books-footer-link", "Book's list")
   );
 
   return footer;

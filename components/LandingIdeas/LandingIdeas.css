@@ -8,6 +8,20 @@
   margin-top: 2em;
 }
 
+.landing-ideas-ul .big-cloud {
+  width: 20%;
+  position: absolute;
+  top: -15%;
+  left: 5%;
+}
+
+.landing-ideas-ul .small-cloud {
+  width: 14%;
+  position: absolute;
+  top: -1%;
+  right: 5%;
+}
+
 .landing-ideas-li {
   display: flex;
   width: 100vw;

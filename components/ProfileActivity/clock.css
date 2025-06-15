@@ -1,44 +1,43 @@
-/* From Uiverse.io by Ali-Tahmazi99 */
-.loader {
-  width: 65px;
-  height: 65px;
-  border: 8px solid var(--main-color);
+/* .clock-timer {
+  width: 32.5px;
+  height: 32.5px;
+  border: 4px solid var(--main-color);
   border-radius: 50px;
   position: relative;
 }
 
-.loader span {
+.clock-timer span {
   display: block;
   background: var(--main-color);
 }
 
-.loader .hour,
-.loader .min {
-  width: 6px;
-  height: 22px;
+.clock-timer .hour,
+.clock-timer .min {
+  width: 3px;
+  height: 11px;
   border-radius: 50px;
   position: absolute;
-  top: 24.5px;
-  left: 21px;
-  animation: load9243 1.2s linear infinite;
+  top: 12.25px;
+  left: 10.5px;
+  animation: timer 1.2s linear infinite;
   transform-origin: top center;
 }
 
-.loader .min {
-  height: 17px;
-  animation: load9243 4s linear infinite;
+.clock-timer .min {
+  height: 8.5px;
+  animation: timer 4s linear infinite;
 }
 
-.loader .circel {
-  width: 10px;
-  height: 10px;
+.clock-timer .circel {
+  width: 5px;
+  height: 5px;
   border-radius: 50px;
   position: absolute;
-  top: 19px;
-  left: 19px;
+  top: 9.5px;
+  left: 9.5px;
 }
 
-@keyframes load9243 {
+@keyframes timer {
   0% {
     transform: rotate(0deg);
   }
@@ -47,3 +46,4 @@
     transform: rotate(360deg);
   }
 }
+ */

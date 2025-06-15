@@ -1,39 +1,29 @@
 import "./RegisterForm.css";
 import { registerUser } from "../../api/userApi";
-import { MainBtn } from "..";
+import { MainBtn, showGlobalLoader, hideGlobalLoader, CheckBox } from "..";
 import { handleAuthSuccess } from "../../pages/SignLogin/SignLogin";
-import {
-  showGlobalLoader,
-  hideGlobalLoader
-} from "../GlobalLoader/GlobalLoader";
 
 export const RegisterForm = () => {
+  const checkTerms = CheckBox("terms");
+  const checkPromotions = CheckBox("promotions");
+
   const div = document.createElement("div");
   div.innerHTML = `
     <form id="register-form">
       <h2>Register in seconds!</h2>
-
       <label for="register-name">Name:</label>
       <input type="text" id="register-name" placeholder="John Smith" required>
-
       <label for="register-email">Email:</label>
       <input type="email" id="register-email" placeholder="example@site.com" required>
-
       <label for="register-password">Password:</label>
       <input type="password" id="register-password" placeholder="At least 8 characters" required>
-
       ${MainBtn("submit", "register-button", "main-btn", "Register")}
-
       <div class="checks">
-        <input type="checkbox" id="promotions" required>
-        <label for="promotions">I agree to receive promotions and marketing emails</label>
+        <p>I agree to receive promotions and marketing emails</p>
       </div>
-
       <div class="checks">
-        <input type="checkbox" id="terms" required>
-        <label for="terms">I agree to the <a href="#null">Terms of Service</a> and <a href="#null">Privacy Policy</a></label>
+        <p>I agree to the <a href="#null">Terms of Service</a> and <a href="#null">Privacy Policy</a></p>
       </div>
-
       <p class="registered">You have an account? Login!</p>
       <p id="register-error" class="error-message"></p>
       </form>
@@ -41,6 +31,9 @@ export const RegisterForm = () => {
 
   const form = div.querySelector("#register-form");
   const errorMessage = div.querySelector("#register-error");
+  const checks = div.querySelectorAll(".checks");
+  checks[0].insertAdjacentElement("afterbegin", checkPromotions);
+  checks[1].insertAdjacentElement("afterbegin", checkTerms);
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -56,27 +49,26 @@ export const RegisterForm = () => {
     }
 
     try {
-      showGlobalLoader(); // 🚀 Mostramos loader antes de iniciar
+      showGlobalLoader();
 
       const response = await registerUser(name, email, password);
 
       if (response?.data) {
-        await handleAuthSuccess(response); // ⚠️ Esto puede tardar
+        await handleAuthSuccess(response);
       } else {
         throw new Error(response?.error || "Registration failed");
       }
     } catch (error) {
-      console.error("❌ Error during registration:", error);
+      console.error("Error during registration:", error);
       errorMessage.textContent =
         error?.response?.data?.error ||
         error.message ||
         "Unexpected error during registration.";
     } finally {
-      hideGlobalLoader(); // 🧹 Siempre se oculta
+      hideGlobalLoader();
     }
   });
 
-  // Cambio a login
   div.querySelector(".registered").addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("changeForm", { detail: "login" }));
   });

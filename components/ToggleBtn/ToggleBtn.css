@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--letter-general);
+  color: var(--back-general);
   border-radius: 0.2em;
   border: none;
   cursor: pointer;
@@ -110,9 +110,6 @@
   animation: anim 1s linear infinite;
   margin-top: 0.25em;
   background: transparent;
-}
-
-.toggle-btn:hover img {
   filter: invert(1);
 }
 

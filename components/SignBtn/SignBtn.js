@@ -2,6 +2,7 @@ import "./SignBtn.css";
 import { SignLogin } from "../../pages/SignLogin/SignLogin.js";
 import { setState, getState } from "../../utils/state.js";
 import { changePage } from "../../utils/changePage.js";
+import { navigate } from "../../utils/router.js";
 
 export const SignBtn = (idName, txt, formType) => {
   const button = document.createElement("button");
@@ -17,7 +18,9 @@ export const SignBtn = (idName, txt, formType) => {
       window.dispatchEvent(new CustomEvent("changeForm", { detail: formType }));
     } else {
       setState("currentForm", formType);
-      changePage(SignLogin, "signlogin");
+      //changePage(SignLogin, "signlogin");
+      //navigate("/register");
+      navigate(`/login?form=${formType}`);
     }
   });
 

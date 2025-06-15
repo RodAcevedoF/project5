@@ -1,4 +1,7 @@
 import "./HeroHome.css";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const HeroHome = () => {
   const sect = document.createElement("section");
@@ -9,12 +12,32 @@ const HeroHome = () => {
     <div class='air air2'></div>
     <div class='air air3'></div>
     <div class='air air4'></div>
+    <div class='up-air up-air1'></div>
+    <div class='up-air up-air2'></div>
+    <div class='up-air up-air3'></div>
+    <div class='up-air up-air4'></div>
     <h1>Welcome to GetDone!</h1>
     <div class="loop-hero">
-      <h3 class="subtitle active-sub">Organize your tasks!</h3>
-      <h3 class="subtitle">Check for Books!</h3>
-      <h3 class="subtitle">Boost your productivity!</h3>
-      <h3 class="subtitle">Check for Videos!</h3>
+      <h3 class="subtitle active-sub">
+        <img src="/images/todolanding.png" alt"checklist-icon" class="hero-home-icons">
+        Organize your tasks!
+        <img src="/images/pencilicon.png" alt"" class="hero-home-icons">
+      </h3>
+      <h3 class="subtitle">
+        <img src="/images/notebookicon.png" alt"notebook icon" class="hero-home-icons">
+        Check for Books!
+        <img src="/images/booklanding.png" alt"book icon" class="hero-home-icons">
+      </h3>
+      <h3 class="subtitle">
+      <img src="/images/videoicon.png" alt"youtube icon" class="hero-home-icons">
+      Check for Videos!
+      <img src="/images/videolanding.png" alt"video icon" class="hero-home-icons">
+      </h3>
+      <h3 class="subtitle">
+      <img src="/images/boosthome.png" alt"boost icon" class="hero-home-icons">
+      Boost productivity!
+      <img src="/images/clockicon.png" alt"clock icon" class="hero-home-icons">
+      </h3>
     </div>
   `;
 
@@ -28,6 +51,15 @@ const HeroHome = () => {
 
   sect.cleanup = () => clearInterval(intervalId);
 
+  requestAnimationFrame(() => {
+    gsap.to(".hero-home-icons", {
+      y: -5,
+      duration: 0.5,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true
+    });
+  });
   return sect;
 };
 

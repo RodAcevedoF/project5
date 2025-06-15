@@ -31,8 +31,8 @@
 }
 
 .brand-div h4:nth-child(2) {
-  font-size: 2em;
-  padding-top: 1em;
+  font-size: 3em;
+  margin-top: 1em;
   width: 100%;
   text-align: center;
   padding: 0 0.25em;
@@ -79,8 +79,16 @@
   border-radius: 0.1em;
   padding: 2em;
   box-shadow: var(--general-shadow);
-  border: 0.5vmin solid var(--back-alt);
-  box-shadow: 0.4rem 0.4rem var(--back-alt);
+  border: 0.6vmin solid var(--back-alt);
+  box-shadow: 0.5rem 0.5rem var(--back-alt);
+  transition: all 0.25s ease-in-out;
+  background: var(--plus-lighter-main);
+}
+
+.with:hover,
+.without:hover {
+  filter: contrast(1.8);
+  box-shadow: var(--general-shadow);
 }
 
 .with li,
@@ -143,6 +151,6 @@
 
 @media screen and (width < 390px) {
   .brand-div h4:nth-child(1) {
-    font-size: 1.2em;
+    font-size: 1.5em;
   }
 }

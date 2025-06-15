@@ -8,6 +8,7 @@
   width: 60%;
   border: 0.6vmin solid var(--back-alt);
   box-shadow: 0.5rem 0.5rem var(--back-alt);
+  margin: 3em 0;
 }
 
 .card-title {
@@ -29,12 +30,9 @@
 }
 
 .todo-display-card h3 {
-  font-size: 1.5em;
-  text-transform: uppercase;
+  font-size: 2.5em;
   font-weight: bold;
-  color: transparent;
-  -webkit-text-stroke-width: 0.3px;
-  -webkit-text-stroke-color: var(--letter-general);
+  font-family: "Jersey 15";
 }
 
 .card-content {

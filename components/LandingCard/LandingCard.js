@@ -29,7 +29,6 @@ const LandingCard = () => {
     "afterbegin",
     SignBtn("sign-in-alt", "Get Started ►", "register")
   );
-
   requestAnimationFrame(() => {
     gsap.from(".landing-card h1", {
       opacity: 0,
@@ -58,7 +57,7 @@ const LandingCard = () => {
       }
     });
 
-    gsap.from(".sign-in-alt", {
+    gsap.from("#sign-in-alt", {
       opacity: 0,
       scale: 0.5,
       y: 30,
@@ -66,7 +65,7 @@ const LandingCard = () => {
       ease: "back.out(1.7)",
       delay: 0.4,
       scrollTrigger: {
-        trigger: ".sign-in-alt",
+        trigger: "#sign-in-alt",
         start: "top 80%",
         toggleActions: "play none none reverse"
       }
@@ -84,7 +83,6 @@ const LandingCard = () => {
       }
     });
   });
-
   return art;
 };
 

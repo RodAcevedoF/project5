@@ -1,6 +1,5 @@
 import "./ProfileBtn.css";
-import { changePage } from "../../utils/changePage";
-import { Profile } from "../../pages/Profile/Profile";
+import { navigate } from "../../utils/router";
 const ProfileBtn = () => {
   const btn = document.createElement("button");
   btn.classList.add("profile-btn");
@@ -8,14 +7,14 @@ const ProfileBtn = () => {
   const img = document.createElement("img");
   img.alt = "profile icon";
   const updateImg = () => {
-  const storedImg = localStorage.getItem("profileImg") || "/icon/user.png";
-  img.src = storedImg;
-  }
+    const storedImg = localStorage.getItem("profileImg") || "/icon/user.png";
+    img.src = storedImg;
+  };
   updateImg();
   btn.addEventListener("click", () => {
-    changePage(Profile, "profile");
+    navigate("profile");
   });
-  btn.appendChild(img)
+  btn.appendChild(img);
   return btn;
 };
 

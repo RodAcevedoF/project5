@@ -63,7 +63,3 @@ const ProfileForm = (user) => {
 };
 
 export default ProfileForm;
-/*
-                <input type="file" id="profile-image-input" class="edit-form-input" accept="image/*" />
-                                <label for="profile-image-input" class="input-image-label" >Profile Image:</label>
-                */

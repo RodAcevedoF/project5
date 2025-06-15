@@ -89,3 +89,7 @@
 .profile-contact-list .icon-content a[data-social="google"] ~ .tooltip {
   background-color: #d15c0d;
 }
+
+.bi-web {
+  width: 5px;
+}

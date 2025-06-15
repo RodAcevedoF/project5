@@ -13,7 +13,6 @@ import {
 } from "..";
 import { searchVideo } from "../../api/searchVideos.js";
 import { getVideos } from "../../api/videoApi.js";
-import { randomVidQueries } from "../../data/options.js";
 import { setState, getState } from "../../utils/state.js";
 import {
   updateVideoCount,
@@ -51,7 +50,7 @@ export const VideoGrid = () => {
     order: ""
   };
   let nextPageToken = "";
-  const maxResults = 10;
+  const maxResults = 12;
   let totalResults = 0;
 
   const showLoading = (comp) => {
@@ -63,22 +62,22 @@ export const VideoGrid = () => {
       comp.innerHTML = "";
     }
 
-    if (!result?.videos?.length && getState("currentToggle") === "search") {
+    const toggleState = getState("currentToggle");
+    const loadBtn = document.querySelector(".load-more-button");
+
+    if (!Array.isArray(result?.videos) || result.videos.length === 0) {
       comp.innerHTML = "";
-      comp.appendChild(VideoSuggestions(searchVideos, toggleButton));
-      return;
-    } else if (
-      !result?.videos?.length &&
-      getState("currentToggle") === "saved"
-    ) {
-      comp.innerHTML = "";
-      comp.appendChild(SavedListsSuggestions("video", toggleButton));
+      loadBtn.style.display = "none";
+      if (toggleState === "search") {
+        comp.appendChild(VideoSuggestions(searchVideos, toggleButton));
+      } else if (toggleState === "saved") {
+        comp.appendChild(SavedListsSuggestions("video", toggleButton));
+      }
       return;
     }
 
     result.videos.forEach((video) => {
       if (comp.querySelector(`[data-video-id="${video.id}"]`)) return;
-
       const elem = comp === grid ? VideoCard(video) : VidListElement(video);
       comp.appendChild(elem);
     });
@@ -147,7 +146,7 @@ export const VideoGrid = () => {
       grid.innerHTML = "";
       searchBarElement.reset();
       setState("currentToggle", "search");
-      //getRandomQuery();
+      getDefaultQuery();
     }
   };
 
@@ -183,12 +182,10 @@ export const VideoGrid = () => {
   });
   searchBarElement.style.display = "flex";
 
-  // Event listeners
   toggleButton.addEventListener("click", handleToggle);
   loadMoreButton.addEventListener("click", () => searchVideos(false));
   window.addEventListener("videoDeleted", handleVideoDeleted);
 
-  // Mount structure
   toggleSect.appendChild(toggleButton);
   menuSect.appendChild(searchBarElement);
   container.appendChild(toggleSect);
@@ -198,15 +195,29 @@ export const VideoGrid = () => {
   container.appendChild(savedSect);
   container.appendChild(loadMoreButton);
 
-  // Init state
   savedSect.style.display = "none";
-  loadMoreButton.style.display = "none";
 
-  const getDefaultQuery = () => {
+  const getDefaultQuery = async () => {
+    const cachedDefault = getState("defaultSearchResults");
+    console.log(cachedDefault || "No data yet");
+    if (cachedDefault && Array.isArray(cachedDefault.videos)) {
+      updateResults(grid, cachedDefault, true);
+      return;
+    }
+
     searchParams.query = "youtube";
-    setState("currentToggle", "search");
-    searchVideos(true);
+    showLoading(grid);
+    const result = await searchVideo(
+      searchParams.query,
+      "",
+      searchParams.videoDuration || "medium",
+      searchParams.order || "relevance"
+    );
+    setState("defaultSearchResults", result);
+    updateResults(grid, result, true);
   };
+
+  getDefaultQuery();
 
   return { container, updateResults, showLoading };
 };

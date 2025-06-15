@@ -1,27 +1,32 @@
 import "./ProfileSettings.css";
 import { CardBtn } from "..";
+import { showWarning, showError, showInfo } from "../../utils/swalHandler";
 
 const ProfileSettings = (userData, fn1, fn2) => {
   const sect = document.createElement("section");
   sect.className = "profile-settings-section";
   sect.classList.add("inactive");
 
-  const editSensitiveBtn = CardBtn("Edit", "edit-sensitive", "/icon/add.png");
+  const editSensitiveBtn = CardBtn(
+    "Edit",
+    "edit-sensitive",
+    "/icon/editicon.png"
+  );
   const submitSensitiveBtn = CardBtn(
     "Submit",
     "submit-sensitive",
-    "/icon/add.png",
+    "/icon/submiticon.png",
     "submit"
   );
   const cancelSensitiveBtn = CardBtn(
     "Cancel",
     "cancel-sensitive",
-    "/icon/add.png"
+    "/icon/close.png"
   );
   const deleteSensitiveBtn = CardBtn(
     "Delete",
     "delete-sensitive",
-    "/icon/add.png"
+    "/icon/deleteicon.png"
   );
 
   sect.innerHTML = `
@@ -100,26 +105,26 @@ const ProfileSettings = (userData, fn1, fn2) => {
       .value.trim();
 
     if (!currentPassword) {
-      alert("Current password is required.");
+      await showWarning("Current password is required.");
       return;
     }
 
     if (newPassword && newPassword !== repeatNewPassword) {
-      alert("New passwords do not match.");
+      await showError("New passwords do not match.");
       return;
     }
 
     if (!email && !newPassword) {
-      alert("You must change at least the email or password.");
+      await showInfo("You must change at least the email or password.");
       return;
     }
+
     const payload = {};
     if (email) payload.email = email;
     if (newPassword) payload.password = newPassword;
     payload.currentPassword = currentPassword;
 
     await fn1(payload);
-    cancelBtn.click();
   });
 
   return sect;

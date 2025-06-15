@@ -1,16 +1,17 @@
 import { changePage } from "../../utils/changePage";
+import { navigate } from "../../utils/router";
 import "./PageBtn.css";
 
-const PageBtn = (PageComponent, img, id, page, txt) => {
-    const btn = document.createElement("button");
-    btn.classList.add("page-btn");
-    btn.id = id;
-    btn.innerHTML = `<img src=${img} alt="${txt} icon">
+const PageBtn = (page, img, id, txt) => {
+  const btn = document.createElement("button");
+  btn.classList.add("page-btn");
+  btn.id = id;
+  btn.innerHTML = `<img src=${img} alt="${txt} icon">
                      <h5>${txt}<h5>`;
-    btn.addEventListener("click", () => {
-        changePage(PageComponent, page);
-    })
-    return btn;
-}
+  btn.addEventListener("click", () => {
+    navigate(page);
+  });
+  return btn;
+};
 
 export default PageBtn;
