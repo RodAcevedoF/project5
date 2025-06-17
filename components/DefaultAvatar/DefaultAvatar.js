@@ -1,5 +1,5 @@
 import "./DefaultAvatar.css";
-import { getRandomColor } from "../../utils/getRandomColor";
+import { getRandomColor } from "../../utils";
 
 export const DefaultAvatar = (type, user) => {
   if (user.profile_image) {

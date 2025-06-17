@@ -1,8 +1,7 @@
 import "./LogOutbtn.css";
-import { logoutUser } from "../../api/authApi.js";
-import { NavBar } from "../NavBar/NavBar.js";
-import { navigate } from "../../utils/router.js";
-import { showConfirm, showSuccess } from "../../utils/swalHandler.js";
+import { logoutUser } from "../../api/authApi";
+import { NavBar } from "../NavBar/NavBar";
+import { showConfirm, showSuccess, navigate } from "../../utils";
 
 export const LogOutBtn = () => {
   const button = document.createElement("button");

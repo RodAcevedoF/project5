@@ -1,3 +1,4 @@
+import "./BookGrid.css";
 import {
   BookCard,
   BookSuggestions,
@@ -9,17 +10,17 @@ import {
   SavedListsSuggestions,
   SearchBar,
   ToggleBtn
-} from "../index.js";
-import "./BookGrid.css";
+} from "..";
 import { searchBook } from "../../api/searchBook.js";
 import { getBooks } from "../../api/bookApi.js";
-import { setState, getState } from "../../utils/state.js";
 import { randomQueries } from "../../data/options.js";
 import {
   getCategories,
   filterBooks,
-  updateBookCount
-} from "../../utils/updateBookCount.js";
+  updateBookCount,
+  setState,
+  getState
+} from "../../utils";
 
 export const BookGrid = () => {
   const container = document.createElement("article");

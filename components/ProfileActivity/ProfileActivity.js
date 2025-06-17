@@ -1,5 +1,5 @@
 import "./ProfileActivity.css";
-import { formatZuluToLocal } from "../../utils/formatZuluToLocal";
+import { formatZuluToLocal } from "../../utils";
 
 const clock = ` 
 <div class="clock-timer">

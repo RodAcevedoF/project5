@@ -1,13 +1,11 @@
 import "./SavedVideosBar.css";
 import {
   filterVideos,
-  updateVideoCount
-} from "../../utils/updateVideoCount.js";
-import {
+  updateVideoCount,
   getChannels,
   updateChannelSelect
-} from "../../utils/updateVideoCount.js";
-import { MainBtn, SearchElement } from "../index.js";
+} from "../../utils";
+import { MainBtn, SearchElement } from "..";
 
 // RangeSlider para la duración
 const RangeSlider = () => {
@@ -46,7 +44,6 @@ const SavedVideosBar = () => {
       const channel = channelSelect.value;
       let duration = parseInt(durationRange.value, 10);
 
-      // Si es 0 o 360, no aplicar filtro (representar como Infinity)
       if (duration === 0 || duration === 60) {
         duration = Infinity;
       }
@@ -55,7 +52,6 @@ const SavedVideosBar = () => {
       updateVideoCount();
     };
 
-    // Mostrar duración en el span, o ∞ si es 0 o 360
     durationRange.addEventListener("input", () => {
       const numericValue = parseInt(durationRange.value, 10);
       durationValue.textContent =

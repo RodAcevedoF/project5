@@ -1,5 +1,5 @@
 import "./ProfileBtn.css";
-import { navigate } from "../../utils/router";
+import { navigate } from "../../utils";
 const ProfileBtn = () => {
   const btn = document.createElement("button");
   btn.classList.add("profile-btn");

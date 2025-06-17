@@ -1,9 +1,5 @@
 import "./InnerFooter.css";
 import { PageBtn } from "..";
-import { Todo } from "../../pages/ToDo/Todo";
-import { Books } from "../../pages/Books/Books";
-import { Videos } from "../../pages/VideoPage/Videos";
-import { Home } from "../../pages/Home/Home";
 
 const InnerFooter = () => {
   const footer = document.createElement("footer");

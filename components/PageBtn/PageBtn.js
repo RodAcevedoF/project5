@@ -1,5 +1,4 @@
-import { changePage } from "../../utils/changePage";
-import { navigate } from "../../utils/router";
+import { navigate } from "../../utils";
 import "./PageBtn.css";
 
 const PageBtn = (page, img, id, txt) => {

@@ -1,5 +1,5 @@
 import "./SavedBookBar.css";
-import { filterBooks, updateBookCount } from "../../utils/updateBookCount.js";
+import { filterBooks, updateBookCount } from "../../utils";
 import { MainBtn, RangeSlider, SearchElement } from "../index.js";
 
 const SavedBooksBar = (categories) => {

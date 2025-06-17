@@ -1,8 +1,6 @@
-import { changePage } from "../../utils/changePage";
-import { AnimBtn } from "..";
 import "./BackBtn.css";
-import { getState } from "../../utils/state";
-import { navigate } from "../../utils/router";
+import { AnimBtn } from "..";
+import { navigate } from "../../utils";
 
 const BackBtn = (page) => {
   const btn = document.createElement("div");

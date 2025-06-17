@@ -1,10 +1,9 @@
 import "./BookCard.css";
 import { createBook } from "../../api/bookApi.js";
-import { CardBtn } from "../index.js";
-import { updateCategorySelect } from "../../utils/updateBookCount.js";
+import { CardBtn } from "..";
+import { updateCategorySelect, showError, showSuccess } from "../../utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { showError, showSuccess } from "../../utils/swalHandler.js";
 
 gsap.registerPlugin(ScrollTrigger);
 

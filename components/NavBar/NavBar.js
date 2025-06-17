@@ -1,13 +1,6 @@
 import "./Navbar.css";
-import {
-  MenuUl,
-  menuBtn,
-  LogOutBtn,
-  ProfileBtn,
-  SignBtn,
-  UpBtn
-} from "../index.js";
-import { getState } from "../../utils/state.js";
+import { MenuUl, menuBtn, LogOutBtn, ProfileBtn, SignBtn, UpBtn } from "..";
+import { getState } from "../../utils";
 
 export const NavBar = (currentPage = getState("currentPage")) => {
   const header = document.querySelector("header");

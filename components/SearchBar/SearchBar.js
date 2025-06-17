@@ -1,5 +1,5 @@
 import "./SearchBar.css";
-import { getState } from "../../utils/state";
+import { getState } from "../../utils";
 import { MainBtn, SearchElement, RangeSlider } from "..";
 
 export const SearchBar = (onSearchQuery) => {

@@ -1,6 +1,6 @@
 import "./ProfileSettings.css";
 import { CardBtn } from "..";
-import { showWarning, showError, showInfo } from "../../utils/swalHandler";
+import { showWarning, showError, showInfo } from "../../utils";
 
 const ProfileSettings = (userData, fn1, fn2) => {
   const sect = document.createElement("section");

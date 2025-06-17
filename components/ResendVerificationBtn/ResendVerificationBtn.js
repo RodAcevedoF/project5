@@ -1,7 +1,5 @@
 import { requestEmailVerification } from "../../api/securityApi";
-import { getState } from "../../utils/state";
-import { sendUserEmail } from "../../utils/sendUserEmail";
-import { showError, showSuccess } from "../../utils/swalHandler";
+import { showError, showSuccess, sendUserEmail, getState } from "../../utils";
 import "./ResendVerificationBtn.css";
 
 export const ResendVerificationBtn = () => {

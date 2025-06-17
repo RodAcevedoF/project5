@@ -1,7 +1,5 @@
 import "./Books.css";
 import { BookGrid, HeroBanner, InnerFooter } from "../../components";
-import { loadCategories } from "../../utils";
-await loadCategories();
 
 export const Books = () => {
   const main = document.querySelector("main");

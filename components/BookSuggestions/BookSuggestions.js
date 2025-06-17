@@ -1,7 +1,7 @@
 import "./BookSuggestions.css";
 import { arrayOptions } from "../../data/options";
 import { SuggestionBtn } from "..";
-import { getState } from "../../utils/state";
+import { getState } from "../../utils";
 
 const BookSuggestions = (searchBooks, toggleButton) => {
   document.querySelector(".book-grid").classList.add("height");

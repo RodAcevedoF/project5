@@ -1,6 +1,6 @@
 import "./SavedListsSuggestion.css";
 import { CardBtn } from "..";
-import { getState } from "../../utils/state";
+import { getState } from "../../utils";
 
 const SavedListsSuggestions = (keyword, toggleButton) => {
   const div = document.createElement("div");

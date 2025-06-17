@@ -3,6 +3,7 @@ import { logoutUser } from "../api/authApi.js";
 import { setState } from "./state.js";
 import { getProfile } from "../api/userApi.js";
 import { isAuthenticated } from "./authUtils.js";
+import { loadCategories } from "./getPopularCategories.js";
 
 export const initAuthFlow = async () => {
   const reject = (needsVerification = false) => {
@@ -33,7 +34,7 @@ export const initAuthFlow = async () => {
 
     setState("isLoggedIn", true);
     scheduleTokenRefresh();
-
+    await loadCategories();
     return { authenticated: true, needsVerification: false };
   } catch (error) {
     console.error("Error fetching profile:", error);
