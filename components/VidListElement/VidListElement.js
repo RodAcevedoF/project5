@@ -1,21 +1,17 @@
 import "./VidListElement.css";
 import { updateVideo, deleteVideo, getVideos } from "../../api/videoApi.js";
-import { setState } from "../../utils/state.js";
 import {
   updateVideoCount,
-  updateChannelSelect
-} from "../../utils/updateVideoCount.js";
-import {
+  updateChannelSelect,
+  setState,
   formatDate,
   formatDurationSecs,
-  formatViews
-} from "../../utils/videoUtils.js";
-import { CardBtn, SavedListBtn } from "../index.js";
-import {
+  formatViews,
   showSuccess,
   showError,
   showConfirm
-} from "../../utils/swalHandler.js";
+} from "../../utils";
+import { CardBtn, SavedListBtn } from "..";
 
 let currentOpenCard = null;
 

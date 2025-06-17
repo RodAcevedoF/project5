@@ -147,7 +147,6 @@ body {
 .dark .saved-label,
 .dark .card-title,
 .dark .matches-info,
-.dark .switch-container,
 .dark .card-actions textarea,
 .dark .notes-input {
   border: 0.4vmin solid var(--back-general);
@@ -320,7 +319,8 @@ body {
 .dark .styled-wrapper .button:before,
 .dark .head-info,
 .dark .with:hover,
-.dark .without:hover {
+.dark .without:hover,
+.dark .switch-container {
   border-color: var(--back-general);
 }
 

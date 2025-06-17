@@ -17,14 +17,9 @@
   overflow: hidden;
   position: sticky;
   overflow: hidden;
-  height: auto;
-}
-
-.landing-header {
-  display: flex;
-  height: auto;
+  min-height: 100vh;
   will-change: transform;
-  width: 100%;
+  position: relative;
   background-image: url("/images/cloudbg.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -44,26 +39,40 @@
     transparent 100%
   );
 }
+
+.landing-header {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
 .landing-header-ideas {
-  top: 80%;
-  height: 60%;
+  top: 15%;
   width: 100%;
   padding: 2em;
-  will-change: transform;
+  will-change: transform, opacity;
   position: absolute;
   opacity: 0;
   display: flex;
+  height: 100%;
 }
 .landing-box {
-  top: 195%;
-  height: 60%;
+  top: 0;
   width: 100%;
-  will-change: transform;
+  will-change: transform, opacity;
   position: absolute;
   opacity: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  padding: 3em 0;
 }
 .article-exp {
   display: flex;

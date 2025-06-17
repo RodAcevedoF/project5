@@ -3,7 +3,7 @@ import { HeroHome } from "../../components";
 import { HomeOptions } from "../../components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { navigate } from "../../utils/router";
+import { navigate } from "../../utils";
 
 gsap.registerPlugin(ScrollTrigger);
 

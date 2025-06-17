@@ -1,7 +1,7 @@
 import "./VideoSuggestions.css";
 import { youtubeOptions } from "../../data/options";
 import { SuggestionBtn } from "..";
-import { getState } from "../../utils/state";
+import { getState } from "../../utils";
 
 const VideoSuggestions = (searchVideos, toggleButton) => {
   document.querySelector(".video-grid").classList.add("height");

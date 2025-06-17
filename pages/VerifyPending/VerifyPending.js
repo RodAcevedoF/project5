@@ -1,9 +1,8 @@
 import "./VerifyPending.css";
 import { CardBtn, ResendVerificationBtn } from "../../components";
-import { initAuthFlow } from "../../utils/authFlow.js";
+import { initAuthFlow, navigate } from "../../utils";
 import Swal from "sweetalert2";
 import gsap from "gsap";
-import { navigate } from "../../utils/router.js";
 
 export const VerifyPending = async () => {
   const main = document.querySelector("main");

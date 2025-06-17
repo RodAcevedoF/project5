@@ -13,12 +13,13 @@ import {
 } from "..";
 import { searchVideo } from "../../api/searchVideos.js";
 import { getVideos } from "../../api/videoApi.js";
-import { setState, getState } from "../../utils/state.js";
 import {
+  setState,
+  getState,
   updateVideoCount,
   getChannels,
   updateChannelSelect
-} from "../../utils/updateVideoCount.js";
+} from "../../utils";
 
 export const VideoGrid = () => {
   const container = document.createElement("article");

@@ -16,10 +16,10 @@ import {
   fetchUpcomingDeadlines,
   renderTodos,
   renderDeadlines,
-  saveTodo
-} from "../../utils/todoHandlers";
-import { getState } from "../../utils/state";
-import { showError, showToast } from "../../utils/swalHandler";
+  saveTodo,
+  showError,
+  showToast
+} from "../../utils";
 
 export const Todo = async () => {
   const container = document.querySelector("main");

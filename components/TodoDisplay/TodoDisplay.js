@@ -1,7 +1,7 @@
 import "./TodoDisplay.css";
 import { deleteTodo, updateTodo } from "../../api/ToDoApi";
 import { MainBtn, SwitchYesNo } from "..";
-import { showConfirm, showError, showSuccess } from "../../utils/swalHandler";
+import { showConfirm, showError, showSuccess } from "../../utils";
 
 export const TodoDisplay = (todo, { onUpdate }) => {
   const card = document.createElement("div");

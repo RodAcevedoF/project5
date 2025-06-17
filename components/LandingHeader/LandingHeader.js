@@ -1,8 +1,4 @@
 import "./LandingHeader.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const LandingHeader = () => {
   const div = document.createElement("div");
@@ -23,63 +19,6 @@ const LandingHeader = () => {
       </div>
     </div>
   `;
-
-  requestAnimationFrame(() => {
-    gsap.set("#anime-card", { opacity: 0, yPercent: 50, scale: 1 });
-    gsap.to("#anime-card", {
-      opacity: 1,
-      yPercent: 0,
-      duration: 0.5,
-      ease: "power2.out"
-    });
-
-    const cardScrollTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#anime-card",
-        start: "top 25%",
-        end: "top 0%",
-        scrub: true
-      }
-    });
-    cardScrollTimeline.fromTo(
-      "#anime-card",
-      { opacity: 1, y: 0, scale: 1 },
-      { opacity: 0, y: -50, scale: 2.5, ease: "power2.out" }
-    );
-    gsap.to("#anime-card", {
-      y: -15,
-      duration: 1.25,
-      ease: "power1.inOut",
-      repeat: -1,
-      yoyo: true
-    });
-    gsap.to(".big-cloud", {
-      xPercent: 25, // mueve 100px a la derecha
-      duration: 4,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true
-    });
-    gsap.to(".small-cloud", {
-      xPercent: -20, // mueve 80px a la izquierda
-      duration: 4,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true
-    });
-    gsap.from(".landing-header-icons", {
-      opacity: 0,
-      y: 50,
-      scale: 0.5,
-      duration: 0.6,
-      ease: "back.out(1.7)",
-      stagger: {
-        amount: 0.6,
-        from: "center"
-      }
-    });
-  });
-
   return div;
 };
 

@@ -1,7 +1,6 @@
 import "./ProfileInfo.css";
 import { CardBtn, ProfileContact, ProfileForm, DefaultAvatar } from "..";
-import normalizeUrl from "../../utils/normalizeUrl";
-import displayNick from "../../utils/displayNickname";
+import { normalizeUrl, displayNick } from "../../utils";
 
 const ProfileInfo = (user, postAll) => {
   const sect = document.createElement("section");

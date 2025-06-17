@@ -5,12 +5,15 @@ import {
   PasswordForm,
   RegisterForm
 } from "../../components";
-import { getState, setState } from "../../utils/state";
-import { setTokens } from "../../utils/authUtils";
+import {
+  getState,
+  setState,
+  setTokens,
+  sendUserEmail,
+  showToast,
+  navigate
+} from "../../utils";
 import { requestEmailVerification } from "../../api/securityApi";
-import { sendUserEmail } from "../../utils/sendUserEmail";
-import { showToast } from "../../utils/SwalHandler";
-import { navigate } from "../../utils/router";
 
 export const SignLogin = () => {
   const main = document.querySelector("main");

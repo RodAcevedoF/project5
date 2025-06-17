@@ -1,13 +1,13 @@
 import "./VideoCard.css";
 import { createVideo } from "../../api/videoApi.js";
 import { CardBtn } from "..";
-import { updateChannelSelect } from "../../utils/updateVideoCount.js";
 import {
+  updateChannelSelect,
   formatDuration,
   formatViews,
   formatDate,
   convertToSeconds
-} from "../../utils/videoUtils.js";
+} from "../../utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Swal from "sweetalert2";

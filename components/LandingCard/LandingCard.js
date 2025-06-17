@@ -1,8 +1,5 @@
 import "./LandingCard.css";
 import { SignBtn } from "..";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
 const LandingCard = () => {
   const art = document.createElement("article");
@@ -29,60 +26,7 @@ const LandingCard = () => {
     "afterbegin",
     SignBtn("sign-in-alt", "Get Started ►", "register")
   );
-  requestAnimationFrame(() => {
-    gsap.from(".landing-card h1", {
-      opacity: 0,
-      x: -150,
-      scale: 1.5,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".landing-card h1",
-        start: "top 10%",
-        end: "bottom bottom",
-        toggleActions: "play none none reverse"
-      }
-    });
 
-    gsap.from(".landing-card p:not(.reviews p)", {
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".landing-card",
-        start: "top 30%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    gsap.from("#sign-in-alt", {
-      opacity: 0,
-      scale: 0.5,
-      y: 30,
-      duration: 0.6,
-      ease: "back.out(1.7)",
-      delay: 0.4,
-      scrollTrigger: {
-        trigger: "#sign-in-alt",
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    gsap.from(".reviews", {
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".reviews",
-        start: "top 85%",
-        toggleActions: "play none none reverse"
-      }
-    });
-  });
   return art;
 };
 

@@ -1,7 +1,4 @@
 import "./LandingIdeas.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
 
 const LandingIdeas = () => {
   const ul = document.createElement("ul");
@@ -24,41 +21,6 @@ const LandingIdeas = () => {
 
   ul.insertAdjacentElement("afterbegin", bigCloud);
   ul.insertAdjacentElement("afterbegin", smallCloud);
-
-  const arrLi = ul.querySelectorAll(".landing-ideas-li");
-  requestAnimationFrame(() => {
-    arrLi.forEach((li, index) => {
-      gsap.from(li, {
-        opacity: 0,
-        x: 150,
-        y: 50,
-        scale: 1.5,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: li,
-          start: "top 30%",
-          end: "bottom bottom",
-          toggleActions: "play none none reverse"
-        }
-      });
-      const img = li.querySelector("img");
-      gsap.to(img, {
-        y: -10,
-        duration: 1.5,
-        ease: "power1.inOut",
-        repeat: -1,
-        yoyo: true
-      });
-    });
-    gsap.to(".ideas-cloud", {
-      y: -10,
-      duration: 1.5,
-      ease: "power1.inOut",
-      repeat: -1,
-      yoyo: true
-    });
-  });
   return ul;
 };
 

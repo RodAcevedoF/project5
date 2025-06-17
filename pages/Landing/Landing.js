@@ -1,13 +1,11 @@
 import "./Landing.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   LandingCard,
   LandingHeader,
   LandingIdeas,
   Brands
 } from "../../components";
-gsap.registerPlugin(ScrollTrigger);
+import { initLandingAnimations } from "../../public/animations/landingAnimation";
 
 export const Landing = () => {
   const main = document.querySelector("main");
@@ -34,46 +32,8 @@ export const Landing = () => {
   main.querySelector(".landing-header-ideas").appendChild(headerIdeas);
   main.querySelector(".landing-box").appendChild(landingCard);
 
-  gsap.set(".landing-header-ideas", { opacity: 0 });
-  gsap.set(".landing-box", { opacity: 0 });
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".landing",
-      start: "top top",
-      end: "+=280%",
-      scrub: true,
-      pin: true,
-      onLeave: () => {
-        gsap.set(".landing-container", {
-          position: "relative",
-          height: "auto"
-        });
-      }
-    }
+  requestAnimationFrame(() => {
+    initLandingAnimations();
   });
-
-  tl.to(".landing-header-ideas", {
-    y: "-60vh",
-    opacity: 1,
-    duration: 1,
-    ease: "power2.out"
-  });
-  tl.to(".landing-header-ideas", {
-    opacity: 0,
-    duration: 1,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".landing-ideas-li:last-of-type",
-      start: "top top"
-    }
-  });
-  tl.to(".landing-box", {
-    y: "-175vh",
-    opacity: 1,
-    duration: 1.5,
-    ease: "power2.out"
-  });
-
   return main;
 };

@@ -1,7 +1,5 @@
 import "./HeroHome.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import { animationHeroHome } from "../../public/animations/animationHeroHome";
 
 const HeroHome = () => {
   const sect = document.createElement("section");
@@ -52,13 +50,7 @@ const HeroHome = () => {
   sect.cleanup = () => clearInterval(intervalId);
 
   requestAnimationFrame(() => {
-    gsap.to(".hero-home-icons", {
-      y: -5,
-      duration: 0.5,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true
-    });
+    animationHeroHome();
   });
   return sect;
 };

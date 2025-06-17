@@ -1,6 +1,6 @@
 import "./Books.css";
 import { BookGrid, HeroBanner, InnerFooter } from "../../components";
-import { loadCategories } from "../../utils/getPopularCategories.js";
+import { loadCategories } from "../../utils";
 await loadCategories();
 
 export const Books = () => {

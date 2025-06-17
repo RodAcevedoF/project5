@@ -9,15 +9,20 @@ import {
   ProfileInfo,
   ProfileActivity,
   ProfileSettings,
-  ProfileHeader
+  ProfileHeader,
+  LoadComp,
+  InnerFooter
 } from "../../components";
 import { getDashboardData } from "../../api/dashboardApi";
-import { LoadComp, InnerFooter } from "../../components";
 import { deleteUser as apiDeleteUser } from "../../api/userApi";
-import { removeTokens } from "../../utils/authUtils";
-import { setState } from "../../utils/state";
-import { navigate } from "../../utils/router";
-import { showConfirm, showError, showSuccess } from "../../utils/SwalHandler";
+import {
+  removeTokens,
+  setState,
+  navigate,
+  showConfirm,
+  showError,
+  showSuccess
+} from "../../utils";
 
 export const Profile = async () => {
   const container = document.querySelector("main");

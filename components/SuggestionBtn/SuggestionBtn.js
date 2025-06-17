@@ -1,4 +1,4 @@
-import { getState } from "../../utils/state";
+import { getState } from "../../utils";
 import "./SuggestionBtn.css";
 
 const SuggestionBtn = (callback, arr) => {
