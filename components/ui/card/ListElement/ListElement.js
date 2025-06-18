@@ -1,5 +1,5 @@
 import "./ListElement.css";
-import { updateBook, deleteBook, getBooks } from "../../../../api/tempbookApi";
+import { updateBook, deleteBook, getBooks } from "../../../../api";
 import {
   setState,
   updateBookCount,
