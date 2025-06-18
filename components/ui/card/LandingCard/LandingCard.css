@@ -158,8 +158,8 @@
 }
 
 @media screen and (width < 399px) {
-  .landing-card {
-    padding: 2.5em 0.6em;
+  .landing-card h1 {
+    font-size: 2.5em;
   }
 }
 @media screen and (width < 376px) {

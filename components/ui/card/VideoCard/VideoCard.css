@@ -189,13 +189,13 @@
   gap: 1em;
 }
 
-.extra-details {
+.extra-vid-details {
   display: none;
   width: 100%;
   gap: 1em;
 }
 
-.extra-details.expanded {
+.extra-vid-details.expanded {
   display: flex;
 }
 

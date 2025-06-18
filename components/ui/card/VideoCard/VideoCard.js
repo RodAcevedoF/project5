@@ -49,7 +49,7 @@ export const VideoCard = (video) => {
          <strong>Description: </strong>${
            video.description || "No description available."
          }</p>
-        <div class="extra-details">
+        <div class="extra-vid-details">
           <p><strong>Duration: </strong>${formattedDuration}</p>
           <p><strong>Views: </strong>${formattedViews}</p>
         </div>
@@ -69,7 +69,7 @@ export const VideoCard = (video) => {
   const detailsBtnDiv = card.querySelector(".vid-details-button");
   const vidDescription = card.querySelector(".vid-description");
   const videoCardTitle = card.querySelector(".vidcard-title");
-  const extraDetails = card.querySelector(".extra-details");
+  const extraDetails = card.querySelector(".extra-vid-details");
 
   const saveButton = CardBtn("Save", "save", "/icon/add.png");
   const collapseButton = CardBtn("Close", "collapse", "/icon/close.png");
