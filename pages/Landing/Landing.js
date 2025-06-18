@@ -35,5 +35,7 @@ export const Landing = () => {
   requestAnimationFrame(() => {
     initLandingAnimations();
   });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
   return main;
 };

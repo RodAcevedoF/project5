@@ -5,7 +5,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const initLandingAnimations = () => {
   // inicio header
-  window.scrollTo({ top: 0, behavior: "smooth" });
   gsap.fromTo(
     ".landing-header",
     { opacity: 0, yPercent: 30 },
