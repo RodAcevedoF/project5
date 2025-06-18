@@ -29,7 +29,7 @@ const routes = {
     const isLoggedIn = getState("isLoggedIn");
     const currentUser = getState("currentUser");
 
-    console.log("🔐 Auth state:", { isLoggedIn, currentUser });
+    //console.log("🔐 Auth state:", { isLoggedIn, currentUser });
 
     if (isLoggedIn && currentUser?.is_verified) {
       return navigate("/home");
