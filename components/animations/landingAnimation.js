@@ -5,6 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const initLandingAnimations = () => {
   // inicio header
+
   gsap.fromTo(
     ".landing-header",
     { opacity: 0, yPercent: 30 },
@@ -86,7 +87,7 @@ export const initLandingAnimations = () => {
   ScrollTrigger.create({
     trigger: ".landing",
     start: "top top",
-    end: "5%",
+    end: "10%",
     scrub: true,
     onUpdate: (self) => {
       if (self.progress === 1) {

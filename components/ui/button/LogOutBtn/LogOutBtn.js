@@ -20,7 +20,6 @@ export const LogOutBtn = () => {
     if (!isConfirmed) return;
 
     logoutUser();
-    NavBar();
     await showSuccess("Logged out successfully!");
     navigate("/");
   });
