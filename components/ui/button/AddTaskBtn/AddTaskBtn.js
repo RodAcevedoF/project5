@@ -6,7 +6,7 @@ const AddTaskBtn = (todoEditor) => {
   const p = document.createElement("p");
   p.textContent = "ADD TASK";
   const img = document.createElement("img");
-  img.src = "../../public/icon/add.png";
+  img.src = "/icon/add.png";
   img.alt = "add button icon";
   btn.appendChild(p);
   btn.appendChild(img);

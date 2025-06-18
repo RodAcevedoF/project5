@@ -7,7 +7,7 @@ const toggleBtn = (txt1, txt2, initialState = "search") => {
   btn.classList.add("toggle-btn");
 
   p.textContent = initialState === "saved" ? txt2 : txt1;
-  img.src = "../../public/icon/btn_arrow.png";
+  img.src = "/icon/btn_arrow.png";
   btn.appendChild(p);
   btn.appendChild(img);
 

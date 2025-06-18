@@ -9,7 +9,7 @@ export const TodoDisplay = (todo, { onUpdate }) => {
 
   card.innerHTML = `
     <div class="card-title">
-      <img src="../../public/images/todolanding.png" alt="todo icon">
+      <img src="/images/todolanding.png" alt="todo icon">
       <h3>${todo.title}</h3>
     </div>
     <div class="card-content">
