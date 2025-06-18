@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import { refreshAccessToken } from "../api/authApi";
+import { refreshAccessToken } from "../api";
 
 export const setTokens = (accessToken, refreshToken) => {
   localStorage.setItem("accessToken", accessToken);

@@ -1,0 +1,81 @@
+#register-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+  gap: 0.5em;
+  box-shadow: var(--general-shadow);
+  background: var(--nav-light);
+  border-radius: 0.2em;
+  opacity: 1;
+  transition: all 0.25s ease;
+  margin-bottom: 1em;
+  border: 0.5vmin solid var(--back-alt);
+  box-shadow: 0.4rem 0.4rem var(--back-alt);
+}
+
+#register-form.get {
+  opacity: 1;
+  z-index: 10;
+}
+
+#register-form h2 {
+  text-align: center;
+  color: inherit;
+  margin-bottom: 0.5em;
+  font-size: 2.5em;
+  font-weight: 100;
+  font-family: "Jersey 15";
+}
+
+#register-form label {
+  font-size: 0.8em;
+}
+
+#register-form input {
+  padding: 0.5em;
+  border-radius: 0.2em;
+  border: none;
+}
+
+#register-button {
+  margin: 1em 0 1em 0;
+  width: 100%;
+}
+
+.checks {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+  text-align: center;
+}
+
+.checks p {
+  font-size: 0.85em;
+}
+
+.registered {
+  font-size: 0.85em;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.registered:hover {
+  transform: scale(1.1);
+  font-weight: 600;
+}
+
+.error-message {
+  width: 100%;
+  text-align: center;
+  color: red;
+  font-size: 0.7em;
+}
+
+.password-label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}

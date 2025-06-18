@@ -21,3 +21,4 @@ export * from "./todoHandlers";
 export * from "./updateBookCount";
 export * from "./updateVideoCount";
 export * from "./videoUtils";
+export * from "./passwordColor";

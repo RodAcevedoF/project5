@@ -1,4 +1,4 @@
-import { pingAuth } from "../api/authApi.js";
+import { pingAuth } from "../api";
 import { getState, setState } from "./state.js";
 import { handleRoute } from "./router.js";
 import { removeTokens } from "./authUtils.js";

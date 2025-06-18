@@ -1,0 +1,167 @@
+.main-aside {
+  background: var(--back-general);
+  padding: 4em 1em 0 1em;
+  width: 100%;
+  min-width: 12em;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-area: 1/1/2/2;
+  box-shadow: var(--general-shadow);
+  color: inherit;
+  gap: 2em;
+  z-index: 1;
+}
+
+.main-aside .latest,
+.main-aside .deadline,
+.main-aside .calendar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-close {
+  filter: invert(1);
+  width: 1.6em;
+  position: absolute;
+  top: 0.25em;
+  visibility: hidden;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.mobile-close:hover {
+  opacity: 0.8;
+}
+
+.main-aside h3 {
+  cursor: pointer;
+  font-size: 1em;
+  width: 100%;
+  padding: 0.5em;
+  border: 0.4vmin solid #05060f;
+  box-shadow: 0.3rem 0.3rem #05060f;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  border-radius: 0.1em;
+}
+
+.main-aside h3:hover {
+  transform: scale(1.05);
+}
+
+.todo-item {
+  padding: 0.3em 0;
+  font-size: 0.9em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transition: all 0.2s ease;
+  color: inherit;
+  border-radius: 0.2em;
+  text-align: center;
+}
+
+.todo-item:hover {
+  background: var(--button-alt-background);
+  backdrop-filter: blur(17px);
+  -webkit-backdrop-filter: blur(17px);
+  color: whitesmoke;
+}
+
+#load-more-tasks {
+  align-self: center;
+  display: none;
+  cursor: pointer;
+  margin-top: 0.25em;
+  width: 100%;
+  border-radius: 0.2em;
+}
+
+#load-more-tasks.visible {
+  display: block;
+}
+
+.collapsible {
+  width: 100%;
+  visibility: hidden;
+  height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+  margin-top: 0.5em;
+}
+
+.collapsible.visible {
+  visibility: visible;
+  height: auto;
+  opacity: 1;
+}
+
+#upcoming-deadlines li {
+  flex-direction: column;
+  width: 100%;
+  font-weight: bold;
+}
+
+#latest-tasks li {
+  flex-direction: row;
+  width: 100%;
+  gap: 0.25em;
+  justify-content: space-between;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.25em;
+  text-align: start;
+}
+
+#latest-tasks {
+  overflow-y: scroll;
+  max-height: 11em;
+}
+
+.todo-checked {
+  width: 1.5em;
+  display: none;
+}
+
+.todo-checked.visible {
+  display: block;
+}
+
+@media screen and (max-width: 792px) {
+  .main-aside {
+    width: 15em;
+    position: fixed;
+    opacity: 0;
+    left: 0;
+    top: 10em;
+    padding: 2em 1em;
+    height: auto;
+    border-radius: 0.2em;
+    border: 1px solid var(--letter-general);
+    background: inherit;
+  }
+
+  .main-aside h3 {
+    font-size: 0.8em;
+  }
+
+  .main-aside.visible {
+    display: flex;
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .mobile-close {
+    visibility: visible;
+  }
+}

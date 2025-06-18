@@ -1,5 +1,5 @@
 import { getTokens, removeTokens, scheduleTokenRefresh } from "./authUtils";
-import { logoutUser, refreshAccessToken } from "../api/authApi";
+import { logoutUser, refreshAccessToken } from "../api";
 let isRefreshing = false;
 let failedQueue = [];
 

@@ -1,4 +1,4 @@
-import { getTodos, createTodo, updateTodo, deleteTodo } from "../api/ToDoApi";
+import { getTodos, createTodo, updateTodo, deleteTodo } from "../api";
 import { setState } from "../utils/state";
 
 export const fetchTodos = async () => {

@@ -60,7 +60,9 @@
 .verify-box img {
   width: 2em;
 }
-
+.go-home-button img {
+  width: auto;
+}
 @media screen and (width < 675px) {
   .verify-box h2 {
     font-size: 3em;

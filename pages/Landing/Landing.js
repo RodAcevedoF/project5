@@ -3,9 +3,9 @@ import {
   LandingCard,
   LandingHeader,
   LandingIdeas,
-  Brands
+  Brands,
+  initLandingAnimations
 } from "../../components";
-import { initLandingAnimations } from "../../public/animations/landingAnimation";
 
 export const Landing = () => {
   const main = document.querySelector("main");

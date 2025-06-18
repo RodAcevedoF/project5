@@ -1,0 +1,155 @@
+.profile-settings-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transition: all 0.25s ease;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0.25em;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-settings-section.inactive,
+.email-pass-div.inactive,
+#email-pass-form.inactive,
+.delete-acc-div.inactive {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-settings-body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  padding: 1em;
+  justify-content: center;
+  align-items: center;
+  width: 30em;
+  background: #f8f9fd;
+  background: linear-gradient(
+    0deg,
+    rgb(255, 255, 255) 0%,
+    rgb(186, 217, 255) 100%
+  );
+  margin: 2em;
+  border: 10px solid rgb(255, 255, 255);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  border-radius: 0.1em;
+}
+
+.profile-settings-body h2 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 4em;
+  font-family: "Jersey 15";
+}
+
+.email-pass-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 2em 0;
+  width: 100%;
+}
+
+.email-pass-div p {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+#email-pass-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.email-pass-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+#email-pass-form input {
+  width: 100%;
+  border: none;
+  border-radius: 0.1em;
+  margin: 0.5em 0;
+  box-shadow: #90d8fa 0px 10px 10px -5px;
+  border-inline: 2px solid transparent;
+  color: gray;
+  font-weight: bolder;
+  padding: 0.25em;
+}
+
+#email-pass-form input::-moz-placeholder {
+  color: rgb(170, 170, 170);
+}
+
+#email-pass-form input:focus {
+  outline: none;
+  border-inline: 2px solid #12b1d1;
+}
+
+#email-pass-form label {
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+}
+
+.sensitive-form-buttons {
+  display: flex;
+  gap: 1em;
+  padding: 1em 0 1.5em 0;
+}
+
+.delete-acc-div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid rgba(171, 0, 0, 0.563);
+  padding: 0.4em;
+  background: rgba(255, 0, 0, 0.319);
+  border-radius: 0.1em;
+}
+
+.delete-acc-div p {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.delete-acc-div button {
+  background: var(--box-danger-background);
+  font-size: 0.6em;
+}
+
+.delete-acc-div button:hover {
+  background-color: #ef1414;
+  border-color: #b30101;
+  color: #fff;
+  box-shadow: 7px 7px 0 #7c0000;
+}
+
+.password-eye {
+  top: 55%;
+  right: 0.5em;
+}
+
+.repeat-password-eye {
+  top: 55%;
+  right: 0.5em;
+}
+
+@media screen and (width < 615px) {
+  .profile-settings-body {
+    width: 90%;
+  }
+}

@@ -342,3 +342,13 @@ body {
 .dark #todo-deadline {
   color-scheme: dark;
 }
+
+input.match {
+  border: 2px solid #29a75eaf;
+  background-color: #9bffc6bc;
+}
+
+input.mismatch {
+  border: 2px solid #c54334;
+  background-color: #ffc0b9d2;
+}

@@ -1,0 +1,11 @@
+export { default as Footer } from "./Footer/Footer";
+export * from "./NavBar/NavBar";
+export { default as InnerFooter } from "./InnerFooter/InnerFooter";
+export { default as SavedVideoList } from "./SavedVideoList/SavedVideoList";
+export { default as SavedList } from "./SavedList/SavedList";
+export * from "./VideoGrid/VideoGrid";
+export * from "./BookGrid/BookGrid";
+export { default as QualityList } from "./QualityList/QualityList";
+export * from "./MainAside/MainAside";
+export { default as Contact } from "./Contact/Contact";
+export { default as Brands } from "./Brands/Brands";

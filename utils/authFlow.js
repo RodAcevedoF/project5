@@ -1,8 +1,10 @@
-import { getTokens, scheduleTokenRefresh } from "./authUtils.js";
-import { logoutUser } from "../api/authApi.js";
+import {
+  getTokens,
+  scheduleTokenRefresh,
+  isAuthenticated
+} from "./authUtils.js";
+import { logoutUser, getProfile } from "../api";
 import { setState } from "./state.js";
-import { getProfile } from "../api/userApi.js";
-import { isAuthenticated } from "./authUtils.js";
 import { loadCategories } from "./getPopularCategories.js";
 
 export const initAuthFlow = async () => {

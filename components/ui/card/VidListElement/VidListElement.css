@@ -1,0 +1,270 @@
+.video-li {
+  display: flex;
+  width: 40em;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  border: 0.5vmin solid var(--darker-main);
+  box-shadow: 0.4rem 0.4rem var(--darker-main);
+  padding: 1em;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+  border-radius: 0.1em;
+  background: rgba(215, 231, 255, 0.268);
+}
+
+.video-li:hover {
+  filter: contrast(1.5);
+  box-shadow: var(--general-shadow);
+}
+
+.video-li.open:hover {
+  filter: none;
+}
+
+.savedvid-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.savedvid-title {
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+}
+.savedvid-title:hover h3 {
+  transform: scale(1.05) translateX(0.5em);
+  color: var(--main-color);
+}
+
+.savedvid-title p {
+  font-size: 0.6em;
+  width: fit-content;
+  text-transform: uppercase;
+  border: 3px solid var(--letter-general);
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 5px 5px 0 var(--letter-general);
+  text-decoration: none;
+  padding: 0.25em;
+  font-weight: bolder;
+}
+
+.savedvid-title h3 {
+  font-size: 1em;
+  transition: all 0.25s ease;
+  padding-left: 1em;
+}
+
+.video-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+}
+.vid-collapsibles {
+  display: none;
+  transition: all 0.25s ease;
+}
+
+.vid-collapsibles.visible {
+  display: flex;
+}
+
+.vid-li-summary {
+  margin-top: 1em;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+  padding: 0 1em;
+  gap: 1em;
+}
+.inner-vid-info {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: space-around;
+  align-items: flex-start;
+  background: var(--plus-lighter-main);
+  padding: 0.5em 0 0 0;
+}
+
+.inner-vid-info > div {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.saved-channel a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: bolder;
+  transition: all 0.25s ease;
+  margin-bottom: 0.5em;
+}
+.saved-channel a:hover {
+  color: var(--main-color);
+}
+
+.saved-vid-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25em 0.3em;
+}
+.channel-icon {
+  width: 4em;
+}
+.video-date {
+  display: flex;
+  align-items: center;
+}
+.saved-publish-date,
+.saved-channel {
+  font-size: 1em;
+  padding: 0.5em;
+}
+.saved-vidcard-details {
+  display: flex;
+  width: 100%;
+  font-size: 0.75em;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: wrap;
+  gap: 1em;
+  font-size: 0.9em;
+}
+.video-input-div {
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.25em 1em;
+  height: 6em;
+}
+.saved-notes-input {
+  width: 100%;
+  border-radius: 0.1em;
+  display: none;
+  font-size: 0.9em;
+}
+
+.li-button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.saved-vid-label {
+  font-size: 0.9em;
+  font-weight: bolder;
+}
+.savedvid-notes {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.5em;
+}
+.savedvid-notes:hover {
+  background-color: var(--plus-lighter-main);
+  border-radius: 0.1em;
+}
+.views-duration {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+  gap: 6em;
+}
+.checked-video-div {
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+}
+.checked-video-div.visible {
+  display: flex;
+}
+.checked-video-div p {
+  border: none;
+  box-shadow: none;
+  font-weight: bolder;
+  font-size: 0.7em;
+}
+.checked-icon {
+  width: 1.5em;
+}
+.savedvid-label-div {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.savedvid-header .front-btns {
+  min-width: 165px;
+}
+@media screen and (max-width: 815px) {
+  .vid-li-summary {
+    flex-flow: wrap;
+  }
+}
+
+@media screen and (max-width: 715px) {
+  .video-li {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 538px) {
+  .savedvid-header {
+    flex-flow: wrap;
+  }
+  .video-input-div {
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+  }
+  .li-button-group {
+    transform: scale(0.8);
+  }
+  .savedvid-notes {
+    align-self: center;
+    padding-top: 0.5em;
+  }
+  .savedvid-title h3 {
+    font-size: 0.9em;
+  }
+  .views-duration {
+    gap: 4em;
+  }
+  .inner-vid-info p,
+  a {
+    font-size: 0.9em;
+  }
+}
+@media screen and (max-width: 461px) {
+  .inner-vid-info {
+    flex-direction: column;
+  }
+
+  .inner-vid-info p,
+  a {
+    font-size: 0.9em;
+  }
+}

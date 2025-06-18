@@ -19,7 +19,7 @@ export const VerifyPending = async () => {
   const cardButton = CardBtn(
     "Back to login",
     "back-to-login",
-    "/icon/emailprofile.svg"
+    "/icon/lock.png"
   );
 
   if (status === "success") {
@@ -86,14 +86,14 @@ const setupListeners = () => {
       const { authenticated } = await initAuthFlow();
 
       if (authenticated) {
-        navigate("home");
+        navigate("/home");
       } else {
-        navigate("signlogin");
+        navigate("/login");
       }
     });
   }
 
   if (backLoginBtn) {
-    backLoginBtn.addEventListener("click", () => navigate("signlogin"));
+    backLoginBtn.addEventListener("click", () => navigate("/login"));
   }
 };

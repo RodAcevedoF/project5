@@ -13,7 +13,7 @@ import {
   showToast,
   navigate
 } from "../../utils";
-import { requestEmailVerification } from "../../api/securityApi";
+import { requestEmailVerification } from "../../api";
 
 export const SignLogin = () => {
   const main = document.querySelector("main");
