@@ -199,9 +199,15 @@ export const VideoGrid = () => {
   savedSect.style.display = "none";
 
   const getDefaultQuery = async () => {
-    const cachedDefault = getState("defaultSearchResults");
+    const cachedState = getState("defaultSearchResults");
+    const cachedLocal = localStorage.getItem("defaultVideos");
+    const cachedDefault =
+      cachedState || (cachedLocal && JSON.parse(cachedLocal));
+
     console.log(cachedDefault || "No data yet");
+
     if (cachedDefault && Array.isArray(cachedDefault.videos)) {
+      console.log("Using cached data:", cachedDefault);
       updateResults(grid, cachedDefault, true);
       return;
     }
@@ -214,7 +220,9 @@ export const VideoGrid = () => {
       searchParams.videoDuration || "medium",
       searchParams.order || "relevance"
     );
+
     setState("defaultSearchResults", result);
+    localStorage.setItem("defaultVideos", JSON.stringify(result));
     updateResults(grid, result, true);
   };
 

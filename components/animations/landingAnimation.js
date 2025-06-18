@@ -86,7 +86,7 @@ export const initLandingAnimations = () => {
   ScrollTrigger.create({
     trigger: ".landing",
     start: "top top",
-    end: "1%",
+    end: "10%",
     scrub: true,
     onUpdate: (self) => {
       if (self.progress === 1) {
