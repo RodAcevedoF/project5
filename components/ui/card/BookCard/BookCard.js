@@ -13,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const BookCard = (book) => {
   const card = document.createElement("div");
   card.classList.add("book-card");
+  card.dataset.bookId = book.id || book.apiId || book.isbn;
 
   card.innerHTML = `
     <div class="bookcard-header">

@@ -16,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const VideoCard = (video) => {
   const card = document.createElement("div");
+  card.setAttribute("data-video-id", video.video_id || video.id);
   card.classList.add("video-card");
   const videoUrl = `https://www.youtube.com/watch?v=${video.video_id}`;
   const channelUrl = `https://www.youtube.com/channel/${video.channelId}`;

@@ -73,6 +73,8 @@ export const BookGrid = () => {
       return;
     }
 
+    const getBookId = (book) => book.id || book.apiId || book.isbn;
+
     const renderedIds = new Set(
       Array.from(comp.querySelectorAll("[data-book-id]")).map((el) =>
         el.getAttribute("data-book-id")
@@ -80,7 +82,9 @@ export const BookGrid = () => {
     );
 
     result.books.forEach((book) => {
-      if (renderedIds.has(book.id)) return;
+      const bookId = getBookId(book);
+      if (!bookId || renderedIds.has(bookId)) return;
+
       const elem = comp === grid ? BookCard(book) : ListElement(book);
       comp.appendChild(elem);
     });
@@ -96,10 +100,28 @@ export const BookGrid = () => {
     categoryOverride = null,
     maxPagesOverride = Infinity
   ) => {
-    const searchQuery = queryOverride || query;
-    const searchCategory = categoryOverride || category;
+    if (isNewSearch) {
+      startIndex = 0;
+      showLoading(grid);
+    }
+
+    const searchQuery =
+      queryOverride !== null && queryOverride !== undefined
+        ? queryOverride
+        : query;
+
+    const searchCategory =
+      categoryOverride !== null && categoryOverride !== undefined
+        ? categoryOverride
+        : category;
+
     const searchMaxPages =
       maxPagesOverride !== Infinity ? maxPagesOverride : maxPages;
+
+    // Guardar en variables globales actualizadas
+    query = searchQuery;
+    category = searchCategory;
+    maxPages = searchMaxPages;
 
     if (!searchQuery && !searchCategory) {
       grid.innerHTML =
@@ -107,16 +129,27 @@ export const BookGrid = () => {
       return;
     }
 
-    if (isNewSearch) showLoading(grid);
-
-    const result = await searchBook(
-      searchQuery,
+    console.log("Fetching books:", {
+      query: searchQuery,
+      category: searchCategory,
       startIndex,
-      maxResults,
-      searchCategory,
-      searchMaxPages
-    );
-    updateResults(grid, result, isNewSearch);
+      maxResults
+    });
+
+    try {
+      const result = await searchBook(
+        searchQuery,
+        startIndex,
+        maxResults,
+        searchCategory,
+        searchMaxPages
+      );
+
+      updateResults(grid, result, isNewSearch);
+    } catch (error) {
+      console.error("Error during book search:", error);
+      grid.innerHTML = "<p>Error fetching books.</p>";
+    }
   };
 
   const loadSavedBooks = async () => {
@@ -201,7 +234,9 @@ export const BookGrid = () => {
   );
 
   toggleButton.addEventListener("click", handleToggle);
-  loadMoreButton.addEventListener("click", () => searchBooks());
+  loadMoreButton.addEventListener("click", () => {
+    searchBooks(false, query, category, maxPages);
+  });
 
   let deleteTimeout;
   document.addEventListener("bookDeleted", (e) => {
