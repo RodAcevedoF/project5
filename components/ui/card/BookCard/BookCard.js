@@ -1,6 +1,6 @@
 import "./BookCard.css";
 import { createBook } from "../../../../api";
-import { animationBookCard, CardBtn } from "../../../../components";
+import { CardBtn } from "../../../../components";
 import {
   updateCategorySelect,
   showError,
@@ -147,7 +147,6 @@ export const BookCard = (book) => {
   });
 
   requestAnimationFrame(() => {
-    //    animationBookCard("book-card");
     gsap.from(card, {
       opacity: 0,
       y: 50,

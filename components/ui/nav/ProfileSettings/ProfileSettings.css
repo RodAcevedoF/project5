@@ -152,4 +152,10 @@
   .profile-settings-body {
     width: 90%;
   }
+  .profile-settings-body h2 {
+    font-size: 3.5em;
+  }
+  .email-pass-div p {
+    font-size: 1em;
+  }
 }

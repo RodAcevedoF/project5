@@ -137,7 +137,7 @@
 
 @media screen and (max-width: 792px) {
   .main-aside {
-    width: 15em;
+    width: 0;
     position: fixed;
     opacity: 0;
     left: 0;
@@ -147,6 +147,8 @@
     border-radius: 0.2em;
     border: 1px solid var(--letter-general);
     background: inherit;
+    transition: all 0.25s ease-in-out;
+    min-width: 0;
   }
 
   .main-aside h3 {
@@ -157,6 +159,8 @@
     display: flex;
     opacity: 1;
     z-index: 1;
+    width: 15em;
+    min-width: 12em;
   }
 }
 

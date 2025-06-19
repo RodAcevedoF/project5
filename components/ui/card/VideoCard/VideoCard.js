@@ -1,6 +1,6 @@
 import "./VideoCard.css";
 import { createVideo } from "../../../../api/videoApi.js";
-import { animationVideoCard, CardBtn } from "../../../../components";
+import { CardBtn } from "../../../../components";
 import {
   updateChannelSelect,
   formatDuration,
@@ -146,7 +146,6 @@ export const VideoCard = (video) => {
   });
 
   requestAnimationFrame(() => {
-    //animationVideoCard("video-card");
     gsap.from(card, {
       opacity: 0,
       y: 25,
@@ -155,7 +154,7 @@ export const VideoCard = (video) => {
       yPercent: 0,
       scrollTrigger: {
         trigger: card,
-        start: "top 90%",
+        start: "top 88%",
         toggleActions: "play none none reverse"
       }
     });
