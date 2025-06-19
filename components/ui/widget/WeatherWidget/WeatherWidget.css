@@ -8,7 +8,7 @@
   box-shadow: var(--general-shadow);
   gap: 0.5em;
   flex-wrap: wrap;
-  background: rgba(44, 44, 44, 0.384);
+  background: var(--aside-background);
   color: var(--back-general);
   overflow: hidden;
   padding: 5px 30px;
@@ -16,8 +16,8 @@
 }
 
 .weather-widget img {
-  width: 1.8em;
-  height: auto;
+  width: auto;
+  height: 1.8em;
 }
 
 .time-element {

@@ -5,7 +5,7 @@ const LandingCard = () => {
   const art = document.createElement("article");
   art.classList.add("landing-card");
 
-  art.innerHTML = `<p>GetDone tasks</p>
+  art.innerHTML = `<p>Give it a try!</p>
                    <p>Welcome to</p>
                    <h1><em>GetDone</em> App</h1>
                    <p>Plan and organize your tasks and study goals.</p>
