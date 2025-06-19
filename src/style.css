@@ -211,7 +211,7 @@ body {
 .dark .without,
 .dark #login-form,
 .dark #register-form,
-.dark #password-form,
+.dark .password-form,
 .dark .video-card,
 .dark .vidcard-header,
 .dark .book-li,
@@ -225,7 +225,7 @@ body {
 .dark .services-ul,
 .dark #register-form,
 .dark .services-ul.floating,
-.dark #password-form,
+.dark .password-form,
 .dark .verify-box {
   background: var(--back-alt-light);
   box-shadow: var(--alt-shadow);
