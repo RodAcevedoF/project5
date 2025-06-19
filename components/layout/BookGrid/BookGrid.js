@@ -73,6 +73,8 @@ export const BookGrid = () => {
       return;
     }
 
+    const getBookId = (book) => book.id || book.apiId || book.isbn;
+
     const renderedIds = new Set(
       Array.from(comp.querySelectorAll("[data-book-id]")).map((el) =>
         el.getAttribute("data-book-id")
@@ -80,7 +82,9 @@ export const BookGrid = () => {
     );
 
     result.books.forEach((book) => {
-      if (renderedIds.has(book.id)) return;
+      const bookId = getBookId(book);
+      if (!bookId || renderedIds.has(bookId)) return;
+
       const elem = comp === grid ? BookCard(book) : ListElement(book);
       comp.appendChild(elem);
     });
@@ -96,27 +100,55 @@ export const BookGrid = () => {
     categoryOverride = null,
     maxPagesOverride = Infinity
   ) => {
-    const searchQuery = queryOverride || query;
-    const searchCategory = categoryOverride || category;
+    if (isNewSearch) {
+      startIndex = 0;
+      showLoading(grid);
+    }
+
+    const searchQuery =
+      queryOverride !== null && queryOverride !== undefined
+        ? queryOverride
+        : query;
+
+    const searchCategory =
+      categoryOverride !== null && categoryOverride !== undefined
+        ? categoryOverride
+        : category;
+
     const searchMaxPages =
       maxPagesOverride !== Infinity ? maxPagesOverride : maxPages;
 
+    query = searchQuery;
+    category = searchCategory;
+    maxPages = searchMaxPages;
+
     if (!searchQuery && !searchCategory) {
-      grid.innerHTML =
-        "<p>Please, enter a search term or a valid category.</p>";
+      grid.innerHTML = "";
+      grid.appendChild(BookSuggestions(searchBooks, toggleButton));
       return;
     }
 
-    if (isNewSearch) showLoading(grid);
-
-    const result = await searchBook(
-      searchQuery,
+    console.log("Fetching books:", {
+      query: searchQuery,
+      category: searchCategory,
       startIndex,
-      maxResults,
-      searchCategory,
-      searchMaxPages
-    );
-    updateResults(grid, result, isNewSearch);
+      maxResults
+    });
+
+    try {
+      const result = await searchBook(
+        searchQuery,
+        startIndex,
+        maxResults,
+        searchCategory,
+        searchMaxPages
+      );
+
+      updateResults(grid, result, isNewSearch);
+    } catch (error) {
+      console.error("Error during book search:", error);
+      grid.innerHTML = "<p>Error fetching books.</p>";
+    }
   };
 
   const loadSavedBooks = async () => {
@@ -160,7 +192,7 @@ export const BookGrid = () => {
       grid.innerHTML = "";
       searchBarElement.reset();
       loadMoreButton.style.display = "block";
-      getRandomQuery();
+      getDefaultQuery();
     }
   };
 
@@ -185,10 +217,40 @@ export const BookGrid = () => {
     }
   };
 
-  const getRandomQuery = () => {
+  const getDefaultQuery = async () => {
+    const cachedState = getState("defaultBookResults");
+    const cachedLocal = localStorage.getItem("defaultBooks");
+    const cachedDefault =
+      cachedState || (cachedLocal && JSON.parse(cachedLocal));
+
+    console.log(cachedDefault || "No data yet");
+
+    if (cachedDefault && Array.isArray(cachedDefault.books)) {
+      console.log("Using cached data:", cachedDefault);
+      updateResults(grid, cachedDefault, true);
+      return;
+    }
+
     const randomIndex = Math.floor(Math.random() * randomQueries.length);
     query = randomQueries[randomIndex];
-    searchBooks(true);
+    showLoading(grid);
+
+    try {
+      const result = await searchBook(
+        query,
+        startIndex,
+        maxResults,
+        category,
+        maxPages
+      );
+
+      setState("defaultBookResults", result);
+      localStorage.setItem("defaultBooks", JSON.stringify(result));
+      updateResults(grid, result, true);
+    } catch (error) {
+      console.error("Error fetching default books:", error);
+      grid.innerHTML = "<p>Error fetching books.</p>";
+    }
   };
 
   const searchBarElement = SearchBar(
@@ -201,7 +263,9 @@ export const BookGrid = () => {
   );
 
   toggleButton.addEventListener("click", handleToggle);
-  loadMoreButton.addEventListener("click", () => searchBooks());
+  loadMoreButton.addEventListener("click", () => {
+    searchBooks(false, query, category, maxPages);
+  });
 
   let deleteTimeout;
   document.addEventListener("bookDeleted", (e) => {
@@ -217,7 +281,7 @@ export const BookGrid = () => {
 
   container.append(toggleSect, menuSect, grid, loadMoreButton, savedSect);
 
-  getRandomQuery();
+  getDefaultQuery();
 
   return { container, updateResults, showLoading, searchBooks };
 };

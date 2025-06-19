@@ -78,7 +78,8 @@ export const VideoGrid = () => {
     }
 
     result.videos.forEach((video) => {
-      if (comp.querySelector(`[data-video-id="${video.id}"]`)) return;
+      const vidId = video.id || video.video_id;
+      if (comp.querySelector(`[data-video-id="${vidId}"]`)) return;
       const elem = comp === grid ? VideoCard(video) : VidListElement(video);
       comp.appendChild(elem);
     });
@@ -94,19 +95,31 @@ export const VideoGrid = () => {
     }
 
     if (!searchParams.query || typeof searchParams.query !== "string") {
-      grid.innerHTML = "<p>Invalid search query</p>";
+      grid.innerHTML = "";
+      grid.appendChild(VideoSuggestions(searchVideos, toggleButton));
       return;
     }
 
-    if (isNewSearch) showLoading(grid);
+    if (isNewSearch) {
+      nextPageToken = "";
+      showLoading(grid);
+    }
 
-    const result = await searchVideo(
-      searchParams.query,
-      nextPageToken,
-      searchParams.videoDuration || "medium",
-      searchParams.order || "relevance"
-    );
-    updateResults(grid, result, isNewSearch);
+    try {
+      const result = await searchVideo(
+        searchParams.query,
+        nextPageToken,
+        searchParams.videoDuration || "medium",
+        searchParams.order || "relevance"
+      );
+
+      nextPageToken = result.nextPageToken || "";
+
+      updateResults(grid, result, isNewSearch);
+    } catch (error) {
+      console.error("Error during video search:", error);
+      grid.innerHTML = "<p>Error fetching videos.</p>";
+    }
   };
 
   const loadSavedVideos = async () => {
