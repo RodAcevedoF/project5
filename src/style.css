@@ -17,7 +17,7 @@
   --box-background: linear-gradient(to right, #3c99f0, #4b4b4b99);
   --box-danger-background: linear-gradient(to right, #fa6767, #4b4b4b99);
   --footer-background: linear-gradient(to right, #3c99f0, #666666);
-  --aside-background: linear-gradient(to right, #3fb2ff98, #2e2e2e);
+  --aside-background: linear-gradient(to right, #133b55d4, #8a8a8ac5);
   --button-alt-background: linear-gradient(to right, #3fb2ff, #000000);
   --letter-general: rgb(20, 20, 22);
   --highlight-letter: #a3a3a3ab;
@@ -104,15 +104,12 @@ body {
 .dark .card-actions textarea,
 .dark .notes-input,
 .dark #global-loader,
-.dark .landing-card,
 .dark .todo-tasks,
 .dark .book-li,
 .dark .video-li {
   background: var(--back-alt);
 }
 
-.dark .landing-card,
-.dark .alt-login,
 .dark .task-editor,
 .dark .page-btn,
 .dark .main-aside,
@@ -159,14 +156,7 @@ body {
   box-shadow: 0.2rem 0.2rem var(--back-general);
 }
 
-.dark .landing-card,
-.dark .verify-box {
-  border: 0.6vmin solid var(--back-general);
-  box-shadow: 0.5rem 0.5rem var(--back-general);
-}
-
 .dark #sign-up-btn,
-.dark .landing-container h1,
 .dark .service-li,
 .dark .go-back-btn span,
 .dark .weather-widget,
@@ -226,7 +216,6 @@ body {
 .dark .vidcard-header,
 .dark .book-li,
 .dark .video-li,
-.dark .landing-card,
 .dark .video-card {
   border: 0.5vmin solid var(--back-general);
   box-shadow: 0.4rem 0.4rem var(--back-general);
@@ -252,7 +241,6 @@ body {
 .dark .actions button,
 .dark .resend-btn,
 .dark .back-to-login-button,
-.dark #sign-in-alt,
 .dark #last-sign-in,
 .dark .suggestion-btn,
 .dark .task-editor input,
@@ -345,10 +333,15 @@ body {
 
 input.match {
   border: 2px solid #29a75eaf;
-  background-color: #9bffc6bc;
+  background-color: #9bffc6a1;
 }
 
 input.mismatch {
   border: 2px solid #c54334;
-  background-color: #ffc0b9d2;
+  background-color: #ffc0b9bc;
+}
+
+.dark .landing-container {
+  background-image: url("/images/bgnight.jpg");
+  background-position: center;
 }

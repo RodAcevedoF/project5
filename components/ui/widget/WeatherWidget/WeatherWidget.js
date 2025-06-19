@@ -36,7 +36,7 @@ const WeatherWidget = async () => {
     cityElement.textContent = weather.city;
 
     const locationIcon = document.createElement("img");
-    locationIcon.src = "/icon/weathericons/locationicon.png";
+    locationIcon.src = "/icon/weathericons/locationicon.gif";
     locationIcon.alt = "location icon";
     locationIcon.classList.add("weather-icon");
 

@@ -20,7 +20,7 @@
   min-height: 100vh;
   will-change: transform;
   position: relative;
-  background-image: url("/images/cloudbg.png");
+  background-image: url("/images/bgcloud.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
