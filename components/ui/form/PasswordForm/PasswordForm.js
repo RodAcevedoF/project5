@@ -39,10 +39,10 @@ export const PasswordForm = ({
             ? ""
             : `
             <div class="password-change-div">
-              <label for="new-password" class="change-password-label">New Password:
+              <label for="new-password" class="change-password-label first-label">New Password:
               <input type="password" id="new-password" placeholder="At least 8 characters" required>
               </label>
-              <label for="repeat-new-password" class="change-password-label">Repeat Password:
+              <label for="repeat-new-password" class="change-password-label second-label">Repeat Password:
               <input type="password" id="repeat-new-password" placeholder="Repeat password" required>
               </label>
             </div>`
@@ -57,13 +57,6 @@ export const PasswordForm = ({
         <p class="already-registered">Back to login</p>
     </form>
   `;
-  const newPasswordInput = div.querySelector("#new-password");
-  const repeatPasswordInput = div.querySelector("#repeat-new-password");
-
-  const eyePass = PasswordEye(newPasswordInput, "password");
-  newPasswordInput.insertAdjacentElement("afterend", eyePass);
-  const repeatEyePass = PasswordEye(repeatPasswordInput, "repeat-password");
-  repeatPasswordInput.insertAdjacentElement("afterend", repeatEyePass);
 
   if (!recoverMode) {
     newPasswordInput.addEventListener("input", () =>
@@ -72,6 +65,15 @@ export const PasswordForm = ({
     repeatPasswordInput.addEventListener("input", () =>
       validatePasswordsColor(newPasswordInput, repeatPasswordInput)
     );
+    const newPasswordLabel = div.querySelector(".first-label");
+    const newPasswordInput = div.querySelector("#new-password");
+    const repeatPasswordLabel = div.querySelector(".second-label");
+    const repeatPasswordInput = div.querySelector("#repeat-new-password");
+
+    const eyePass = PasswordEye(newPasswordInput, "password");
+    newPasswordLabel.appendChild(eyePass);
+    const repeatEyePass = PasswordEye(repeatPasswordInput, "repeat-password");
+    repeatPasswordLabel.appendChild(repeatEyePass);
   }
 
   const form = div.querySelector("#password-form");
