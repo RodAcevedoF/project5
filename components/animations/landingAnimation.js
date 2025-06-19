@@ -4,12 +4,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export const initLandingAnimations = () => {
-  window.scrollTo({ top: 0, behavior: "instant" }); // o "auto" para evitar delay
+  window.scrollTo({ top: 0, behavior: "instant" });
 
-  // Luego actualiza ScrollTrigger
   setTimeout(() => {
     ScrollTrigger.refresh(true); // fuerza recalculo
-  }, 50); // pequeño delay para asegurar que el DOM haya repintado
+  }, 50);
 
   // inicio header
   gsap.fromTo(
