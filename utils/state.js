@@ -10,6 +10,7 @@ const appState = {
   videoCategories: [],
   justRegistered: "",
   defaultSearchResults: null,
+  defaultBookResults: null,
   todos: []
 };
 

@@ -95,7 +95,8 @@ export const VideoGrid = () => {
     }
 
     if (!searchParams.query || typeof searchParams.query !== "string") {
-      grid.innerHTML = "<p>Invalid search query</p>";
+      grid.innerHTML = "";
+      grid.appendChild(VideoSuggestions(searchVideos, toggleButton));
       return;
     }
 
