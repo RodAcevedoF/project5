@@ -154,7 +154,7 @@ export const VideoCard = (video) => {
       yPercent: 0,
       scrollTrigger: {
         trigger: card,
-        start: "top 88%",
+        start: "top 90%",
         toggleActions: "play none none reverse"
       }
     });
