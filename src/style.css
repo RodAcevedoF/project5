@@ -308,7 +308,8 @@ body {
 .dark .head-info,
 .dark .with:hover,
 .dark .without:hover,
-.dark .switch-container {
+.dark .switch-container,
+.dark .verify-box {
   border-color: var(--back-general);
 }
 
