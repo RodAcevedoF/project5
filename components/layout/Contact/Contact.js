@@ -7,7 +7,8 @@ const Contact = () => {
   div.innerHTML = `
   <h5>Contact</h5>
   <div class="buttons-container">
-  <button class="contact-button">
+  <a class="contact-button" href="https://web.telegram.org/"
+    } target="_blank" rel="noopener noreferrer">
     <span class="svg-container">
       <svg
         viewBox="0 0 496 512"
@@ -22,9 +23,9 @@ const Contact = () => {
       </svg>
     </span>
     <span class="bg-span"></span>
-  </button>
-
-  <button class="btn-twit">
+  </a>
+  <a class="btn-twit" href="https://www.x.com"
+    } target="_blank" rel="noopener noreferrer">
     <span class="svg-container-twit">
       <svg
         viewBox="0 0 512 512"
@@ -39,8 +40,9 @@ const Contact = () => {
       </svg>
     </span>
     <span class="bg-span-twit"></span>
-  </button>
-  <button class="btn-insta">
+  </a>
+  <a class="btn-insta" href="https://www.instagram.com"
+    } target="_blank" rel="noopener noreferrer">
     <span class="svg-container-insta">
       <svg
         fill="white"
@@ -55,9 +57,9 @@ const Contact = () => {
       </svg>
     </span>
     <span class="bg-span-insta"></span>
-  </button>
-
-  <button class="btn-stock">
+  </a>
+  <a class="btn-stock" href="https://www.facebook.com"
+    } target="_blank" rel="noopener noreferrer">
     <span class="svg-container-stock">
       <svg
         viewBox="0 0 384 512"
@@ -71,7 +73,7 @@ const Contact = () => {
       </svg>
     </span>
     <span class="bg-span-stock"></span>
-  </button>
+  </a>
   ${MicrosoftBtn}
   <div>
     `;

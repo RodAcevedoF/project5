@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export const initLandingAnimations = () => {
-  window.scrollTo({ top: 0, behavior: "instant" });
+  window.scrollTo({ top: 0, behavior: "auto" });
 
   setTimeout(() => {
     ScrollTrigger.refresh(true); // fuerza recalculo
@@ -124,7 +124,7 @@ export const initLandingAnimations = () => {
     }
   });
 
-  // 1
+  // ELEMENTO 1
   tl.fromTo(
     ".landing-header-ideas",
     { opacity: 0, yPercent: 30 },
@@ -150,14 +150,14 @@ export const initLandingAnimations = () => {
     "<+0.2"
   );
 
+  // TRANSICIÓN 1 → 2 (Salida del elemento 1 + Entrada del elemento 2)
   tl.to(".landing-header-ideas", {
     opacity: 0,
     yPercent: -30,
-    duration: 0.8,
+    duration: 1,
     ease: "power2.inOut"
   });
 
-  // 2
   tl.fromTo(
     ".landing-box",
     { opacity: 0, yPercent: 30 },
@@ -166,9 +166,11 @@ export const initLandingAnimations = () => {
       yPercent: 0,
       duration: 1,
       ease: "power2.inOut"
-    }
+    },
+    "<+0.2" // Mismo espaciado que la transición anterior
   );
 
+  // ELEMENTO 2
   tl.from(
     ".landing-card h1",
     {
@@ -203,6 +205,28 @@ export const initLandingAnimations = () => {
     },
     "<+0.2"
   );
+
+  // TRANSICIÓN 2 → 3 (Salida del elemento 2 + Entrada del elemento 3)
+  tl.to(".landing-box", {
+    opacity: 0,
+    yPercent: -30,
+    duration: 1,
+    ease: "power2.inOut"
+  });
+
+  // Aquí agregarías la entrada del elemento 3 con el mismo patrón:
+  // tl.fromTo(
+  //   ".elemento-3",
+  //   { opacity: 0, yPercent: 30 },
+  //   {
+  //     opacity: 1,
+  //     yPercent: 0,
+  //     duration: 1,
+  //     ease: "power2.inOut"
+  //   },
+  //   "<+0.2"
+  // );
+
   // fin
   tl.to({}, { duration: 0.6 });
 };

@@ -1,19 +1,23 @@
 import "./Brands.css";
 import brandInfo from "../../../data/brands";
 import { SignBtn } from "../../../components";
-import gsap from "gsap";
+/* import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger); */
+import { animationBrand, animationTitle } from "../../../components";
 
 const Brands = () => {
-  const div = document.createElement("div");
-  div.classList.add("brand-div");
-  div.innerHTML = `<div class="brand-article">
+  const sect = document.createElement("section");
+  sect.classList.add("brand-div");
+  sect.innerHTML = `<div class="brand-article">
                       <h4>Trusted by hundreds+ of teams</h4>
                       <ul class="brand-ul"></ul>
                     </div>  
-                    <h4>Simple organization is the secret to success</h4>
-                    <p>The difference between chaos and seamless workflow.</p>
+                    <div class="brand-subtitle">
+                      <h4>Just simple organization</h4>
+                      <p>The difference between chaos and seamless workflow.</p>
+                    </div>
+                    <div>
                     <div class="comparative">
                         <ul class="without">
                           <li>
@@ -59,52 +63,21 @@ const Brands = () => {
                         </ul>
                     </div>`;
 
-  const ul = div.querySelector(".brand-ul");
+  const ul = sect.querySelector(".brand-ul");
   for (let brand of brandInfo) {
     let newLi = document.createElement("li");
     newLi.innerHTML = `<img src=${brand.url} class="${brand.className} logo">`;
     ul.appendChild(newLi);
   }
-  div.appendChild(
+  sect.appendChild(
     SignBtn("last-sign-in", "Get Started for free! ►", "register")
   );
-
+  const subtitle = sect.querySelector(".brand-subtitle h4");
   requestAnimationFrame(() => {
-    gsap.to(".brand-ul li", {
-      y: -5,
-      duration: 1,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-      stagger: {
-        amount: 1.5,
-        from: "start"
-      }
-    });
-    gsap.to(".without li img", {
-      scale: 1.2,
-      duration: 0.25,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-      stagger: {
-        amount: 0.5,
-        from: "start"
-      }
-    });
-    gsap.to(".with li img", {
-      scale: 1.3,
-      duration: 0.25,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-      stagger: {
-        amount: 0.5,
-        from: "start"
-      }
-    });
+    animationBrand();
+    animationTitle(subtitle, "brand-subtitle", true);
   });
-  return div;
+  return sect;
 };
 
 export default Brands;
