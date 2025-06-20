@@ -83,7 +83,7 @@ cd project5
 # Open index.xhtml in browser or serve with Live Server
 ```
 
-> Note: Backend must be up and properly configured for auth and resource access.
+> Note: Backend must be up and properly configured for auth and resource access. Contact me.
 
 ---
 
@@ -158,7 +158,7 @@ cd project5
 # Abre index.xhtml en el navegador o usa Live Server
 ```
 
-> Nota: El backend debe estar corriendo para que funcionen las rutas y la autenticación.
+> Nota: El backend debe estar corriendo para que funcionen las rutas y la autenticación. Contáctame.
 
 ---
 
