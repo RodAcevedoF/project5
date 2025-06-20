@@ -5,7 +5,12 @@ import {
   ProfileForm,
   DefaultAvatar
 } from "../../../../components";
-import { normalizeUrl, displayNick } from "../../../../utils";
+import {
+  normalizeUrl,
+  displayNick,
+  formatZuluToLocal,
+  formatZuluToLocalDateOnly
+} from "../../../../utils";
 
 const ProfileInfo = (user, postAll) => {
   const sect = document.createElement("section");
@@ -24,7 +29,8 @@ const ProfileInfo = (user, postAll) => {
   const profileContact = ProfileContact(user);
   const profileForm = ProfileForm(user);
   const avatar = DefaultAvatar("info", user);
-
+  const formattedBDay =
+    formatZuluToLocalDateOnly(user.birth_date) || "add your b-day";
   sect.innerHTML = `
         <div class="profile-info-body">
          <aside class="aside-profile">
@@ -41,7 +47,7 @@ const ProfileInfo = (user, postAll) => {
             </li>
             <li>
               <img src="icon/birthdateprofile.svg" alt="Birthdate Icon" class="profile-info-icons" />
-              <p>Birthdate: ${user.birth_date || "add your b-day"}</p>
+              <p>Birthdate: ${formattedBDay}</p>
             </li>
             <li>
               <img src="icon/locationprofile.svg" alt="Location Icon" class="profile-info-icons" />

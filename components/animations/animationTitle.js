@@ -1,7 +1,7 @@
 import gsap from "gsap";
-import { splitChars } from "../../utils";
+import { splitChars, splitCharsWords } from "../../utils";
 
-export const animationTitle = (titleElement, container) => {
+export const animationTitle = (titleElement, container, words = false) => {
   let flipped = false;
   const card = document.querySelector(".profile-header-body");
   if (card) {
@@ -25,6 +25,7 @@ export const animationTitle = (titleElement, container) => {
       });
     });
   }
+  if (words) splitCharsWords(titleElement);
   splitChars(titleElement);
   const chars =
     titleElement.closest(`.${container}`)?.querySelectorAll(".char") || [];
