@@ -6,7 +6,7 @@ export const PasswordEye = (input, className) => {
   const srcClosed = "/icon/closedeye.png";
   const srcOpen = "/icon/eye.png";
   img.src = srcClosed;
-  img.alt = `${className} icon`;
+  img.alt = `eye icon`;
 
   img.addEventListener("click", () => {
     if (input.type === "password") {

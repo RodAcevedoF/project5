@@ -342,6 +342,11 @@ input.mismatch {
 }
 
 .dark .landing-container {
-  background-image: url("/images/bgnight.jpg");
-  background-position: center;
+  background-image: url("/images/bgnight.webp");
+  background-position: top;
+}
+
+.dark .big-cloud,
+.dark .small-cloud {
+  filter: contrast(0.8) saturate(0) hue-rotate(20deg);
 }

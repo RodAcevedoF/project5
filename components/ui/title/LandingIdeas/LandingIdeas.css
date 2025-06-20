@@ -58,3 +58,9 @@
     font-size: 2.5em;
   }
 }
+
+@media screen and (width < 550px) {
+  .landing-ideas-li p {
+    font-size: 2em;
+  }
+}

@@ -31,12 +31,21 @@
 
 #login-form label {
   font-size: 0.8em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
 }
 
 #login-form input {
   padding: 0.5em;
   border-radius: 0.2em;
   border: none;
+}
+
+#login-form .login-eye {
+  top: 56%;
+  right: 4%;
 }
 
 #login-button {
