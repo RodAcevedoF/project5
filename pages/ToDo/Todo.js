@@ -137,8 +137,12 @@ export const Todo = async () => {
   });
   header.appendChild(hero);
 
-  const weather = await WeatherWidget();
-  header.appendChild(weather);
+  const weatherSection = document.createElement("section");
+  weatherSection.classList.add("weather-section");
+  header.appendChild(weatherSection);
+  WeatherWidget().then((weather) => {
+    weatherSection.appendChild(weather);
+  });
 
   const middleContainer = document.createElement("section");
   middleContainer.classList.add("mid-container");

@@ -33,6 +33,10 @@
   flex-direction: column;
 }
 
+.weather-section {
+  display: flex;
+  width: 100%;
+}
 .mid-container {
   display: flex;
   width: 100%;

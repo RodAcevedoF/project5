@@ -1,4 +1,4 @@
-.hero-article {
+.hero-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,7 +46,7 @@
   will-change: transform, opacity;
 }
 @media screen and (width < 581px) {
-  .hero-article {
+  .hero-section {
     padding: 3em 0.5em 4em 1.5em;
   }
 }
