@@ -258,14 +258,18 @@ body {
 }
 
 .dark .del-btn:hover,
-.dark #delete-btn:hover,
-.dark .delete-acc-div button:hover {
+.dark #delete-btn:hover {
   background-color: #ff0000;
   border-color: #ff0000;
   color: #fff;
   box-shadow: 7px 7px 0 #800000;
 }
 
+.dark .delete-acc-div button:hover {
+  background-color: #ff0000;
+  border-color: #ff0000;
+  color: #fff;
+}
 .dark .front-btns button:active {
   transform: translate(5px, 5px);
   box-shadow: none;
