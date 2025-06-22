@@ -135,6 +135,7 @@
   background-color: #ef1414;
   border-color: #b30101;
   color: #fff;
+  box-shadow: none;
 }
 
 .password-eye {
