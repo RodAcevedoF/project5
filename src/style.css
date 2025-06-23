@@ -269,7 +269,13 @@ body {
   background-color: #ff0000;
   border-color: #ff0000;
   color: #fff;
+  box-shadow: none;
 }
+
+.dark .delete-acc-div .card-button {
+  box-shadow: none;
+}
+
 .dark .front-btns button:active {
   transform: translate(5px, 5px);
   box-shadow: none;

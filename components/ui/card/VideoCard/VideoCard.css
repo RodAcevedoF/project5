@@ -113,7 +113,7 @@
 }
 .vid-description {
   display: none;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .vid-description.expanded {
@@ -193,6 +193,8 @@
   display: none;
   width: 100%;
   gap: 1em;
+  font-size: 0.85em;
+  justify-content: center;
 }
 
 .extra-vid-details.expanded {
@@ -269,9 +271,9 @@
     padding: 1em 1em 0 1em;
   }
   .vid-description {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
-  .extra-details p {
-    font-size: 0.7em;
+  .extra-vid-details p {
+    font-size: 0.8em;
   }
 }
