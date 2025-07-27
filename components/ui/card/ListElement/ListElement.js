@@ -81,13 +81,12 @@ const ListElement = (book) => {
     </div>
   `;
 
-  const notesInput = li.querySelector(".notes-input");
   const buttonGroup = li.querySelector(".li-button-group");
   const headerClick = li.querySelector(".savedbook-header");
   const updateButton = CardBtn("Update", "update", "/icon/editicon.png");
   const closeButton = CardBtn("Close", "close", "/icon/close.png");
   const notesDisplay = li.querySelector(".savedbook-notes");
-  const notesTextarea = li.querySelector(".book-notes-input");
+  const notesTextArea = li.querySelector(".book-notes-input");
   const checkedInfo = li.querySelector(".checked-book-div");
   if (book.checked) checkedInfo.classList.add("visible");
 
@@ -128,27 +127,27 @@ const ListElement = (book) => {
   );
   headerClick.appendChild(listButtons);
 
-  notesTextarea.style.display = "none";
+  notesTextArea.style.display = "none";
 
   notesDisplay.addEventListener("click", (e) => {
     e.stopPropagation();
     notesDisplay.style.display = "none";
-    notesTextarea.style.display = "block";
-    notesTextarea.focus();
+    notesTextArea.style.display = "block";
+    notesTextArea.focus();
   });
 
   document.addEventListener("click", (e) => {
     if (
-      !notesTextarea.contains(e.target) &&
-      notesTextarea.style.display === "block"
+      !notesTextArea.contains(e.target) &&
+      notesTextArea.style.display === "block"
     ) {
-      notesTextarea.style.display = "none";
+      notesTextArea.style.display = "none";
       notesDisplay.style.display = "block";
     }
   });
 
   updateButton.addEventListener("click", async () => {
-    const result = await updateBook(book.id, { notes: notesInput.value });
+    const result = await updateBook(book.id, { notes: notesTextArea.value });
     if (result.error) {
       await showError("Error updating book");
       return;
@@ -160,7 +159,7 @@ const ListElement = (book) => {
     document
       .querySelectorAll(".collapsibles")
       .forEach((elem) => elem.classList.remove("visible"));
-    notesTextarea.style.display = "none";
+    notesTextArea.style.display = "none";
     notesDisplay.style.display = "block";
   });
 
