@@ -128,13 +128,6 @@ export const BookGrid = () => {
       return;
     }
 
-    console.log("Fetching books:", {
-      query: searchQuery,
-      category: searchCategory,
-      startIndex,
-      maxResults
-    });
-
     try {
       const result = await searchBook(
         searchQuery,
@@ -223,10 +216,7 @@ export const BookGrid = () => {
     const cachedDefault =
       cachedState || (cachedLocal && JSON.parse(cachedLocal));
 
-    console.log(cachedDefault || "No data yet");
-
     if (cachedDefault && Array.isArray(cachedDefault.books)) {
-      console.log("Using cached data:", cachedDefault);
       updateResults(grid, cachedDefault, true);
       return;
     }

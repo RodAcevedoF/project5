@@ -72,7 +72,7 @@ export const TodoCard = ({ onCreated }) => {
       cardContainer.classList.remove("visible");
       document.querySelector(".add-task-btn > p").textContent = "ADD TASK";
     } catch (error) {
-      console.log("Error saving task");
+      console.error("Error saving task");
     }
   });
 

@@ -63,7 +63,6 @@ export const VideoGrid = () => {
     }
 
     const toggleState = getState("currentToggle");
-    console.log(toggleState);
     const loadBtn = document.querySelector(".load-more-button");
 
     if (!Array.isArray(result?.videos) || result.videos.length === 0) {
@@ -217,10 +216,7 @@ export const VideoGrid = () => {
     const cachedDefault =
       cachedState || (cachedLocal && JSON.parse(cachedLocal));
 
-    console.log(cachedDefault || "No data yet");
-
     if (cachedDefault && Array.isArray(cachedDefault.videos)) {
-      console.log("Using cached data:", cachedDefault);
       updateResults(grid, cachedDefault, true);
       return;
     }

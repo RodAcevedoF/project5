@@ -132,9 +132,7 @@ export const BookCard = (book) => {
       pages: book.pages,
       categories: book.categories || []
     });
-    console.log(book.publish_date);
     if (result.error) {
-      console.log(result);
       await showError(result.error || "Error while saving book");
       toggleCard();
       return;

@@ -98,7 +98,6 @@ export const Todo = async () => {
         showToast(todoData.id ? "Task updated!" : "Task added!");
         await reloadData(true);
       } else {
-        console.log(result);
         showError(result.error || "Error saving task");
       }
     }
